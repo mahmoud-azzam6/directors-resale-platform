@@ -199,6 +199,8 @@ Additional countries, languages and currencies will be introduced in future rele
 
 Additional reference records will be introduced through seed migrations without requiring schema changes.
 
+The System User account must be created before seeding Reference Data to preserve audit consistency.
+
 ---
 
 # Migration Strategy

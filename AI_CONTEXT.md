@@ -185,6 +185,8 @@ Avoid JSON except for:
 * Logs
 
 Business fields must be stored as proper database columns.
+All *_by columns reference the internal users.id primary key.
+Public ULIDs must never be stored in audit relationships.
 
 ---
 
