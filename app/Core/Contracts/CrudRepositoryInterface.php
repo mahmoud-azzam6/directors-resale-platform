@@ -38,10 +38,10 @@ interface CrudRepositoryInterface
      * @param array<string, mixed> $attributes
      * @return array<string, mixed>|null
      */
-    public function update(int $id, array $attributes): ?array;
+    public function update(int|string $id, array $attributes): ?array;
 
     /**
      * Delete a record by its identifier.
      */
-    public function delete(int $id): bool;
+    public function delete(int|string $id): bool;
 }
