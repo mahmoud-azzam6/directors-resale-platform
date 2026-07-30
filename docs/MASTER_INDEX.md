@@ -389,6 +389,7 @@ Analytics is implemented using reporting tables, SQL Views, Materialized Views a
 | ADR-015 | Organization Settings Inheritance | Planned |
 | ADR-016 | Business Entities vs Reference Data | Approved |
 | ADR-017 | MVP First, Global Architecture | Approved |
+| ADR-018 | Universal Audit Columns | Approved |
 
 ---
 

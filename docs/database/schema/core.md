@@ -28,9 +28,7 @@ No business module should duplicate identity or organization information.
 
 ---
 
-# Table 1
-
-# organizations
+## DB101 - organizations
 
 ## Purpose
 
@@ -74,12 +72,12 @@ People belong to the CRM.
 | Column | Type | Nullable | Notes |
 |----------|----------|----------|----------|
 | id | BIGINT UNSIGNED | No | Primary Key |
-| uuid | CHAR(36) | No | Public Identifier |
+| ulid | CHAR(26) | No | Public Identifier |
 | parent_organization_id | BIGINT UNSIGNED | Yes | Parent Franchise |
 | code | VARCHAR(100) | No | Unique Business Code |
 | legal_name | VARCHAR(255) | No | Official Company Name |
 | display_name | VARCHAR(255) | No | Display Name |
-| type | ENUM | No | System / Franchise / Partner Agency |
+| type |  VARCHAR(50) | No | Organization Type |
 | email | VARCHAR(255) | Yes | Main Email |
 | phone | VARCHAR(50) | Yes | Main Phone |
 | website | VARCHAR(255) | Yes | Company Website |
@@ -89,18 +87,19 @@ People belong to the CRM.
 | city_id | BIGINT UNSIGNED | Yes | Reference Data |
 | address | TEXT | Yes | Company Address |
 | logo_url | VARCHAR(500) | Yes | Logo |
-| timezone | VARCHAR(100) | No | Default Timezone |
-| default_language | ENUM | No | ar / en |
-| status | ENUM | No | Active / Inactive / Suspended |
-| created_by_user_id | BIGINT UNSIGNED | Yes | Audit |
-| updated_by_user_id | BIGINT UNSIGNED | Yes | Audit |
+| timezone | VARCHAR(100) | No | IANA Time Zone (e.g. Africa/Cairo) |
+| default_language_id | BIGINT UNSIGNED | No | Default Language |
+| status | VARCHAR(50) | No | Business Status |
+| created_by | BIGINT UNSIGNED | Yes | Audit |
+| updated_by | BIGINT UNSIGNED | Yes | Audit |
 | created_at | TIMESTAMP | No | |
 | updated_at | TIMESTAMP | No | |
-| deleted_at | TIMESTAMP | Yes | Soft Delete |
+| archived_at | TIMESTAMP | Yes | Archive Timestamp |
+| archived_by | BIGINT UNSIGNED | Yes | Archived By |
 
 ---
 
-## Enums
+## Allowed Values
 
 ### type
 
@@ -122,14 +121,6 @@ inactive
 suspended
 ```
 
-### default_language
-
-```text
-ar
-
-en
-```
-
 ---
 
 ## Foreign Keys
@@ -146,17 +137,27 @@ city_id
 
 → cities.id
 
-created_by_user_id
+default_language_id
+
+→ languages.id
+
+created_by
 
 → users.id
 
-updated_by_user_id
+updated_by
+
+→ users.id
+
+archived_by
 
 → users.id
 
 ---
 
 ## Indexes
+
+INDEX(ulid)
 
 INDEX(code)
 
@@ -170,11 +171,13 @@ INDEX(country_id)
 
 INDEX(city_id)
 
+INDEX(default_language_id)
+
 ---
 
 ## Unique Constraints
 
-UNIQUE(uuid)
+UNIQUE(ulid)
 
 UNIQUE(code)
 

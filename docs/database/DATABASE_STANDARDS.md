@@ -179,15 +179,35 @@ Never store names instead of IDs.
 
 ---
 
-# Audit Columns
+# Audit Standards
 
-Business tables should include:
+Every persistent business table must include:
 
-created_by_user_id
+| Column | Required |
+|---------|----------|
+| created_at | Yes |
+| updated_at | Yes |
+| created_by | Yes |
+| updated_by | Yes |
 
-updated_by_user_id
+When applicable, tables should also include:
 
-approved_by_user_id (when applicable)
+| Column | Required |
+|---------|----------|
+| approved_at | Conditional |
+| approved_by | Conditional |
+| archived_at | Conditional |
+| archived_by | Conditional |
+
+All *_by columns reference the internal users.id primary key.
+
+Public ULIDs must never be stored in audit relationships.
+
+Reference Data tables also include audit columns.
+
+System seeded records should reference the dedicated System User account as created_by.
+
+These columns are mandatory unless an ADR explicitly states otherwise.
 
 ---
 
@@ -491,7 +511,12 @@ Before approving any database table verify:
 - [ ] Primary Key added
 - [ ] ULID added
 - [ ] Foreign Keys defined
-- [ ] Audit columns included
+- [ ] created_at added
+- [ ] updated_at added
+- [ ] created_by added
+- [ ] updated_by added
+- [ ] Approval columns reviewed
+- [ ] Archive columns reviewed
 - [ ] Status strategy defined
 - [ ] Money fields include Currency
 - [ ] Indexes added
