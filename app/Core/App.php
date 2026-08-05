@@ -15,8 +15,6 @@ final class App
 
     private Container $container;
 
-    private Logger $logger;
-
     /**
      * @param array<string, mixed> $config
      * @param array<int, ServiceProvider> $providers
@@ -24,12 +22,10 @@ final class App
     public function __construct(
         array $config,
         Container $container,
-        Logger $logger,
         private array $providers = []
     ) {
         $this->config = $config;
         $this->container = $container;
-        $this->logger = $logger;
     }
 
 
@@ -41,7 +37,7 @@ final class App
             $provider->register();
         }
 
-        $this->logger->info('Application bootstrapped.');
+        $this->logger()->info('Application bootstrapped.');
     }
 
     /**
@@ -59,6 +55,6 @@ final class App
 
     public function logger(): Logger
     {
-        return $this->logger;
+        return $this->container->make(Logger::class);
     }
 }

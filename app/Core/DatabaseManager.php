@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Core;
 
+use App\Core\Database\DatabaseConnectionInterface;
 use PDO;
 use RuntimeException;
 
-final class DatabaseManager
+final class DatabaseManager implements DatabaseConnectionInterface
 {
     /**
      * @var array<string, mixed>
@@ -63,5 +64,43 @@ final class DatabaseManager
         );
 
         return $this->connection;
+    }
+
+    public function connection(): PDO
+    {
+        return $this->getConnection();
+    }
+
+    public function beginTransaction(): void
+    {
+        $this->connection()->beginTransaction();
+    }
+
+    public function commit(): void
+    {
+        $this->connection()->commit();
+    }
+
+    public function rollback(): void
+    {
+        $this->connection()->rollBack();
+    }
+
+    public function transaction(callable $callback): mixed
+    {
+        $this->beginTransaction();
+
+        try {
+            $result = $callback($this);
+            $this->commit();
+
+            return $result;
+        } catch (\Throwable $exception) {
+            if ($this->connection()->inTransaction()) {
+                $this->rollback();
+            }
+
+            throw $exception;
+        }
     }
 }
