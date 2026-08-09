@@ -12,7 +12,10 @@ use App\Core\ServiceProvider;
 use App\Exceptions\ExceptionHandler;
 use App\Http\Kernel;
 use App\Http\Request;
-use App\Responses\Response;
+use App\Modules\Organization\Controllers\OrganizationController;
+use App\Modules\Organization\Repositories\OrganizationRepository;
+use App\Modules\Organization\Services\OrganizationService;
+use App\Modules\Organization\Validators\OrganizationValidator;
 use App\Routing\Router;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -49,21 +52,12 @@ final class AppServiceProvider extends ServiceProvider
             fn (): Request => $this->container->make(Kernel::class)->createRequest()
         );
 
-        $this->container->singleton(Router::class, function (): Router {
-            $router = new Router();
+        $this->container->bind(OrganizationRepository::class);
+        $this->container->bind(OrganizationValidator::class);
+        $this->container->bind(OrganizationService::class);
+        $this->container->bind(OrganizationController::class);
 
-            $router->get('/api/v1/health', function (): Response {
-                return Response::success(
-                    'Application is running.',
-                    [
-                        'status' => 'ok',
-                        'version' => $this->config['app']['version'],
-                    ]
-                );
-            });
-
-            return $router;
-        });
+        $this->container->singleton(Router::class);
 
         $this->container->singleton(ExceptionHandler::class);
     }

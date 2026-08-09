@@ -6,6 +6,7 @@ use App\Core\App;
 use App\Core\Container;
 use App\Exceptions\ExceptionHandler;
 use App\Providers\AppServiceProvider;
+use App\Providers\RouteServiceProvider;
 use Dotenv\Dotenv;
 
 $basePath = dirname(__DIR__);
@@ -32,6 +33,7 @@ $app = new App(
     $container,
     [
         new AppServiceProvider($container, $config),
+        new RouteServiceProvider($container, $config),
     ]
 );
 

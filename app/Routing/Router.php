@@ -52,10 +52,49 @@ final class Router
         $path = $this->normalizePath((string) parse_url($uri, PHP_URL_PATH));
 
         if (! isset($this->routes[$method][$path])) {
+            foreach ($this->routes[$method] ?? [] as $route => $handler) {
+                $parameters = $this->matchParameters($route, $path);
+
+                if ($parameters !== null) {
+                    return $handler(...$parameters);
+                }
+            }
+
             return Response::error('not_found', 'Route not found.', 404);
         }
 
         return $this->routes[$method][$path]();
+    }
+
+    /**
+     * @return array<int, string>|null
+     */
+    private function matchParameters(string $route, string $path): ?array
+    {
+        $routeSegments = explode('/', trim($route, '/'));
+        $pathSegments = explode('/', trim($path, '/'));
+
+        if (count($routeSegments) !== count($pathSegments)) {
+            return null;
+        }
+
+        $parameters = [];
+
+        foreach ($routeSegments as $index => $routeSegment) {
+            $pathSegment = $pathSegments[$index];
+
+            if (str_starts_with($routeSegment, '{') && str_ends_with($routeSegment, '}')) {
+                $parameters[] = rawurldecode($pathSegment);
+
+                continue;
+            }
+
+            if ($routeSegment !== $pathSegment) {
+                return null;
+            }
+        }
+
+        return $parameters;
     }
 
     private function normalizePath(string $path): string
