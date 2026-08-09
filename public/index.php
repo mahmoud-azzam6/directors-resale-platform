@@ -21,7 +21,7 @@ if ($basePath !== '' && str_starts_with($uri, $basePath)) {
 
 $uri = $uri === '' ? '/' : $uri;
 
-$response = $container->make(Router::class)->dispatch($request->method(), $uri);
+$response = $container->make(Router::class)->dispatch($request->method(), $uri, $request);
 
 if ($response instanceof Response) {
     $response->send();

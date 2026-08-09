@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Routing;
 
+use App\Http\Request;
 use App\Responses\Response;
 
 final class Router
@@ -46,7 +47,7 @@ final class Router
     /**
      * @return mixed
      */
-    public function dispatch(string $method, string $uri)
+    public function dispatch(string $method, string $uri, Request $request)
     {
         $method = strtoupper($method);
         $path = $this->normalizePath((string) parse_url($uri, PHP_URL_PATH));
@@ -56,14 +57,14 @@ final class Router
                 $parameters = $this->matchParameters($route, $path);
 
                 if ($parameters !== null) {
-                    return $handler(...$parameters);
+                    return $handler($request, ...$parameters);
                 }
             }
 
             return Response::error('not_found', 'Route not found.', 404);
         }
 
-        return $this->routes[$method][$path]();
+        return $this->routes[$method][$path]($request);
     }
 
     /**
