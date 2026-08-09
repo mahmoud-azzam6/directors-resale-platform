@@ -6,7 +6,7 @@
 
 **Internal Project Name:** Directors Resale Platform
 
-Current Version: **0.1.0 (Architecture Phase)**
+Current Version: **v0.1.0-foundation**
 
 ---
 
@@ -237,14 +237,27 @@ No implementation starts before architecture approval.
 # Project Structure
 
 ```text
-backend/
-frontend/
+app/
+    Core/
+        Contracts/
+        Database/
+        Repository/
+    Exceptions/
+    Http/
+    Providers/
+    Responses/
+    Routing/
+
+bootstrap/
+config/
 database/
 resources/
 storage/
 scripts/
 tests/
 docs/
+public/
+routes/
 
 README.md
 AI_CONTEXT.md
@@ -286,19 +299,19 @@ Main sections include:
 
 Current Phase:
 
-Architecture & Documentation
+Milestone 1 - Backend Foundation
 
 Current Sprint:
 
-Sprint 1
+BF005 - HTTP Kernel (Completed)
 
 Current Milestone:
 
-Architecture Foundation
+Milestone 1 - Foundation Complete
 
 Implementation Status:
 
-Not Started
+Completed
 
 Architecture Status:
 
@@ -311,6 +324,10 @@ Completed
 Database Discovery:
 
 Completed
+
+Next Planned Sprint:
+
+BF006 - Organization Module
 
 ---
 
