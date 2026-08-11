@@ -6,7 +6,7 @@ Version: 2.0
 
 Status: Active
 
-Last Updated: 2026-08-11
+Last Updated: 2026-08-12
 
 ---
 
@@ -19,7 +19,7 @@ Last Updated: 2026-08-11
 | Project Type | Enterprise SaaS Platform |
 | Industry | Real Estate Resale |
 | Architecture Style | Modular + Event Driven |
-| Current Phase | Documentation synchronization after BF006 |
+| Current Phase | BF007 completed; documentation synchronized |
 | Current Sprint | No active implementation sprint |
 | Current Version | 0.1.0 |
 | Repository Status | Active |
@@ -138,7 +138,7 @@ Business rollout remains incremental.
 | ID | Module | Status |
 |----|-------------------------|------------|
 | M00 | Reference Data | Planned |
-| M01 | Core | Planned |
+| M01 | Core | Partially implemented (BF006-BF007) |
 | M02 | CRM | Planned |
 | M03 | Property Engine | Planned |
 | M04 | Matching Engine | Planned |
@@ -160,13 +160,13 @@ Business rollout remains incremental.
 | Item | Value |
 |------|-------|
 | Current Phase | Milestone 2 - Core Business |
-| Current Sprint | BF006 - Organization Module (Completed) |
+| Current Sprint | BF007 - Franchise Management (Completed) |
 | Current Module | M01 - Core |
-| Current Feature | Organization Management |
-| Current Database Contract | BF006 staged organizations schema |
+| Current Feature | Organization and Franchise Management |
+| Current Database Contract | BF006-BF007 staged organizations hierarchy schema |
 | Current Database Module | Core |
-| Current Status | BF006 completed; next milestone requires explicit project decision |
-| Current Milestone | BF006 completed |
+| Current Status | BF007 completed; next milestone requires explicit project decision |
+| Current Milestone | BF007 completed |
 | Target Release | Not defined by the current canonical roadmap |
 
 ---
@@ -201,7 +201,7 @@ Business rollout remains incremental.
 
 | ID | Table | Status |
 |-----|-------------------------------|-----------|
-| DB101 | organizations | Implemented (BF006 staged schema) |
+| DB101 | organizations | Implemented (BF006-BF007 staged schema) |
 | DB102 | organization_settings | Planned |
 | DB103 | positions | Planned |
 | DB104 | users | Planned |
@@ -398,7 +398,7 @@ Analytics is implemented using reporting tables, SQL Views, Materialized Views a
 | ID | Module | Endpoint Group | Status |
 |------|----------------------|-----------------------|-----------|
 | API001 | Authentication | /auth | Planned |
-| API002 | Organizations | /organizations | Implemented (BF006) |
+| API002 | Organizations and Franchises | /organizations, /franchises | Implemented (BF006-BF007) |
 | API003 | Users | /users | Planned |
 | API004 | Permissions | /permissions | Planned |
 | API005 | CRM | /people | Planned |
@@ -425,7 +425,7 @@ Analytics is implemented using reporting tables, SQL Views, Materialized Views a
 | ID | Feature | Module | Status |
 |------|----------------------------------------|----------------|-----------|
 | F001 | Authentication | Core | Planned |
-| F002 | Organization Management | Core | Implemented (BF006) |
+| F002 | Organization and Franchise Management | Core | Implemented (BF006-BF007) |
 | F003 | User Management | Core | Planned |
 | F004 | Dynamic Positions | Core | Planned |
 | F005 | CRM | CRM | Planned |
@@ -509,12 +509,12 @@ Analytics is implemented using reporting tables, SQL Views, Materialized Views a
 
 | Item | Value |
 |------|-------|
-| Current Phase | Documentation synchronization after BF006 |
+| Current Phase | BF007 completed; documentation synchronized |
 | Current Module | M01 - Core |
-| Current Document | BF006-Organization-Module.md |
-| Current Database Contract | BF006 staged organizations schema |
+| Current Document | BF007-franchise-management.md |
+| Current Database Contract | BF006-BF007 staged organizations hierarchy schema |
 | Current ADR | Next milestone requires explicit project decision |
-| Current Milestone | BF006 - Organization Module (Completed) |
+| Current Milestone | BF007 - Franchise Management (Completed) |
 | Current Release Target | Not defined by the current canonical roadmap |
 
 ---
@@ -528,7 +528,7 @@ Analytics is implemented using reporting tables, SQL Views, Materialized Views a
 | Architecture | ████████████████████ 100% |
 | Documentation | ██████████████████░░ 90% |
 | Database Design | ███░░░░░░░░░░░░░░░░░ 10% |
-| Backend Development | Foundation and BF006 Organization Module implemented |
+| Backend Development | Foundation, Organization, and Franchise management implemented |
 | Frontend Development | ░░░░░░░░░░░░░░░░░░░░ 0% |
 | AI Development | ░░░░░░░░░░░░░░░░░░░░ 0% |
 | Testing | ░░░░░░░░░░░░░░░░░░░░ 0% |
@@ -547,7 +547,7 @@ Analytics is implemented using reporting tables, SQL Views, Materialized Views a
 | ADR Documents | 17 |
 | Documentation Files | 40+ |
 | Project Templates | 6 |
-| Current Sprint | BF006 - Organization Module (Completed) |
+| Current Sprint | BF007 - Franchise Management (Completed) |
 | Current Release | R0.1.0 |
 
 ---
@@ -714,9 +714,7 @@ A feature is considered complete only when:
 
 ## Immediate Next Development Target
 
-Next development milestone requires explicit project decision. The untracked
-`docs/sprints/BF007-franchise-management.md` file is a DRAFT / NOT APPROVED
-and is not an active or completed milestone.
+BF007 Franchise Management is completed. Next development milestone requires explicit project decision.
 
 ## Sprint 1
 

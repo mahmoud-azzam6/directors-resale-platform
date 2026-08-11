@@ -10,19 +10,19 @@
 | BF004 | Completed | Service-container functionality present; no separate Git commit |
 | BF005 | Completed | HTTP Kernel and Request abstraction |
 | BF006 | Completed | Organization CRUD/API, staged `organizations` table, and routing fix `a017c94` |
+| BF007 | Completed | Organization-backed Franchise CRUD/API, `parent_organization_id`, System-parent validation, and status-based archival |
 
-BF006 smoke tests passed. No automated test suite exists.
+BF006 smoke tests and BF007 manual acceptance/regression checks passed. No automated test suite exists.
 
 ## Next Development Target
 
-Next development milestone requires explicit project decision. The canonical registry documents
-do not identify one consistently after BF006. The untracked
-`docs/sprints/BF007-franchise-management.md` file is a DRAFT / NOT APPROVED and is not an
-active implementation plan.
+BF007 is completed. Next development milestone requires explicit project decision.
 
 ## Constraints for Future Planning
 
-- Preserve the BF006 seven-field `organizations` schema unless an approved milestone changes it.
+- Preserve the BF006-BF007 staged `organizations` schema unless an approved milestone changes it.
 - Resolve the documented no-hard-delete versus Organization physical DELETE discrepancy before
   relying on deletion behavior for future business modules.
+- Franchise DELETE is scoped to status-based archival (`inactive`); it does not create a general lifecycle framework.
+- Authentication and authorization remain future integration dependencies and are not implemented by BF007.
 - Do not infer implementation from broader planned architecture documents.

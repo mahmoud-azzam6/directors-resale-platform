@@ -12,6 +12,10 @@ use App\Core\ServiceProvider;
 use App\Exceptions\ExceptionHandler;
 use App\Http\Kernel;
 use App\Http\Request;
+use App\Modules\Franchise\Controllers\FranchiseController;
+use App\Modules\Franchise\Repositories\FranchiseRepository;
+use App\Modules\Franchise\Services\FranchiseService;
+use App\Modules\Franchise\Validators\FranchiseValidator;
 use App\Modules\Organization\Controllers\OrganizationController;
 use App\Modules\Organization\Repositories\OrganizationRepository;
 use App\Modules\Organization\Services\OrganizationService;
@@ -56,6 +60,11 @@ final class AppServiceProvider extends ServiceProvider
         $this->container->bind(OrganizationValidator::class);
         $this->container->bind(OrganizationService::class);
         $this->container->bind(OrganizationController::class);
+
+        $this->container->bind(FranchiseRepository::class);
+        $this->container->bind(FranchiseValidator::class);
+        $this->container->bind(FranchiseService::class);
+        $this->container->bind(FranchiseController::class);
 
         $this->container->singleton(Router::class);
 

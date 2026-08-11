@@ -32,10 +32,11 @@ No business module should duplicate identity or organization information.
 
 ## BF006 Implementation Status
 
-BF006 intentionally implements a staged subset of this broader architecture. The live
-`organizations` table currently contains only:
+BF006-BF007 intentionally implement a staged subset of this broader architecture. The live
+`organizations` table currently contains:
 
 - id
+- parent_organization_id
 - name
 - code
 - organization_type
@@ -43,8 +44,9 @@ BF006 intentionally implements a staged subset of this broader architecture. The
 - created_at
 - updated_at
 
-This staged implementation is defined by `docs/sprints/BF006-Organization-Module.md` and
-`database/migrations/001_create_organizations_table.sql`. It must not be silently expanded
+This staged implementation is defined by `docs/sprints/BF006-Organization-Module.md`,
+`database/migrations/001_create_organizations_table.sql`, and
+`database/migrations/002_add_parent_organization_id_to_organizations_table.sql`. It must not be silently expanded
 from this broader DB101 design. The remaining fields, relationships, ULID, and audit columns
 below remain architectural/planned requirements until an approved future milestone addresses them.
 
@@ -91,7 +93,7 @@ People belong to the CRM.
 |----------|----------|----------|----------|
 | id | BIGINT UNSIGNED | No | Primary Key |
 | ulid | CHAR(26) | No | Public Identifier |
-| parent_organization_id | BIGINT UNSIGNED | Yes | Parent Franchise |
+| parent_organization_id | BIGINT UNSIGNED | Yes | Parent Organization (System for BF007 Franchise) |
 | code | VARCHAR(100) | No | Unique Business Code |
 | legal_name | VARCHAR(255) | No | Official Company Name |
 | display_name | VARCHAR(255) | No | Display Name |
@@ -299,6 +301,6 @@ Customers are stored inside the People module.
 
 ## Known Discrepancy
 
-The broader DB101 design and global ULID/audit standards exceed the intentional BF006 staged
+The broader DB101 design and global ULID/audit standards exceed the intentional BF006-BF007 staged
 implementation. This is recorded as a known architecture/documentation discrepancy; it is not
 resolved by changing the BF006 table during documentation synchronization.

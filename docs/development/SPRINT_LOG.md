@@ -146,8 +146,18 @@ Status: Completed
 - Routing Request injection was fixed in commit `a017c94`.
 - BF006 smoke tests passed; no automated test suite exists.
 
-The next development milestone requires explicit project decision. The untracked
-`docs/sprints/BF007-franchise-management.md` is a DRAFT / NOT APPROVED.
+## BF007 - Franchise Management
+
+Status: Completed
+
+- Implemented Franchise management using Organization-backed records; no `franchises` table was created.
+- Added `parent_organization_id` through a staged self-referencing migration.
+- Added Franchise CRUD API routes and System Organization parent validation.
+- Implemented status-based archival (`inactive`) for Franchise DELETE.
+- Verified BF007 manual acceptance and BF006 Organization regression checks; no automated test suite exists.
+- Deferred ULID, extended audit, authentication, and authorization infrastructure according to the staged scope.
+
+Next development milestone requires explicit project decision.
 
 Every completed database contract will immediately produce:
 

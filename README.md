@@ -299,11 +299,11 @@ Main sections include:
 
 Current Phase:
 
-Documentation synchronization after BF006
+BF007 Franchise Management completed
 
 Current Sprint:
 
-BF006 - Organization Module (Completed)
+BF007 - Franchise Management (Completed)
 
 Current Milestone:
 
@@ -327,11 +327,11 @@ Completed
 
 Latest Verified Implementation:
 
-BF006 Organization CRUD/API, the `organizations` table, and routing fix `a017c94`
+BF007 Franchise Management: Organization-backed Franchise CRUD/API, `parent_organization_id`, System-parent validation, and status-based archival
 
 Next Development Milestone:
 
-Requires explicit project decision. The untracked BF007 franchise document is a draft and is not approved.
+Requires explicit project decision after BF007 completion.
 
 ---
 

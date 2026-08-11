@@ -4,6 +4,16 @@ All notable changes to Directors Resale Platform will be documented in this file
 
 ---
 
+# 2026-08-12
+
+## BF007 - Franchise Management
+
+- Added Organization-backed Franchise management with CRUD API routes under `/franchises`.
+- Added `parent_organization_id` through the BF007 migration, including its index and self-referencing foreign key.
+- Enforced System Organization parents, unique codes, and Franchise-only endpoint filtering.
+- Implemented status-based Franchise archival (`inactive`) for DELETE without physical row removal.
+- Verified manual BF007 acceptance and Organization regression checks; no automated test suite exists.
+
 # 2026-08-09
 
 ## BF006 - Organization Module
