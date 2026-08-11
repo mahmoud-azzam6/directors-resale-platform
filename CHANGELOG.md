@@ -6,6 +6,13 @@ All notable changes to Directors Resale Platform will be documented in this file
 
 # 2026-08-09
 
+## BF006 - Organization Module
+
+- Implemented the Organization model, validator, repository, service, controller, and CRUD API routes.
+- Added the `organizations` database migration and restored/verified the intentional BF006 seven-field table.
+- Fixed Organization route Request injection in commit `a017c94`.
+- Verified health and Organization CRUD smoke tests; no automated test suite exists.
+
 ## BF001 - Backend Foundation
 
 - Added the backend bootstrap and application runtime.

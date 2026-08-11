@@ -4,7 +4,7 @@ Version: 1.0
 
 Status: Documentation Freeze v1.0
 
-Last Updated: YYYY-MM-DD
+Last Updated: 2026-08-11
 
 ---
 
@@ -504,6 +504,16 @@ Avoid database structures that prevent future AI analysis.
 ---
 
 # Database Checklist
+
+## BF006 Staged Implementation Record
+
+The BF006 `organizations` table is an intentional staged implementation with seven fields:
+`id`, `name`, `code`, `organization_type`, `status`, `created_at`, and `updated_at`.
+
+It does not currently contain the ULID, audit, hierarchy, or broader DB101 fields required by
+these global standards. This is a recorded discrepancy, not a change to the standards and not
+authorization to expand the table outside an approved milestone. See
+`docs/database/DATABASE_CHANGELOG.md` and `docs/database/schema/core.md`.
 
 Before approving any database table verify:
 

@@ -299,15 +299,15 @@ Main sections include:
 
 Current Phase:
 
-Milestone 1 - Backend Foundation
+Documentation synchronization after BF006
 
 Current Sprint:
 
-BF005 - HTTP Kernel (Completed)
+BF006 - Organization Module (Completed)
 
 Current Milestone:
 
-Milestone 1 - Foundation Complete
+Milestone 2 - Core Business
 
 Implementation Status:
 
@@ -325,9 +325,13 @@ Database Discovery:
 
 Completed
 
-Next Planned Sprint:
+Latest Verified Implementation:
 
-BF006 - Organization Module
+BF006 Organization CRUD/API, the `organizations` table, and routing fix `a017c94`
+
+Next Development Milestone:
+
+Requires explicit project decision. The untracked BF007 franchise document is a draft and is not approved.
 
 ---
 

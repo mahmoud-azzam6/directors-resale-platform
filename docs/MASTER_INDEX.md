@@ -6,7 +6,7 @@ Version: 2.0
 
 Status: Active
 
-Last Updated: YYYY-MM-DD
+Last Updated: 2026-08-11
 
 ---
 
@@ -19,8 +19,8 @@ Last Updated: YYYY-MM-DD
 | Project Type | Enterprise SaaS Platform |
 | Industry | Real Estate Resale |
 | Architecture Style | Modular + Event Driven |
-| Current Phase | Sprint 1 - Core Database Design |
-| Current Sprint | Sprint 1 |
+| Current Phase | Documentation synchronization after BF006 |
+| Current Sprint | No active implementation sprint |
 | Current Version | 0.1.0 |
 | Repository Status | Active |
 
@@ -159,15 +159,15 @@ Business rollout remains incremental.
 
 | Item | Value |
 |------|-------|
-| Current Phase | Sprint 1 - Core Database Foundation |
-| Current Sprint | Sprint 1 |
-| Current Module | M00 - Reference Data |
-| Current Feature | Database Foundation |
-| Current Database Contract | DB001 - Countries |
-| Current Database Module | Reference Data |
-| Current Status | Documentation Normalization |
-| Current Milestone | Documentation Freeze v1.0 |
-| Target Release | R0.2.0 |
+| Current Phase | Milestone 2 - Core Business |
+| Current Sprint | BF006 - Organization Module (Completed) |
+| Current Module | M01 - Core |
+| Current Feature | Organization Management |
+| Current Database Contract | BF006 staged organizations schema |
+| Current Database Module | Core |
+| Current Status | BF006 completed; next milestone requires explicit project decision |
+| Current Milestone | BF006 completed |
+| Target Release | Not defined by the current canonical roadmap |
 
 ---
 
@@ -201,7 +201,7 @@ Business rollout remains incremental.
 
 | ID | Table | Status |
 |-----|-------------------------------|-----------|
-| DB101 | organizations | Planned |
+| DB101 | organizations | Implemented (BF006 staged schema) |
 | DB102 | organization_settings | Planned |
 | DB103 | positions | Planned |
 | DB104 | users | Planned |
@@ -398,7 +398,7 @@ Analytics is implemented using reporting tables, SQL Views, Materialized Views a
 | ID | Module | Endpoint Group | Status |
 |------|----------------------|-----------------------|-----------|
 | API001 | Authentication | /auth | Planned |
-| API002 | Organizations | /organizations | Planned |
+| API002 | Organizations | /organizations | Implemented (BF006) |
 | API003 | Users | /users | Planned |
 | API004 | Permissions | /permissions | Planned |
 | API005 | CRM | /people | Planned |
@@ -425,7 +425,7 @@ Analytics is implemented using reporting tables, SQL Views, Materialized Views a
 | ID | Feature | Module | Status |
 |------|----------------------------------------|----------------|-----------|
 | F001 | Authentication | Core | Planned |
-| F002 | Organization Management | Core | Planned |
+| F002 | Organization Management | Core | Implemented (BF006) |
 | F003 | User Management | Core | Planned |
 | F004 | Dynamic Positions | Core | Planned |
 | F005 | CRM | CRM | Planned |
@@ -457,7 +457,7 @@ Analytics is implemented using reporting tables, SQL Views, Materialized Views a
 | Sprint | Goal | Status |
 |----------|----------------------------------------------|-------------|
 | Sprint 0 | Discovery & Architecture Foundation | ✅ Completed |
-| Sprint 1 | Core Database Module | In Progress |
+| Sprint 1 | Core Database Module | Planned / sequencing requires decision |
 | Sprint 2 | CRM Module | Planned |
 | Sprint 3 | Property Engine | Planned |
 | Sprint 4 | Matching Engine | Planned |
@@ -509,13 +509,13 @@ Analytics is implemented using reporting tables, SQL Views, Materialized Views a
 
 | Item | Value |
 |------|-------|
-| Current Phase | Sprint 1 - Documentation Normalization |
-| Current Module | M00 - Reference Data |
-| Current Document | docs/database/schema/reference-data.md |
-| Current Database Contract | DB001-countries.md |
-| Current ADR | ADR-017 - MVP First, Global Architecture |
-| Current Milestone | Documentation Freeze v1.0 |
-| Current Release Target | R0.2.0 |
+| Current Phase | Documentation synchronization after BF006 |
+| Current Module | M01 - Core |
+| Current Document | BF006-Organization-Module.md |
+| Current Database Contract | BF006 staged organizations schema |
+| Current ADR | Next milestone requires explicit project decision |
+| Current Milestone | BF006 - Organization Module (Completed) |
+| Current Release Target | Not defined by the current canonical roadmap |
 
 ---
 
@@ -528,7 +528,7 @@ Analytics is implemented using reporting tables, SQL Views, Materialized Views a
 | Architecture | ████████████████████ 100% |
 | Documentation | ██████████████████░░ 90% |
 | Database Design | ███░░░░░░░░░░░░░░░░░ 10% |
-| Backend Development | ░░░░░░░░░░░░░░░░░░░░ 0% |
+| Backend Development | Foundation and BF006 Organization Module implemented |
 | Frontend Development | ░░░░░░░░░░░░░░░░░░░░ 0% |
 | AI Development | ░░░░░░░░░░░░░░░░░░░░ 0% |
 | Testing | ░░░░░░░░░░░░░░░░░░░░ 0% |
@@ -547,7 +547,7 @@ Analytics is implemented using reporting tables, SQL Views, Materialized Views a
 | ADR Documents | 17 |
 | Documentation Files | 40+ |
 | Project Templates | 6 |
-| Current Sprint | Sprint 1 |
+| Current Sprint | BF006 - Organization Module (Completed) |
 | Current Release | R0.1.0 |
 
 ---
@@ -711,6 +711,12 @@ A feature is considered complete only when:
 ---
 
 # Next Milestones
+
+## Immediate Next Development Target
+
+Next development milestone requires explicit project decision. The untracked
+`docs/sprints/BF007-franchise-management.md` file is a DRAFT / NOT APPROVED
+and is not an active or completed milestone.
 
 ## Sprint 1
 

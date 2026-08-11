@@ -8,19 +8,19 @@ Current Milestone: Milestone 2 - Core Business
 
 Completed Sprints: BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005
 
-Current Sprint: BF005 - HTTP Kernel (Completed)
+Current Sprint: BF006 - Organization Module (Completed)
 
-Next Sprint: BF006 - Organization Module
+Next Sprint: Next development milestone requires explicit project decision
 
-Latest Stable Commit: Not committed
+Latest Stable Commit: a017c94 - fix(BF006): inject request into organization routes
 
-Last Updated: 2026-08-09
+Last Updated: 2026-08-11
 
 ---
 
 # Summary
 
-Milestone 1 established the reusable backend foundation and HTTP infrastructure.
+BF001 through BF005 established the reusable backend foundation and HTTP infrastructure. BF006 implemented and verified the Organization Module.
 
 The application now has:
 
@@ -32,33 +32,50 @@ The application now has:
 - Parameterized query builder and reusable base repository
 - Router, standardized JSON responses, exception handling, and health endpoint
 - HTTP Kernel with framework-independent request, input, header, cookie, server, JSON, and upload abstractions
+- Organization model, validator, repository, service, controller, and CRUD API routes
+- BF006 routing fix committed as `a017c94`
+- Restored and verified `organizations` table using the intentional BF006 seven-field schema
 
-No business modules, authentication, authorization, controllers, migrations, seeders, or ORM have been implemented.
+The Organization Module is the only implemented business module. There is no Franchise, Users, Partner Company, authentication, or authorization module. No automated test suite exists; BF006 smoke tests passed.
 
 ## Architecture Overview
 
 The current foundation follows this direction:
 
-HTTP Request
+public/index.php
 
 ↓
 
-HTTP Kernel / Router
+HTTP Kernel / Request
 
 ↓
 
-Controllers (future)
+Router
 
 ↓
 
-Services (future)
+Organization Controller
 
 ↓
 
-Repositories
+Organization Service
 
 ↓
 
-Database Abstractions / PDO
+Organization Repository
 
-The Service Container is the composition root for infrastructure services. Business modules have not yet been introduced.
+↓
+
+Query Builder / PDO
+
+↓
+
+MySQL
+
+The Service Container is the composition root for infrastructure services.
+
+## Known Discrepancies
+
+- The global no-hard-delete policy conflicts with the current Organization physical DELETE behavior.
+- The broader canonical Organization schema and ULID/audit standards exceed the intentional BF006 staged seven-field implementation.
+- No automated test suite exists.

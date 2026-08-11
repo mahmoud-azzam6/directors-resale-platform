@@ -85,7 +85,7 @@ Database Foundation
 
 ## Status
 
-In Progress 🚧
+Planned / sequencing requires explicit project decision
 
 ---
 
@@ -111,19 +111,43 @@ Build the complete Reference Data foundation.
 
 ## Current Task
 
-DB001 - Countries Database Contract
+No active implementation task is selected.
 
 ---
 
 ## Next Task
 
-Create the official Database Contract Template.
+Next development milestone requires explicit project decision.
 
 ---
 
 ## Notes
 
-This sprint marks the beginning of the implementation phase.
+Reference Data has not been implemented. This sprint remains planned.
+
+---
+
+# Backend Implementation Milestones
+
+## BF001-BF005 - Foundation
+
+Status: Completed
+
+The completed foundation includes bootstrap, the service container, database abstractions,
+query builder, base repository, router, standardized responses, exception handling, and
+the HTTP Kernel/Request abstraction.
+
+## BF006 - Organization Module
+
+Status: Completed
+
+- Organization CRUD and API routes implemented.
+- The `organizations` table was restored and verified using the intentional seven-field BF006 schema.
+- Routing Request injection was fixed in commit `a017c94`.
+- BF006 smoke tests passed; no automated test suite exists.
+
+The next development milestone requires explicit project decision. The untracked
+`docs/sprints/BF007-franchise-management.md` is a DRAFT / NOT APPROVED.
 
 Every completed database contract will immediately produce:
 

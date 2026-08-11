@@ -30,6 +30,24 @@ No business module should duplicate identity or organization information.
 
 ## DB101 - organizations
 
+## BF006 Implementation Status
+
+BF006 intentionally implements a staged subset of this broader architecture. The live
+`organizations` table currently contains only:
+
+- id
+- name
+- code
+- organization_type
+- status
+- created_at
+- updated_at
+
+This staged implementation is defined by `docs/sprints/BF006-Organization-Module.md` and
+`database/migrations/001_create_organizations_table.sql`. It must not be silently expanded
+from this broader DB101 design. The remaining fields, relationships, ULID, and audit columns
+below remain architectural/planned requirements until an approved future milestone addresses them.
+
 ## Purpose
 
 Represents every organization inside the platform.
@@ -278,3 +296,9 @@ Organizations represent companies only.
 They never represent customers.
 
 Customers are stored inside the People module.
+
+## Known Discrepancy
+
+The broader DB101 design and global ULID/audit standards exceed the intentional BF006 staged
+implementation. This is recorded as a known architecture/documentation discrepancy; it is not
+resolved by changing the BF006 table during documentation synchronization.
