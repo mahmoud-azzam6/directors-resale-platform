@@ -6,15 +6,15 @@ Current Project Phase: Core Business Development
 
 Current Milestone: Milestone 2 - Core Business
 
-Completed Sprints: BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005
+Completed Sprints: BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007
 
 Current Sprint: BF007 - Franchise Management (Completed)
 
-Next Sprint: Next development milestone requires explicit project decision
+Next Selected Milestone: BF008 - Partner Agency Management (Selected / Planned / Not Implemented)
 
 Latest Stable Commit: a017c94 - fix(BF006): inject request into organization routes
 
-Last Updated: 2026-08-12
+Last Updated: 2026-08-13
 
 ---
 
@@ -39,6 +39,10 @@ The application now has:
 - BF007 migration adding indexed, self-referencing `parent_organization_id`
 
 Organization and Franchise Management are the implemented business scope. There is no Users, Partner Agency, authentication, or authorization module. No automated test suite exists; BF006 and BF007 manual smoke/acceptance checks passed.
+
+BF008 - Partner Agency Management is the selected next development milestone. Its implementation
+specification has not been approved, and it is not implemented, in progress, migrated, tested, or deployed.
+The approved business progression continues as Organization -> Franchise -> Partner Agency -> Users.
 
 ## Architecture Overview
 

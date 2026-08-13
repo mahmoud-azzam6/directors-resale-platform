@@ -64,3 +64,6 @@ All notable changes to Directors Resale Platform will be documented in this file
 
 - Milestone 1 - Backend Foundation is complete.
 - Next planned sprint: BF006 - Organization Module.
+
+This status entry records the state at BF005 completion and is retained as history. The current state
+is BF007 completed, with BF008 - Partner Agency Management selected/planned and not implemented.

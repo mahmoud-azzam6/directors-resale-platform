@@ -16,7 +16,12 @@ BF006 smoke tests and BF007 manual acceptance/regression checks passed. No autom
 
 ## Next Development Target
 
-BF007 is completed. Next development milestone requires explicit project decision.
+BF008 - Partner Agency Management is selected as the next milestone.
+
+Status: Selected / Planned / Not Implemented
+
+Its implementation specification is not yet approved. This plan records sequencing only and does not
+define BF008 APIs, migrations, database fields, or implementation details.
 
 ## Constraints for Future Planning
 
@@ -25,4 +30,6 @@ BF007 is completed. Next development milestone requires explicit project decisio
   relying on deletion behavior for future business modules.
 - Franchise DELETE is scoped to status-based archival (`inactive`); it does not create a general lifecycle framework.
 - Authentication and authorization remain future integration dependencies and are not implemented by BF007.
+- Continue the approved Organization -> Franchise -> Partner Agency -> Users hierarchy; do not introduce
+  another parent model or hierarchy level.
 - Do not infer implementation from broader planned architecture documents.

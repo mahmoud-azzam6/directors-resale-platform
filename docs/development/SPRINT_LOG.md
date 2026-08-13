@@ -77,6 +77,9 @@ The project is now ready for implementation.
 
 # Sprint 1
 
+> Historical roadmap entry: this sequence predates the completed BF001-BF007 implementation track.
+> It is preserved for history and does not describe the current sprint or next selected milestone.
+
 ## Name
 
 Database Foundation
@@ -109,15 +112,15 @@ Build the complete Reference Data foundation.
 
 ---
 
-## Current Task
+## Historical Current Task
 
-No active implementation task is selected.
+No active implementation task was selected when this roadmap entry was written.
 
 ---
 
-## Next Task
+## Historical Next Task
 
-Next development milestone requires explicit project decision.
+At that time, the next development milestone required an explicit project decision.
 
 ---
 
@@ -157,7 +160,14 @@ Status: Completed
 - Verified BF007 manual acceptance and BF006 Organization regression checks; no automated test suite exists.
 - Deferred ULID, extended audit, authentication, and authorization infrastructure according to the staged scope.
 
-Next development milestone requires explicit project decision.
+## Next Selected Milestone
+
+BF008 - Partner Agency Management
+
+Status: Selected / Planned / Not Implemented
+
+Its implementation specification has not yet been approved. The approved sequencing continues the
+Organization -> Franchise -> Partner Agency hierarchy before Users and later business modules.
 
 Every completed database contract will immediately produce:
 

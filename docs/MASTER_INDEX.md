@@ -6,7 +6,7 @@ Version: 2.0
 
 Status: Active
 
-Last Updated: 2026-08-12
+Last Updated: 2026-08-13
 
 ---
 
@@ -19,8 +19,9 @@ Last Updated: 2026-08-12
 | Project Type | Enterprise SaaS Platform |
 | Industry | Real Estate Resale |
 | Architecture Style | Modular + Event Driven |
-| Current Phase | BF007 completed; documentation synchronized |
-| Current Sprint | No active implementation sprint |
+| Current Phase | Milestone 2 - Core Business |
+| Current Sprint | BF007 - Franchise Management (Completed) |
+| Next Selected Milestone | BF008 - Partner Agency Management (Planned / Not Implemented) |
 | Current Version | 0.1.0 |
 | Repository Status | Active |
 
@@ -138,7 +139,7 @@ Business rollout remains incremental.
 | ID | Module | Status |
 |----|-------------------------|------------|
 | M00 | Reference Data | Planned |
-| M01 | Core | Partially implemented (BF006-BF007) |
+| M01 | Core | Organization and Franchise business scope implemented (BF006-BF007); remaining Core scope planned |
 | M02 | CRM | Planned |
 | M03 | Property Engine | Planned |
 | M04 | Matching Engine | Planned |
@@ -165,8 +166,9 @@ Business rollout remains incremental.
 | Current Feature | Organization and Franchise Management |
 | Current Database Contract | BF006-BF007 staged organizations hierarchy schema |
 | Current Database Module | Core |
-| Current Status | BF007 completed; next milestone requires explicit project decision |
-| Current Milestone | BF007 completed |
+| Current Status | BF007 completed; BF008 selected/planned/not implemented |
+| Current Milestone | Milestone 2 - Core Business |
+| Next Selected Milestone | BF008 - Partner Agency Management |
 | Target Release | Not defined by the current canonical roadmap |
 
 ---
@@ -398,7 +400,8 @@ Analytics is implemented using reporting tables, SQL Views, Materialized Views a
 | ID | Module | Endpoint Group | Status |
 |------|----------------------|-----------------------|-----------|
 | API001 | Authentication | /auth | Planned |
-| API002 | Organizations and Franchises | /organizations, /franchises | Implemented (BF006-BF007) |
+| API002 | Organizations | /organizations | Implemented (BF006) |
+| API021 | Franchises | /franchises | Implemented (BF007) |
 | API003 | Users | /users | Planned |
 | API004 | Permissions | /permissions | Planned |
 | API005 | CRM | /people | Planned |
@@ -426,6 +429,7 @@ Analytics is implemented using reporting tables, SQL Views, Materialized Views a
 |------|----------------------------------------|----------------|-----------|
 | F001 | Authentication | Core | Planned |
 | F002 | Organization and Franchise Management | Core | Implemented (BF006-BF007) |
+| F026 | Partner Agency Management | Core | Selected / Planned / Not Implemented (BF008) |
 | F003 | User Management | Core | Planned |
 | F004 | Dynamic Positions | Core | Planned |
 | F005 | CRM | CRM | Planned |
@@ -457,7 +461,7 @@ Analytics is implemented using reporting tables, SQL Views, Materialized Views a
 | Sprint | Goal | Status |
 |----------|----------------------------------------------|-------------|
 | Sprint 0 | Discovery & Architecture Foundation | ✅ Completed |
-| Sprint 1 | Core Database Module | Planned / sequencing requires decision |
+| Sprint 1 | Core Database Module | Legacy roadmap; superseded by BF milestone sequence |
 | Sprint 2 | CRM Module | Planned |
 | Sprint 3 | Property Engine | Planned |
 | Sprint 4 | Matching Engine | Planned |
@@ -714,9 +718,17 @@ A feature is considered complete only when:
 
 ## Immediate Next Development Target
 
-BF007 Franchise Management is completed. Next development milestone requires explicit project decision.
+BF008 - Partner Agency Management is selected as the next development milestone.
+
+Status: Selected / Planned / Not Implemented
+
+Its implementation specification has not yet been approved. This selection preserves the approved
+Organization -> Franchise -> Partner Agency -> Users progression and does not define BF008 APIs,
+migrations, or technical implementation.
 
 ## Sprint 1
+
+Historical roadmap sequence, retained for context and superseded by the BF milestone sequence:
 
 - M00 Reference Data
 - M01 Core

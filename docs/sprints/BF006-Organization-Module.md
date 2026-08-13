@@ -83,7 +83,7 @@ Franchise
 
 ↓
 
-Partner Company
+Partner Agency
 
 ↓
 
@@ -182,7 +182,7 @@ The Organization is the root business entity.
 
 Only one Organization may own a Franchise.
 
-Only one Franchise may own a Partner Company.
+Only one Franchise may own a Partner Agency.
 
 Every future business entity must belong directly or indirectly to exactly one Organization.
 

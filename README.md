@@ -331,7 +331,10 @@ BF007 Franchise Management: Organization-backed Franchise CRUD/API, `parent_orga
 
 Next Development Milestone:
 
-Requires explicit project decision after BF007 completion.
+BF008 - Partner Agency Management (Selected / Planned / Not Implemented)
+
+BF008's implementation specification has not yet been approved. No Partner Agency application code,
+API contract, migration, authentication, or authorization infrastructure is implemented.
 
 ---
 

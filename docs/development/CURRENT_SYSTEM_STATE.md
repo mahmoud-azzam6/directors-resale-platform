@@ -44,9 +44,9 @@ and `updated_at`. `parent_organization_id` is indexed and self-references `organ
 
 ## Not Implemented
 
-- Users module
-- Partner Agency module
-- Authentication and authorization modules
+- Partner Agency, Users, authentication, and authorization
+- CRM, Property, Listings, Deals, Commissions, and Transfers
+- Notifications, AI, Analytics, Integrations, and Frontend
 - Automated test suite
 
 ## Known Discrepancies
@@ -59,4 +59,9 @@ and `updated_at`. `parent_organization_id` is indexed and self-references `organ
 
 ## Next Development Target
 
-BF007 is completed. Next development milestone requires explicit project decision.
+BF008 - Partner Agency Management is selected as the next milestone. It is planned and not
+implemented. Its implementation specification has not yet been approved, so no BF008 API contract,
+migration, or technical solution is part of the current system.
+
+The approved progression is Organization -> Franchise -> Partner Agency -> Users. Organization is the
+highest business entity, and a Partner Agency belongs to one Franchise.
