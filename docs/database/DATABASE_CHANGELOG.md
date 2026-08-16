@@ -1,5 +1,15 @@
 # Database Changelog
 
+## BF008 - Partner Agency Management
+
+Status: Implemented; no migration required
+
+- Partner Agencies reuse `organizations` with `organization_type = partner_agency`.
+- The BF007 `parent_organization_id` column already provides the required direct Franchise relationship.
+- No `partner_agencies` table, new column, or BF008 migration was created.
+- DELETE uses `status = inactive`; the database row remains present.
+- ULID and extended audit requirements remain deferred.
+
 ## BF007 - Franchise Management
 
 Status: Implemented and verified
@@ -24,7 +34,7 @@ Status: Implemented and verified
 
 ## Staged Schema Note
 
-The BF006-BF007 table intentionally implements only the BF006 fields plus the BF007 hierarchy relationship.
+The BF006-BF008 table intentionally implements only the BF006 fields plus the BF007 hierarchy relationship reused by BF008.
 The broader DB101 Organization architecture remains preserved in `docs/database/schema/core.md`;
 it is not silently applied to the BF006 implementation.
 

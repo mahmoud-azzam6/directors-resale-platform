@@ -20,6 +20,10 @@ use App\Modules\Organization\Controllers\OrganizationController;
 use App\Modules\Organization\Repositories\OrganizationRepository;
 use App\Modules\Organization\Services\OrganizationService;
 use App\Modules\Organization\Validators\OrganizationValidator;
+use App\Modules\PartnerAgency\Controllers\PartnerAgencyController;
+use App\Modules\PartnerAgency\Repositories\PartnerAgencyRepository;
+use App\Modules\PartnerAgency\Services\PartnerAgencyService;
+use App\Modules\PartnerAgency\Validators\PartnerAgencyValidator;
 use App\Routing\Router;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -65,6 +69,11 @@ final class AppServiceProvider extends ServiceProvider
         $this->container->bind(FranchiseValidator::class);
         $this->container->bind(FranchiseService::class);
         $this->container->bind(FranchiseController::class);
+
+        $this->container->bind(PartnerAgencyRepository::class);
+        $this->container->bind(PartnerAgencyValidator::class);
+        $this->container->bind(PartnerAgencyService::class);
+        $this->container->bind(PartnerAgencyController::class);
 
         $this->container->singleton(Router::class);
 

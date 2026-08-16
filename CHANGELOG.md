@@ -4,6 +4,16 @@ All notable changes to Directors Resale Platform will be documented in this file
 
 ---
 
+# 2026-08-16
+
+## BF008 - Partner Agency Management
+
+- Added Organization-backed Partner Agency CRUD API routes under `/partner-agencies`.
+- Enforced Franchise parents, hierarchy isolation, global Organization code uniqueness, and Partner Agency-only endpoint access.
+- Reused `organizations.parent_organization_id`; no Partner Agency table or BF008 migration was required.
+- Implemented status-based Partner Agency archival (`inactive`) without physical row removal.
+- Deferred authentication, authorization, ULID, and extended audit work; no automated test suite exists.
+
 # 2026-08-12
 
 ## BF007 - Franchise Management
@@ -66,4 +76,4 @@ All notable changes to Directors Resale Platform will be documented in this file
 - Next planned sprint: BF006 - Organization Module.
 
 This status entry records the state at BF005 completion and is retained as history. The current state
-is BF007 completed, with BF008 - Partner Agency Management selected/planned and not implemented.
+includes BF008 Partner Agency Management; no later milestone has been selected.

@@ -299,11 +299,11 @@ Main sections include:
 
 Current Phase:
 
-BF007 Franchise Management completed
+BF008 Partner Agency Management implemented
 
 Current Sprint:
 
-BF007 - Franchise Management (Completed)
+BF008 - Partner Agency Management (Implemented)
 
 Current Milestone:
 
@@ -327,14 +327,14 @@ Completed
 
 Latest Verified Implementation:
 
-BF007 Franchise Management: Organization-backed Franchise CRUD/API, `parent_organization_id`, System-parent validation, and status-based archival
+BF008 Partner Agency Management: Organization-backed CRUD/API, Franchise-parent validation, endpoint isolation, and status-based archival
 
 Next Development Milestone:
 
-BF008 - Partner Agency Management (Selected / Planned / Not Implemented)
+Not selected
 
-BF008's implementation specification has not yet been approved. No Partner Agency application code,
-API contract, migration, authentication, or authorization infrastructure is implemented.
+Partner Agencies reuse the `organizations` table and BF007 `parent_organization_id`; no separate table
+or BF008 migration was required. Authentication and authorization infrastructure remains deferred.
 
 ---
 

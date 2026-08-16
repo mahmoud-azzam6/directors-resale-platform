@@ -160,14 +160,17 @@ Status: Completed
 - Verified BF007 manual acceptance and BF006 Organization regression checks; no automated test suite exists.
 - Deferred ULID, extended audit, authentication, and authorization infrastructure according to the staged scope.
 
-## Next Selected Milestone
+## BF008 - Partner Agency Management
 
-BF008 - Partner Agency Management
+Status: Implemented on 2026-08-16
 
-Status: Selected / Planned / Not Implemented
-
-Its implementation specification has not yet been approved. The approved sequencing continues the
-Organization -> Franchise -> Partner Agency hierarchy before Users and later business modules.
+- Added Organization-backed Partner Agency model, repository, validator, service, controller, and CRUD routes.
+- Enforced an existing Franchise as the required direct parent and isolated endpoints to active Partner Agencies.
+- Reused `organizations` and `parent_organization_id`; no separate table or migration was required.
+- Implemented status-based archival with `status = inactive` and preserved the database row.
+- Preserved the deferred ULID, audit, authentication, and authorization scope.
+- PHP syntax and autoload verification passed; no automated test framework exists, and database-backed checks were unavailable because MySQL was not running.
+- No subsequent milestone was selected.
 
 Every completed database contract will immediately produce:
 

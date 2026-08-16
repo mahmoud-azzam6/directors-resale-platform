@@ -6,6 +6,7 @@ use App\Core\Container;
 use App\Http\Request;
 use App\Modules\Franchise\Controllers\FranchiseController;
 use App\Modules\Organization\Controllers\OrganizationController;
+use App\Modules\PartnerAgency\Controllers\PartnerAgencyController;
 use App\Responses\Response;
 use App\Routing\Router;
 
@@ -63,5 +64,25 @@ return static function (Router $router, Container $container, array $config): vo
 
     $router->delete('/franchises/{id}', function (Request $request, string $id) use ($container): Response {
         return $container->make(FranchiseController::class)->destroy($request, $id);
+    });
+
+    $router->get('/partner-agencies', function (Request $request) use ($container): Response {
+        return $container->make(PartnerAgencyController::class)->index($request);
+    });
+
+    $router->get('/partner-agencies/{id}', function (Request $request, string $id) use ($container): Response {
+        return $container->make(PartnerAgencyController::class)->show($request, $id);
+    });
+
+    $router->post('/partner-agencies', function (Request $request) use ($container): Response {
+        return $container->make(PartnerAgencyController::class)->store($request);
+    });
+
+    $router->put('/partner-agencies/{id}', function (Request $request, string $id) use ($container): Response {
+        return $container->make(PartnerAgencyController::class)->update($request, $id);
+    });
+
+    $router->delete('/partner-agencies/{id}', function (Request $request, string $id) use ($container): Response {
+        return $container->make(PartnerAgencyController::class)->destroy($request, $id);
     });
 };

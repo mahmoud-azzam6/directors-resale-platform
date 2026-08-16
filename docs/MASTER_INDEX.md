@@ -6,7 +6,7 @@ Version: 2.0
 
 Status: Active
 
-Last Updated: 2026-08-13
+Last Updated: 2026-08-16
 
 ---
 
@@ -20,8 +20,8 @@ Last Updated: 2026-08-13
 | Industry | Real Estate Resale |
 | Architecture Style | Modular + Event Driven |
 | Current Phase | Milestone 2 - Core Business |
-| Current Sprint | BF007 - Franchise Management (Completed) |
-| Next Selected Milestone | BF008 - Partner Agency Management (Planned / Not Implemented) |
+| Current Sprint | BF008 - Partner Agency Management (Implemented) |
+| Next Selected Milestone | Not selected |
 | Current Version | 0.1.0 |
 | Repository Status | Active |
 
@@ -161,14 +161,14 @@ Business rollout remains incremental.
 | Item | Value |
 |------|-------|
 | Current Phase | Milestone 2 - Core Business |
-| Current Sprint | BF007 - Franchise Management (Completed) |
+| Current Sprint | BF008 - Partner Agency Management (Implemented) |
 | Current Module | M01 - Core |
-| Current Feature | Organization and Franchise Management |
-| Current Database Contract | BF006-BF007 staged organizations hierarchy schema |
+| Current Feature | Organization, Franchise, and Partner Agency Management |
+| Current Database Contract | BF006-BF008 staged organizations hierarchy schema |
 | Current Database Module | Core |
-| Current Status | BF007 completed; BF008 selected/planned/not implemented |
+| Current Status | BF008 implemented |
 | Current Milestone | Milestone 2 - Core Business |
-| Next Selected Milestone | BF008 - Partner Agency Management |
+| Next Selected Milestone | Not selected |
 | Target Release | Not defined by the current canonical roadmap |
 
 ---

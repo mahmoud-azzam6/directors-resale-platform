@@ -375,16 +375,15 @@ The current project milestone is Milestone 2 - Core Business.
 - BF001-BF005: Foundation completed
 - BF006: Organization Management completed
 - BF007: Franchise Management completed
-- BF008: Partner Agency Management selected and planned, but not implemented
+- BF008: Partner Agency Management implemented
 
-The approved hierarchy is Organization -> Franchise -> Partner Agency, followed by Users. BF008's
-implementation specification has not yet been approved. Users, authentication, authorization, CRM,
+The implemented hierarchy is Organization -> Franchise -> Partner Agency, followed by future Users. Users, authentication, authorization, CRM,
 Property, Listings, Deals, Commissions, Transfers, Notifications, AI, Analytics, Integrations, and the
 Frontend remain future and not implemented.
 
-The BF006-BF007 database is intentionally staged. Organization and Franchise records use the
+The BF006-BF008 database is intentionally staged. Organization, Franchise, and Partner Agency records use the
 `organizations` table; Franchise records use `organization_type = franchise` and
-`parent_organization_id`. No `franchises` table exists. Global ULID, audit, security, and no-hard-delete
+`parent_organization_id`. Partner Agencies use `organization_type = partner_agency` with a Franchise parent. No `franchises` or `partner_agencies` table exists. Global ULID, audit, security, and no-hard-delete
 standards remain target architecture rather than a claim about the complete current implementation.
 
 ---

@@ -6,21 +6,21 @@ Current Project Phase: Core Business Development
 
 Current Milestone: Milestone 2 - Core Business
 
-Completed Sprints: BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007
+Completed Sprints: BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008
 
-Current Sprint: BF007 - Franchise Management (Completed)
+Current Sprint: BF008 - Partner Agency Management (Implemented)
 
-Next Selected Milestone: BF008 - Partner Agency Management (Selected / Planned / Not Implemented)
+Next Selected Milestone: Not selected
 
 Latest Stable Commit: a017c94 - fix(BF006): inject request into organization routes
 
-Last Updated: 2026-08-13
+Last Updated: 2026-08-16
 
 ---
 
 # Summary
 
-BF001 through BF005 established the reusable backend foundation and HTTP infrastructure. BF006 implemented the Organization Module. BF007 implemented Franchise Management using Organization-backed records.
+BF001 through BF005 established the reusable backend foundation and HTTP infrastructure. BF006-BF008 implemented the approved Organization, Franchise, and Partner Agency hierarchy using Organization-backed records.
 
 The application now has:
 
@@ -37,12 +37,9 @@ The application now has:
 - Restored and verified `organizations` table using the intentional BF006 seven-field schema
 - Franchise module with CRUD API routes, System Organization parent validation, and status-based archival
 - BF007 migration adding indexed, self-referencing `parent_organization_id`
+- Partner Agency module with CRUD API routes, Franchise parent validation, endpoint isolation, and status-based archival
 
-Organization and Franchise Management are the implemented business scope. There is no Users, Partner Agency, authentication, or authorization module. No automated test suite exists; BF006 and BF007 manual smoke/acceptance checks passed.
-
-BF008 - Partner Agency Management is the selected next development milestone. Its implementation
-specification has not been approved, and it is not implemented, in progress, migrated, tested, or deployed.
-The approved business progression continues as Organization -> Franchise -> Partner Agency -> Users.
+Organization, Franchise, and Partner Agency Management are the implemented business scope. Partner Agencies reuse `organizations`, use `organization_type = partner_agency`, and belong directly to a Franchise through `parent_organization_id`; no separate table or BF008 migration exists. Users, authentication, and authorization remain unimplemented. No automated test suite exists, and BF008 database-backed acceptance testing was unavailable because MySQL was not running during verification. No next milestone has been selected.
 
 ## Architecture Overview
 
@@ -85,5 +82,5 @@ The Service Container is the composition root for infrastructure services.
 - The global no-hard-delete policy conflicts with the current Organization physical DELETE behavior.
 - The broader canonical Organization schema and ULID/audit standards exceed the intentional BF006-BF007 staged implementation.
 - No automated test suite exists.
-- Authentication and authorization remain unavailable integration dependencies; BF007 does not add a parallel security system.
+- Authentication and authorization remain unavailable integration dependencies; BF008 does not add a parallel security system.
 - Franchise DELETE archives by setting `status` to `inactive`; the existing Organization DELETE behavior remains a separate known discrepancy.
