@@ -23,11 +23,11 @@ final class FranchiseService
     /**
      * @return array<int, array<string, mixed>>
      */
-    public function all(): array
+    public function all(array $organizationIds = []): array
     {
         return array_map(
             static fn (array $record): array => Franchise::fromArray($record)->toArray(),
-            $this->repository->allActive()
+            $this->repository->allActive($organizationIds)
         );
     }
 

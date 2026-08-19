@@ -6,9 +6,9 @@ Current Project Phase: Core Business Development
 
 Current Milestone: Milestone 2 - Core Business
 
-Completed Sprints: BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, BF009, BF010, BF011
+Completed Sprints: BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, BF009, BF010, BF011, BF012
 
-Current Sprint: BF011 - Dynamic Positions (Implemented)
+Current Sprint: BF012 - Permissions & Authorization (Implemented)
 
 Next Selected Milestone: Not selected
 
@@ -41,7 +41,7 @@ The application now has:
 - User module with staged CRUD API routes, active Organization ownership validation, globally unique email validation, immutable Organization ownership, and status-based deactivation
 - `users` table with a restricted Organization foreign key and indexed `organization_id`
 
-Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, and Dynamic Positions are implemented. Positions are Organization-owned with Organization-scoped codes; Users may hold one nullable Position only when both belong to the same Organization. Position deactivation preserves rows and historical User relationships. Authorization, Roles, Permissions, Position hierarchy, Team hierarchy, User Profiles, Transfers, password reset, registration, refresh tokens, and future modules remain deferred. No automated test suite exists; BF011 database-backed acceptance and authenticated BF006-BF010 regression checks passed. No next milestone has been selected.
+Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, and Permissions & Authorization are implemented. Authorization requires both active Position-derived Permission and Organization scope. System Users may operate platform-wide within assigned capabilities; Franchise Users operate within their Franchise and child Partner Agencies; Partner Agency Users operate only within their own Agency. Lists are scope-filtered before response generation. Roles, direct User permissions, Position hierarchy, Team hierarchy, User Profiles, Transfers, password reset, registration, refresh tokens, and future modules remain deferred. No automated test suite exists; BF012 database-backed acceptance and authenticated BF006-BF011 regression checks passed. No next milestone has been selected.
 
 ## Architecture Overview
 

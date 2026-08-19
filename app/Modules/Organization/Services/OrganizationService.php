@@ -23,11 +23,11 @@ final class OrganizationService
     /**
      * @return array<int, array<string, mixed>>
      */
-    public function all(): array
+    public function all(array $organizationIds = []): array
     {
         return array_map(
             static fn (array $record): array => Organization::fromArray($record)->toArray(),
-            $this->repository->all()
+            $organizationIds === [] ? $this->repository->all() : $this->repository->allInScope($organizationIds)
         );
     }
 

@@ -32,6 +32,15 @@ use App\Modules\Position\Controllers\PositionController;
 use App\Modules\Position\Repositories\PositionRepository;
 use App\Modules\Position\Services\PositionService;
 use App\Modules\Position\Validators\PositionValidator;
+use App\Modules\Permission\Controllers\PermissionController;
+use App\Modules\Permission\Controllers\PositionPermissionController;
+use App\Modules\Permission\Repositories\PermissionRepository;
+use App\Modules\Permission\Repositories\PositionPermissionRepository;
+use App\Modules\Permission\Services\PermissionService;
+use App\Modules\Permission\Services\PositionPermissionService;
+use App\Modules\Authorization\Middleware\AuthorizationMiddleware;
+use App\Modules\Authorization\Services\AuthorizationService;
+use App\Modules\Authorization\Services\OrganizationScopeService;
 use App\Modules\User\Controllers\UserController;
 use App\Modules\User\Repositories\UserRepository;
 use App\Modules\User\Services\UserService;
@@ -96,6 +105,16 @@ final class AppServiceProvider extends ServiceProvider
         $this->container->bind(PositionValidator::class);
         $this->container->bind(PositionService::class);
         $this->container->bind(PositionController::class);
+
+        $this->container->bind(PermissionRepository::class);
+        $this->container->bind(PositionPermissionRepository::class);
+        $this->container->bind(PermissionService::class);
+        $this->container->bind(PositionPermissionService::class);
+        $this->container->bind(PermissionController::class);
+        $this->container->bind(PositionPermissionController::class);
+        $this->container->bind(OrganizationScopeService::class);
+        $this->container->bind(AuthorizationService::class);
+        $this->container->bind(AuthorizationMiddleware::class);
 
         $this->container->bind(AuthTokenRepository::class);
         $this->container->bind(AuthenticationMiddleware::class);

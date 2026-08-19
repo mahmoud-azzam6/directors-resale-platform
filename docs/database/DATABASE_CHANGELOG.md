@@ -1,5 +1,16 @@
 # Database Changelog
 
+## BF012 - Permissions & Authorization
+
+Status: Implemented and verified
+
+- Migration: `database/migrations/008_create_permissions_tables.sql`
+- Added globally unique, status-based `permissions` and composite-unique `position_permissions`.
+- Seeded the 22 approved active Permission codes for Organizations, Franchises, Partner Agencies, Users, Positions, and Permission administration.
+- Users inherit active Permissions only through an active same-Organization Position; no `user_permissions` table exists.
+- Position-Permission replacement is atomic; relationship rows represent current assignments and may be synchronized without hard-deleting Position or Permission business records.
+- Full audit/event history for Permission assignment remains deferred to the staged audit architecture.
+
 ## BF011 - Dynamic Positions
 
 Status: Implemented and verified

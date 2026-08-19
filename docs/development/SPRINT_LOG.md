@@ -212,6 +212,20 @@ Status: Implemented on 2026-08-19
 - Authorization, Permissions, Roles, Position hierarchy, Team hierarchy, User Profiles, Transfers, and BF012 remain deferred.
 - No subsequent milestone was selected.
 
+## BF012 - Permissions & Authorization
+
+Status: Implemented on 2026-08-19
+
+- Added controlled Permission catalog seed and Position-Permission persistence with composite uniqueness.
+- Added Permission catalog and Position-Permission APIs with atomic replacement and explicit CLI bootstrap.
+- Added reusable Authorization and Organization Scope services over BF010 authenticated User context.
+- Enforced 401 versus 403 semantics, System/Franchise/Partner Agency scope, resource checks, scoped creates, and list isolation across BF006-BF011 APIs.
+- Preserved BF009 Organization-transfer protection and BF011 same-Organization User/Position integrity.
+- BF012 database-backed two-branch scope testing and authenticated BF006-BF011 regression checks passed.
+- Temporary verification data was removed; no automated test framework exists.
+- Direct User permissions, hard-coded roles, Position/Team hierarchy, Admin UI, audit engine, and future modules remain deferred.
+- No subsequent Backend sprint was selected.
+
 Every completed database contract will immediately produce:
 
 - SQL Migration

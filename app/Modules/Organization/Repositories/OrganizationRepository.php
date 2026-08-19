@@ -39,4 +39,8 @@ final class OrganizationRepository extends BaseRepository
     {
         return $this->findByCode($code, $ignoreId) !== null;
     }
+
+    /** @param array<int, int> $organizationIds @return array<int, array<string, mixed>> */
+    public function allInScope(array $organizationIds): array
+    { return $this->query()->whereIn('id', $organizationIds)->get(); }
 }

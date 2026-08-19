@@ -1,10 +1,10 @@
 # Current System State
 
-Status: BF011 implemented and documented
+Status: BF012 implemented and documented
 
 ## Completed Implementation
 
-BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, BF009, BF010, and BF011 are implemented.
+BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, BF009, BF010, BF011, and BF012 are implemented.
 BF004 has no separate Git commit, but its service-container functionality is present in code.
 
 BF006 - Organization Module is completed and verified:
@@ -52,6 +52,16 @@ BF011 - Dynamic Positions is implemented:
 - Position deactivation preserves the database row and existing User `position_id` relationships.
 - Position endpoints require BF010 authentication; Authorization, Roles, Permissions, Position hierarchy, Team hierarchy, and BF012 remain deferred.
 
+BF012 - Permissions & Authorization is implemented:
+
+- Permission capabilities are controlled by the seeded catalog and assigned to Positions through `position_permissions`.
+- Authorization requires an active User, active same-Organization Position, active Permission, and valid Organization scope.
+- Scope resolves as System platform-wide, Franchise plus direct child Partner Agencies, or Partner Agency own-only.
+- Existing business lists are filtered at the persistence/service boundary; resource and mutation routes return 403 for out-of-scope targets.
+- Missing/invalid Authentication remains 401; authenticated Permission or scope failure is 403.
+- Permission assignment uses an explicit CLI bootstrap for initial development and authorized atomic API synchronization thereafter.
+- Direct User permissions, Roles, Position/Team hierarchy, Admin UI, and full audit/event history are deferred.
+
 ## Implemented Request Path
 
 ```text
@@ -73,10 +83,11 @@ and `updated_at`; `parent_organization_id` is indexed and self-references `organ
 The BF009 `users` schema contains the staged User fields plus nullable BF010 `password_hash` and BF011 `position_id`, referencing `organizations.id` and `positions.id`.
 The BF010 `auth_tokens` table references `users.id` and stores only token hashes with expiry and revocation state.
 The BF011 `positions` table references `organizations.id` and uses composite Organization/code uniqueness.
+The BF012 `permissions` and `position_permissions` tables provide the controlled Position-derived Permission model.
 
 ## Not Implemented
 
-- Authorization, roles, permissions, position hierarchy, team hierarchy, user profiles, transfers, registration, reset, refresh tokens, and sessions
+- Direct User permissions, authorization expansion beyond BF012, roles, position hierarchy, team hierarchy, user profiles, transfers, registration, reset, refresh tokens, and sessions
 - CRM, Property, Listings, Deals, Commissions, and Transfers
 - Notifications, AI, Analytics, Integrations, and Frontend
 - Automated test suite
@@ -91,4 +102,4 @@ The BF011 `positions` table references `organizations.id` and uses composite Org
 
 ## Next Development Target
 
-No next milestone is selected. BF012 is not selected or designed.
+No next milestone is selected. No subsequent Backend sprint is selected or designed.

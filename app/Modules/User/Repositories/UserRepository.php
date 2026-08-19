@@ -22,9 +22,11 @@ final class UserRepository extends BaseRepository
     }
 
     /** @return array<int, array<string, mixed>> */
-    public function allActive(): array
+    public function allActive(array $organizationIds = []): array
     {
-        return $this->query()->where('status', '!=', 'inactive')->get();
+        $query = $this->query()->where('status', '!=', 'inactive');
+        if ($organizationIds !== []) { $query->whereIn('organization_id', $organizationIds); }
+        return $query->get();
     }
 
     /** @return array<string, mixed>|null */

@@ -80,6 +80,16 @@ reassignment, and clearing require an active Position in the same Organization. 
 sets `status = inactive` without physically deleting the row or clearing existing User relationships.
 Authorization, Permissions, Roles, Position hierarchy, and Team hierarchy remain deferred.
 
+## BF012 Implementation Status: permissions
+
+BF012 adds the controlled `permissions` catalog and `position_permissions` relationship. Users
+inherit active Permissions through their active same-Organization Position. Authorization requires
+both the Permission code and Organization scope: System scope includes the platform hierarchy,
+Franchise scope includes the Franchise and direct child Partner Agencies, and Partner Agency scope
+is own-only. Lists are filtered to the resolved scope before response generation. Direct User
+Permission overrides, Roles, Position/Team hierarchy, and full Permission assignment audit history
+are not implemented.
+
 ## Purpose
 
 Represents every organization inside the platform.

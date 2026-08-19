@@ -6,6 +6,19 @@ All notable changes to Directors Resale Platform will be documented in this file
 
 # 2026-08-19
 
+## BF012 - Permissions & Authorization
+
+- Added the controlled Permission catalog and `position_permissions` inheritance model.
+- Added authenticated Permission catalog and Position-Permission assignment APIs with atomic synchronization.
+- Added reusable authorization and Organization scope services requiring both Permission and hierarchy scope.
+- Protected existing BF006-BF011 business routes with 401 authentication and 403 authorization semantics.
+- Added scope-filtered lists and resource/create authorization for System, Franchise-plus-child-Agency, and Partner Agency own-only boundaries.
+- Added explicit CLI Position-Permission bootstrap without automatic Position or role creation.
+- Verified two-branch scope isolation, permission lifecycle, list leakage prevention, authorized mutations, and authenticated BF006-BF011 regressions.
+- Direct User permissions, hard-coded roles, Position/Team hierarchy, Admin UI, audit engine, and future modules remain deferred.
+
+# 2026-08-19
+
 ## BF011 - Dynamic Positions
 
 - Added dynamic Organization-owned Position CRUD under `/positions` with Organization-scoped code uniqueness.

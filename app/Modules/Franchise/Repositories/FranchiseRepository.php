@@ -24,12 +24,13 @@ final class FranchiseRepository extends BaseRepository
     /**
      * @return array<int, array<string, mixed>>
      */
-    public function allActive(): array
+    public function allActive(array $organizationIds = []): array
     {
-        return $this->query()
+        $query = $this->query()
             ->where('organization_type', '=', 'franchise')
-            ->where('status', '!=', 'inactive')
-            ->get();
+            ->where('status', '!=', 'inactive');
+        if ($organizationIds !== []) { $query->whereIn('id', $organizationIds); }
+        return $query->get();
     }
 
     /**

@@ -20,7 +20,7 @@ final class FranchiseController
 
     public function index(Request $request): Response
     {
-        return Response::success('Franchises retrieved.', $this->service->all());
+        return Response::success('Franchises retrieved.', $this->service->all((array) $request->attribute('auth.scope.organization_ids', [])));
     }
 
     public function show(Request $request, int|string $id): Response

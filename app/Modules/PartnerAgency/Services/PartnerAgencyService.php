@@ -21,11 +21,11 @@ final class PartnerAgencyService
     }
 
     /** @return array<int, array<string, mixed>> */
-    public function all(): array
+    public function all(array $organizationIds = []): array
     {
         return array_map(
             static fn (array $record): array => PartnerAgency::fromArray($record)->toArray(),
-            $this->repository->allActive()
+            $this->repository->allActive($organizationIds)
         );
     }
 

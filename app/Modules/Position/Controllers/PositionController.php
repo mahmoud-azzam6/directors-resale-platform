@@ -20,7 +20,7 @@ final class PositionController
 
     public function index(Request $request): Response
     {
-        return Response::success('Positions retrieved.', $this->service->all());
+        return Response::success('Positions retrieved.', $this->service->all((array) $request->attribute('auth.scope.organization_ids', [])));
     }
 
     public function show(Request $request, int|string $id): Response
