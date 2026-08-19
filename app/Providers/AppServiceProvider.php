@@ -28,6 +28,10 @@ use App\Modules\PartnerAgency\Controllers\PartnerAgencyController;
 use App\Modules\PartnerAgency\Repositories\PartnerAgencyRepository;
 use App\Modules\PartnerAgency\Services\PartnerAgencyService;
 use App\Modules\PartnerAgency\Validators\PartnerAgencyValidator;
+use App\Modules\Position\Controllers\PositionController;
+use App\Modules\Position\Repositories\PositionRepository;
+use App\Modules\Position\Services\PositionService;
+use App\Modules\Position\Validators\PositionValidator;
 use App\Modules\User\Controllers\UserController;
 use App\Modules\User\Repositories\UserRepository;
 use App\Modules\User\Services\UserService;
@@ -87,6 +91,11 @@ final class AppServiceProvider extends ServiceProvider
         $this->container->bind(UserValidator::class);
         $this->container->bind(UserService::class);
         $this->container->bind(UserController::class);
+
+        $this->container->bind(PositionRepository::class);
+        $this->container->bind(PositionValidator::class);
+        $this->container->bind(PositionService::class);
+        $this->container->bind(PositionController::class);
 
         $this->container->bind(AuthTokenRepository::class);
         $this->container->bind(AuthenticationMiddleware::class);

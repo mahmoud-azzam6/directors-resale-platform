@@ -2,38 +2,32 @@
 
 declare(strict_types=1);
 
-namespace App\Modules\User\Models;
+namespace App\Modules\Position\Models;
 
 /**
- * Represents the staged User business entity.
+ * Represents a dynamic Position belonging to one Organization.
  */
-final class User
+final class Position
 {
     public function __construct(
         private ?int $id,
         private int $organizationId,
-        private ?int $positionId,
-        private string $fullName,
-        private string $email,
-        private ?string $phone,
+        private string $name,
+        private string $code,
         private string $status,
         private ?string $createdAt = null,
         private ?string $updatedAt = null
     ) {
     }
 
-    /**
-     * @param array<string, mixed> $attributes
-     */
+    /** @param array<string, mixed> $attributes */
     public static function fromArray(array $attributes): self
     {
         return new self(
             isset($attributes['id']) ? (int) $attributes['id'] : null,
             (int) ($attributes['organization_id'] ?? 0),
-            isset($attributes['position_id']) ? (int) $attributes['position_id'] : null,
-            (string) ($attributes['full_name'] ?? ''),
-            (string) ($attributes['email'] ?? ''),
-            isset($attributes['phone']) ? (string) $attributes['phone'] : null,
+            (string) ($attributes['name'] ?? ''),
+            (string) ($attributes['code'] ?? ''),
             (string) ($attributes['status'] ?? ''),
             isset($attributes['created_at']) ? (string) $attributes['created_at'] : null,
             isset($attributes['updated_at']) ? (string) $attributes['updated_at'] : null
@@ -46,10 +40,8 @@ final class User
         return [
             'id' => $this->id,
             'organization_id' => $this->organizationId,
-            'position_id' => $this->positionId,
-            'full_name' => $this->fullName,
-            'email' => $this->email,
-            'phone' => $this->phone,
+            'name' => $this->name,
+            'code' => $this->code,
             'status' => $this->status,
             'created_at' => $this->createdAt,
             'updated_at' => $this->updatedAt,
@@ -61,10 +53,8 @@ final class User
     {
         return [
             'organization_id' => $this->organizationId,
-            'position_id' => $this->positionId,
-            'full_name' => $this->fullName,
-            'email' => $this->email,
-            'phone' => $this->phone,
+            'name' => $this->name,
+            'code' => $this->code,
             'status' => $this->status,
         ];
     }

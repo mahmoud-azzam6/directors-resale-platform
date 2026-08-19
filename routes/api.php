@@ -9,6 +9,7 @@ use App\Modules\Authentication\Middleware\AuthenticationMiddleware;
 use App\Modules\Franchise\Controllers\FranchiseController;
 use App\Modules\Organization\Controllers\OrganizationController;
 use App\Modules\PartnerAgency\Controllers\PartnerAgencyController;
+use App\Modules\Position\Controllers\PositionController;
 use App\Modules\User\Controllers\UserController;
 use App\Responses\Response;
 use App\Routing\Router;
@@ -132,5 +133,25 @@ return static function (Router $router, Container $container, array $config): vo
 
     $router->delete('/users/{id}', $protect(function (Request $request, string $id) use ($container): Response {
         return $container->make(UserController::class)->destroy($request, $id);
+    }));
+
+    $router->get('/positions', $protect(function (Request $request) use ($container): Response {
+        return $container->make(PositionController::class)->index($request);
+    }));
+
+    $router->get('/positions/{id}', $protect(function (Request $request, string $id) use ($container): Response {
+        return $container->make(PositionController::class)->show($request, $id);
+    }));
+
+    $router->post('/positions', $protect(function (Request $request) use ($container): Response {
+        return $container->make(PositionController::class)->store($request);
+    }));
+
+    $router->put('/positions/{id}', $protect(function (Request $request, string $id) use ($container): Response {
+        return $container->make(PositionController::class)->update($request, $id);
+    }));
+
+    $router->delete('/positions/{id}', $protect(function (Request $request, string $id) use ($container): Response {
+        return $container->make(PositionController::class)->destroy($request, $id);
     }));
 };

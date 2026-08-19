@@ -1,5 +1,17 @@
 # Database Changelog
 
+## BF011 - Dynamic Positions
+
+Status: Implemented and verified
+
+- Migration: `database/migrations/006_create_positions_table.sql`
+- Migration: `database/migrations/007_add_position_id_to_users_table.sql`
+- Added staged `positions` with Organization ownership, active/inactive status, Organization index, and composite unique `(organization_id, code)`.
+- Added nullable `users.position_id`, its index, and foreign key to `positions.id` so existing Users remain valid without a Position.
+- Position DELETE uses `status = inactive`; assigned Users retain their `position_id` and Position rows remain present.
+- User assignment requires an active Position in the same Organization; reassignment and clearing are supported.
+- Authorization, Permissions, Roles, Position hierarchy, Team hierarchy, and future modules remain deferred.
+
 ## BF010 - Authentication Foundation
 
 Status: Implemented and verified

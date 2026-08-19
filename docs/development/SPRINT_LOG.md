@@ -198,6 +198,20 @@ Status: Implemented on 2026-08-19
 - Authentication is identity-only; Authorization, Roles, Permissions, Positions, User Profiles, Transfers, and BF011 remain deferred.
 - No subsequent milestone was selected.
 
+## BF011 - Dynamic Positions
+
+Status: Implemented on 2026-08-19
+
+- Added the Position model, repository, validator, service, controller, DI bindings, and authenticated CRUD routes.
+- Added `positions` and nullable `users.position_id` migrations with Organization/Position foreign keys and required indexes.
+- Enforced Organization-scoped Position code uniqueness, active supported Organization ownership, and immutable Position ownership.
+- Added User Position assignment, reassignment, clearing, same-Organization enforcement, and inactive-Position rejection.
+- Position deactivation preserves rows and existing User relationships.
+- BF011 database-backed acceptance tests and authenticated BF006-BF010 regression checks passed.
+- Temporary verification data was removed; no automated test framework exists.
+- Authorization, Permissions, Roles, Position hierarchy, Team hierarchy, User Profiles, Transfers, and BF012 remain deferred.
+- No subsequent milestone was selected.
+
 Every completed database contract will immediately produce:
 
 - SQL Migration

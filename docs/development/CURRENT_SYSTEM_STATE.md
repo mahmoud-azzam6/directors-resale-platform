@@ -1,10 +1,10 @@
 # Current System State
 
-Status: BF010 implemented and documented
+Status: BF011 implemented and documented
 
 ## Completed Implementation
 
-BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, BF009, and BF010 are implemented.
+BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, BF009, BF010, and BF011 are implemented.
 BF004 has no separate Git commit, but its service-container functionality is present in code.
 
 BF006 - Organization Module is completed and verified:
@@ -45,6 +45,13 @@ BF010 - Authentication Foundation is implemented:
 - `/auth/login` and health remain public; `/auth/logout`, `/auth/me`, and existing business routes require authentication.
 - Authentication resolves the active User only; Authorization, Roles, Permissions, Positions, Profiles, Transfers, reset, registration, refresh tokens, and sessions are deferred.
 
+BF011 - Dynamic Positions is implemented:
+
+- Positions belong to one Organization and use Organization-scoped code uniqueness.
+- Users have nullable `position_id` with active same-Organization assignment, reassignment, and clearing.
+- Position deactivation preserves the database row and existing User `position_id` relationships.
+- Position endpoints require BF010 authentication; Authorization, Roles, Permissions, Position hierarchy, Team hierarchy, and BF012 remain deferred.
+
 ## Implemented Request Path
 
 ```text
@@ -63,12 +70,13 @@ public/index.php
 The application business tables are `organizations` and `users`. The intentional BF006-BF008 staged `organizations` schema
 contains `id`, `parent_organization_id`, `name`, `code`, `organization_type`, `status`, `created_at`,
 and `updated_at`; `parent_organization_id` is indexed and self-references `organizations.id`.
-The BF009 `users` schema contains the staged User fields plus nullable BF010 `password_hash` and references `organizations.id`.
+The BF009 `users` schema contains the staged User fields plus nullable BF010 `password_hash` and BF011 `position_id`, referencing `organizations.id` and `positions.id`.
 The BF010 `auth_tokens` table references `users.id` and stores only token hashes with expiry and revocation state.
+The BF011 `positions` table references `organizations.id` and uses composite Organization/code uniqueness.
 
 ## Not Implemented
 
-- Authorization, roles, permissions, positions, user profiles, transfers, registration, reset, refresh tokens, and sessions
+- Authorization, roles, permissions, position hierarchy, team hierarchy, user profiles, transfers, registration, reset, refresh tokens, and sessions
 - CRM, Property, Listings, Deals, Commissions, and Transfers
 - Notifications, AI, Analytics, Integrations, and Frontend
 - Automated test suite
@@ -83,4 +91,4 @@ The BF010 `auth_tokens` table references `users.id` and stores only token hashes
 
 ## Next Development Target
 
-No next milestone is selected. BF011 is not selected or designed.
+No next milestone is selected. BF012 is not selected or designed.

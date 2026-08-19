@@ -6,6 +6,17 @@ All notable changes to Directors Resale Platform will be documented in this file
 
 # 2026-08-19
 
+## BF011 - Dynamic Positions
+
+- Added dynamic Organization-owned Position CRUD under `/positions` with Organization-scoped code uniqueness.
+- Added nullable `users.position_id` with same-Organization and active-Position assignment validation.
+- Allowed Position reassignment and clearing while preserving BF009 Organization ownership immutability.
+- Implemented Position DELETE as deactivation without clearing historical User relationships.
+- Protected Position endpoints with BF010 authentication without adding Authorization, Roles, Permissions, or hierarchy behavior.
+- Verified BF011 database-backed acceptance and authenticated BF006-BF010 regression checks; no automated test suite exists.
+
+# 2026-08-19
+
 ## BF010 - Authentication Foundation
 
 - Added secure `password_hash` credentials and a dedicated `auth_tokens` table with hashed tokens, expiry, revocation, and User ownership.

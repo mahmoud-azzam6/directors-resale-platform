@@ -71,6 +71,15 @@ bearer tokens are stored only as SHA-256 hashes, and tokens support expiration a
 Authentication is identity-only. Authorization, Roles, Permissions, Positions, User Profiles,
 Transfers, reset, registration, refresh tokens, sessions, and full audit relationships are deferred.
 
+## BF011 Implementation Status: positions
+
+BF011 adds the staged `positions` entity with `id`, `organization_id`, `name`, `code`, `status`,
+`created_at`, and `updated_at`. Position codes are unique within an Organization, and each
+Position belongs to an active supported Organization. Users have nullable `position_id`; assignment,
+reassignment, and clearing require an active Position in the same Organization. Position DELETE
+sets `status = inactive` without physically deleting the row or clearing existing User relationships.
+Authorization, Permissions, Roles, Position hierarchy, and Team hierarchy remain deferred.
+
 ## Purpose
 
 Represents every organization inside the platform.

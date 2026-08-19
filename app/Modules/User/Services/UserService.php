@@ -6,6 +6,7 @@ namespace App\Modules\User\Services;
 
 use App\Exceptions\ValidationException;
 use App\Modules\Organization\Repositories\OrganizationRepository;
+use App\Modules\Position\Repositories\PositionRepository;
 use App\Modules\User\Models\User;
 use App\Modules\User\Repositories\UserRepository;
 use App\Modules\User\Validators\UserValidator;
@@ -18,7 +19,8 @@ final class UserService
     public function __construct(
         private UserRepository $repository,
         private UserValidator $validator,
-        private OrganizationRepository $organizationRepository
+        private OrganizationRepository $organizationRepository,
+        private PositionRepository $positionRepository
     ) {
     }
 
@@ -45,6 +47,7 @@ final class UserService
         $data = $this->normalize($data);
         $this->ensureValid($this->validator->validate($data));
         $this->ensureOrganizationIsAllowed((int) $data['organization_id']);
+        $this->ensurePositionIsAllowed($data['position_id'] ?? null, (int) $data['organization_id']);
 
         $user = User::fromArray($data);
 
@@ -71,6 +74,7 @@ final class UserService
         $merged = $this->normalize(array_merge($existing, $normalizedInput));
         $errors = array_merge($errors, $this->validator->validateForUpdate($merged, $id));
         $this->ensureValid($errors);
+        $this->ensurePositionIsAllowed($merged['position_id'] ?? null, (int) $existing['organization_id']);
 
         $user = User::fromArray($merged);
         $updated = $this->repository->update($id, $user->persistenceData());
@@ -113,6 +117,31 @@ final class UserService
         }
     }
 
+    private function ensurePositionIsAllowed(mixed $positionId, int $organizationId): void
+    {
+        if ($positionId === null) {
+            return;
+        }
+
+        if (! is_int($positionId) && (! is_string($positionId) || ctype_digit($positionId) === false)) {
+            throw new ValidationException(['position_id' => 'Position must be a valid integer identifier.']);
+        }
+
+        if ((int) $positionId <= 0) {
+            throw new ValidationException(['position_id' => 'Position must be a valid integer identifier.']);
+        }
+
+        $position = $this->positionRepository->findActive((int) $positionId);
+
+        if ($position === null) {
+            throw new ValidationException(['position_id' => 'Position must exist and be active.']);
+        }
+
+        if ((int) $position['organization_id'] !== $organizationId) {
+            throw new ValidationException(['position_id' => 'Position must belong to the User Organization.']);
+        }
+    }
+
     /** @param array<string, mixed> $data @return array<string, mixed> */
     private function normalize(array $data): array
     {
@@ -132,6 +161,10 @@ final class UserService
 
         if (array_key_exists('organization_id', $data)) {
             $normalized['organization_id'] = $data['organization_id'];
+        }
+
+        if (array_key_exists('position_id', $data)) {
+            $normalized['position_id'] = $data['position_id'];
         }
 
         return $normalized;
