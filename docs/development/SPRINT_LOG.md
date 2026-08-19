@@ -185,6 +185,19 @@ Status: Implemented on 2026-08-19
 - Authentication, Authorization, Positions, Permissions, User Profiles, and Transfers remain deferred.
 - No subsequent milestone was selected.
 
+## BF010 - Authentication Foundation
+
+Status: Implemented on 2026-08-19
+
+- Added `password_hash` credentials and the `auth_tokens` migration with User ownership, hashed token storage, expiry, and revocation.
+- Added login, logout, current User, authentication service, controller, and reusable bearer middleware.
+- Protected existing Organization, Franchise, Partner Agency, and User business routes without changing their business rules.
+- Added the narrow CLI-only initial password setup mechanism; no public registration, password reset, refresh tokens, or browser sessions.
+- BF010 database-backed login/token/logout/me acceptance tests and authenticated BF006-BF009 regression checks passed.
+- Temporary verification data was removed; no automated test framework exists.
+- Authentication is identity-only; Authorization, Roles, Permissions, Positions, User Profiles, Transfers, and BF011 remain deferred.
+- No subsequent milestone was selected.
+
 Every completed database contract will immediately produce:
 
 - SQL Migration

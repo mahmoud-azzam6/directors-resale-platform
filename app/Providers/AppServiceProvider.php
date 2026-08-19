@@ -16,6 +16,10 @@ use App\Modules\Franchise\Controllers\FranchiseController;
 use App\Modules\Franchise\Repositories\FranchiseRepository;
 use App\Modules\Franchise\Services\FranchiseService;
 use App\Modules\Franchise\Validators\FranchiseValidator;
+use App\Modules\Authentication\Controllers\AuthenticationController;
+use App\Modules\Authentication\Middleware\AuthenticationMiddleware;
+use App\Modules\Authentication\Repositories\AuthTokenRepository;
+use App\Modules\Authentication\Services\AuthenticationService;
 use App\Modules\Organization\Controllers\OrganizationController;
 use App\Modules\Organization\Repositories\OrganizationRepository;
 use App\Modules\Organization\Services\OrganizationService;
@@ -83,6 +87,18 @@ final class AppServiceProvider extends ServiceProvider
         $this->container->bind(UserValidator::class);
         $this->container->bind(UserService::class);
         $this->container->bind(UserController::class);
+
+        $this->container->bind(AuthTokenRepository::class);
+        $this->container->bind(AuthenticationMiddleware::class);
+        $this->container->bind(AuthenticationController::class);
+        $this->container->bind(
+            AuthenticationService::class,
+            fn (): AuthenticationService => new AuthenticationService(
+                $this->container->make(UserRepository::class),
+                $this->container->make(AuthTokenRepository::class),
+                $this->config
+            )
+        );
 
         $this->container->singleton(Router::class);
 

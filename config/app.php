@@ -10,6 +10,9 @@ return [
     'url' => $_ENV['APP_URL'] ?? '',
     'timezone' => $_ENV['APP_TIMEZONE'] ?? 'UTC',
     'base_path' => $_ENV['APP_BASE_PATH'] ?? '',
+    'auth' => [
+        'token_ttl' => (int) ($_ENV['AUTH_TOKEN_TTL'] ?? 3600),
+    ],
     'log' => [
         'path' => dirname(__DIR__) . '/storage/logs/app.log',
         'level' => match (strtolower($_ENV['APP_LOG_LEVEL'] ?? 'debug')) {

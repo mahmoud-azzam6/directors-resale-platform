@@ -63,6 +63,16 @@ final class Kernel
             }
         }
 
+        if (isset($server['REDIRECT_HTTP_AUTHORIZATION'])) {
+            $headers['AUTHORIZATION'] = (string) $server['REDIRECT_HTTP_AUTHORIZATION'];
+        }
+
+        if (function_exists('getallheaders')) {
+            foreach (getallheaders() as $name => $value) {
+                $headers[$name] = (string) $value;
+            }
+        }
+
         return $headers;
     }
 

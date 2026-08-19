@@ -11,6 +11,9 @@ final class Request
 {
     private InputBag $input;
 
+    /** @var array<string, mixed> */
+    private array $attributes = [];
+
     /**
      * @param array<string, UploadedFile|array<int|string, UploadedFile|array>> $files
      */
@@ -108,5 +111,15 @@ final class Request
     public function files(): array
     {
         return $this->files;
+    }
+
+    public function setAttribute(string $key, mixed $value): void
+    {
+        $this->attributes[$key] = $value;
+    }
+
+    public function attribute(string $key, mixed $default = null): mixed
+    {
+        return $this->attributes[$key] ?? $default;
     }
 }

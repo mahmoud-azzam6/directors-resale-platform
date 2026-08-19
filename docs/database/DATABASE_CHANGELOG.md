@@ -1,5 +1,17 @@
 # Database Changelog
 
+## BF010 - Authentication Foundation
+
+Status: Implemented and verified
+
+- Migration: `database/migrations/004_add_password_hash_to_users_table.sql`
+- Migration: `database/migrations/005_create_auth_tokens_table.sql`
+- Added nullable `users.password_hash` for existing BF009 Users without introducing a plain password column.
+- Added `auth_tokens` with User ownership, SHA-256 token hashes, `DATETIME` expiry, nullable revocation timestamp, creation timestamp, foreign key, and lookup indexes.
+- Raw bearer tokens are returned only on successful login and are never persisted or exposed through APIs.
+- Logout revokes tokens without deleting token history; inactive Users cannot log in or use existing tokens.
+- Authentication is identity-only. Authorization, Roles, Permissions, Positions, User Profiles, Transfers, reset, registration, refresh tokens, and sessions remain deferred.
+
 ## BF009 - User Management
 
 Status: Implemented and verified

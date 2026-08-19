@@ -48,6 +48,19 @@ final class UserRepository extends BaseRepository
     }
 
     /** @return array<string, mixed>|null */
+    public function findByEmail(string $email): ?array
+    {
+        return $this->query()->where('email', '=', $email)->first();
+    }
+
+    public function setPasswordHash(int|string $id, string $passwordHash): bool
+    {
+        return $this->query()
+            ->where('id', '=', $id)
+            ->update(['password_hash' => $passwordHash]) > 0;
+    }
+
+    /** @return array<string, mixed>|null */
     public function deactivate(int|string $id): ?array
     {
         $this->query()->where('id', '=', $id)->update(['status' => 'inactive']);

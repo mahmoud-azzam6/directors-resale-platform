@@ -1,10 +1,10 @@
 # Current System State
 
-Status: BF009 implemented and documented
+Status: BF010 implemented and documented
 
 ## Completed Implementation
 
-BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, and BF009 are implemented.
+BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, BF009, and BF010 are implemented.
 BF004 has no separate Git commit, but its service-container functionality is present in code.
 
 BF006 - Organization Module is completed and verified:
@@ -38,6 +38,13 @@ BF009 - User Management is implemented:
 - User DELETE deactivates with `status = inactive`; the database row remains present.
 - Authentication, Authorization, Positions, Permissions, User Profiles, and Transfers are deferred.
 
+BF010 - Authentication Foundation is implemented:
+
+- Existing Users may authenticate with securely hashed passwords established through the narrow CLI development mechanism.
+- Login issues cryptographically random bearer tokens while persisting only SHA-256 token hashes with expiry and revocation lifecycle fields.
+- `/auth/login` and health remain public; `/auth/logout`, `/auth/me`, and existing business routes require authentication.
+- Authentication resolves the active User only; Authorization, Roles, Permissions, Positions, Profiles, Transfers, reset, registration, refresh tokens, and sessions are deferred.
+
 ## Implemented Request Path
 
 ```text
@@ -56,11 +63,12 @@ public/index.php
 The application business tables are `organizations` and `users`. The intentional BF006-BF008 staged `organizations` schema
 contains `id`, `parent_organization_id`, `name`, `code`, `organization_type`, `status`, `created_at`,
 and `updated_at`; `parent_organization_id` is indexed and self-references `organizations.id`.
-The BF009 `users` schema contains only the staged User fields and references `organizations.id`.
+The BF009 `users` schema contains the staged User fields plus nullable BF010 `password_hash` and references `organizations.id`.
+The BF010 `auth_tokens` table references `users.id` and stores only token hashes with expiry and revocation state.
 
 ## Not Implemented
 
-- Authentication, authorization, positions, permissions, user profiles, and transfers
+- Authorization, roles, permissions, positions, user profiles, transfers, registration, reset, refresh tokens, and sessions
 - CRM, Property, Listings, Deals, Commissions, and Transfers
 - Notifications, AI, Analytics, Integrations, and Frontend
 - Automated test suite
@@ -71,8 +79,8 @@ The BF009 `users` schema contains only the staged User fields and references `or
 - The broader canonical Organization schema exceeds the intentional BF006-BF007 staged schema.
 - ULID and audit standards are not present in the BF006-BF007 staged schema.
 - Automated Organization tests do not exist.
-- Authentication and authorization infrastructure is not available; BF008 retains the documented integration dependency without implementing a parallel security system.
+- Authentication is implemented as an identity layer; authorization remains deferred.
 
 ## Next Development Target
 
-No next milestone is selected. BF010 is not selected or designed.
+No next milestone is selected. BF011 is not selected or designed.

@@ -6,9 +6,9 @@ Current Project Phase: Core Business Development
 
 Current Milestone: Milestone 2 - Core Business
 
-Completed Sprints: BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, BF009
+Completed Sprints: BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, BF009, BF010
 
-Current Sprint: BF009 - User Management (Implemented)
+Current Sprint: BF010 - Authentication Foundation (Implemented)
 
 Next Selected Milestone: Not selected
 
@@ -41,7 +41,7 @@ The application now has:
 - User module with staged CRUD API routes, active Organization ownership validation, globally unique email validation, immutable Organization ownership, and status-based deactivation
 - `users` table with a restricted Organization foreign key and indexed `organization_id`
 
-Organization, Franchise, Partner Agency, and staged User Management are the implemented business scope. Users belong to exactly one active System, Franchise, or Partner Agency Organization; email is globally unique; normal User updates cannot change `organization_id`; and DELETE deactivates without physical deletion. Authentication, Authorization, Positions, Permissions, User Profiles, and Transfers remain deferred. No automated test suite exists; BF009 database-backed acceptance and BF006-BF008 regression checks passed. No next milestone has been selected.
+Organization, Franchise, Partner Agency, staged User Management, and Authentication Foundation are implemented. Authentication uses secure password hashes, hashed expiring bearer tokens, token revocation, active-user enforcement, and protected business routes. Authorization, Positions, Roles, Permissions, User Profiles, Transfers, password reset, registration, refresh tokens, and future modules remain deferred. No automated test suite exists; BF010 database-backed acceptance and authenticated BF006-BF009 regression checks passed. No next milestone has been selected.
 
 ## Architecture Overview
 
@@ -85,4 +85,5 @@ The Service Container is the composition root for infrastructure services.
 - The broader canonical Organization schema and ULID/audit standards exceed the intentional BF006-BF007 staged implementation.
 - No automated test suite exists.
 - Authentication and authorization remain unavailable integration dependencies; BF008 does not add a parallel security system.
+- Authentication is identity-only; authorization remains deferred.
 - Franchise DELETE archives by setting `status` to `inactive`; the existing Organization DELETE behavior remains a separate known discrepancy.

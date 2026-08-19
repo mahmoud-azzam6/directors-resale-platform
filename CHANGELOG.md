@@ -6,6 +6,17 @@ All notable changes to Directors Resale Platform will be documented in this file
 
 # 2026-08-19
 
+## BF010 - Authentication Foundation
+
+- Added secure `password_hash` credentials and a dedicated `auth_tokens` table with hashed tokens, expiry, revocation, and User ownership.
+- Added `POST /auth/login`, `POST /auth/logout`, and `GET /auth/me`.
+- Added reusable bearer authentication middleware and protected Organizations, Franchises, Partner Agencies, and Users routes.
+- Added a narrow CLI-only initial password setup mechanism; no public registration, reset, refresh tokens, sessions, or raw credential persistence.
+- Verified login, token lifecycle, logout, inactive-user enforcement, public health/login, route protection, and authenticated BF006-BF009 regression checks.
+- Authorization, Roles, Permissions, Positions, User Profiles, and Transfers remain deferred; no future module was introduced.
+
+# 2026-08-19
+
 ## BF009 - User Management
 
 - Added the staged `User` module and CRUD API routes under `/users`.

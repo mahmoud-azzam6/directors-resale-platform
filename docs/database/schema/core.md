@@ -65,9 +65,11 @@ BF009 implements the staged User entity in `users`:
 
 Each User belongs to one active System, Franchise, or Partner Agency Organization. Email is
 globally unique. Normal User updates cannot change `organization_id`, and DELETE deactivates the
-row with `status = inactive` rather than physically deleting it. Authentication, Authorization,
-Positions, Permissions, User Profiles, Transfers, credentials, tokens, sessions, and full audit
-relationships are deferred.
+row with `status = inactive` rather than physically deleting it. BF010 adds nullable
+`password_hash` credentials and the separate `auth_tokens` table; passwords are securely hashed,
+bearer tokens are stored only as SHA-256 hashes, and tokens support expiration and revocation.
+Authentication is identity-only. Authorization, Roles, Permissions, Positions, User Profiles,
+Transfers, reset, registration, refresh tokens, sessions, and full audit relationships are deferred.
 
 ## Purpose
 
