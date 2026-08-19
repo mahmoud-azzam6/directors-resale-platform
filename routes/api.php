@@ -7,6 +7,7 @@ use App\Http\Request;
 use App\Modules\Franchise\Controllers\FranchiseController;
 use App\Modules\Organization\Controllers\OrganizationController;
 use App\Modules\PartnerAgency\Controllers\PartnerAgencyController;
+use App\Modules\User\Controllers\UserController;
 use App\Responses\Response;
 use App\Routing\Router;
 
@@ -84,5 +85,25 @@ return static function (Router $router, Container $container, array $config): vo
 
     $router->delete('/partner-agencies/{id}', function (Request $request, string $id) use ($container): Response {
         return $container->make(PartnerAgencyController::class)->destroy($request, $id);
+    });
+
+    $router->get('/users', function (Request $request) use ($container): Response {
+        return $container->make(UserController::class)->index($request);
+    });
+
+    $router->get('/users/{id}', function (Request $request, string $id) use ($container): Response {
+        return $container->make(UserController::class)->show($request, $id);
+    });
+
+    $router->post('/users', function (Request $request) use ($container): Response {
+        return $container->make(UserController::class)->store($request);
+    });
+
+    $router->put('/users/{id}', function (Request $request, string $id) use ($container): Response {
+        return $container->make(UserController::class)->update($request, $id);
+    });
+
+    $router->delete('/users/{id}', function (Request $request, string $id) use ($container): Response {
+        return $container->make(UserController::class)->destroy($request, $id);
     });
 };

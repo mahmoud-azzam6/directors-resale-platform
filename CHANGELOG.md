@@ -4,6 +4,17 @@ All notable changes to Directors Resale Platform will be documented in this file
 
 ---
 
+# 2026-08-19
+
+## BF009 - User Management
+
+- Added the staged `User` module and CRUD API routes under `/users`.
+- Added `users` with Organization ownership, a foreign key and index on `organization_id`, global unique email, and only the BF009 fields.
+- Enforced active System, Franchise, or Partner Agency Organization ownership and immutable `organization_id` through normal User updates.
+- Implemented DELETE as `status = inactive` while preserving the database row and hiding inactive Users from active endpoints.
+- Deferred Authentication, Authorization, Positions, Permissions, User Profiles, and Transfers; no future module was introduced.
+- Verified BF009 database-backed acceptance and BF006-BF008 regression checks; no automated test suite exists.
+
 # 2026-08-16
 
 ## BF008 - Partner Agency Management

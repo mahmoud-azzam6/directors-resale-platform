@@ -24,6 +24,10 @@ use App\Modules\PartnerAgency\Controllers\PartnerAgencyController;
 use App\Modules\PartnerAgency\Repositories\PartnerAgencyRepository;
 use App\Modules\PartnerAgency\Services\PartnerAgencyService;
 use App\Modules\PartnerAgency\Validators\PartnerAgencyValidator;
+use App\Modules\User\Controllers\UserController;
+use App\Modules\User\Repositories\UserRepository;
+use App\Modules\User\Services\UserService;
+use App\Modules\User\Validators\UserValidator;
 use App\Routing\Router;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -74,6 +78,11 @@ final class AppServiceProvider extends ServiceProvider
         $this->container->bind(PartnerAgencyValidator::class);
         $this->container->bind(PartnerAgencyService::class);
         $this->container->bind(PartnerAgencyController::class);
+
+        $this->container->bind(UserRepository::class);
+        $this->container->bind(UserValidator::class);
+        $this->container->bind(UserService::class);
+        $this->container->bind(UserController::class);
 
         $this->container->singleton(Router::class);
 

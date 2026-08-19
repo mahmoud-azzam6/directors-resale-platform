@@ -50,6 +50,25 @@ This staged implementation is defined by `docs/sprints/BF006-Organization-Module
 from this broader DB101 design. The remaining fields, relationships, ULID, and audit columns
 below remain architectural/planned requirements until an approved future milestone addresses them.
 
+## BF009 Implementation Status: users
+
+BF009 implements the staged User entity in `users`:
+
+- `id`
+- `organization_id`
+- `full_name`
+- `email`
+- `phone`
+- `status`
+- `created_at`
+- `updated_at`
+
+Each User belongs to one active System, Franchise, or Partner Agency Organization. Email is
+globally unique. Normal User updates cannot change `organization_id`, and DELETE deactivates the
+row with `status = inactive` rather than physically deleting it. Authentication, Authorization,
+Positions, Permissions, User Profiles, Transfers, credentials, tokens, sessions, and full audit
+relationships are deferred.
+
 ## Purpose
 
 Represents every organization inside the platform.

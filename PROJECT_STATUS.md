@@ -6,15 +6,15 @@ Current Project Phase: Core Business Development
 
 Current Milestone: Milestone 2 - Core Business
 
-Completed Sprints: BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008
+Completed Sprints: BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, BF009
 
-Current Sprint: BF008 - Partner Agency Management (Implemented)
+Current Sprint: BF009 - User Management (Implemented)
 
 Next Selected Milestone: Not selected
 
 Latest Stable Commit: a017c94 - fix(BF006): inject request into organization routes
 
-Last Updated: 2026-08-16
+Last Updated: 2026-08-19
 
 ---
 
@@ -38,8 +38,10 @@ The application now has:
 - Franchise module with CRUD API routes, System Organization parent validation, and status-based archival
 - BF007 migration adding indexed, self-referencing `parent_organization_id`
 - Partner Agency module with CRUD API routes, Franchise parent validation, endpoint isolation, and status-based archival
+- User module with staged CRUD API routes, active Organization ownership validation, globally unique email validation, immutable Organization ownership, and status-based deactivation
+- `users` table with a restricted Organization foreign key and indexed `organization_id`
 
-Organization, Franchise, and Partner Agency Management are the implemented business scope. Partner Agencies reuse `organizations`, use `organization_type = partner_agency`, and belong directly to a Franchise through `parent_organization_id`; no separate table or BF008 migration exists. Users, authentication, and authorization remain unimplemented. No automated test suite exists, and BF008 database-backed acceptance testing was unavailable because MySQL was not running during verification. No next milestone has been selected.
+Organization, Franchise, Partner Agency, and staged User Management are the implemented business scope. Users belong to exactly one active System, Franchise, or Partner Agency Organization; email is globally unique; normal User updates cannot change `organization_id`; and DELETE deactivates without physical deletion. Authentication, Authorization, Positions, Permissions, User Profiles, and Transfers remain deferred. No automated test suite exists; BF009 database-backed acceptance and BF006-BF008 regression checks passed. No next milestone has been selected.
 
 ## Architecture Overview
 

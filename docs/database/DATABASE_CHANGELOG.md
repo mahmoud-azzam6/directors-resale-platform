@@ -1,5 +1,17 @@
 # Database Changelog
 
+## BF009 - User Management
+
+Status: Implemented and verified
+
+- Migration: `database/migrations/003_create_users_table.sql`
+- Added the staged `users` table with `id`, `organization_id`, `full_name`, `email`, `phone`, `status`, `created_at`, and `updated_at`.
+- Added the restricted foreign key `fk_users_organization` to `organizations.id` and index `idx_users_organization_id`.
+- Added global unique email behavior; no password, position, permission, profile, token, or session fields were introduced.
+- DELETE uses `status = inactive`; the User row remains present.
+- Normal User updates cannot change `organization_id`; Organization transfers remain deferred.
+- Authentication, Authorization, Positions, Permissions, User Profiles, and full audit relationships remain deferred.
+
 ## BF008 - Partner Agency Management
 
 Status: Implemented; no migration required

@@ -172,6 +172,19 @@ Status: Implemented on 2026-08-16
 - PHP syntax and autoload verification passed; no automated test framework exists, and database-backed checks were unavailable because MySQL was not running.
 - No subsequent milestone was selected.
 
+## BF009 - User Management
+
+Status: Implemented on 2026-08-19
+
+- Added the staged User model, repository, validator, service, controller, DI bindings, and CRUD routes.
+- Added `database/migrations/003_create_users_table.sql` with Organization foreign key/index and global unique email.
+- Enforced active supported Organization ownership and rejected normal User Organization changes.
+- Implemented DELETE as status-based deactivation while preserving User rows and active endpoint visibility rules.
+- BF009 database-backed acceptance tests and BF006-BF008 regression endpoint checks passed.
+- Temporary verification data was removed; no automated test framework exists.
+- Authentication, Authorization, Positions, Permissions, User Profiles, and Transfers remain deferred.
+- No subsequent milestone was selected.
+
 Every completed database contract will immediately produce:
 
 - SQL Migration

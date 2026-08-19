@@ -12,12 +12,13 @@
 | BF006 | Completed | Organization CRUD/API, staged `organizations` table, and routing fix `a017c94` |
 | BF007 | Completed | Organization-backed Franchise CRUD/API, `parent_organization_id`, System-parent validation, and status-based archival |
 | BF008 | Implemented | Organization-backed Partner Agency CRUD/API, Franchise-parent validation, isolation, and status-based archival |
+| BF009 | Implemented | Staged User CRUD/API, active Organization ownership, global unique email, immutable ownership, and status-based deactivation |
 
 BF006 smoke tests and BF007 manual acceptance/regression checks passed. No automated test suite exists.
 
 ## Next Development Target
 
-No next milestone is selected. BF009 remains subject to a separate project decision.
+No next milestone is selected. BF010 is not selected or designed.
 
 ## Constraints for Future Planning
 

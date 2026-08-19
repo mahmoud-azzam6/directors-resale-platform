@@ -1,10 +1,10 @@
 # Current System State
 
-Status: BF008 implemented and documented
+Status: BF009 implemented and documented
 
 ## Completed Implementation
 
-BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, and BF008 are implemented.
+BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, and BF009 are implemented.
 BF004 has no separate Git commit, but its service-container functionality is present in code.
 
 BF006 - Organization Module is completed and verified:
@@ -31,6 +31,13 @@ BF008 - Partner Agency Management is implemented:
 - DELETE archives by setting `status` to `inactive`; the row is not physically deleted.
 - No Partner Agency table or BF008 migration was required.
 
+BF009 - User Management is implemented:
+
+- Users belong to exactly one active System, Franchise, or Partner Agency Organization.
+- User email is globally unique and `organization_id` is immutable through normal updates.
+- User DELETE deactivates with `status = inactive`; the database row remains present.
+- Authentication, Authorization, Positions, Permissions, User Profiles, and Transfers are deferred.
+
 ## Implemented Request Path
 
 ```text
@@ -46,13 +53,14 @@ public/index.php
 
 ## Current Database State
 
-`organizations` is the only application business table. Its intentional BF006-BF008 staged schema
+The application business tables are `organizations` and `users`. The intentional BF006-BF008 staged `organizations` schema
 contains `id`, `parent_organization_id`, `name`, `code`, `organization_type`, `status`, `created_at`,
-and `updated_at`. `parent_organization_id` is indexed and self-references `organizations.id`.
+and `updated_at`; `parent_organization_id` is indexed and self-references `organizations.id`.
+The BF009 `users` schema contains only the staged User fields and references `organizations.id`.
 
 ## Not Implemented
 
-- Users, authentication, and authorization
+- Authentication, authorization, positions, permissions, user profiles, and transfers
 - CRM, Property, Listings, Deals, Commissions, and Transfers
 - Notifications, AI, Analytics, Integrations, and Frontend
 - Automated test suite
@@ -67,4 +75,4 @@ and `updated_at`. `parent_organization_id` is indexed and self-references `organ
 
 ## Next Development Target
 
-No next milestone is selected. Selection and design of BF009 require a separate project decision.
+No next milestone is selected. BF010 is not selected or designed.
