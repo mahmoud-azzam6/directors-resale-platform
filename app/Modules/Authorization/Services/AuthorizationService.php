@@ -42,6 +42,28 @@ final class AuthorizationService
         return null;
     }
 
+    /** @return array<string, mixed>|null */
+    public function effectivePosition(array $user): ?array
+    {
+        if (($user['status'] ?? null) !== 'active' || empty($user['position_id'])) { return null; }
+        $position = $this->positionRepository->findActive((int) $user['position_id']);
+        return $position !== null
+            && (int) $position['organization_id'] === (int) $user['organization_id'] ? $position : null;
+    }
+
+    /** @return array<int, string> */
+    public function effectivePermissionCodes(array $user): array
+    {
+        $position = $this->effectivePosition($user);
+        if ($position === null) { return []; }
+        $codes = [];
+        foreach ($this->assignmentRepository->forPosition((int) $position['id']) as $assignment) {
+            $permission = $this->permissionRepository->findActive((int) $assignment['permission_id']);
+            if ($permission !== null) { $codes[] = (string) $permission['code']; }
+        }
+        return array_values(array_unique($codes));
+    }
+
     public function targetOrganization(string $resource, int|string $id): ?int
     {
         if ($resource === 'organizations') {
@@ -60,14 +82,6 @@ final class AuthorizationService
 
     private function hasPermission(array $user, string $code): bool
     {
-        if (($user['status'] ?? null) !== 'active' || empty($user['position_id'])) { return false; }
-        $position = $this->positionRepository->findActive((int) $user['position_id']);
-        if ($position === null || (int) $position['organization_id'] !== (int) $user['organization_id']) { return false; }
-        $permission = $this->permissionRepository->findActiveByCode($code);
-        if ($permission === null) { return false; }
-        foreach ($this->assignmentRepository->forPosition((int) $position['id']) as $assignment) {
-            if ((int) $assignment['permission_id'] === (int) $permission['id']) { return true; }
-        }
-        return false;
+        return in_array($code, $this->effectivePermissionCodes($user), true);
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Core\Container;
 use App\Http\Request;
 use App\Modules\Authentication\Controllers\AuthenticationController;
+use App\Modules\Authentication\Controllers\AuthContextController;
 use App\Modules\Authentication\Middleware\AuthenticationMiddleware;
 use App\Modules\Franchise\Controllers\FranchiseController;
 use App\Modules\Organization\Controllers\OrganizationController;
@@ -139,6 +140,10 @@ return static function (Router $router, Container $container, array $config): vo
 
     $router->get('/auth/me', $protect(function (Request $request) use ($container): Response {
         return $container->make(AuthenticationController::class)->me($request);
+    }));
+
+    $router->get('/auth/context', $protect(function (Request $request) use ($container): Response {
+        return $container->make(AuthContextController::class)->show($request);
     }));
 
     $router->get('/users', $authorize(function (Request $request) use ($container): Response {

@@ -4,6 +4,17 @@ All notable changes to Directors Resale Platform will be documented in this file
 
 ---
 
+# 2026-08-20
+
+## AF001 - Admin UI Foundation
+
+- Added the Next.js + TypeScript + App Router Admin frontend under `frontend/` with Tailwind, TanStack Query, React Hook Form, Zod, and Lucide.
+- Added replaceable design tokens, source-owned UI primitives, Directors brand reference integration, protected Admin layout, responsive navigation, Header, Dashboard shell, and polished module placeholders.
+- Added server-side HttpOnly cookie bridge for BF010 login/logout and safe `/auth/context` consumption without exposing bearer tokens to browser storage or JavaScript.
+- Added permission-aware navigation and authenticated 403, loading, error, empty, and not-found foundations.
+- Verified frontend typecheck, production build, lint, HTTP auth integration, logout, expired-session handling, context safety, and backend PHP syntax.
+- AF002/AF003 and full CRUD screens remain deferred.
+
 # 2026-08-19
 
 ## BF012 - Permissions & Authorization

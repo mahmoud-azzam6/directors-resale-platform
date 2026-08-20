@@ -226,6 +226,19 @@ Status: Implemented on 2026-08-19
 - Direct User permissions, hard-coded roles, Position/Team hierarchy, Admin UI, audit engine, and future modules remain deferred.
 - No subsequent Backend sprint was selected.
 
+## AF001 - Admin UI Foundation
+
+Status: Implemented on 2026-08-20
+
+- Added the `frontend/` Next.js App Router foundation with TypeScript, Tailwind, TanStack Query, React Hook Form, Zod, and Lucide.
+- Added centralized Directors Gold/Charcoal-informed design tokens and source-owned reusable UI primitives.
+- Added real Login, server-side HttpOnly cookie bridge, logout, safe `/auth/context`, protected Admin layout, responsive Sidebar/Header, and context-only Dashboard.
+- Added permission-aware navigation and polished placeholders for Organizations, Franchises, Partner Agencies, Users, Positions, and Permissions.
+- Added reusable loading, generic error, 403, empty, and not-found states without implementing full CRUD.
+- Frontend typecheck, build, lint, HTTP login/context/logout integration, permission-aware navigation, forbidden state, expired-session handling, and PHP syntax checks passed.
+- Raw tokens were absent from Web Storage and not returned to frontend JavaScript; temporary backend verification data was removed.
+- AF002 and AF003 remain deferred; no subsequent frontend phase was selected.
+
 Every completed database contract will immediately produce:
 
 - SQL Migration

@@ -17,6 +17,7 @@ use App\Modules\Franchise\Repositories\FranchiseRepository;
 use App\Modules\Franchise\Services\FranchiseService;
 use App\Modules\Franchise\Validators\FranchiseValidator;
 use App\Modules\Authentication\Controllers\AuthenticationController;
+use App\Modules\Authentication\Controllers\AuthContextController;
 use App\Modules\Authentication\Middleware\AuthenticationMiddleware;
 use App\Modules\Authentication\Repositories\AuthTokenRepository;
 use App\Modules\Authentication\Services\AuthenticationService;
@@ -119,6 +120,7 @@ final class AppServiceProvider extends ServiceProvider
         $this->container->bind(AuthTokenRepository::class);
         $this->container->bind(AuthenticationMiddleware::class);
         $this->container->bind(AuthenticationController::class);
+        $this->container->bind(AuthContextController::class);
         $this->container->bind(
             AuthenticationService::class,
             fn (): AuthenticationService => new AuthenticationService(

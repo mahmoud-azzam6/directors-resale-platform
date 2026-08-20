@@ -1,6 +1,6 @@
 # Current System State
 
-Status: BF012 implemented and documented
+Status: AF001 implemented and documented
 
 ## Completed Implementation
 
@@ -62,6 +62,14 @@ BF012 - Permissions & Authorization is implemented:
 - Permission assignment uses an explicit CLI bootstrap for initial development and authorized atomic API synchronization thereafter.
 - Direct User permissions, Roles, Position/Team hierarchy, Admin UI, and full audit/event history are deferred.
 
+AF001 - Admin UI Foundation is implemented:
+
+- Added a Next.js App Router, TypeScript, Tailwind, TanStack Query, React Hook Form, Zod, and Lucide frontend under `frontend/`.
+- Added centralized replaceable design tokens, source-owned UI primitives, protected Admin layout, responsive sidebar, header, dashboard shell, loading/error/403 states, and six polished placeholder routes.
+- Added server-side HttpOnly cookie bridge for BF010 login/logout and `/auth/context`; raw tokens are not exposed to browser JavaScript or Web Storage.
+- Added permission-aware navigation from backend context codes and authenticated server-aware Admin protection.
+- AF002/AF003, full CRUD screens, Admin UI expansion, and final mobile product design remain deferred.
+
 ## Implemented Request Path
 
 ```text
@@ -89,7 +97,7 @@ The BF012 `permissions` and `position_permissions` tables provide the controlled
 
 - Direct User permissions, authorization expansion beyond BF012, roles, position hierarchy, team hierarchy, user profiles, transfers, registration, reset, refresh tokens, and sessions
 - CRM, Property, Listings, Deals, Commissions, and Transfers
-- Notifications, AI, Analytics, Integrations, and Frontend
+- Notifications, AI, Analytics, Integrations, full CRUD Admin UI, AF002, and AF003
 - Automated test suite
 
 ## Known Discrepancies
@@ -98,8 +106,8 @@ The BF012 `permissions` and `position_permissions` tables provide the controlled
 - The broader canonical Organization schema exceeds the intentional BF006-BF007 staged schema.
 - ULID and audit standards are not present in the BF006-BF007 staged schema.
 - Automated Organization tests do not exist.
-- Authentication is implemented as an identity layer; authorization remains deferred.
+- Authentication and authorization remain PHP-authoritative; the frontend consumes safe context and does not duplicate security calculations.
 
 ## Next Development Target
 
-No next milestone is selected. No subsequent Backend sprint is selected or designed.
+No next milestone is selected. AF002 and AF003 are not selected or designed.

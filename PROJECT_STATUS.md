@@ -2,19 +2,19 @@
 
 Status: Active
 
-Current Project Phase: Core Business Development
+Current Project Phase: Admin Frontend Foundation
 
 Current Milestone: Milestone 2 - Core Business
 
 Completed Sprints: BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, BF009, BF010, BF011, BF012
 
-Current Sprint: BF012 - Permissions & Authorization (Implemented)
+Current Sprint: AF001 - Admin UI Foundation (Implemented)
 
 Next Selected Milestone: Not selected
 
 Latest Stable Commit: a017c94 - fix(BF006): inject request into organization routes
 
-Last Updated: 2026-08-19
+Last Updated: 2026-08-20
 
 ---
 
@@ -40,8 +40,9 @@ The application now has:
 - Partner Agency module with CRUD API routes, Franchise parent validation, endpoint isolation, and status-based archival
 - User module with staged CRUD API routes, active Organization ownership validation, globally unique email validation, immutable Organization ownership, and status-based deactivation
 - `users` table with a restricted Organization foreign key and indexed `organization_id`
+- AF001 Next.js Admin UI foundation under `frontend/` with secure HttpOnly auth bridge, typed API/context layer, protected App Router layout, and permission-aware navigation
 
-Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, and Permissions & Authorization are implemented. Authorization requires both active Position-derived Permission and Organization scope. System Users may operate platform-wide within assigned capabilities; Franchise Users operate within their Franchise and child Partner Agencies; Partner Agency Users operate only within their own Agency. Lists are scope-filtered before response generation. Roles, direct User permissions, Position hierarchy, Team hierarchy, User Profiles, Transfers, password reset, registration, refresh tokens, and future modules remain deferred. No automated test suite exists; BF012 database-backed acceptance and authenticated BF006-BF011 regression checks passed. No next milestone has been selected.
+Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, Permissions & Authorization, and the AF001 Admin UI Foundation are implemented. The frontend uses Next.js App Router, TypeScript, Tailwind, TanStack Query, React Hook Form, Zod, Lucide, centralized tokens, and source-owned UI primitives. Authentication remains PHP-authoritative through a server-side HttpOnly cookie bridge; browser storage never receives bearer tokens. AF002/AF003 and full CRUD screens remain deferred. No automated test suite exists; AF001 frontend build/typecheck/lint, HTTP authentication integration, context, permission-aware navigation, 403, logout, and backend regression checks passed. No next milestone has been selected.
 
 ## Architecture Overview
 
@@ -84,6 +85,5 @@ The Service Container is the composition root for infrastructure services.
 - The global no-hard-delete policy conflicts with the current Organization physical DELETE behavior.
 - The broader canonical Organization schema and ULID/audit standards exceed the intentional BF006-BF007 staged implementation.
 - No automated test suite exists.
-- Authentication and authorization remain unavailable integration dependencies; BF008 does not add a parallel security system.
-- Authentication is identity-only; authorization remains deferred.
+- Authentication and authorization remain PHP-authoritative; AF001 does not duplicate security calculations.
 - Franchise DELETE archives by setting `status` to `inactive`; the existing Organization DELETE behavior remains a separate known discrepancy.
