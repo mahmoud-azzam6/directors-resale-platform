@@ -46,6 +46,8 @@ use App\Modules\User\Controllers\UserController;
 use App\Modules\User\Repositories\UserRepository;
 use App\Modules\User\Services\UserService;
 use App\Modules\User\Validators\UserValidator;
+use App\Modules\NetworkAdministration\Controllers\FranchiseOnboardingController;
+use App\Modules\NetworkAdministration\Services\FranchiseOnboardingService;
 use App\Routing\Router;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -121,6 +123,8 @@ final class AppServiceProvider extends ServiceProvider
         $this->container->bind(AuthenticationMiddleware::class);
         $this->container->bind(AuthenticationController::class);
         $this->container->bind(AuthContextController::class);
+        $this->container->bind(FranchiseOnboardingService::class);
+        $this->container->bind(FranchiseOnboardingController::class);
         $this->container->bind(
             AuthenticationService::class,
             fn (): AuthenticationService => new AuthenticationService(

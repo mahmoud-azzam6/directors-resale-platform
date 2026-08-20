@@ -308,7 +308,7 @@ Admin Frontend Foundation
 
 Current Sprint:
 
-AF001 - Admin UI Foundation (Implemented)
+AF002 - Network Administration UI (Implemented)
 
 Current Milestone:
 
@@ -332,7 +332,7 @@ Completed
 
 Latest Verified Implementation:
 
-AF001 Admin UI Foundation over the BF006-BF012 Organization, User, Authentication, Position,
+AF002 Network Administration UI over the AF001 foundation and BF006-BF012 Organization, User, Authentication, Position,
 Permission, and Authorization backend foundation.
 
 Next Development Milestone:
@@ -347,8 +347,8 @@ The approved future product architecture distinguishes Global Marketplace Visibi
 Administrative Scope. Authenticated Users may browse marketplace-eligible available Listings across the
 network, but that visibility does not grant authority over another Organization's Listings, Users,
 reports, commissions, or operations. Listings, Requests, Reports, Commissions, Teams, and provisioning
-workflows are planned, not implemented. AF002 direction is Network Administration UI, but its sprint
-contract is not approved and AF002 is not implemented.
+workflows are planned, not implemented. AF002 provides System-level Franchise network management and
+atomic initial administrator provisioning. AF003 is not selected or designed.
 
 ---
 

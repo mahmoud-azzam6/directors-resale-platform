@@ -6,6 +6,14 @@ All notable changes to Directors Resale Platform will be documented in this file
 
 # 2026-08-20
 
+## AF002 - Network Administration UI
+
+- Added real permission-aware Franchise list, search, detail, lifecycle, and Partner Agency hierarchy experiences to the existing Admin application.
+- Added atomic Franchise onboarding across existing Franchise, Position, Permission assignment, and User services.
+- Kept the initial administrator inactive pending credential activation without creating or exposing an insecure password.
+- Preserved backend authorization, Organization scope, hierarchy validation, and status-based Franchise archival.
+- Verified PHP syntax, TypeScript, lint, database onboarding and rollback behavior, archive semantics, and cleanup.
+
 ## AF001 - Admin UI Foundation
 
 - Added the Next.js + TypeScript + App Router Admin frontend under `frontend/` with Tailwind, TanStack Query, React Hook Form, Zod, and Lucide.

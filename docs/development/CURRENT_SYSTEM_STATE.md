@@ -1,6 +1,6 @@
 # Current System State
 
-Status: AF001 implemented and documented
+Status: AF002 implemented and verified
 
 ## Completed Implementation
 
@@ -70,7 +70,16 @@ AF001 - Admin UI Foundation is implemented:
 - Added centralized replaceable design tokens, source-owned UI primitives, protected Admin layout, responsive sidebar, header, dashboard shell, loading/error/403 states, and six polished placeholder routes.
 - Added server-side HttpOnly cookie bridge for BF010 login/logout and `/auth/context`; raw tokens are not exposed to browser JavaScript or Web Storage.
 - Added permission-aware navigation from backend context codes and authenticated server-aware Admin protection.
-- AF002/AF003, full CRUD screens, Admin UI expansion, and final mobile product design remain deferred.
+- AF003, broader CRUD screens, Admin UI expansion, and final mobile product design remain deferred.
+
+AF002 - Network Administration UI is implemented:
+
+- `/admin/franchises` provides a permission-aware Franchise list, name/code search, and complete loading, error, empty, and restricted states.
+- Authorized System Users can atomically create a Franchise, Organization-owned Position, catalog Permission assignments, and inactive initial administrator.
+- Initial administrator credentials remain deferred; onboarding generates or exposes no password or token.
+- `/admin/franchises/[id]` provides Franchise identity, hierarchy, lifecycle management, and authorized Partner Agency overview.
+- Franchise deactivation preserves the Organization row through existing status-based archival.
+- Database-backed onboarding, hierarchy, duplicate, rollback, overview, archive, and cleanup checks passed.
 
 ## Implemented Request Path
 
@@ -99,7 +108,7 @@ The BF012 `permissions` and `position_permissions` tables provide the controlled
 
 - Direct User permissions, authorization expansion beyond BF012, roles, position hierarchy, team hierarchy, user profiles, transfers, registration, reset, refresh tokens, and sessions
 - CRM, Property, Listings, Deals, Commissions, and Transfers
-- Notifications, AI, Analytics, Integrations, full CRUD Admin UI, AF002, and AF003
+- Notifications, AI, Analytics, Integrations, broader Admin UI modules, and AF003
 - Automated test suite
 
 ## Approved Architecture, Not Implemented
@@ -125,5 +134,4 @@ provisioning implementations are not present. Exact Listing Permission codes and
 
 ## Next Development Target
 
-No next milestone is selected. AF002 has an approved direction of Network Administration UI, but its
-exact sprint contract is not approved and AF002 is not implemented. AF003 is not selected or designed.
+No next milestone is selected. AF002 is implemented and verified. AF003 is not selected or designed.

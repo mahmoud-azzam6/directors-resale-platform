@@ -16,6 +16,7 @@ use App\Modules\Permission\Controllers\PositionPermissionController;
 use App\Modules\Authorization\Middleware\AuthorizationMiddleware;
 use App\Modules\Authorization\Services\AuthorizationService;
 use App\Modules\User\Controllers\UserController;
+use App\Modules\NetworkAdministration\Controllers\FranchiseOnboardingController;
 use App\Responses\Response;
 use App\Routing\Router;
 
@@ -57,6 +58,8 @@ return static function (Router $router, Container $container, array $config): vo
     };
     $createTarget = static fn (Request $request): ?int => is_numeric($request->input('organization_id'))
         ? (int) $request->input('organization_id') : null;
+    $franchiseParentTarget = static fn (Request $request): ?int => is_numeric($request->input('parent_organization_id'))
+        ? (int) $request->input('parent_organization_id') : null;
 
     $router->get('/api/v1/health', function () use ($config): Response {
         return Response::success(
@@ -98,7 +101,15 @@ return static function (Router $router, Container $container, array $config): vo
 
     $router->post('/franchises', $authorize(function (Request $request) use ($container): Response {
         return $container->make(FranchiseController::class)->store($request);
-    }, 'franchises.create', $createTarget));
+    }, 'franchises.create', $franchiseParentTarget));
+
+    $router->post('/network/franchises/onboard', $authorize(function (Request $request) use ($container): Response {
+        return $container->make(FranchiseOnboardingController::class)->store($request);
+    }, 'franchises.create', static function (Request $request): ?int {
+        $franchise = $request->input('franchise');
+        return is_array($franchise) && is_numeric($franchise['parent_organization_id'] ?? null)
+            ? (int) $franchise['parent_organization_id'] : null;
+    }));
 
     $router->put('/franchises/{id}', $authorize(function (Request $request, string $id) use ($container): Response {
         return $container->make(FranchiseController::class)->update($request, $id);

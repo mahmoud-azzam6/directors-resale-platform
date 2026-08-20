@@ -239,6 +239,17 @@ Status: Implemented on 2026-08-20
 - Raw tokens were absent from Web Storage and not returned to frontend JavaScript; temporary backend verification data was removed.
 - AF002 and AF003 remain deferred; no subsequent frontend phase was selected.
 
+## AF002 - Network Administration UI
+
+Status: Implemented on 2026-08-20
+
+- Replaced the Franchise placeholder with permission-aware list, search, detail, lifecycle, and Partner Agency hierarchy views.
+- Added atomic onboarding that reuses Franchise, Position, Permission assignment, and User services.
+- Provisioned the initial administrator as inactive with an Organization-owned Position and selected catalog Permissions; credentials and invitations remain deferred.
+- Preserved backend authorization, Organization scope, hierarchy validation, and status-based Franchise archival.
+- Verified TypeScript, lint, PHP syntax, database success/validation/duplicate/hierarchy/rollback/archive behavior, and temporary-data cleanup.
+- AF003 and later Organization administration, transfer, Listing, reporting, and notification work remain deferred; no next milestone was selected.
+
 Every completed database contract will immediately produce:
 
 - SQL Migration

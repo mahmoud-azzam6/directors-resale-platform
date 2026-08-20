@@ -51,10 +51,16 @@ final class PositionPermissionService
             $ids[$id] = true; $codes[] = $id;
         }
 
-        $this->database->transaction(function () use ($positionId, $codes): void {
+        $replace = function () use ($positionId, $codes): void {
             $this->assignmentRepository->removeForPosition($positionId);
             foreach ($codes as $permissionId) { $this->assignmentRepository->assign((int) $positionId, $permissionId); }
-        });
+        };
+
+        if ($this->database->connection()->inTransaction()) {
+            $replace();
+        } else {
+            $this->database->transaction($replace);
+        }
 
         return $this->list($positionId);
     }

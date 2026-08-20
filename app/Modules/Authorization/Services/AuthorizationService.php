@@ -70,9 +70,17 @@ final class AuthorizationService
             return $this->organizationRepository->find($id) === null ? null : (int) $id;
         }
 
+        if ($resource === 'franchises') {
+            $record = $this->franchiseRepository->findActive($id);
+            return $record === null ? null : (int) $record['id'];
+        }
+
+        if ($resource === 'partner_agencies') {
+            $record = $this->partnerAgencyRepository->findActive($id);
+            return $record === null ? null : (int) $record['id'];
+        }
+
         $record = match ($resource) {
-            'franchises' => $this->franchiseRepository->findActive($id),
-            'partner_agencies' => $this->partnerAgencyRepository->findActive($id),
             'users' => $this->userRepository->findActive($id),
             'positions' => $this->positionRepository->findActive($id),
             default => null,

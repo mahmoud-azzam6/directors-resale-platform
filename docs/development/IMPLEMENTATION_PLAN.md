@@ -17,13 +17,13 @@
 | BF011 | Implemented | Dynamic Organization-owned Positions, scoped code uniqueness, nullable same-Organization User assignment, and status-based deactivation |
 | BF012 | Implemented | Controlled Permission catalog, Position-Permission inheritance, reusable authorization, Organization scope enforcement, and isolated lists |
 | AF001 | Implemented | Next.js Admin UI foundation, secure HttpOnly auth bridge, context, protected layout, permission-aware navigation, dashboard, and placeholders |
+| AF002 | Implemented | Franchise network list/detail, Partner Agency overview, status-based deactivation, and atomic initial administrator onboarding |
 
 BF006 smoke tests and BF007 manual acceptance/regression checks passed. No automated test suite exists.
 
 ## Next Development Target
 
-No next milestone is selected. AF002 has an approved product direction of Network Administration UI,
-but no AF002 sprint contract is approved and AF002 is not implemented. AF003 is not selected or designed.
+No next milestone is selected. AF002 is implemented and verified. AF003 is not selected or designed.
 
 ## Constraints for Future Planning
 
