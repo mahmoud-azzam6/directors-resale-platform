@@ -370,21 +370,42 @@ No implementation starts before architecture and database design are complete.
 
 # Current Implementation State
 
-The current project milestone is Milestone 2 - Core Business.
+BF001-BF012 and AF001 are implemented. The current application includes Organization, Franchise,
+Partner Agency, User, Authentication, Dynamic Position, Permission/Authorization, and Admin UI
+foundation functionality.
 
-- BF001-BF005: Foundation completed
-- BF006: Organization Management completed
-- BF007: Franchise Management completed
-- BF008: Partner Agency Management implemented
+The implemented Organization hierarchy is System Organization -> Franchise -> Partner Agency. Users
+belong to an Organization in that hierarchy and receive capabilities from dynamic Positions and
+effective Permissions. Backend authorization remains authoritative and combines capability with
+applicable Organization/resource scope. Position names are not authorization rules.
 
-The implemented hierarchy is Organization -> Franchise -> Partner Agency, followed by future Users. Users, authentication, authorization, CRM,
-Property, Listings, Deals, Commissions, Transfers, Notifications, AI, Analytics, Integrations, and the
-Frontend remain future and not implemented.
+The BF006-BF012 database remains intentionally staged. Franchise and Partner Agency records reuse
+`organizations`; Users, authentication tokens, Positions, Permissions, and Position-Permission
+assignments use the staged tables introduced by their approved sprints. Global ULID and extended audit
+requirements remain deferred.
 
-The BF006-BF008 database is intentionally staged. Organization, Franchise, and Partner Agency records use the
-`organizations` table; Franchise records use `organization_type = franchise` and
-`parent_organization_id`. Partner Agencies use `organization_type = partner_agency` with a Franchise parent. No `franchises` or `partner_agencies` table exists. Global ULID, audit, security, and no-hard-delete
-standards remain target architecture rather than a claim about the complete current implementation.
+# Approved Admin Experience Architecture
+
+`docs/architecture/ADMIN_EXPERIENCE_ARCHITECTURE.md` is the approved source for the shared Admin
+experience, provisioning direction, Global Marketplace Visibility, Administrative Scope, and scoped
+reporting principles.
+
+- The platform has one authenticated Admin Application.
+- Experience is determined by Organization, Position, Permissions, and applicable resource scope.
+- System-authorized administration provisions Franchises; permitted Franchise administration may
+  provision Partner Agencies; Organization administrators manage Users only within authorized scope.
+- The System controls the Permission capability catalog. Organization administrators cannot create
+  unrestricted capabilities or escalate privileges.
+- Future marketplace-eligible available Listings are globally visible to authenticated platform Users.
+  This Global Marketplace Visibility does not grant Administrative Scope over another Organization's
+  Listings, Users, reports, commissions, or operations.
+- Cross-Organization Requests against marketplace-visible Listings are approved in principle, subject
+  to a future Request workflow and business rules.
+- Reporting is scope-sensitive. Exact Listing Permission codes and Team scope remain deferred.
+
+Listings, Requests, Reports, Deals, Commissions, Teams, and provisioning/onboarding workflows are not
+implemented. AF002 has an approved direction of Network Administration UI, but no AF002 sprint contract
+is approved and AF002 is not implemented.
 
 ---
 

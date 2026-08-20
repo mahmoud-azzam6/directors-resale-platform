@@ -36,21 +36,23 @@ BF009 - User Management is implemented:
 - Users belong to exactly one active System, Franchise, or Partner Agency Organization.
 - User email is globally unique and `organization_id` is immutable through normal updates.
 - User DELETE deactivates with `status = inactive`; the database row remains present.
-- Authentication, Authorization, Positions, Permissions, User Profiles, and Transfers are deferred.
+- At BF009 completion, Authentication, Authorization, Positions, Permissions, User Profiles, and Transfers were deferred.
 
 BF010 - Authentication Foundation is implemented:
 
 - Existing Users may authenticate with securely hashed passwords established through the narrow CLI development mechanism.
 - Login issues cryptographically random bearer tokens while persisting only SHA-256 token hashes with expiry and revocation lifecycle fields.
 - `/auth/login` and health remain public; `/auth/logout`, `/auth/me`, and existing business routes require authentication.
-- Authentication resolves the active User only; Authorization, Roles, Permissions, Positions, Profiles, Transfers, reset, registration, refresh tokens, and sessions are deferred.
+- BF010 authentication resolves the active User only. At BF010 completion, Authorization, Roles,
+  Permissions, Positions, Profiles, Transfers, reset, registration, refresh tokens, and sessions were deferred.
 
 BF011 - Dynamic Positions is implemented:
 
 - Positions belong to one Organization and use Organization-scoped code uniqueness.
 - Users have nullable `position_id` with active same-Organization assignment, reassignment, and clearing.
 - Position deactivation preserves the database row and existing User `position_id` relationships.
-- Position endpoints require BF010 authentication; Authorization, Roles, Permissions, Position hierarchy, Team hierarchy, and BF012 remain deferred.
+- Position endpoints require BF010 authentication. At BF011 completion, Authorization, Roles,
+  Permissions, Position hierarchy, Team hierarchy, and BF012 were deferred.
 
 BF012 - Permissions & Authorization is implemented:
 
@@ -100,6 +102,19 @@ The BF012 `permissions` and `position_permissions` tables provide the controlled
 - Notifications, AI, Analytics, Integrations, full CRUD Admin UI, AF002, and AF003
 - Automated test suite
 
+## Approved Architecture, Not Implemented
+
+The approved Admin Experience Architecture establishes one authenticated Admin Application and combines
+Organization, Position, Permissions, and applicable resource scope to determine experience and authority.
+It approves System provisioning of Franchises, permitted Franchise provisioning of Partner Agencies,
+and Organization-scoped User administration as future workflows.
+
+It also distinguishes Global Marketplace Visibility from Administrative Scope. Future authenticated
+Users may browse marketplace-eligible available Listings across the platform and may submit permitted
+cross-Organization Requests, while Listing management, reports, Users, commissions, and internal
+operations remain scope-controlled. Listing, Request, Report, Commission, Team, invitation, and
+provisioning implementations are not present. Exact Listing Permission codes and Team scope remain deferred.
+
 ## Known Discrepancies
 
 - The global no-hard-delete policy conflicts with the current Organization physical DELETE behavior.
@@ -110,4 +125,5 @@ The BF012 `permissions` and `position_permissions` tables provide the controlled
 
 ## Next Development Target
 
-No next milestone is selected. AF002 and AF003 are not selected or designed.
+No next milestone is selected. AF002 has an approved direction of Network Administration UI, but its
+exact sprint contract is not approved and AF002 is not implemented. AF003 is not selected or designed.

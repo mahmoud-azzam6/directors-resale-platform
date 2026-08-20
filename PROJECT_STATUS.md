@@ -44,6 +44,14 @@ The application now has:
 
 Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, Permissions & Authorization, and the AF001 Admin UI Foundation are implemented. The frontend uses Next.js App Router, TypeScript, Tailwind, TanStack Query, React Hook Form, Zod, Lucide, centralized tokens, and source-owned UI primitives. Authentication remains PHP-authoritative through a server-side HttpOnly cookie bridge; browser storage never receives bearer tokens. AF002/AF003 and full CRUD screens remain deferred. No automated test suite exists; AF001 frontend build/typecheck/lint, HTTP authentication integration, context, permission-aware navigation, 403, logout, and backend regression checks passed. No next milestone has been selected.
 
+Approved architecture now defines one authenticated Admin Application whose experience is determined by
+Organization, Position, Permissions, and applicable resource scope. It also separates future Global
+Marketplace Visibility from Administrative Scope: authenticated Users may browse marketplace-eligible
+available Listings platform-wide, while management, reporting, commission, User, and operational access
+remain scope-controlled. Listings, Requests, Reports, Commissions, Teams, and provisioning workflows are
+not implemented. AF002's approved direction is Network Administration UI; its exact sprint contract is
+not approved and it is not selected for implementation.
+
 ## Architecture Overview
 
 The current foundation follows this direction:

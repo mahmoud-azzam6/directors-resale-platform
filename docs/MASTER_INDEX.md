@@ -6,7 +6,7 @@ Version: 2.0
 
 Status: Active
 
-Last Updated: 2026-08-16
+Last Updated: 2026-08-20
 
 ---
 
@@ -19,8 +19,8 @@ Last Updated: 2026-08-16
 | Project Type | Enterprise SaaS Platform |
 | Industry | Real Estate Resale |
 | Architecture Style | Modular + Event Driven |
-| Current Phase | Milestone 2 - Core Business |
-| Current Sprint | BF008 - Partner Agency Management (Implemented) |
+| Current Phase | Admin Frontend Foundation |
+| Current Sprint | AF001 - Admin UI Foundation (Implemented) |
 | Next Selected Milestone | Not selected |
 | Current Version | 0.1.0 |
 | Repository Status | Active |
@@ -80,6 +80,7 @@ Business rollout remains incremental.
 - SECURITY_ARCHITECTURE.md
 - PERMISSION_ARCHITECTURE.md
 - INTEGRATION_ARCHITECTURE.md
+- ADMIN_EXPERIENCE_ARCHITECTURE.md
 
 ---
 
@@ -131,6 +132,7 @@ Business rollout remains incremental.
 | Database Tables | docs/database/tables/ |
 | ADRs | docs/decisions/ |
 | APIs | docs/api/ |
+| Admin Experience, Marketplace Visibility, and Administrative Scope | ADMIN_EXPERIENCE_ARCHITECTURE.md |
 
 ---
 
@@ -139,7 +141,7 @@ Business rollout remains incremental.
 | ID | Module | Status |
 |----|-------------------------|------------|
 | M00 | Reference Data | Planned |
-| M01 | Core | Organization and Franchise business scope implemented (BF006-BF007); remaining Core scope planned |
+| M01 | Core | Organization, Franchise, Partner Agency, User, Authentication, Position, Permission, and Authorization scope implemented (BF006-BF012) |
 | M02 | CRM | Planned |
 | M03 | Property Engine | Planned |
 | M04 | Matching Engine | Planned |
@@ -160,13 +162,13 @@ Business rollout remains incremental.
 
 | Item | Value |
 |------|-------|
-| Current Phase | Milestone 2 - Core Business |
-| Current Sprint | BF008 - Partner Agency Management (Implemented) |
+| Current Phase | Admin Frontend Foundation |
+| Current Sprint | AF001 - Admin UI Foundation (Implemented) |
 | Current Module | M01 - Core |
-| Current Feature | Organization, Franchise, and Partner Agency Management |
-| Current Database Contract | BF006-BF008 staged organizations hierarchy schema |
+| Current Feature | Admin UI Foundation over implemented BF006-BF012 Core APIs |
+| Current Database Contract | BF006-BF012 staged Core schema |
 | Current Database Module | Core |
-| Current Status | BF008 implemented |
+| Current Status | AF001 implemented; Admin Experience Architecture approved |
 | Current Milestone | Milestone 2 - Core Business |
 | Next Selected Milestone | Not selected |
 | Target Release | Not defined by the current canonical roadmap |
@@ -203,13 +205,13 @@ Business rollout remains incremental.
 
 | ID | Table | Status |
 |-----|-------------------------------|-----------|
-| DB101 | organizations | Implemented (BF006-BF007 staged schema) |
+| DB101 | organizations | Implemented (BF006-BF008 staged schema) |
 | DB102 | organization_settings | Planned |
-| DB103 | positions | Planned |
-| DB104 | users | Planned |
+| DB103 | positions | Implemented (BF011) |
+| DB104 | users | Implemented (BF009-BF011 staged schema) |
 | DB105 | user_profiles | Planned |
-| DB106 | permissions | Planned |
-| DB107 | user_permissions | Planned |
+| DB106 | permissions | Implemented (BF012 controlled catalog) |
+| DB107 | user_permissions | Deferred; direct User permissions not approved |
 | DB108 | system_settings | Planned |
 | DB109 | system_events | Planned |
 | DB110 | activity_logs | Planned |
@@ -343,9 +345,9 @@ Business rollout remains incremental.
 
 # M12 - Analytics
 
-Analytics is implemented using reporting tables, SQL Views, Materialized Views and aggregated datasets.
+Analytics is planned to use reporting tables, SQL Views, Materialized Views, and aggregated datasets.
 
-(No transactional tables.)
+No Analytics or reporting implementation exists yet.
 
 ---
 
@@ -399,11 +401,13 @@ Analytics is implemented using reporting tables, SQL Views, Materialized Views a
 
 | ID | Module | Endpoint Group | Status |
 |------|----------------------|-----------------------|-----------|
-| API001 | Authentication | /auth | Planned |
+| API001 | Authentication | /auth | Implemented (BF010; AF001 adds safe `/auth/context`) |
 | API002 | Organizations | /organizations | Implemented (BF006) |
 | API021 | Franchises | /franchises | Implemented (BF007) |
-| API003 | Users | /users | Planned |
-| API004 | Permissions | /permissions | Planned |
+| API022 | Partner Agencies | /partner-agencies | Implemented (BF008) |
+| API003 | Users | /users | Implemented (BF009; BF012-authorized) |
+| API004 | Permissions | /permissions | Implemented (BF012 controlled catalog) |
+| API023 | Positions | /positions | Implemented (BF011; BF012-authorized) |
 | API005 | CRM | /people | Planned |
 | API006 | Leads | /leads | Planned |
 | API007 | Requirements | /requirements | Planned |
@@ -427,11 +431,13 @@ Analytics is implemented using reporting tables, SQL Views, Materialized Views a
 
 | ID | Feature | Module | Status |
 |------|----------------------------------------|----------------|-----------|
-| F001 | Authentication | Core | Planned |
+| F001 | Authentication | Core | Implemented (BF010) |
 | F002 | Organization and Franchise Management | Core | Implemented (BF006-BF007) |
-| F026 | Partner Agency Management | Core | Selected / Planned / Not Implemented (BF008) |
-| F003 | User Management | Core | Planned |
-| F004 | Dynamic Positions | Core | Planned |
+| F026 | Partner Agency Management | Core | Implemented (BF008) |
+| F003 | User Management | Core | Implemented (BF009) |
+| F004 | Dynamic Positions | Core | Implemented (BF011) |
+| F027 | Permissions & Authorization | Core | Implemented (BF012) |
+| F028 | Admin UI Foundation | Core | Implemented (AF001) |
 | F005 | CRM | CRM | Planned |
 | F006 | Lead Management | CRM | Planned |
 | F007 | Requirement Management | CRM | Planned |
@@ -513,12 +519,12 @@ Analytics is implemented using reporting tables, SQL Views, Materialized Views a
 
 | Item | Value |
 |------|-------|
-| Current Phase | BF007 completed; documentation synchronized |
+| Current Phase | AF001 implemented; Admin Experience Architecture approved |
 | Current Module | M01 - Core |
-| Current Document | BF007-franchise-management.md |
-| Current Database Contract | BF006-BF007 staged organizations hierarchy schema |
-| Current ADR | Next milestone requires explicit project decision |
-| Current Milestone | BF007 - Franchise Management (Completed) |
+| Current Document | ADMIN_EXPERIENCE_ARCHITECTURE.md |
+| Current Database Contract | BF006-BF012 staged Core schema |
+| Current ADR | ADR-001 Organization Hierarchy; Admin Experience Architecture |
+| Current Milestone | AF001 - Admin UI Foundation (Implemented) |
 | Current Release Target | Not defined by the current canonical roadmap |
 
 ---
@@ -532,8 +538,8 @@ Analytics is implemented using reporting tables, SQL Views, Materialized Views a
 | Architecture | ████████████████████ 100% |
 | Documentation | ██████████████████░░ 90% |
 | Database Design | ███░░░░░░░░░░░░░░░░░ 10% |
-| Backend Development | Foundation, Organization, and Franchise management implemented |
-| Frontend Development | ░░░░░░░░░░░░░░░░░░░░ 0% |
+| Backend Development | BF001-BF012 foundation and Core business/security scope implemented |
+| Frontend Development | AF001 Admin UI Foundation implemented; feature CRUD UI planned |
 | AI Development | ░░░░░░░░░░░░░░░░░░░░ 0% |
 | Testing | ░░░░░░░░░░░░░░░░░░░░ 0% |
 | Production Readiness | ░░░░░░░░░░░░░░░░░░░░ 0% |
@@ -551,7 +557,7 @@ Analytics is implemented using reporting tables, SQL Views, Materialized Views a
 | ADR Documents | 17 |
 | Documentation Files | 40+ |
 | Project Templates | 6 |
-| Current Sprint | BF007 - Franchise Management (Completed) |
+| Current Sprint | AF001 - Admin UI Foundation (Implemented) |
 | Current Release | R0.1.0 |
 
 ---
@@ -718,13 +724,11 @@ A feature is considered complete only when:
 
 ## Immediate Next Development Target
 
-BF008 - Partner Agency Management is selected as the next development milestone.
+No implementation milestone is selected.
 
-Status: Selected / Planned / Not Implemented
-
-Its implementation specification has not yet been approved. This selection preserves the approved
-Organization -> Franchise -> Partner Agency -> Users progression and does not define BF008 APIs,
-migrations, or technical implementation.
+AF002 has an approved direction of Network Administration UI, centered initially on System-authorized
+network administration. Its exact sprint contract is not approved, AF002 is not implemented, and no
+future Listing, Request, Reporting, Commission, Team, or provisioning workflow is selected for implementation.
 
 ## Sprint 1
 

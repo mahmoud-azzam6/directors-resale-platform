@@ -180,7 +180,11 @@ Next.js
 
 TypeScript
 
-Bootstrap 5
+Tailwind CSS
+
+TanStack Query
+
+React Hook Form + Zod
 
 ---
 
@@ -258,6 +262,7 @@ tests/
 docs/
 public/
 routes/
+frontend/
 
 README.md
 AI_CONTEXT.md
@@ -299,11 +304,11 @@ Main sections include:
 
 Current Phase:
 
-BF008 Partner Agency Management implemented
+Admin Frontend Foundation
 
 Current Sprint:
 
-BF008 - Partner Agency Management (Implemented)
+AF001 - Admin UI Foundation (Implemented)
 
 Current Milestone:
 
@@ -327,14 +332,23 @@ Completed
 
 Latest Verified Implementation:
 
-BF008 Partner Agency Management: Organization-backed CRUD/API, Franchise-parent validation, endpoint isolation, and status-based archival
+AF001 Admin UI Foundation over the BF006-BF012 Organization, User, Authentication, Position,
+Permission, and Authorization backend foundation.
 
 Next Development Milestone:
 
 Not selected
 
-Partner Agencies reuse the `organizations` table and BF007 `parent_organization_id`; no separate table
-or BF008 migration was required. Authentication and authorization infrastructure remains deferred.
+The platform uses one authenticated Admin Application. User experience is driven by Organization,
+Position, effective Permissions, and applicable resource scope; Position names are not authorization
+rules. See `docs/architecture/ADMIN_EXPERIENCE_ARCHITECTURE.md`.
+
+The approved future product architecture distinguishes Global Marketplace Visibility from
+Administrative Scope. Authenticated Users may browse marketplace-eligible available Listings across the
+network, but that visibility does not grant authority over another Organization's Listings, Users,
+reports, commissions, or operations. Listings, Requests, Reports, Commissions, Teams, and provisioning
+workflows are planned, not implemented. AF002 direction is Network Administration UI, but its sprint
+contract is not approved and AF002 is not implemented.
 
 ---
 

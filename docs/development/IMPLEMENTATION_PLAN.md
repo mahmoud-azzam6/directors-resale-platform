@@ -22,7 +22,8 @@ BF006 smoke tests and BF007 manual acceptance/regression checks passed. No autom
 
 ## Next Development Target
 
-No next milestone is selected. AF002 and AF003 are not selected or designed.
+No next milestone is selected. AF002 has an approved product direction of Network Administration UI,
+but no AF002 sprint contract is approved and AF002 is not implemented. AF003 is not selected or designed.
 
 ## Constraints for Future Planning
 
@@ -30,7 +31,11 @@ No next milestone is selected. AF002 and AF003 are not selected or designed.
 - Resolve the documented no-hard-delete versus Organization physical DELETE discrepancy before
   relying on deletion behavior for future business modules.
 - Franchise DELETE is scoped to status-based archival (`inactive`); it does not create a general lifecycle framework.
-- Authentication and authorization remain future integration dependencies and are not implemented by BF008.
-- Continue the approved Organization -> Franchise -> Partner Agency -> Users hierarchy; do not introduce
-  another parent model or hierarchy level.
+- Authentication and authorization are implemented through BF010-BF012 and remain backend-authoritative.
+- Preserve the approved System Organization -> Franchise -> Partner Agency hierarchy. Users belong to an
+  Organization in this hierarchy; do not treat Users as another hierarchy level.
+- Preserve the approved distinction between future Global Marketplace Visibility and Administrative
+  Scope. Do not use Organization management scope to isolate marketplace-eligible available Listings.
+- Keep exact Listing Permission codes, Team scope, Request workflow, reporting metrics, and commission
+  behavior deferred until their domain-specific contracts are approved.
 - Do not infer implementation from broader planned architecture documents.
