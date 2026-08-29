@@ -32,7 +32,7 @@ final class PositionPermissionService
     }
 
     /** @param array<int, mixed> $requested */
-    public function replace(int|string $positionId, array $requested): array
+    public function replace(int|string $positionId, array $requested, ?array $delegableCodes = null): array
     {
         $position = $this->positionRepository->findActive($positionId);
         if ($position === null) { throw new ValidationException(['position_id' => 'Position must exist and be active.']); }
@@ -46,6 +46,9 @@ final class PositionPermissionService
                 $permission = $this->permissionRepository->findActiveByCode($value);
             } else { $permission = null; }
             if ($permission === null) { throw new ValidationException(['permissions' => 'All permissions must be active and known.']); }
+            if ($delegableCodes !== null && ! in_array((string) $permission['code'], $delegableCodes, true)) {
+                throw new ValidationException(['permissions' => 'Permissions may only be delegated from the actor effective capabilities.']);
+            }
             $id = (int) $permission['id'];
             if (isset($ids[$id])) { continue; }
             $ids[$id] = true; $codes[] = $id;

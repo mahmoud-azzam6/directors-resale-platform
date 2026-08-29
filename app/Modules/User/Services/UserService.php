@@ -33,6 +33,15 @@ final class UserService
         );
     }
 
+    /** @return array<int, array<string, mixed>> */
+    public function administrativeDirectory(array $organizationIds): array
+    {
+        return array_map(
+            static fn (array $record): array => User::fromArray($record)->toArray(),
+            $this->repository->allForAdministration($organizationIds)
+        );
+    }
+
     /** @return array<string, mixed>|null */
     public function find(int|string $id): ?array
     {

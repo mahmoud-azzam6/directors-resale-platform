@@ -370,7 +370,7 @@ No implementation starts before architecture and database design are complete.
 
 # Current Implementation State
 
-BF001-BF012 and AF001 are implemented. The current application includes Organization, Franchise,
+BF001-BF012 and AF001-AF003 are implemented. The current application includes Organization, Franchise,
 Partner Agency, User, Authentication, Dynamic Position, Permission/Authorization, and Admin UI
 foundation functionality.
 
@@ -403,9 +403,10 @@ reporting principles.
   to a future Request workflow and business rules.
 - Reporting is scope-sensitive. Exact Listing Permission codes and Team scope remain deferred.
 
-Listings, Requests, Reports, Deals, Commissions, Teams, and provisioning/onboarding workflows are not
-implemented. AF002 has an approved direction of Network Administration UI, but no AF002 sprint contract
-is approved and AF002 is not implemented.
+AF002 provides System Franchise network administration and atomic initial administrator onboarding.
+AF003 provides Organization-scoped User and Position administration with capability-subset Permission
+delegation; manual browser QA remains pending before AF003 closure. Listings, Requests, Reports, Deals,
+Commissions, Teams, transfers, and AF004 are not implemented.
 
 ---
 

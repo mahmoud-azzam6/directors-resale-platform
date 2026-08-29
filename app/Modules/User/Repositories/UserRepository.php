@@ -29,6 +29,18 @@ final class UserRepository extends BaseRepository
         return $query->get();
     }
 
+    /** @return array<int, array<string, mixed>> */
+    public function allForAdministration(array $organizationIds): array
+    {
+        if ($organizationIds === []) {
+            return [];
+        }
+
+        return $this->query()
+            ->whereIn('organization_id', $organizationIds)
+            ->get();
+    }
+
     /** @return array<string, mixed>|null */
     public function findActive(int|string $id): ?array
     {

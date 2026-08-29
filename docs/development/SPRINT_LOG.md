@@ -250,6 +250,17 @@ Status: Implemented on 2026-08-20
 - Verified TypeScript, lint, PHP syntax, database success/validation/duplicate/hierarchy/rollback/archive behavior, and temporary-data cleanup.
 - AF003 and later Organization administration, transfer, Listing, reporting, and notification work remain deferred; no next milestone was selected.
 
+## AF003 - Organization User Administration
+
+Status: Implemented on 2026-08-23; manual browser QA pending
+
+- Replaced Users and Positions placeholders with Organization-aware operational administration screens.
+- Reused BF009-BF012 scope, CRUD, lifecycle, Position ownership, Permission catalog, and authorization behavior.
+- Added scope-filtered Organization context routes for User and Position administration.
+- Restricted API Permission delegation to the authenticated actor's own effective capabilities while retaining target scope and `permissions.assign` enforcement.
+- Verified System, Franchise, Partner Agency, sibling rejection, cross-Organization Position rejection, User transfer rejection, lifecycle preservation, PHP, TypeScript, lint, build, and cleanup.
+- Manual browser QA remains required before sprint closure. AF004 and future transfer, Listing, reporting, Team, and Partner Agency provisioning work remain deferred.
+
 Every completed database contract will immediately produce:
 
 - SQL Migration

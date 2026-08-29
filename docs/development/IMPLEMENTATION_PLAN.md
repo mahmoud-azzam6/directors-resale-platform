@@ -18,12 +18,13 @@
 | BF012 | Implemented | Controlled Permission catalog, Position-Permission inheritance, reusable authorization, Organization scope enforcement, and isolated lists |
 | AF001 | Implemented | Next.js Admin UI foundation, secure HttpOnly auth bridge, context, protected layout, permission-aware navigation, dashboard, and placeholders |
 | AF002 | Implemented | Franchise network list/detail, Partner Agency overview, status-based deactivation, and atomic initial administrator onboarding |
+| AF003 | Implemented; browser QA pending | Organization-scoped User and Position administration with safe Position ownership and capability-subset delegation |
 
 BF006 smoke tests and BF007 manual acceptance/regression checks passed. No automated test suite exists.
 
 ## Next Development Target
 
-No next milestone is selected. AF002 is implemented and verified. AF003 is not selected or designed.
+No next milestone is selected. AF003 is implemented and technically verified, with manual browser QA pending before closure. AF004 is not selected or designed.
 
 ## Constraints for Future Planning
 

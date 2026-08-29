@@ -19,8 +19,8 @@ Last Updated: 2026-08-20
 | Project Type | Enterprise SaaS Platform |
 | Industry | Real Estate Resale |
 | Architecture Style | Modular + Event Driven |
-| Current Phase | Network Administration UI |
-| Current Sprint | AF002 - Network Administration UI (Implemented) |
+| Current Phase | Organization Administration |
+| Current Sprint | AF003 - Organization User Administration (Implemented; browser QA pending) |
 | Next Selected Milestone | Not selected |
 | Current Version | 0.1.0 |
 | Repository Status | Active |

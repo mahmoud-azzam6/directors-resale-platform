@@ -348,7 +348,7 @@ Administrative Scope. Authenticated Users may browse marketplace-eligible availa
 network, but that visibility does not grant authority over another Organization's Listings, Users,
 reports, commissions, or operations. Listings, Requests, Reports, Commissions, Teams, and provisioning
 workflows are planned, not implemented. AF002 provides System-level Franchise network management and
-atomic initial administrator provisioning. AF003 is not selected or designed.
+atomic initial administrator provisioning. AF003 adds Organization-scoped User and Position administration; manual browser QA remains pending before closure. AF004 is not selected or designed.
 
 ---
 

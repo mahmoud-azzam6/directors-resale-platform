@@ -161,6 +161,14 @@ return static function (Router $router, Container $container, array $config): vo
         return $container->make(UserController::class)->index($request);
     }, 'users.view'));
 
+    $router->get('/user-administration/organizations', $authorize(function (Request $request) use ($container): Response {
+        return $container->make(OrganizationController::class)->index($request);
+    }, 'users.view'));
+
+    $router->get('/user-administration/users', $authorize(function (Request $request) use ($container): Response {
+        return $container->make(UserController::class)->administrativeIndex($request);
+    }, 'users.view'));
+
     $router->get('/users/{id}', $authorize(function (Request $request, string $id) use ($container): Response {
         return $container->make(UserController::class)->show($request, $id);
     }, 'users.view', $target('users')));
@@ -179,6 +187,10 @@ return static function (Router $router, Container $container, array $config): vo
 
     $router->get('/positions', $authorize(function (Request $request) use ($container): Response {
         return $container->make(PositionController::class)->index($request);
+    }, 'positions.view'));
+
+    $router->get('/position-administration/organizations', $authorize(function (Request $request) use ($container): Response {
+        return $container->make(OrganizationController::class)->index($request);
     }, 'positions.view'));
 
     $router->get('/positions/{id}', $authorize(function (Request $request, string $id) use ($container): Response {

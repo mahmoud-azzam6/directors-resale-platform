@@ -4,6 +4,16 @@ All notable changes to Directors Resale Platform will be documented in this file
 
 ---
 
+# 2026-08-23
+
+## AF003 - Organization User Administration
+
+- Added scoped User and Position administration to the existing Admin application.
+- Added explicit Organization context, User Position assignment, lifecycle actions, Permission catalog display, and capability assignment.
+- Limited API Permission delegation to capabilities held by the authenticated actor, preserving existing scope and authorization checks.
+- Verified Organization boundaries, Position ownership, transfer rejection, lifecycle preservation, TypeScript, lint, production build, and database cleanup.
+- Manual browser QA remains pending before sprint closure.
+
 # 2026-08-20
 
 ## AF002 - Network Administration UI

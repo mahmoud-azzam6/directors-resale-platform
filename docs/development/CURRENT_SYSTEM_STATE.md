@@ -1,6 +1,6 @@
 # Current System State
 
-Status: AF002 implemented and verified
+Status: AF003 implemented and technically verified; manual browser closure pending
 
 ## Completed Implementation
 
@@ -70,7 +70,7 @@ AF001 - Admin UI Foundation is implemented:
 - Added centralized replaceable design tokens, source-owned UI primitives, protected Admin layout, responsive sidebar, header, dashboard shell, loading/error/403 states, and six polished placeholder routes.
 - Added server-side HttpOnly cookie bridge for BF010 login/logout and `/auth/context`; raw tokens are not exposed to browser JavaScript or Web Storage.
 - Added permission-aware navigation from backend context codes and authenticated server-aware Admin protection.
-- AF003, broader CRUD screens, Admin UI expansion, and final mobile product design remain deferred.
+- Broader CRUD screens, Admin UI expansion, and final mobile product design remain deferred.
 
 AF002 - Network Administration UI is implemented:
 
@@ -80,6 +80,15 @@ AF002 - Network Administration UI is implemented:
 - `/admin/franchises/[id]` provides Franchise identity, hierarchy, lifecycle management, and authorized Partner Agency overview.
 - Franchise deactivation preserves the Organization row through existing status-based archival.
 - Database-backed onboarding, hierarchy, duplicate, rollback, overview, archive, and cleanup checks passed.
+
+AF003 - Organization User Administration is implemented pending manual browser closure:
+
+- `/admin/users` provides scoped User listing, search, Organization and Position context, supported creation/editing, Position assignment, and status-based deactivation.
+- `/admin/positions` provides scoped Position listing, search, Organization context, supported creation/editing, deactivation, catalog display, and Permission assignment.
+- System support uses existing platform-wide scope; Franchise scope remains own plus direct child Organizations and Partner Agency scope remains own-only.
+- API Permission delegation is limited to the actor's own effective capabilities, in addition to existing authentication, `permissions.assign`, and target-scope checks.
+- User Organization ownership remains immutable and cross-Organization Position assignment remains rejected.
+- PHP, TypeScript, lint, production build, database scope/integrity/delegation/status checks, and cleanup passed. Manual browser QA remains required for sprint closure.
 
 ## Implemented Request Path
 
@@ -108,7 +117,7 @@ The BF012 `permissions` and `position_permissions` tables provide the controlled
 
 - Direct User permissions, authorization expansion beyond BF012, roles, position hierarchy, team hierarchy, user profiles, transfers, registration, reset, refresh tokens, and sessions
 - CRM, Property, Listings, Deals, Commissions, and Transfers
-- Notifications, AI, Analytics, Integrations, broader Admin UI modules, and AF003
+- Notifications, AI, Analytics, Integrations, broader Admin UI modules, and AF004
 - Automated test suite
 
 ## Approved Architecture, Not Implemented
@@ -134,4 +143,4 @@ provisioning implementations are not present. Exact Listing Permission codes and
 
 ## Next Development Target
 
-No next milestone is selected. AF002 is implemented and verified. AF003 is not selected or designed.
+No next milestone is selected. AF003 is implemented and technically verified, with manual browser QA pending before closure. AF004 is not selected or designed.

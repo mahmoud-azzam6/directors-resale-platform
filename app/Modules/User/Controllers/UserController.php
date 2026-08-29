@@ -23,6 +23,14 @@ final class UserController
         return Response::success('Users retrieved.', $this->service->all((array) $request->attribute('auth.scope.organization_ids', [])));
     }
 
+    public function administrativeIndex(Request $request): Response
+    {
+        return Response::success(
+            'Administrative User directory retrieved.',
+            $this->service->administrativeDirectory((array) $request->attribute('auth.scope.organization_ids', []))
+        );
+    }
+
     public function show(Request $request, int|string $id): Response
     {
         $user = $this->service->find($id);
