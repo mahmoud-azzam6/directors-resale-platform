@@ -137,6 +137,8 @@ One Lead may have multiple Requirements.
 
 ## Property Engine
 
+The approved conceptual Listing boundaries and behavior are defined by `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md`. No physical Listing schema is approved by that document.
+
 Purpose
 
 Represents physical real estate assets.

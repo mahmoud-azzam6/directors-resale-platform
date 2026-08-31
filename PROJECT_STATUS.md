@@ -2,19 +2,19 @@
 
 Status: Active
 
-Current Project Phase: Organization Administration
+Current Project Phase: Listing Domain Architecture Approved
 
 Current Milestone: Milestone 2 - Core Business
 
-Completed Sprints: BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, BF009, BF010, BF011, BF012
+Completed Sprints: BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, BF009, BF010, BF011, BF012, AF001, AF002, AF003
 
-Current Sprint: AF003 - Organization User Administration (Implemented; browser QA pending)
+Current Sprint: No implementation sprint selected
 
 Next Selected Milestone: Not selected
 
 Latest Stable Commit: a017c94 - fix(BF006): inject request into organization routes
 
-Last Updated: 2026-08-23
+Last Updated: 2026-08-31
 
 ---
 
@@ -42,15 +42,13 @@ The application now has:
 - `users` table with a restricted Organization foreign key and indexed `organization_id`
 - AF001 Next.js Admin UI foundation under `frontend/` with secure HttpOnly auth bridge, typed API/context layer, protected App Router layout, and permission-aware navigation
 
-Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, Permissions & Authorization, and AF001-AF003 are implemented. The frontend uses Next.js App Router, TypeScript, Tailwind, TanStack Query, React Hook Form, Zod, Lucide, centralized tokens, and source-owned UI primitives. Authentication remains PHP-authoritative through a server-side HttpOnly cookie bridge; browser storage never receives bearer tokens. AF003 manual browser QA remains pending before closure. No automated test suite exists; PHP, frontend typecheck/lint/build, database scope, Position integrity, delegation, lifecycle, and cleanup checks passed. No next milestone has been selected.
+Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, Permissions & Authorization, and AF001-AF003 are implemented. AF003 browser QA passed and its branch was committed and pushed. The Listing Domain Architecture is approved but not implemented. No Listing implementation sprint or next implementation milestone is selected.
 
 Approved architecture now defines one authenticated Admin Application whose experience is determined by
 Organization, Position, Permissions, and applicable resource scope. It also separates future Global
 Marketplace Visibility from Administrative Scope: authenticated Users may browse marketplace-eligible
 available Listings platform-wide, while management, reporting, commission, User, and operational access
-remain scope-controlled. Listings, Requests, Reports, Commissions, Teams, and provisioning workflows are
-not implemented. AF002's approved direction is Network Administration UI; its exact sprint contract is
-not approved and it is not selected for implementation.
+remain scope-controlled. `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md` now defines the approved Listing-domain boundaries, lifecycle, approvals, provenance, privacy, and integration points. Listings, Requests, Reports, Commissions, Teams, and transfer workflows remain unimplemented.
 
 ## Architecture Overview
 

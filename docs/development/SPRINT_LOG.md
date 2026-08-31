@@ -261,6 +261,15 @@ Status: Implemented on 2026-08-23; manual browser QA pending
 - Verified System, Franchise, Partner Agency, sibling rejection, cross-Organization Position rejection, User transfer rejection, lifecycle preservation, PHP, TypeScript, lint, build, and cleanup.
 - Manual browser QA remains required before sprint closure. AF004 and future transfer, Listing, reporting, Team, and Partner Agency provisioning work remain deferred.
 
+## Listing Domain Architecture
+
+Status: Approved and documented on 2026-08-31; not implemented
+
+- Established `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md` as the canonical Listing-domain source.
+- Approved Residential Resale MVP scope with future category extensibility, Property/Ownership/Listing separation, provenance and assignment, lifecycle, approvals, hold/sold/withdrawal behavior, marketplace eligibility, Owner privacy, and future integration boundaries.
+- Added ADR-002 and concise canonical Listing business rules and edge cases.
+- No physical schema, migration, API, frontend, exact Listing Permission codes, or implementation sprint was created or selected.
+
 Every completed database contract will immediately produce:
 
 - SQL Migration

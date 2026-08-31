@@ -1,6 +1,6 @@
 # Current System State
 
-Status: AF003 implemented and technically verified; manual browser closure pending
+Status: AF003 completed; Listing Domain Architecture approved and not implemented
 
 ## Completed Implementation
 
@@ -81,14 +81,23 @@ AF002 - Network Administration UI is implemented:
 - Franchise deactivation preserves the Organization row through existing status-based archival.
 - Database-backed onboarding, hierarchy, duplicate, rollback, overview, archive, and cleanup checks passed.
 
-AF003 - Organization User Administration is implemented pending manual browser closure:
+AF003 - Organization User Administration is completed:
 
 - `/admin/users` provides scoped User listing, search, Organization and Position context, supported creation/editing, Position assignment, and status-based deactivation.
 - `/admin/positions` provides scoped Position listing, search, Organization context, supported creation/editing, deactivation, catalog display, and Permission assignment.
 - System support uses existing platform-wide scope; Franchise scope remains own plus direct child Organizations and Partner Agency scope remains own-only.
 - API Permission delegation is limited to the actor's own effective capabilities, in addition to existing authentication, `permissions.assign`, and target-scope checks.
 - User Organization ownership remains immutable and cross-Organization Position assignment remains rejected.
-- PHP, TypeScript, lint, production build, database scope/integrity/delegation/status checks, and cleanup passed. Manual browser QA remains required for sprint closure.
+- PHP, TypeScript, lint, production build, database scope/integrity/delegation/status checks, cleanup, and manual browser QA passed. The AF003 branch was committed and pushed.
+
+Listing Domain Architecture is approved but not implemented:
+
+- `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md` is the canonical domain source.
+- ADR-002 records Property / Ownership / Listing separation.
+- Residential Resale is the MVP scope with future property-category extensibility.
+- Global authenticated marketplace visibility remains separate from administrative authority.
+- Lifecycle, provenance, assignment, approvals, holds, sold, withdrawal, Owner privacy, media/document separation, and future integration boundaries are approved conceptually.
+- No physical schema, API, frontend, Permission codes, migration, or Listing implementation sprint is approved.
 
 ## Implemented Request Path
 
@@ -124,14 +133,11 @@ The BF012 `permissions` and `position_permissions` tables provide the controlled
 
 The approved Admin Experience Architecture establishes one authenticated Admin Application and combines
 Organization, Position, Permissions, and applicable resource scope to determine experience and authority.
-It approves System provisioning of Franchises, permitted Franchise provisioning of Partner Agencies,
-and Organization-scoped User administration as future workflows.
+System Franchise provisioning and Organization-scoped User/Position administration are implemented through AF002-AF003. Broader Partner Agency provisioning remains future work.
 
-It also distinguishes Global Marketplace Visibility from Administrative Scope. Future authenticated
-Users may browse marketplace-eligible available Listings across the platform and may submit permitted
+It also distinguishes Global Marketplace Visibility from Administrative Scope. The approved Listing Domain Architecture specifies how authenticated Users may browse marketplace-eligible Listings across the platform and may later submit permitted
 cross-Organization Requests, while Listing management, reports, Users, commissions, and internal
-operations remain scope-controlled. Listing, Request, Report, Commission, Team, invitation, and
-provisioning implementations are not present. Exact Listing Permission codes and Team scope remain deferred.
+operations remain scope-controlled. Listing, Request, Report, Commission, Team, invitation, and provisioning implementations are not present. Exact Listing Permission codes, physical schema, APIs, and Team scope remain deferred.
 
 ## Known Discrepancies
 
@@ -143,4 +149,4 @@ provisioning implementations are not present. Exact Listing Permission codes and
 
 ## Next Development Target
 
-No next milestone is selected. AF003 is implemented and technically verified, with manual browser QA pending before closure. AF004 is not selected or designed.
+No next implementation milestone is selected. Listing Domain Architecture is approved and documented but not implemented. No Listing implementation sprint has been approved.

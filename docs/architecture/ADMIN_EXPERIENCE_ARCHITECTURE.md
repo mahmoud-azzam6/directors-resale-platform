@@ -478,6 +478,8 @@ Permissions and applicable scope define authority.
 
 # 13. Listing Visibility Architecture
 
+Domain-specific Listing behavior is approved in `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md`. This document remains authoritative for the shared Admin experience and the separation between global marketplace visibility and administrative authority.
+
 Future Listing architecture must explicitly support two different concerns:
 
 ## Marketplace Query
@@ -542,9 +544,7 @@ System Admin:
 - marketplace: all available Listings
 - management: platform scope when authorized
 
-The final Listing Permission/scope model must be approved when the Listing domain is designed.
-
-This document does not prematurely define those Permission codes.
+The Listing domain architecture is approved. Exact Listing Permission codes and future Team scope remain deferred; examples in this document are not final codes.
 
 ---
 
@@ -814,15 +814,18 @@ Approved:
 - scoped reporting
 - separation between marketplace visibility and administrative authority
 
-Deferred for domain-specific architecture:
+Approved in `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md`, but not implemented:
+
+- Listing publication and conceptual lifecycle
+- internal, Owner, hold, sold, withdrawal, and archive behavior
+- provenance, assignment, Owner privacy, marketplace eligibility, and integration boundaries
+
+Still deferred for later domain/implementation decisions:
 
 - exact Listing Permission codes
 - Team scope implementation
-- Listing publication/status model
 - Request workflow details
-- owner approval workflow integration
 - Deal workflow
-- SOLD workflow
 - commission visibility rules
 - commission calculations
 - reporting metrics

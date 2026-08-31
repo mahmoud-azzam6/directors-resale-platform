@@ -18,13 +18,13 @@
 | BF012 | Implemented | Controlled Permission catalog, Position-Permission inheritance, reusable authorization, Organization scope enforcement, and isolated lists |
 | AF001 | Implemented | Next.js Admin UI foundation, secure HttpOnly auth bridge, context, protected layout, permission-aware navigation, dashboard, and placeholders |
 | AF002 | Implemented | Franchise network list/detail, Partner Agency overview, status-based deactivation, and atomic initial administrator onboarding |
-| AF003 | Implemented; browser QA pending | Organization-scoped User and Position administration with safe Position ownership and capability-subset delegation |
+| AF003 | Completed | Organization-scoped User and Position administration with safe Position ownership and capability-subset delegation; browser QA passed and branch committed/pushed |
 
 BF006 smoke tests and BF007 manual acceptance/regression checks passed. No automated test suite exists.
 
 ## Next Development Target
 
-No next milestone is selected. AF003 is implemented and technically verified, with manual browser QA pending before closure. AF004 is not selected or designed.
+No next implementation milestone is selected. Listing Domain Architecture is approved and documented but not implemented. No Listing implementation sprint is approved.
 
 ## Constraints for Future Planning
 
@@ -37,6 +37,6 @@ No next milestone is selected. AF003 is implemented and technically verified, wi
   Organization in this hierarchy; do not treat Users as another hierarchy level.
 - Preserve the approved distinction between future Global Marketplace Visibility and Administrative
   Scope. Do not use Organization management scope to isolate marketplace-eligible available Listings.
-- Keep exact Listing Permission codes, Team scope, Request workflow, reporting metrics, and commission
-  behavior deferred until their domain-specific contracts are approved.
+- Use `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md` as the canonical source for approved Listing boundaries and behavior.
+- Keep physical Listing schema, APIs, exact Permission codes, Team scope, complete Request/Deal/Commission/Transfer workflows, publication field lists, and implementation sprint scope deferred until separately approved.
 - Do not infer implementation from broader planned architecture documents.

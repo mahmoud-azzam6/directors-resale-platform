@@ -19,8 +19,8 @@ Last Updated: 2026-08-20
 | Project Type | Enterprise SaaS Platform |
 | Industry | Real Estate Resale |
 | Architecture Style | Modular + Event Driven |
-| Current Phase | Organization Administration |
-| Current Sprint | AF003 - Organization User Administration (Implemented; browser QA pending) |
+| Current Phase | Listing Domain Architecture Approved |
+| Current Sprint | No implementation sprint selected |
 | Next Selected Milestone | Not selected |
 | Current Version | 0.1.0 |
 | Repository Status | Active |
@@ -81,6 +81,7 @@ Business rollout remains incremental.
 - PERMISSION_ARCHITECTURE.md
 - INTEGRATION_ARCHITECTURE.md
 - ADMIN_EXPERIENCE_ARCHITECTURE.md
+- LISTING_DOMAIN_ARCHITECTURE.md
 
 ---
 
@@ -133,6 +134,7 @@ Business rollout remains incremental.
 | ADRs | docs/decisions/ |
 | APIs | docs/api/ |
 | Admin Experience, Marketplace Visibility, and Administrative Scope | ADMIN_EXPERIENCE_ARCHITECTURE.md |
+| Listing Domain | LISTING_DOMAIN_ARCHITECTURE.md |
 
 ---
 
@@ -143,7 +145,7 @@ Business rollout remains incremental.
 | M00 | Reference Data | Planned |
 | M01 | Core | Organization, Franchise, Partner Agency, User, Authentication, Position, Permission, and Authorization scope implemented (BF006-BF012) |
 | M02 | CRM | Planned |
-| M03 | Property Engine | Planned |
+| M03 | Property Engine | Listing architecture approved; implementation planned |
 | M04 | Matching Engine | Planned |
 | M05 | Deal Engine | Planned |
 | M06 | Commission Engine | Planned |
@@ -162,13 +164,13 @@ Business rollout remains incremental.
 
 | Item | Value |
 |------|-------|
-| Current Phase | Admin Frontend Foundation |
-| Current Sprint | AF001 - Admin UI Foundation (Implemented) |
-| Current Module | M01 - Core |
-| Current Feature | Admin UI Foundation over implemented BF006-BF012 Core APIs |
+| Current Phase | Listing Domain Architecture Approved |
+| Current Sprint | No implementation sprint selected |
+| Current Module | M03 - Property Engine (architecture only) |
+| Current Feature | Listing Domain Architecture approved; not implemented |
 | Current Database Contract | BF006-BF012 staged Core schema |
 | Current Database Module | Core |
-| Current Status | AF001 implemented; Admin Experience Architecture approved |
+| Current Status | BF001-BF012 and AF001-AF003 implemented; Listing architecture approved but not implemented |
 | Current Milestone | Milestone 2 - Core Business |
 | Next Selected Milestone | Not selected |
 | Target Release | Not defined by the current canonical roadmap |
@@ -377,7 +379,7 @@ No Analytics or reporting implementation exists yet.
 | ADR | Title | Status |
 |------|-----------------------------------------------------------|-----------|
 | ADR-001 | Organization Hierarchy | ✅ Approved |
-| ADR-002 | Property / Ownership / Listing Separation | Planned |
+| ADR-002 | Property / Ownership / Listing Separation | ✅ Approved |
 | ADR-003 | Requirement Groups | Planned |
 | ADR-004 | Event Driven Architecture | Planned |
 | ADR-005 | ULID Strategy | Planned |
@@ -442,7 +444,7 @@ No Analytics or reporting implementation exists yet.
 | F006 | Lead Management | CRM | Planned |
 | F007 | Requirement Management | CRM | Planned |
 | F008 | Property Management | Property | Planned |
-| F009 | Listing Management | Property | Planned |
+| F009 | Listing Management | Property | Architecture approved; implementation planned |
 | F010 | Matching Engine | Matching | Planned |
 | F011 | Deal Management | Deals | Planned |
 | F012 | Negotiation Workflow | Deals | Planned |
@@ -519,12 +521,12 @@ No Analytics or reporting implementation exists yet.
 
 | Item | Value |
 |------|-------|
-| Current Phase | AF001 implemented; Admin Experience Architecture approved |
-| Current Module | M01 - Core |
-| Current Document | ADMIN_EXPERIENCE_ARCHITECTURE.md |
+| Current Phase | Listing Domain Architecture Approved |
+| Current Module | M03 - Property Engine (architecture only) |
+| Current Document | LISTING_DOMAIN_ARCHITECTURE.md |
 | Current Database Contract | BF006-BF012 staged Core schema |
-| Current ADR | ADR-001 Organization Hierarchy; Admin Experience Architecture |
-| Current Milestone | AF001 - Admin UI Foundation (Implemented) |
+| Current ADR | ADR-002 Property / Ownership / Listing Separation |
+| Current Milestone | Architecture approved; no implementation sprint selected |
 | Current Release Target | Not defined by the current canonical roadmap |
 
 ---
@@ -557,7 +559,7 @@ No Analytics or reporting implementation exists yet.
 | ADR Documents | 17 |
 | Documentation Files | 40+ |
 | Project Templates | 6 |
-| Current Sprint | AF001 - Admin UI Foundation (Implemented) |
+| Current Sprint | No implementation sprint selected |
 | Current Release | R0.1.0 |
 
 ---
@@ -726,9 +728,7 @@ A feature is considered complete only when:
 
 No implementation milestone is selected.
 
-AF002 has an approved direction of Network Administration UI, centered initially on System-authorized
-network administration. Its exact sprint contract is not approved, AF002 is not implemented, and no
-future Listing, Request, Reporting, Commission, Team, or provisioning workflow is selected for implementation.
+BF001-BF012 and AF001-AF003 are implemented. Listing Domain Architecture is approved and documented but not implemented. No Listing implementation sprint or other next implementation milestone is selected.
 
 ## Sprint 1
 

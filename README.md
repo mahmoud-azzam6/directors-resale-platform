@@ -304,11 +304,11 @@ Main sections include:
 
 Current Phase:
 
-Admin Frontend Foundation
+Listing Domain Architecture Approved
 
 Current Sprint:
 
-AF002 - Network Administration UI (Implemented)
+No implementation sprint selected
 
 Current Milestone:
 
@@ -316,7 +316,7 @@ Milestone 2 - Core Business
 
 Implementation Status:
 
-Completed
+Core and Admin implementation completed through AF003; Listing domain not implemented
 
 Architecture Status:
 
@@ -332,8 +332,7 @@ Completed
 
 Latest Verified Implementation:
 
-AF002 Network Administration UI over the AF001 foundation and BF006-BF012 Organization, User, Authentication, Position,
-Permission, and Authorization backend foundation.
+BF001-BF012 and AF001-AF003 are implemented. AF003 browser QA passed and its branch was committed and pushed.
 
 Next Development Milestone:
 
@@ -343,12 +342,11 @@ The platform uses one authenticated Admin Application. User experience is driven
 Position, effective Permissions, and applicable resource scope; Position names are not authorization
 rules. See `docs/architecture/ADMIN_EXPERIENCE_ARCHITECTURE.md`.
 
-The approved future product architecture distinguishes Global Marketplace Visibility from
+The approved product architecture distinguishes Global Marketplace Visibility from
 Administrative Scope. Authenticated Users may browse marketplace-eligible available Listings across the
 network, but that visibility does not grant authority over another Organization's Listings, Users,
 reports, commissions, or operations. Listings, Requests, Reports, Commissions, Teams, and provisioning
-workflows are planned, not implemented. AF002 provides System-level Franchise network management and
-atomic initial administrator provisioning. AF003 adds Organization-scoped User and Position administration; manual browser QA remains pending before closure. AF004 is not selected or designed.
+workflows are planned, not implemented. The approved, not-yet-implemented Listing domain is defined by `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md`. No Listing implementation sprint or next implementation milestone is selected.
 
 ---
 

@@ -403,10 +403,14 @@ reporting principles.
   to a future Request workflow and business rules.
 - Reporting is scope-sensitive. Exact Listing Permission codes and Team scope remain deferred.
 
+# Approved Listing Domain Architecture
+
+`docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md` is the canonical source for the approved, not-yet-implemented Listing domain. It defines Residential Resale MVP scope with future category extensibility; Property/Ownership/Listing separation; provenance and assignment; approval, lifecycle, hold, sold, withdrawal, Owner privacy, marketplace eligibility, and future integration boundaries.
+
+The architecture preserves global authenticated marketplace visibility separately from administrative authority. Physical schema, APIs, exact Permission codes, frontend, Request/Deal/Commission/Transfer workflows, and a Listing implementation sprint remain unapproved or deferred.
+
 AF002 provides System Franchise network administration and atomic initial administrator onboarding.
-AF003 provides Organization-scoped User and Position administration with capability-subset Permission
-delegation; manual browser QA remains pending before AF003 closure. Listings, Requests, Reports, Deals,
-Commissions, Teams, transfers, and AF004 are not implemented.
+AF003 provides Organization-scoped User and Position administration with capability-subset Permission delegation; browser QA passed and the AF003 branch was committed and pushed. Listing Domain Architecture is approved but not implemented. Listings, Requests, Reports, Deals, Commissions, Teams, transfers, and AF004 are not implemented.
 
 ---
 
