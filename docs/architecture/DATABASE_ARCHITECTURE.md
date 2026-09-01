@@ -137,7 +137,7 @@ One Lead may have multiple Requirements.
 
 ## Property Engine
 
-The approved conceptual Listing boundaries and behavior are defined by `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md`. No physical Listing schema is approved by that document.
+The approved conceptual Listing boundaries and behavior are defined by `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md`. The approved, not-implemented physical data-model architecture is defined by `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md`. It distinguishes System-only Global Physical Property Identity from independent Organization Property records and is not a committed SQL schema.
 
 Purpose
 
@@ -151,18 +151,20 @@ Responsibilities
 * Media
 * Approval
 
-Owns
+Conceptually owns
 
-* properties
-* property_ownerships
-* property_listings
-* property_media
-* owner_approvals
-* property_listing_history
+* Global Physical Property Identity for System-only reconciliation
+* independent Organization Property records
+* Organization-scoped Owners and Ownership history
+* Listings, material versions, approvals, lifecycle, and assignment history
+* Property Media and Listing publication selections
+* Sale Closing and Ownership Transfer relationships
+
+These are conceptual responsibilities, not approved SQL table names.
 
 Business Rule
 
-Property is permanent.
+Real-world physical identity persists; Organization Property records remain independent.
 
 Ownership changes.
 

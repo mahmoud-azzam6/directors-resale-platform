@@ -2,7 +2,7 @@
 
 Status: Active
 
-Current Project Phase: Listing Domain Architecture Approved
+Current Project Phase: Listing Domain and Physical Data Model Architecture Approved
 
 Current Milestone: Milestone 2 - Core Business
 
@@ -14,7 +14,7 @@ Next Selected Milestone: Not selected
 
 Latest Stable Commit: a017c94 - fix(BF006): inject request into organization routes
 
-Last Updated: 2026-08-31
+Last Updated: 2026-09-01
 
 ---
 
@@ -42,13 +42,13 @@ The application now has:
 - `users` table with a restricted Organization foreign key and indexed `organization_id`
 - AF001 Next.js Admin UI foundation under `frontend/` with secure HttpOnly auth bridge, typed API/context layer, protected App Router layout, and permission-aware navigation
 
-Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, Permissions & Authorization, and AF001-AF003 are implemented. AF003 browser QA passed and its branch was committed and pushed. The Listing Domain Architecture is approved but not implemented. No Listing implementation sprint or next implementation milestone is selected.
+Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, Permissions & Authorization, and AF001-AF003 are implemented. AF003 browser QA passed and its branch was committed and pushed. The Listing Domain Architecture and Physical Listing Data Model Architecture are approved but not implemented. LF001 is not started, and no Listing implementation sprint or next implementation milestone is selected.
 
 Approved architecture now defines one authenticated Admin Application whose experience is determined by
 Organization, Position, Permissions, and applicable resource scope. It also separates future Global
 Marketplace Visibility from Administrative Scope: authenticated Users may browse marketplace-eligible
 available Listings platform-wide, while management, reporting, commission, User, and operational access
-remain scope-controlled. `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md` now defines the approved Listing-domain boundaries, lifecycle, approvals, provenance, privacy, and integration points. Listings, Requests, Reports, Commissions, Teams, and transfer workflows remain unimplemented.
+remain scope-controlled. `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md` defines approved Listing behavior, and `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md` defines the approved conceptual physical model without committing SQL schema. Listings, Requests, Reports, Commissions, Teams, and transfer workflows remain unimplemented.
 
 ## Architecture Overview
 

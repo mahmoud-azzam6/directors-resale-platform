@@ -19,7 +19,7 @@ Last Updated: 2026-08-20
 | Project Type | Enterprise SaaS Platform |
 | Industry | Real Estate Resale |
 | Architecture Style | Modular + Event Driven |
-| Current Phase | Listing Domain Architecture Approved |
+| Current Phase | Listing Domain and Physical Data Model Architecture Approved |
 | Current Sprint | No implementation sprint selected |
 | Next Selected Milestone | Not selected |
 | Current Version | 0.1.0 |
@@ -82,6 +82,7 @@ Business rollout remains incremental.
 - INTEGRATION_ARCHITECTURE.md
 - ADMIN_EXPERIENCE_ARCHITECTURE.md
 - LISTING_DOMAIN_ARCHITECTURE.md
+- LISTING_PHYSICAL_DATA_MODEL.md
 
 ---
 
@@ -135,6 +136,7 @@ Business rollout remains incremental.
 | APIs | docs/api/ |
 | Admin Experience, Marketplace Visibility, and Administrative Scope | ADMIN_EXPERIENCE_ARCHITECTURE.md |
 | Listing Domain | LISTING_DOMAIN_ARCHITECTURE.md |
+| Listing Physical Data Model | LISTING_PHYSICAL_DATA_MODEL.md |
 
 ---
 
@@ -145,7 +147,7 @@ Business rollout remains incremental.
 | M00 | Reference Data | Planned |
 | M01 | Core | Organization, Franchise, Partner Agency, User, Authentication, Position, Permission, and Authorization scope implemented (BF006-BF012) |
 | M02 | CRM | Planned |
-| M03 | Property Engine | Listing architecture approved; implementation planned |
+| M03 | Property Engine | Domain and physical data-model architecture approved; not implemented |
 | M04 | Matching Engine | Planned |
 | M05 | Deal Engine | Planned |
 | M06 | Commission Engine | Planned |
@@ -164,13 +166,13 @@ Business rollout remains incremental.
 
 | Item | Value |
 |------|-------|
-| Current Phase | Listing Domain Architecture Approved |
+| Current Phase | Listing Domain and Physical Data Model Architecture Approved |
 | Current Sprint | No implementation sprint selected |
 | Current Module | M03 - Property Engine (architecture only) |
-| Current Feature | Listing Domain Architecture approved; not implemented |
+| Current Feature | Listing domain and physical data-model architecture approved; not implemented |
 | Current Database Contract | BF006-BF012 staged Core schema |
 | Current Database Module | Core |
-| Current Status | BF001-BF012 and AF001-AF003 implemented; Listing architecture approved but not implemented |
+| Current Status | BF001-BF012 and AF001-AF003 implemented; Listing domain and physical model approved but not implemented; LF001 not started |
 | Current Milestone | Milestone 2 - Core Business |
 | Next Selected Milestone | Not selected |
 | Target Release | Not defined by the current canonical roadmap |
@@ -237,7 +239,9 @@ Business rollout remains incremental.
 
 # M03 - Property Engine
 
-| ID | Table | Status |
+The following names are legacy planning placeholders, not approved SQL table contracts. The approved conceptual model is defined by `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md`; physical schema remains deferred.
+
+| ID | Legacy Planned Record | Status |
 |-----|-----------------------------------|-----------|
 | DB301 | developers | Planned |
 | DB302 | developer_projects | Planned |
@@ -521,12 +525,12 @@ No Analytics or reporting implementation exists yet.
 
 | Item | Value |
 |------|-------|
-| Current Phase | Listing Domain Architecture Approved |
+| Current Phase | Listing Domain and Physical Data Model Architecture Approved |
 | Current Module | M03 - Property Engine (architecture only) |
-| Current Document | LISTING_DOMAIN_ARCHITECTURE.md |
+| Current Documents | LISTING_DOMAIN_ARCHITECTURE.md; LISTING_PHYSICAL_DATA_MODEL.md |
 | Current Database Contract | BF006-BF012 staged Core schema |
 | Current ADR | ADR-002 Property / Ownership / Listing Separation |
-| Current Milestone | Architecture approved; no implementation sprint selected |
+| Current Milestone | Domain and physical data-model architecture approved; LF001 not started |
 | Current Release Target | Not defined by the current canonical roadmap |
 
 ---
@@ -728,7 +732,7 @@ A feature is considered complete only when:
 
 No implementation milestone is selected.
 
-BF001-BF012 and AF001-AF003 are implemented. Listing Domain Architecture is approved and documented but not implemented. No Listing implementation sprint or other next implementation milestone is selected.
+BF001-BF012 and AF001-AF003 are implemented. Listing Domain Architecture and Physical Listing Data Model Architecture are approved and documented but not implemented. LF001 is not started. No Listing implementation sprint or other next implementation milestone is selected.
 
 ## Sprint 1
 

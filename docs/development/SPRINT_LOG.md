@@ -270,6 +270,14 @@ Status: Approved and documented on 2026-08-31; not implemented
 - Added ADR-002 and concise canonical Listing business rules and edge cases.
 - No physical schema, migration, API, frontend, exact Listing Permission codes, or implementation sprint was created or selected.
 
+## Physical Listing Data Model Architecture
+
+Status: Approved and documented on 2026-09-01; not implemented; LF001 not started
+
+- Established `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md` as the canonical conceptual physical-model source.
+- Approved the System-only Global Physical Property Identity and independent Organization Property model, Ownership/Owner history, material versions, media/document separation, Sale/Ownership Transfer boundary, and logical constraints.
+- No SQL schema, migration, application code, API, frontend, test, or implementation sprint was created or selected.
+
 Every completed database contract will immediately produce:
 
 - SQL Migration

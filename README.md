@@ -304,7 +304,7 @@ Main sections include:
 
 Current Phase:
 
-Listing Domain Architecture Approved
+Listing Domain and Physical Data Model Architecture Approved
 
 Current Sprint:
 
@@ -346,7 +346,7 @@ The approved product architecture distinguishes Global Marketplace Visibility fr
 Administrative Scope. Authenticated Users may browse marketplace-eligible available Listings across the
 network, but that visibility does not grant authority over another Organization's Listings, Users,
 reports, commissions, or operations. Listings, Requests, Reports, Commissions, Teams, and provisioning
-workflows are planned, not implemented. The approved, not-yet-implemented Listing domain is defined by `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md`. No Listing implementation sprint or next implementation milestone is selected.
+workflows are planned, not implemented. The approved, not-yet-implemented Listing domain is defined by `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md`; its approved conceptual physical model is defined by `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md`. No SQL schema or migration is approved. LF001 is not started, and no Listing implementation sprint or next implementation milestone is selected.
 
 ---
 

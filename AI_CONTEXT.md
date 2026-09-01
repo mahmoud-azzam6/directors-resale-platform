@@ -407,7 +407,9 @@ reporting principles.
 
 `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md` is the canonical source for the approved, not-yet-implemented Listing domain. It defines Residential Resale MVP scope with future category extensibility; Property/Ownership/Listing separation; provenance and assignment; approval, lifecycle, hold, sold, withdrawal, Owner privacy, marketplace eligibility, and future integration boundaries.
 
-The architecture preserves global authenticated marketplace visibility separately from administrative authority. Physical schema, APIs, exact Permission codes, frontend, Request/Deal/Commission/Transfer workflows, and a Listing implementation sprint remain unapproved or deferred.
+`docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md` is the canonical source for the approved, not-implemented conceptual physical model. It distinguishes System-only Global Physical Property Identity from independent Organization Property records and defines Owner/Ownership history, material versions, media/document separation, Sale Closing, Ownership Transfer boundaries, and logical constraints without approving SQL schema.
+
+The architecture preserves global authenticated marketplace visibility separately from administrative authority. SQL schema, migrations, APIs, exact Permission codes, frontend, Request/Deal/Commission/Transfer implementation, and a Listing implementation sprint remain unapproved or deferred. LF001 is not started.
 
 AF002 provides System Franchise network administration and atomic initial administrator onboarding.
 AF003 provides Organization-scoped User and Position administration with capability-subset Permission delegation; browser QA passed and the AF003 branch was committed and pushed. Listing Domain Architecture is approved but not implemented. Listings, Requests, Reports, Deals, Commissions, Teams, transfers, and AF004 are not implemented.

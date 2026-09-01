@@ -8,7 +8,8 @@ The platform must preserve the permanent real-estate asset, changes in ownership
 
 ## Decision
 
-- Property is the permanent real-estate asset.
+- Global Physical Property Identity is a System-only analytical identity for the persistent real-estate asset.
+- Organization Property is an Organization-owned operational representation and remains independent even when System reconciliation confirms that multiple records represent the same real-world unit.
 - Ownership changes independently and preserves ownership context/history.
 - A Listing is a temporary market offering referencing Property and Ownership context.
 - Future Deals reference Listings rather than replacing Property or Ownership facts.
@@ -17,6 +18,6 @@ The platform must preserve the permanent real-estate asset, changes in ownership
 
 ## Consequences
 
-Property, Ownership, Listing, and Deal records must not be collapsed into one entity. Future physical schema and APIs must preserve these boundaries and distinguish marketplace visibility from management authority.
+Global identity reconciliation never merges, transfers, deduplicates, or exposes Organization operational records, Ownerships, Listings, Owners, documents, or history. Property, Ownership, Listing, Sale, and Ownership Transfer must not be collapsed into one entity. Future schema and APIs must preserve these boundaries and distinguish marketplace visibility from management authority.
 
-Detailed approved behavior is defined by `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md`.
+Detailed approved behavior is defined by `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md`; the approved conceptual physical model is defined by `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md`.

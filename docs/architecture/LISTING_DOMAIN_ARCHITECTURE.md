@@ -2,7 +2,7 @@
 # Listing Domain Architecture
 
 **Document Type:** Domain Architecture  
-**Status:** APPROVED / NOT YET IMPLEMENTED  
+**Status:** APPROVED / NOT IMPLEMENTED
 **MVP Scope:** Residential Resale  
 **Applies To:** Property, Ownership, Listings, Owner Approval, Marketplace Publication, Holds, Sale Closing, and future Request/Deal/Transfer integrations
 
@@ -12,17 +12,22 @@
 
 This document is the canonical architecture source for the Listing domain. It defines approved domain boundaries, lifecycle, attribution, approval, privacy, marketplace, and future-integration rules without defining a physical database schema, API, frontend, or implementation sprint.
 
+The approved physical data-model architecture is defined separately in `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md`. That document is also **APPROVED / NOT IMPLEMENTED** and remains conceptual rather than a committed SQL schema. LF001 is **NOT STARTED**.
+
 The MVP serves Residential Resale while the core architecture remains ready for Commercial, Administrative, Medical, and future property categories.
 
 # 2. Core Domain Boundaries
 
 The platform keeps three independent concepts:
 
-- **Property:** the permanent real-estate asset.
+- **Global Physical Property Identity:** a System-only analytical identity for a persistent real-world asset.
+- **Organization Property:** one Organization's independent operational representation of that asset.
 - **Ownership:** the ownership state and history associated with that asset.
 - **Listing:** a temporary market offering in a particular business and ownership context.
 
 Listings reference Property and Ownership context. Future Deals reference Listings. Listing lifecycle, versions, attribution, assignment, approvals, holds, withdrawals, and sale outcomes must retain history. Listings and their business history are never hard-deleted.
+
+Global reconciliation never merges or exposes Organization operational records. Each Organization Property, its Owners, Ownerships, Listings, documents, and history remain isolated. The detailed identity, reconciliation, ownership, versioning, media, Sale, and logical-constraint model is defined by the physical-model architecture.
 
 The Listing domain does not own the future Request, Deal, Commission, Transfer, Team, Viewing, or Rental Management workflows.
 
@@ -155,7 +160,7 @@ The catalog tolerates imperfect real-estate geography and proposed values. A Pro
 
 # 13. Pricing, Payment, and Resale Context
 
-A Listing supports Currency, Seller Asking Amount, Price Negotiable, and payment status (`Fully Paid` or `Installments Remaining`). Asking amount is not the same as total buyer financial exposure.
+A Listing's commercial instruction supports Currency, Seller Asking Amount, Price Negotiable, and payment status (`Fully Paid` or `Installments Remaining`). Current physical/profile facts belong to Organization Property and are preserved in immutable Listing material snapshots at approval/publication boundaries. Asking amount is not the same as total buyer financial exposure.
 
 Where installments remain, the architecture supports original unit price, amount paid to developer, remaining developer balance, seller premium/overprice, total buyer commitment, next installment date and amount, frequency, and final installment date. Optional future obligations include maintenance balance, club fees, transfer fees, and other mandatory fees. A detailed installment schedule engine is not part of MVP architecture.
 
@@ -163,9 +168,9 @@ Residential resale context may include unit/delivery status, delivery date, fini
 
 # 14. Owner Model, Isolation, and Privacy
 
-Owner is an external Organization-scoped entity. Conceptual data may include name, mobile, email, preferred contact method, notes, and status/context metadata. One Owner may relate to multiple Listings in the same Organization.
+Owner is an external Organization-scoped individual or company/legal entity, not a Platform User. Conceptual data may include display/legal name, contact-person information, mobile, email, preferred contact method, notes, and status/context metadata. One Owner may participate in multiple Ownerships in the same Organization.
 
-Matching contact information across different Organizations is not a business duplicate. Records must not be globally merged or disclosed to normal Users. Within one Organization, matching information may reuse an Owner record. Future matching may consider mobile, email, or name plus mobile, but no physical matching engine is approved here.
+Matching contact information across different Organizations is not a business duplicate. Records must not be globally merged or disclosed to normal Users. Within one Organization, matching signals may suggest reuse but mobile/email are not blindly unique. Cross-Organization Owner matching is outside MVP.
 
 Marketplace visibility never exposes Owner name, contacts, precise private address, internal notes, approval records, or private documents by default. Operational access requires capability, Organization scope, and resource relationship. Parent Franchise supervision does not automatically expose a Partner Agency's Owner contact database.
 
@@ -173,7 +178,7 @@ Marketplace visibility never exposes Owner name, contacts, precise private addre
 
 Public/publishable media and private documents are separate.
 
-Media may include photos, floor plans, and videos. Upload does not make media marketplace-public; publication selects cover and display media.
+Media may include photos, floor plans, and videos. Publishable media belongs to the reusable Organization Property media library; each Listing explicitly selects its published media. Upload does not make media marketplace-public.
 
 Ownership documents, contracts, payment schedules, receipts, identification, and other legal/support files are private by default and never automatically become marketplace media. Missing publication materials do not block `DRAFT` creation; publication requirements are evaluated when moving toward `AVAILABLE`.
 
@@ -224,7 +229,7 @@ Publication requires correct internal state, current Owner approval where requir
 
 This architecture does not implement or approve:
 
-- physical tables, columns, indexes, foreign keys, JSON structures, migrations, or enum storage
+- physical SQL tables, columns, indexes, foreign keys, JSON structures, migrations, or enum storage; the approved conceptual physical model is documented separately
 - APIs, routes, services, repositories, frontend pages, or implementation sprint scope
 - exact Listing Permission codes or Team scope
 - complete Request, Deal, Commission, Transfer, Viewing, Rental, or catalog-review workflows

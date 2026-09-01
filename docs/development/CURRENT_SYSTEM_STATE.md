@@ -1,6 +1,6 @@
 # Current System State
 
-Status: AF003 completed; Listing Domain Architecture approved and not implemented
+Status: AF003 completed; Listing Domain and Physical Data Model Architecture approved and not implemented; LF001 not started
 
 ## Completed Implementation
 
@@ -93,11 +93,13 @@ AF003 - Organization User Administration is completed:
 Listing Domain Architecture is approved but not implemented:
 
 - `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md` is the canonical domain source.
+- `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md` is the approved, not-implemented conceptual physical data-model source.
 - ADR-002 records Property / Ownership / Listing separation.
 - Residential Resale is the MVP scope with future property-category extensibility.
 - Global authenticated marketplace visibility remains separate from administrative authority.
 - Lifecycle, provenance, assignment, approvals, holds, sold, withdrawal, Owner privacy, media/document separation, and future integration boundaries are approved conceptually.
-- No physical schema, API, frontend, Permission codes, migration, or Listing implementation sprint is approved.
+- The physical model distinguishes System-only Global Physical Property Identity from independent Organization Property records and defines conceptual Ownership, version, media, Sale, and transfer boundaries.
+- No SQL schema, API, frontend, Permission codes, migration, or Listing implementation sprint is approved. LF001 is not started.
 
 ## Implemented Request Path
 
@@ -149,4 +151,4 @@ operations remain scope-controlled. Listing, Request, Report, Commission, Team, 
 
 ## Next Development Target
 
-No next implementation milestone is selected. Listing Domain Architecture is approved and documented but not implemented. No Listing implementation sprint has been approved.
+No next implementation milestone is selected. Listing Domain Architecture and Physical Listing Data Model Architecture are approved and documented but not implemented. LF001 is not started, and no Listing implementation sprint has been approved.
