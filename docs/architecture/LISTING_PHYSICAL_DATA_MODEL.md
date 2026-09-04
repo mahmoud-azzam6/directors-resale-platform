@@ -4,7 +4,7 @@
 **Document Type:** Physical Data Model Architecture
 **Status:** APPROVED / NOT IMPLEMENTED
 **MVP Scope:** Residential Resale
-**Implementation Sprint:** LF001 NOT STARTED
+**Foundation Sprint:** BF013 - ARCHITECTURE LOCKED / IMPLEMENTATION NOT STARTED
 
 ---
 
@@ -14,7 +14,7 @@ This document is the canonical source for the approved physical Listing data-mod
 
 Names in this document identify conceptual entities and relationships. They are not a committed physical table list. Logical constraints may later be enforced by database design, Service/business logic, or both.
 
-The Listing Domain Architecture and this Physical Listing Data Model Architecture are approved and not implemented. LF001 has not started, and no Listing implementation sprint is authorized.
+The Listing Domain Architecture and this Physical Listing Data Model Architecture are approved and not implemented. BF013 is the approved Property & Ownership Foundation sprint contract, but implementation has not started. BF013 does not implement Listing workflows.
 
 # 2. Identity and Organization Isolation
 
@@ -66,9 +66,11 @@ Cross-Organization Owner matching or merging is not part of MVP. Global property
 
 Ownership is an append-oriented, Organization-scoped historical relationship between one Organization Property and one or more Organization Owner records. It records the platform's known ownership context; it is not legal-title verification and does not make the platform a land registry.
 
+An Organization Property has zero or one current Ownership state. Co-owners are parties within that single Ownership rather than separate current Ownerships. Ownership follows `CURRENT -> CLOSED`; closed Ownership and its parties remain historical and immutable through normal operations.
+
 One Ownership may have multiple Ownership Parties. Shares may be recorded when known. If all shares are known as complete percentages, they should logically total 100%. Missing shares must not by themselves block recording the Ownership.
 
-One Ownership Party may be designated Authorized Acting Owner after the Organization records that co-owner authority was confirmed through its operational process. The designation retains the selected Owner, authority basis/source, recording actor and time, and optional notes. It does not alter ownership shares. In MVP, the Authorized Acting Owner must be one of the recorded Ownership Parties; a general legal representative or power-of-attorney engine is deferred.
+One Ownership Party may be designated Authorized Acting Owner after the Organization records that co-owner authority was confirmed through its operational process. This is a historical designation referencing the Ownership Party, not a simple Owner reference on Ownership. It retains authority basis/source, recording actor/time, optional notes, and start/end/current semantics. At most one designation is current per Ownership; changing it ends the previous designation and creates another, and no designation remains active beyond its Ownership. It does not alter ownership shares. In MVP, the Authorized Acting Owner must be one of the recorded Ownership Parties; a general legal representative or power-of-attorney engine is deferred.
 
 Only the designated Authorized Acting Owner may need to receive Listing Owner Approval for that Ownership context.
 
@@ -282,7 +284,8 @@ These constraints are architectural invariants. Future implementation design det
 
 The architecture is ready for, but does not implement or authorize:
 
-- LF001 or any Listing implementation sprint
+- Listing workflows or any unapproved future Listing implementation sprint
+- BF013 work beyond the Property & Ownership Foundation contract
 - physical database schema, migrations, tables, columns, indexes, or storage constraints
 - full Property matching algorithms, advanced confidence scoring, or automated reconciliation
 - cross-Organization Owner matching

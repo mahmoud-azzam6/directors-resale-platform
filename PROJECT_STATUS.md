@@ -2,19 +2,19 @@
 
 Status: Active
 
-Current Project Phase: Listing Domain and Physical Data Model Architecture Approved
+Current Project Phase: BF013 Property & Ownership Foundation Architecture Locked
 
 Current Milestone: Milestone 2 - Core Business
 
 Completed Sprints: BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, BF009, BF010, BF011, BF012, AF001, AF002, AF003
 
-Current Sprint: No implementation sprint selected
+Current Sprint: BF013 - Property & Ownership Foundation (implementation not started)
 
-Next Selected Milestone: Not selected
+Next Selected Milestone: BF013 - Property & Ownership Foundation
 
 Latest Stable Commit: a017c94 - fix(BF006): inject request into organization routes
 
-Last Updated: 2026-09-01
+Last Updated: 2026-09-03
 
 ---
 
@@ -42,7 +42,7 @@ The application now has:
 - `users` table with a restricted Organization foreign key and indexed `organization_id`
 - AF001 Next.js Admin UI foundation under `frontend/` with secure HttpOnly auth bridge, typed API/context layer, protected App Router layout, and permission-aware navigation
 
-Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, Permissions & Authorization, and AF001-AF003 are implemented. AF003 browser QA passed and its branch was committed and pushed. The Listing Domain Architecture and Physical Listing Data Model Architecture are approved but not implemented. LF001 is not started, and no Listing implementation sprint or next implementation milestone is selected.
+Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, Permissions & Authorization, and AF001-AF003 are implemented. AF003 browser QA passed and its branch was committed and pushed. The Listing Domain Architecture and Physical Listing Data Model Architecture are approved but not implemented. BF013 Property & Ownership Foundation architecture and sprint contract are locked; implementation has not started and excludes Listing workflows.
 
 Approved architecture now defines one authenticated Admin Application whose experience is determined by
 Organization, Position, Permissions, and applicable resource scope. It also separates future Global

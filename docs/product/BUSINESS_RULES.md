@@ -26,4 +26,4 @@ The Listing Domain Architecture and Physical Listing Data Model Architecture are
 - Withdrawn Listings returning to market reuse their history and repeat current approval requirements.
 - Owner identity, co-ownership, and private Listing data are Organization-scoped and hidden from the global marketplace by default.
 - Publication media and private documents remain separate.
-- Exact Listing Permission codes, SQL schema, API, and implementation sprint remain deferred; LF001 is not started.
+- BF013 is limited to the Property & Ownership Foundation; implementation has not started and Listing workflows remain deferred.

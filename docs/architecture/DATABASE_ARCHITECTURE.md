@@ -139,6 +139,8 @@ One Lead may have multiple Requirements.
 
 The approved conceptual Listing boundaries and behavior are defined by `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md`. The approved, not-implemented physical data-model architecture is defined by `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md`. It distinguishes System-only Global Physical Property Identity from independent Organization Property records and is not a committed SQL schema.
 
+BF013 is the approved Property & Ownership Foundation sprint contract. It covers only the Organization Property shell, Organization Owner, Ownership history and parties, Acting Owner designation history, and System-only Global Identity link history. Implementation and physical schema design have not started; Listing and rich Property Profile responsibilities below remain deferred.
+
 Purpose
 
 Represents physical real estate assets.

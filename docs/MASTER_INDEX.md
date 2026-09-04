@@ -19,9 +19,9 @@ Last Updated: 2026-08-20
 | Project Type | Enterprise SaaS Platform |
 | Industry | Real Estate Resale |
 | Architecture Style | Modular + Event Driven |
-| Current Phase | Listing Domain and Physical Data Model Architecture Approved |
-| Current Sprint | No implementation sprint selected |
-| Next Selected Milestone | Not selected |
+| Current Phase | BF013 Property & Ownership Foundation Architecture Locked |
+| Current Sprint | BF013 - Property & Ownership Foundation (implementation not started) |
+| Next Selected Milestone | BF013 - Property & Ownership Foundation |
 | Current Version | 0.1.0 |
 | Repository Status | Active |
 
@@ -166,15 +166,15 @@ Business rollout remains incremental.
 
 | Item | Value |
 |------|-------|
-| Current Phase | Listing Domain and Physical Data Model Architecture Approved |
-| Current Sprint | No implementation sprint selected |
+| Current Phase | BF013 Property & Ownership Foundation Architecture Locked |
+| Current Sprint | BF013 - Property & Ownership Foundation (implementation not started) |
 | Current Module | M03 - Property Engine (architecture only) |
 | Current Feature | Listing domain and physical data-model architecture approved; not implemented |
 | Current Database Contract | BF006-BF012 staged Core schema |
 | Current Database Module | Core |
-| Current Status | BF001-BF012 and AF001-AF003 implemented; Listing domain and physical model approved but not implemented; LF001 not started |
+| Current Status | BF001-BF012 and AF001-AF003 implemented; BF013 contract approved, implementation not started |
 | Current Milestone | Milestone 2 - Core Business |
-| Next Selected Milestone | Not selected |
+| Next Selected Milestone | BF013 - Property & Ownership Foundation |
 | Target Release | Not defined by the current canonical roadmap |
 
 ---
@@ -488,6 +488,7 @@ No Analytics or reporting implementation exists yet.
 | Sprint 13 | AI Optimization | Planned |
 | Sprint 14 | Testing & QA | Planned |
 | Sprint 15 | Beta Release | Planned |
+| BF013 | Property & Ownership Foundation | Contract approved; implementation not started |
 
 ---
 
@@ -525,12 +526,12 @@ No Analytics or reporting implementation exists yet.
 
 | Item | Value |
 |------|-------|
-| Current Phase | Listing Domain and Physical Data Model Architecture Approved |
+| Current Phase | BF013 Property & Ownership Foundation Architecture Locked |
 | Current Module | M03 - Property Engine (architecture only) |
-| Current Documents | LISTING_DOMAIN_ARCHITECTURE.md; LISTING_PHYSICAL_DATA_MODEL.md |
+| Current Documents | BF013-property-ownership-foundation.md; LISTING_DOMAIN_ARCHITECTURE.md; LISTING_PHYSICAL_DATA_MODEL.md |
 | Current Database Contract | BF006-BF012 staged Core schema |
 | Current ADR | ADR-002 Property / Ownership / Listing Separation |
-| Current Milestone | Domain and physical data-model architecture approved; LF001 not started |
+| Current Milestone | BF013 Property & Ownership Foundation contract approved; implementation not started |
 | Current Release Target | Not defined by the current canonical roadmap |
 
 ---
@@ -563,7 +564,7 @@ No Analytics or reporting implementation exists yet.
 | ADR Documents | 17 |
 | Documentation Files | 40+ |
 | Project Templates | 6 |
-| Current Sprint | No implementation sprint selected |
+| Current Sprint | BF013 - Property & Ownership Foundation (implementation not started) |
 | Current Release | R0.1.0 |
 
 ---
@@ -730,9 +731,9 @@ A feature is considered complete only when:
 
 ## Immediate Next Development Target
 
-No implementation milestone is selected.
+BF013 - Property & Ownership Foundation. Architecture and sprint contract are locked; implementation has not started.
 
-BF001-BF012 and AF001-AF003 are implemented. Listing Domain Architecture and Physical Listing Data Model Architecture are approved and documented but not implemented. LF001 is not started. No Listing implementation sprint or other next implementation milestone is selected.
+BF001-BF012 and AF001-AF003 are implemented. Listing Domain Architecture and Physical Listing Data Model Architecture are approved but not implemented. BF013 is the selected Property & Ownership Foundation contract and excludes Listing workflows.
 
 ## Sprint 1
 

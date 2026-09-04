@@ -272,11 +272,20 @@ Status: Approved and documented on 2026-08-31; not implemented
 
 ## Physical Listing Data Model Architecture
 
-Status: Approved and documented on 2026-09-01; not implemented; LF001 not started
+Status: Approved and documented on 2026-09-01; not implemented
 
 - Established `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md` as the canonical conceptual physical-model source.
 - Approved the System-only Global Physical Property Identity and independent Organization Property model, Ownership/Owner history, material versions, media/document separation, Sale/Ownership Transfer boundary, and logical constraints.
 - No SQL schema, migration, application code, API, frontend, test, or implementation sprint was created or selected.
+
+## BF013 - Property & Ownership Foundation
+
+Status: Architecture locked and sprint contract approved on 2026-09-03; implementation not started
+
+- Established `docs/sprints/BF013-property-ownership-foundation.md` as the authoritative implementation contract.
+- Scoped the foundation to Organization Property, Organization Owner, Ownership Parties, historical Acting Owner designations, and System-only Global Physical Identity link history.
+- Explicitly excluded Listing workflows, rich Property Profile, catalogs, media/documents, Sale/Transfer, matching algorithms, and frontend implementation.
+- Replaced the obsolete tentative LF sprint-family naming with the approved BF backend/domain convention.
 
 Every completed database contract will immediately produce:
 

@@ -1,6 +1,6 @@
 # Current System State
 
-Status: AF003 completed; Listing Domain and Physical Data Model Architecture approved and not implemented; LF001 not started
+Status: AF003 completed; BF013 Property & Ownership Foundation contract approved; implementation not started
 
 ## Completed Implementation
 
@@ -99,7 +99,7 @@ Listing Domain Architecture is approved but not implemented:
 - Global authenticated marketplace visibility remains separate from administrative authority.
 - Lifecycle, provenance, assignment, approvals, holds, sold, withdrawal, Owner privacy, media/document separation, and future integration boundaries are approved conceptually.
 - The physical model distinguishes System-only Global Physical Property Identity from independent Organization Property records and defines conceptual Ownership, version, media, Sale, and transfer boundaries.
-- No SQL schema, API, frontend, Permission codes, migration, or Listing implementation sprint is approved. LF001 is not started.
+- BF013 is the approved Property & Ownership Foundation contract. Its implementation has not started and it excludes Listing workflows.
 
 ## Implemented Request Path
 
@@ -151,4 +151,4 @@ operations remain scope-controlled. Listing, Request, Report, Commission, Team, 
 
 ## Next Development Target
 
-No next implementation milestone is selected. Listing Domain Architecture and Physical Listing Data Model Architecture are approved and documented but not implemented. LF001 is not started, and no Listing implementation sprint has been approved.
+BF013 Property & Ownership Foundation is the next selected backend/domain sprint. Its architecture and contract are locked, implementation has not started, and Listing workflows remain deferred.

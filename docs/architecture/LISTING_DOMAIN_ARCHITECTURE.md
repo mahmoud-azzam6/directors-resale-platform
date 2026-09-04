@@ -12,7 +12,7 @@
 
 This document is the canonical architecture source for the Listing domain. It defines approved domain boundaries, lifecycle, attribution, approval, privacy, marketplace, and future-integration rules without defining a physical database schema, API, frontend, or implementation sprint.
 
-The approved physical data-model architecture is defined separately in `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md`. That document is also **APPROVED / NOT IMPLEMENTED** and remains conceptual rather than a committed SQL schema. LF001 is **NOT STARTED**.
+The approved physical data-model architecture is defined separately in `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md`. That document is also **APPROVED / NOT IMPLEMENTED** and remains conceptual rather than a committed SQL schema. BF013 is the approved Property & Ownership Foundation sprint contract; its implementation has **NOT STARTED** and excludes Listing workflows.
 
 The MVP serves Residential Resale while the core architecture remains ready for Commercial, Administrative, Medical, and future property categories.
 
