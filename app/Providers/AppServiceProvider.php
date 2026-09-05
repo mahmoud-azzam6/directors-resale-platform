@@ -8,6 +8,8 @@ use App\Core\DatabaseManager;
 use App\Core\Database\BaseQueryBuilder;
 use App\Core\Database\DatabaseConnectionInterface;
 use App\Core\Database\QueryBuilderInterface;
+use App\Core\Contracts\UlidGeneratorInterface;
+use App\Core\Identifiers\SymfonyUlidGenerator;
 use App\Core\ServiceProvider;
 use App\Exceptions\ExceptionHandler;
 use App\Http\Kernel;
@@ -77,6 +79,7 @@ final class AppServiceProvider extends ServiceProvider
 
         $this->container->bind(BaseQueryBuilder::class);
         $this->container->bind(QueryBuilderInterface::class, BaseQueryBuilder::class);
+        $this->container->singleton(UlidGeneratorInterface::class, SymfonyUlidGenerator::class);
 
         $this->container->singleton(Kernel::class);
         $this->container->singleton(
