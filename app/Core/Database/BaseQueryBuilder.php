@@ -40,6 +40,8 @@ final class BaseQueryBuilder implements QueryBuilderInterface
 
     private ?int $offsetValue = null;
 
+    private bool $forUpdate = false;
+
     private int $bindingIndex = 0;
 
     public function __construct(private DatabaseConnectionInterface $database)
@@ -137,6 +139,13 @@ final class BaseQueryBuilder implements QueryBuilderInterface
         return $this;
     }
 
+    public function forUpdate(): self
+    {
+        $this->forUpdate = true;
+
+        return $this;
+    }
+
     public function first(): ?array
     {
         $this->limitValue = 1;
@@ -149,12 +158,13 @@ final class BaseQueryBuilder implements QueryBuilderInterface
     {
         try {
             $sql = sprintf(
-                'SELECT %s FROM %s%s%s%s',
+                'SELECT %s FROM %s%s%s%s%s',
                 implode(', ', $this->columns),
                 $this->requireTable(),
                 $this->compileWhere(),
                 $this->compileOrderBy(),
-                $this->compileLimitOffset()
+                $this->compileLimitOffset(),
+                $this->compileForUpdate()
             );
 
             return $this->execute($sql)->fetchAll(PDO::FETCH_ASSOC);
@@ -287,6 +297,11 @@ final class BaseQueryBuilder implements QueryBuilderInterface
         return $sql;
     }
 
+    private function compileForUpdate(): string
+    {
+        return $this->forUpdate ? ' FOR UPDATE' : '';
+    }
+
     private function execute(string $sql): PDOStatement
     {
         $statement = $this->database->connection()->prepare($sql);
@@ -345,6 +360,7 @@ final class BaseQueryBuilder implements QueryBuilderInterface
         $this->table = null;
         $this->limitValue = null;
         $this->offsetValue = null;
+        $this->forUpdate = false;
         $this->bindingIndex = 0;
     }
 }

@@ -31,6 +31,8 @@ interface QueryBuilderInterface
 
     public function offset(int $offset): self;
 
+    public function forUpdate(): self;
+
     /**
      * @return array<string, mixed>|null
      */
