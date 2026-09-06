@@ -40,6 +40,14 @@ final class OwnerRepository
             ->where('organization_id', '=', $organizationId)->forUpdate()->first();
     }
 
+    public function findOrganizationId(int|string $id): ?int
+    {
+        $record = $this->queryBuilder->table('owners')->select(['organization_id'])
+            ->where('id', '=', $id)->first();
+
+        return $record === null ? null : (int) $record['organization_id'];
+    }
+
     /** @param array<int, int> $organizationIds @return array<int, array<string, mixed>> */
     public function allInScope(array $organizationIds): array
     {

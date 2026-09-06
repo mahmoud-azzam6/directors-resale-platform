@@ -11,6 +11,9 @@ use App\Modules\Franchise\Repositories\FranchiseRepository;
 use App\Modules\PartnerAgency\Repositories\PartnerAgencyRepository;
 use App\Modules\User\Repositories\UserRepository;
 use App\Modules\Position\Repositories\PositionRepository;
+use App\Modules\Property\Repositories\OrganizationPropertyRepository;
+use App\Modules\Owner\Repositories\OwnerRepository;
+use App\Modules\Ownership\Repositories\OwnershipRepository;
 use App\Responses\Response;
 
 final class AuthorizationService
@@ -23,20 +26,33 @@ final class AuthorizationService
         private OrganizationRepository $organizationRepository,
         private FranchiseRepository $franchiseRepository,
         private PartnerAgencyRepository $partnerAgencyRepository,
-        private UserRepository $userRepository
+        private UserRepository $userRepository,
+        private OrganizationPropertyRepository $propertyRepository,
+        private OwnerRepository $ownerRepository,
+        private OwnershipRepository $ownershipRepository
     ) {}
 
     /** @return array<int, int> */
-    public function scopeFor(array $user): array
-    { return $this->scopeService->organizationIds((int) $user['organization_id']); }
-
-    public function authorize(array $user, string $permissionCode, ?int $targetOrganizationId = null): ?Response
+    public function scopeFor(array $user, string $scopeMode = OrganizationScopeService::HIERARCHY): array
     {
+        return $this->scopeService->organizationIds((int) $user['organization_id'], $scopeMode);
+    }
+
+    public function authorize(
+        array $user,
+        string $permissionCode,
+        ?int $targetOrganizationId = null,
+        string $scopeMode = OrganizationScopeService::HIERARCHY
+    ): ?Response {
         if (!$this->hasPermission($user, $permissionCode)) {
             return Response::error('forbidden', 'You do not have permission to perform this action.', 403);
         }
+        $scope = $this->scopeFor($user, $scopeMode);
+        if ($scopeMode === OrganizationScopeService::SYSTEM_ONLY && $scope === []) {
+            return Response::error('forbidden', 'This action is restricted to the System Organization.', 403);
+        }
         if ($targetOrganizationId !== null
-            && !$this->scopeService->allows((int) $user['organization_id'], $targetOrganizationId)) {
+            && !in_array($targetOrganizationId, $scope, true)) {
             return Response::error('forbidden', 'The requested Organization is outside your scope.', 403);
         }
         return null;
@@ -83,9 +99,14 @@ final class AuthorizationService
         $record = match ($resource) {
             'users' => $this->userRepository->findActive($id),
             'positions' => $this->positionRepository->findActive($id),
-            default => null,
+            'organization_properties' => $this->propertyRepository->findOrganizationId($id),
+            'owners' => $this->ownerRepository->findOrganizationId($id),
+            'ownerships' => $this->ownershipRepository->findOrganizationId($id),
+            default => throw new \InvalidArgumentException("Unsupported authorization resource: {$resource}"),
         };
-        return $record === null ? null : (int) $record['organization_id'];
+        if ($record === null) { return null; }
+        if (is_int($record)) { return $record; }
+        return (int) $record['organization_id'];
     }
 
     private function hasPermission(array $user, string $code): bool

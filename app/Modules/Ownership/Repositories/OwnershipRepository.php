@@ -38,6 +38,14 @@ final class OwnershipRepository
             ->where('organization_id', '=', $organizationId)->forUpdate()->first();
     }
 
+    public function findOrganizationId(int|string $id): ?int
+    {
+        $record = $this->queryBuilder->table('ownerships')->select(['organization_id'])
+            ->where('id', '=', $id)->first();
+
+        return $record === null ? null : (int) $record['organization_id'];
+    }
+
     /** @return array<string, mixed>|null */
     public function findCurrentForProperty(int|string $propertyId, int|string $organizationId): ?array
     {
