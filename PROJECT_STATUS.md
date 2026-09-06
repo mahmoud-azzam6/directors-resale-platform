@@ -2,19 +2,19 @@
 
 Status: Active
 
-Current Project Phase: BF013 Property & Ownership Foundation Architecture Locked
+Current Project Phase: BF013 Property & Ownership Foundation Implemented and Verified
 
 Current Milestone: Milestone 2 - Core Business
 
-Completed Sprints: BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, BF009, BF010, BF011, BF012, AF001, AF002, AF003
+Completed Sprints: BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, BF009, BF010, BF011, BF012, BF013, AF001, AF002, AF003
 
-Current Sprint: BF013 - Property & Ownership Foundation (implementation not started)
+Current Sprint: BF013 - Property & Ownership Foundation (closed)
 
-Next Selected Milestone: BF013 - Property & Ownership Foundation
+Next Selected Sprint: None
 
-Latest Stable Commit: a017c94 - fix(BF006): inject request into organization routes
+Latest Stable Commit: 239b013 - test: add BF013 database acceptance coverage
 
-Last Updated: 2026-09-03
+Last Updated: 2026-09-06
 
 ---
 
@@ -42,7 +42,7 @@ The application now has:
 - `users` table with a restricted Organization foreign key and indexed `organization_id`
 - AF001 Next.js Admin UI foundation under `frontend/` with secure HttpOnly auth bridge, typed API/context layer, protected App Router layout, and permission-aware navigation
 
-Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, Permissions & Authorization, and AF001-AF003 are implemented. AF003 browser QA passed and its branch was committed and pushed. The Listing Domain Architecture and Physical Listing Data Model Architecture are approved but not implemented. BF013 Property & Ownership Foundation architecture and sprint contract are locked; implementation has not started and excludes Listing workflows.
+Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, Permissions & Authorization, BF013 Property & Ownership Foundation, and AF001-AF003 are implemented. BF013 supplies the verified backend foundation for Organization Properties, Owners, Ownership history, Acting Owner history, and System-only Global Physical Property Identity links. The broader Listing Domain Architecture and Physical Listing Data Model Architecture remain approved but not implemented; Listing workflows and frontend Property workflows remain deferred, and no subsequent sprint is selected.
 
 Approved architecture now defines one authenticated Admin Application whose experience is determined by
 Organization, Position, Permissions, and applicable resource scope. It also separates future Global

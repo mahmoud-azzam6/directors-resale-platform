@@ -304,11 +304,11 @@ Main sections include:
 
 Current Phase:
 
-BF013 Property & Ownership Foundation Architecture Locked
+BF013 Property & Ownership Foundation Implemented and Verified
 
 Current Sprint:
 
-BF013 - Property & Ownership Foundation (implementation not started)
+BF013 - Property & Ownership Foundation (closed)
 
 Current Milestone:
 
@@ -316,7 +316,7 @@ Milestone 2 - Core Business
 
 Implementation Status:
 
-Core and Admin implementation completed through AF003; Listing domain not implemented
+Backend foundation completed through BF013 and Admin implementation completed through AF003; broader Listing domain not implemented
 
 Architecture Status:
 
@@ -332,11 +332,11 @@ Completed
 
 Latest Verified Implementation:
 
-BF001-BF012 and AF001-AF003 are implemented. AF003 browser QA passed and its branch was committed and pushed.
+BF001-BF013 and AF001-AF003 are implemented. BF013 database-backed acceptance and regressions passed on MariaDB 10.4.32.
 
-Next Development Milestone:
+Next Selected Sprint:
 
-BF013 - Property & Ownership Foundation
+None
 
 The platform uses one authenticated Admin Application. User experience is driven by Organization,
 Position, effective Permissions, and applicable resource scope; Position names are not authorization
@@ -346,7 +346,7 @@ The approved product architecture distinguishes Global Marketplace Visibility fr
 Administrative Scope. Authenticated Users may browse marketplace-eligible available Listings across the
 network, but that visibility does not grant authority over another Organization's Listings, Users,
 reports, commissions, or operations. Listings, Requests, Reports, Commissions, Teams, and provisioning
-workflows are planned, not implemented. The approved, not-yet-implemented Listing domain is defined by `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md`; its approved conceptual physical model is defined by `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md`. BF013 is the approved Property & Ownership Foundation contract, with implementation not started and Listing workflows excluded.
+workflows are planned, not implemented. The approved, not-yet-implemented Listing domain is defined by `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md`; its approved conceptual physical model is defined by `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md`. BF013 Property & Ownership Foundation is implemented, verified, and closed as a backend-only operational foundation; Listing workflows, rich Property Profile behavior, and frontend Property workflows remain excluded.
 
 ---
 

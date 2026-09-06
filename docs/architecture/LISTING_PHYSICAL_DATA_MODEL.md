@@ -4,7 +4,7 @@
 **Document Type:** Physical Data Model Architecture
 **Status:** APPROVED / NOT IMPLEMENTED
 **MVP Scope:** Residential Resale
-**Foundation Sprint:** BF013 - ARCHITECTURE LOCKED / IMPLEMENTATION NOT STARTED
+**Foundation Sprint:** BF013 - IMPLEMENTED AND VERIFIED / CLOSED
 
 ---
 
@@ -14,7 +14,7 @@ This document is the canonical source for the approved physical Listing data-mod
 
 Names in this document identify conceptual entities and relationships. They are not a committed physical table list. Logical constraints may later be enforced by database design, Service/business logic, or both.
 
-The Listing Domain Architecture and this Physical Listing Data Model Architecture are approved and not implemented. BF013 is the approved Property & Ownership Foundation sprint contract, but implementation has not started. BF013 does not implement Listing workflows.
+The Listing Domain Architecture and this broader Physical Listing Data Model Architecture are approved and not implemented. BF013 implemented and verified the limited Property & Ownership backend foundation only. BF013 does not implement Listing workflows, rich Property Profile behavior, or frontend Property workflows.
 
 # 2. Identity and Organization Isolation
 

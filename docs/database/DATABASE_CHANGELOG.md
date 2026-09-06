@@ -1,12 +1,25 @@
 # Database Changelog
 
+## BF013 - Property & Ownership Foundation
+
+Status: Implemented and verified
+
+- Migrations `009` through `016` add `organization_properties`, `owners`, `ownerships`, `ownership_parties`, `authorized_acting_owner_designations`, `global_physical_property_identities`, `global_physical_identity_links`, and `property_owner_lifecycle_history`.
+- Migration `017_add_bf013_permissions.sql` adds eight active Permission codes: `properties.view`, `properties.manage`, `owners.view`, `owners.manage`, `ownerships.view`, `ownerships.manage`, `global_physical_identities.view`, and `global_physical_identities.manage`.
+- The active Permission catalog contains 30 codes after migration 017.
+- Application-generated canonical ULIDs use the reusable `UlidGeneratorInterface` backed by Symfony UID 5.4.
+- Generated nullable uniqueness guards enforce at most one current Ownership per Organization Property, one current Acting Owner designation per Ownership, and one active Global Identity link per Organization Property.
+- Foreign keys, `CHECK` constraints, share invariants, lifecycle history, historical designation/link preservation, and transactional rollback were verified on MariaDB 10.4.32.
+- Migrations `001` through `017`, including PDO multi-statement execution, passed database-backed acceptance; isolated test cleanup reported `remaining_bf013_test_databases=0`.
+- Listing schema, rich Property Profile/catalog data, automatic matching, transfer behavior, and frontend Property workflows remain deferred.
+
 ## BF012 - Permissions & Authorization
 
 Status: Implemented and verified
 
 - Migration: `database/migrations/008_create_permissions_tables.sql`
 - Added globally unique, status-based `permissions` and composite-unique `position_permissions`.
-- Seeded the 22 approved active Permission codes for Organizations, Franchises, Partner Agencies, Users, Positions, and Permission administration.
+- Seeded the original 22 approved active Permission codes for Organizations, Franchises, Partner Agencies, Users, Positions, and Permission administration; BF013 migration 017 later expands the active catalog to 30.
 - Users inherit active Permissions only through an active same-Organization Position; no `user_permissions` table exists.
 - Position-Permission replacement is atomic; relationship rows represent current assignments and may be synchronized without hard-deleting Position or Permission business records.
 - Full audit/event history for Permission assignment remains deferred to the staged audit architecture.

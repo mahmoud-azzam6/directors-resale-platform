@@ -24,7 +24,7 @@ BF006 smoke tests and BF007 manual acceptance/regression checks passed. No autom
 
 ## Next Development Target
 
-BF013 Property & Ownership Foundation is the next selected backend/domain sprint. Its architecture and sprint contract are locked; implementation has not started. BF013 does not implement Listing workflows.
+No subsequent sprint is selected. BF013 Property & Ownership Foundation is implemented, verified, and closed; its backend foundation is ready to support a future separately approved Admin Property workflow. Listing workflows remain unimplemented.
 
 ## Constraints for Future Planning
 
@@ -39,6 +39,6 @@ BF013 Property & Ownership Foundation is the next selected backend/domain sprint
   Scope. Do not use Organization management scope to isolate marketplace-eligible available Listings.
 - Use `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md` as the canonical source for approved Listing boundaries and behavior.
 - Use `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md` as the canonical source for the approved conceptual physical model; do not treat it as a committed SQL schema.
-- Use `docs/sprints/BF013-property-ownership-foundation.md` as the authoritative BF013 implementation contract.
-- Keep SQL schema, migrations, APIs, exact Permission codes, Team scope, complete Request/Deal/Commission/Transfer workflows, publication field lists, and implementation sprint scope deferred until separately approved.
+- Use `docs/sprints/BF013-property-ownership-foundation.md` as the authoritative closed BF013 implementation contract.
+- Keep future Listing SQL schema, APIs, Listing Permission codes, Team scope, complete Request/Deal/Commission/Transfer workflows, publication field lists, and subsequent sprint scope deferred until separately approved.
 - Do not infer implementation from broader planned architecture documents.

@@ -1,10 +1,10 @@
 # Current System State
 
-Status: AF003 completed; BF013 Property & Ownership Foundation contract approved; implementation not started
+Status: BF013 Property & Ownership Foundation implemented, verified, and closed; AF003 completed
 
 ## Completed Implementation
 
-BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, BF009, BF010, BF011, and BF012 are implemented.
+BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, BF009, BF010, BF011, BF012, and BF013 are implemented.
 BF004 has no separate Git commit, but its service-container functionality is present in code.
 
 BF006 - Organization Module is completed and verified:
@@ -64,6 +64,15 @@ BF012 - Permissions & Authorization is implemented:
 - Permission assignment uses an explicit CLI bootstrap for initial development and authorized atomic API synchronization thereafter.
 - Direct User permissions, Roles, Position/Team hierarchy, Admin UI, and full audit/event history are deferred.
 
+BF013 - Property & Ownership Foundation is implemented and verified:
+
+- Migrations 009-016 add the Organization Property shell, Organization-scoped Owners, Ownerships and Parties, historical Acting Owner designations, System-only Global Physical Property Identities, historical links, and Property/Owner lifecycle history.
+- Migration 017 expands the active Permission catalog from 22 to 30 with Property, Owner, Ownership, and Global Physical Identity view/manage capabilities.
+- Services and repositories enforce lifecycle, privacy, share, current-record, historical preservation, and transaction rules; the reusable ULID contract uses Symfony UID 5.4 and QueryBuilder supports `FOR UPDATE` row locking.
+- REST APIs use hierarchy scope for Organization Properties, `private_organization` scope for Owners and Ownerships, and `system_only` scope for Global Physical Identities.
+- Organization candidates remain untrusted before authorization and are promoted to `auth.target.organization_id` only after successful authorization; unsupported generic target resource types fail explicitly.
+- Real MariaDB 10.4.32 acceptance, HTTP/auth/domain regressions, rollback checks, legacy backend smoke, and isolated database cleanup passed.
+
 AF001 - Admin UI Foundation is implemented:
 
 - Added a Next.js App Router, TypeScript, Tailwind, TanStack Query, React Hook Form, Zod, and Lucide frontend under `frontend/`.
@@ -99,7 +108,7 @@ Listing Domain Architecture is approved but not implemented:
 - Global authenticated marketplace visibility remains separate from administrative authority.
 - Lifecycle, provenance, assignment, approvals, holds, sold, withdrawal, Owner privacy, media/document separation, and future integration boundaries are approved conceptually.
 - The physical model distinguishes System-only Global Physical Property Identity from independent Organization Property records and defines conceptual Ownership, version, media, Sale, and transfer boundaries.
-- BF013 is the approved Property & Ownership Foundation contract. Its implementation has not started and it excludes Listing workflows.
+- BF013 implemented the approved Property & Ownership backend foundation. Listing workflows, rich Property Profile behavior, and frontend Property workflows remain excluded.
 
 ## Implemented Request Path
 
@@ -116,20 +125,21 @@ public/index.php
 
 ## Current Database State
 
-The application business tables are `organizations` and `users`. The intentional BF006-BF008 staged `organizations` schema
+The application database foundation is applied through migration 017. The intentional BF006-BF008 staged `organizations` schema
 contains `id`, `parent_organization_id`, `name`, `code`, `organization_type`, `status`, `created_at`,
 and `updated_at`; `parent_organization_id` is indexed and self-references `organizations.id`.
 The BF009 `users` schema contains the staged User fields plus nullable BF010 `password_hash` and BF011 `position_id`, referencing `organizations.id` and `positions.id`.
 The BF010 `auth_tokens` table references `users.id` and stores only token hashes with expiry and revocation state.
 The BF011 `positions` table references `organizations.id` and uses composite Organization/code uniqueness.
 The BF012 `permissions` and `position_permissions` tables provide the controlled Position-derived Permission model.
+BF013 adds `organization_properties`, `owners`, `ownerships`, `ownership_parties`, `authorized_acting_owner_designations`, `global_physical_property_identities`, `global_physical_identity_links`, and `property_owner_lifecycle_history`. The active Permission catalog contains 30 codes after migration 017.
 
 ## Not Implemented
 
 - Direct User permissions, authorization expansion beyond BF012, roles, position hierarchy, team hierarchy, user profiles, transfers, registration, reset, refresh tokens, and sessions
-- CRM, Property, Listings, Deals, Commissions, and Transfers
+- CRM, rich Property Profile and catalogs, Listings, Deals, Commissions, and Transfers
 - Notifications, AI, Analytics, Integrations, broader Admin UI modules, and AF004
-- Automated test suite
+- A unified project-wide automated test runner; legacy BF006-BF007 verification remains primarily manual
 
 ## Approved Architecture, Not Implemented
 
@@ -139,7 +149,7 @@ System Franchise provisioning and Organization-scoped User/Position administrati
 
 It also distinguishes Global Marketplace Visibility from Administrative Scope. The approved Listing Domain Architecture specifies how authenticated Users may browse marketplace-eligible Listings across the platform and may later submit permitted
 cross-Organization Requests, while Listing management, reports, Users, commissions, and internal
-operations remain scope-controlled. Listing, Request, Report, Commission, Team, invitation, and provisioning implementations are not present. Exact Listing Permission codes, physical schema, APIs, and Team scope remain deferred.
+operations remain scope-controlled. Listing, Request, Report, Commission, Team, invitation, and provisioning implementations are not present. Exact Listing Permission codes, rich Listing schema and APIs, and Team scope remain deferred.
 
 ## Known Discrepancies
 
@@ -151,4 +161,4 @@ operations remain scope-controlled. Listing, Request, Report, Commission, Team, 
 
 ## Next Development Target
 
-BF013 Property & Ownership Foundation is the next selected backend/domain sprint. Its architecture and contract are locked, implementation has not started, and Listing workflows remain deferred.
+No subsequent sprint is selected. The completed BF013 backend foundation is ready to support a future approved Admin Property workflow, while Listing workflows remain deferred.

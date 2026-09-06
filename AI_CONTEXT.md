@@ -409,10 +409,10 @@ reporting principles.
 
 `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md` is the canonical source for the approved, not-implemented conceptual physical model. It distinguishes System-only Global Physical Property Identity from independent Organization Property records and defines Owner/Ownership history, material versions, media/document separation, Sale Closing, Ownership Transfer boundaries, and logical constraints without approving SQL schema.
 
-The architecture preserves global authenticated marketplace visibility separately from administrative authority. BF013 is the architecture-locked, approved Property & Ownership Foundation sprint contract; implementation has not started and explicitly excludes Listing workflows. Its exact schema, APIs, and Permission codes are deferred to implementation design under the locked contract.
+The architecture preserves global authenticated marketplace visibility separately from administrative authority. BF013 Property & Ownership Foundation is implemented, verified, and closed. It provides the Organization Property shell, Organization-scoped Owners, historical Ownership aggregates and Acting Owner designations, System-only Global Physical Property Identity links, migrations 009-017, eight BF013 Permission codes, and REST APIs while explicitly excluding Listing workflows and rich Property Profile behavior.
 
 AF002 provides System Franchise network administration and atomic initial administrator onboarding.
-AF003 provides Organization-scoped User and Position administration with capability-subset Permission delegation; browser QA passed and the AF003 branch was committed and pushed. Listing Domain Architecture is approved but not implemented. Listings, Requests, Reports, Deals, Commissions, Teams, transfers, and AF004 are not implemented.
+AF003 provides Organization-scoped User and Position administration with capability-subset Permission delegation; browser QA passed and the AF003 branch was committed and pushed. The broader Listing Domain Architecture remains approved but not implemented, and no subsequent sprint is selected. Listings, Requests, Reports, Deals, Commissions, Teams, transfers, frontend Property workflows, and AF004 are not implemented.
 
 ---
 

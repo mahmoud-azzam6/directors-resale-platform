@@ -137,9 +137,9 @@ One Lead may have multiple Requirements.
 
 ## Property Engine
 
-The approved conceptual Listing boundaries and behavior are defined by `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md`. The approved, not-implemented physical data-model architecture is defined by `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md`. It distinguishes System-only Global Physical Property Identity from independent Organization Property records and is not a committed SQL schema.
+The approved conceptual Listing boundaries and behavior are defined by `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md`. The approved, not-implemented broader physical data-model architecture is defined by `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md`. It distinguishes System-only Global Physical Property Identity from independent Organization Property records and is not a committed rich Property or Listing SQL schema.
 
-BF013 is the approved Property & Ownership Foundation sprint contract. It covers only the Organization Property shell, Organization Owner, Ownership history and parties, Acting Owner designation history, and System-only Global Identity link history. Implementation and physical schema design have not started; Listing and rich Property Profile responsibilities below remain deferred.
+BF013 Property & Ownership Foundation is implemented, verified, and closed. Migrations 009-016 add `organization_properties`, `owners`, `ownerships`, `ownership_parties`, `authorized_acting_owner_designations`, `global_physical_property_identities`, `global_physical_identity_links`, and `property_owner_lifecycle_history`; migration 017 adds BF013 Permission capabilities. The implementation uses application-generated ULIDs, generated nullable uniqueness guards, foreign keys, `CHECK` constraints, and transactional `FOR UPDATE` locking. Listing and rich Property Profile responsibilities below remain deferred.
 
 Purpose
 

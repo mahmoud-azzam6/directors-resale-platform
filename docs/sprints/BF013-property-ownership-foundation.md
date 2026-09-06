@@ -2,7 +2,7 @@
 
 ## Status
 
-**ARCHITECTURE LOCKED / APPROVED SPRINT CONTRACT / IMPLEMENTATION NOT STARTED**
+**IMPLEMENTED AND VERIFIED / CLOSED**
 
 Milestone: **Milestone 2 - Core Business**
 
@@ -259,7 +259,18 @@ valid Organization/resource scope
 * Global identity operations and data are System-only.
 * Normal Organization-facing Property responses do not expose Global Identity or another Organization's record.
 
-Exact capability codes are selected during BF013 implementation contract/schema design using BF012 conventions; this documentation task does not invent them.
+Implemented BF013 capabilities follow BF012 conventions:
+
+* `properties.view`
+* `properties.manage`
+* `owners.view`
+* `owners.manage`
+* `ownerships.view`
+* `ownerships.manage`
+* `global_physical_identities.view`
+* `global_physical_identities.manage`
+
+Organization Property uses hierarchy scope. Owner and Ownership use `private_organization` scope. Global Physical Identity uses `system_only` scope. Pre-authorization Organization candidates remain untrusted and are promoted to `auth.target.organization_id` only after successful authorization. Unsupported generic resource target types fail explicitly.
 
 ---
 
@@ -286,9 +297,9 @@ Exact capability codes are selected during BF013 implementation contract/schema 
 
 ---
 
-## Expected Implementation Layers
+## Implemented Layers
 
-Future BF013 implementation includes only the layers necessary for its approved scope:
+BF013 implemented only the layers necessary for its approved scope:
 
 * database persistence and migrations
 * models/domain representations
@@ -301,7 +312,7 @@ Future BF013 implementation includes only the layers necessary for its approved 
 * acceptance, validation, authorization, persistence, and regression tests
 * implementation documentation synchronization
 
-Exact table names, fields, indexes, constraints, routes, payloads, response shapes, and permission codes are decided during implementation/schema design in accordance with existing conventions and this contract.
+The implementation includes migrations 009-017, reusable application-generated ULIDs through `UlidGeneratorInterface` backed by Symfony UID 5.4, QueryBuilder `FOR UPDATE` row locking, persistence repositories, transactional domain services, BF012-integrated authorization, controllers, REST routes, and focused acceptance/regression tests.
 
 ---
 
@@ -327,7 +338,7 @@ BF013 does not implement:
 
 ## Acceptance Criteria
 
-Future BF013 implementation is acceptable only when:
+BF013 implementation was accepted against these criteria:
 
 1. Organization Property operations enforce scope, minimum fields, lifecycle, audit, and no-hard-delete rules.
 2. Owner operations enforce Organization scope, party types, minimum fields, lifecycle, privacy, and non-unique optional contacts.
@@ -349,7 +360,7 @@ Future BF013 implementation is acceptable only when:
 
 ## Testing Expectations
 
-Future implementation verification must cover:
+Implementation verification covered:
 
 * successful and invalid creation for each BF013 resource
 * required-field and party-type validation
@@ -375,9 +386,30 @@ All explicit non-goals remain deferred. No name or number is assigned here to a 
 
 ---
 
+## Implementation Completion
+
+Completed execution units:
+
+* 2A - Database Schema & Migrations
+* 2B - QueryBuilder `FOR UPDATE`
+* 2C - Repositories
+* 2D.0 - ULID Foundation
+* 2D.1 - Property and Owner Services
+* 2D.2 - Ownership Aggregate Service
+* 2D.3 - Global Physical Identity Service
+* 2E.1 - Permission Catalog and Authorization Scope Foundation
+* 2E.2 - HTTP Integration
+* 2E.3 - Database-backed Acceptance and Regression
+
+Implemented domain persistence comprises `organization_properties`, `owners`, `ownerships`, `ownership_parties`, `authorized_acting_owner_designations`, `global_physical_property_identities`, `global_physical_identity_links`, and `property_owner_lifecycle_history`. REST endpoints cover Property, Owner, Ownership, Ownership Party, Acting Owner, Global Physical Identity, and Global Identity link operations.
+
+Verification passed migrations 001-017 on MariaDB 10.4.32, PDO multi-statement migration execution, generated nullable uniqueness guards, foreign keys, `CHECK` constraints, current-record enforcement, Party/share invariants, lifecycle and historical persistence, rollback after post-write failure, HTTP `200`/`201`/`401`/`403`/`404`/`422` contracts, authorization scopes, trusted target semantics, privacy boundaries, legacy backend compatibility smoke, and BF013 regressions. Isolated cleanup reported `remaining_bf013_test_databases=0`.
+
+---
+
 ## Definition of Done
 
-BF013 is complete only after its future implementation:
+BF013 is complete because its implementation:
 
 * satisfies every locked rule and acceptance criterion in this contract
 * implements the required backend/domain layers using existing architecture
@@ -389,4 +421,4 @@ BF013 is complete only after its future implementation:
 * updates canonical implementation and database documentation accurately
 * introduces no out-of-scope Listing or frontend implementation
 
-At present, BF013 implementation has **NOT STARTED**.
+BF013 is **IMPLEMENTED AND VERIFIED / CLOSED**. No subsequent sprint is selected.

@@ -280,12 +280,16 @@ Status: Approved and documented on 2026-09-01; not implemented
 
 ## BF013 - Property & Ownership Foundation
 
-Status: Architecture locked and sprint contract approved on 2026-09-03; implementation not started
+Status: Implemented and verified; closed on 2026-09-06
 
 - Established `docs/sprints/BF013-property-ownership-foundation.md` as the authoritative implementation contract.
 - Scoped the foundation to Organization Property, Organization Owner, Ownership Parties, historical Acting Owner designations, and System-only Global Physical Identity link history.
 - Explicitly excluded Listing workflows, rich Property Profile, catalogs, media/documents, Sale/Transfer, matching algorithms, and frontend implementation.
 - Replaced the obsolete tentative LF sprint-family naming with the approved BF backend/domain convention.
+- Completed 2A schema/migrations, 2B QueryBuilder row locking, 2C repositories, 2D.0 reusable ULID infrastructure, 2D.1 Property/Owner services, 2D.2 Ownership aggregate services, 2D.3 Global Identity services, 2E.1 permissions/authorization, 2E.2 HTTP integration, and 2E.3 database-backed acceptance/regression.
+- Added migrations 009-017, eight domain tables, eight BF013 Permission codes, and scoped REST APIs without implementing Listing or frontend workflows.
+- Verified migrations 001-017 on MariaDB 10.4.32, database constraints and nullable uniqueness guards, lifecycle/history preservation, transactional rollback, HTTP and authorization contracts, privacy boundaries, legacy backend compatibility, regressions, and cleanup with `remaining_bf013_test_databases=0`.
+- No subsequent sprint was selected.
 
 Every completed database contract will immediately produce:
 
