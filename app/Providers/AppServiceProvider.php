@@ -50,6 +50,22 @@ use App\Modules\User\Services\UserService;
 use App\Modules\User\Validators\UserValidator;
 use App\Modules\NetworkAdministration\Controllers\FranchiseOnboardingController;
 use App\Modules\NetworkAdministration\Services\FranchiseOnboardingService;
+use App\Modules\Property\Controllers\OrganizationPropertyController;
+use App\Modules\Property\Repositories\OrganizationPropertyRepository;
+use App\Modules\Property\Repositories\PropertyOwnerLifecycleHistoryRepository;
+use App\Modules\Property\Services\OrganizationPropertyService;
+use App\Modules\Owner\Controllers\OwnerController;
+use App\Modules\Owner\Repositories\OwnerRepository;
+use App\Modules\Owner\Services\OwnerService;
+use App\Modules\Ownership\Controllers\OwnershipController;
+use App\Modules\Ownership\Repositories\AuthorizedActingOwnerDesignationRepository;
+use App\Modules\Ownership\Repositories\OwnershipPartyRepository;
+use App\Modules\Ownership\Repositories\OwnershipRepository;
+use App\Modules\Ownership\Services\OwnershipService;
+use App\Modules\GlobalPropertyIdentity\Controllers\GlobalPhysicalIdentityController;
+use App\Modules\GlobalPropertyIdentity\Repositories\GlobalPhysicalIdentityLinkRepository;
+use App\Modules\GlobalPropertyIdentity\Repositories\GlobalPhysicalPropertyIdentityRepository;
+use App\Modules\GlobalPropertyIdentity\Services\GlobalPhysicalIdentityService;
 use App\Routing\Router;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -128,6 +144,23 @@ final class AppServiceProvider extends ServiceProvider
         $this->container->bind(AuthContextController::class);
         $this->container->bind(FranchiseOnboardingService::class);
         $this->container->bind(FranchiseOnboardingController::class);
+
+        $this->container->bind(OrganizationPropertyRepository::class);
+        $this->container->bind(PropertyOwnerLifecycleHistoryRepository::class);
+        $this->container->bind(OrganizationPropertyService::class);
+        $this->container->bind(OrganizationPropertyController::class);
+        $this->container->bind(OwnerRepository::class);
+        $this->container->bind(OwnerService::class);
+        $this->container->bind(OwnerController::class);
+        $this->container->bind(OwnershipRepository::class);
+        $this->container->bind(OwnershipPartyRepository::class);
+        $this->container->bind(AuthorizedActingOwnerDesignationRepository::class);
+        $this->container->bind(OwnershipService::class);
+        $this->container->bind(OwnershipController::class);
+        $this->container->bind(GlobalPhysicalPropertyIdentityRepository::class);
+        $this->container->bind(GlobalPhysicalIdentityLinkRepository::class);
+        $this->container->bind(GlobalPhysicalIdentityService::class);
+        $this->container->bind(GlobalPhysicalIdentityController::class);
         $this->container->bind(
             AuthenticationService::class,
             fn (): AuthenticationService => new AuthenticationService(
