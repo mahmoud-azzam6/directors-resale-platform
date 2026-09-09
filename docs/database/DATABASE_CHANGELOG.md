@@ -1,5 +1,14 @@
 # Database Changelog
 
+## Rich Property Profile and Property Catalog Architecture
+
+Status: Approved; not implemented
+
+- The conceptual Rich Property Profile and Property Catalog/Data Governance physical model is approved as additive future work over the implemented BF013 schema.
+- No Rich Property Profile or Property Catalog tables, migrations, seed scripts, APIs, or frontend workflows have been created.
+- Schema migration and seed execution are separate concerns. `docs/database/SEED_DATA.md` defines only the approved versioned, idempotent, non-destructive seed strategy.
+- Proposed baseline canonical data includes common categories, Unit Types, Measurements, Attributes/configurations, Egypt, and its 27 governorates; authoritative Developer/Project data must come from a separately approved business dataset rather than being invented.
+
 ## BF013 - Property & Ownership Foundation
 
 Status: Implemented and verified

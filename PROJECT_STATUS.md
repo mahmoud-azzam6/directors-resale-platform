@@ -12,9 +12,9 @@ Current Sprint: BF013 - Property & Ownership Foundation (closed)
 
 Next Selected Sprint: None
 
-Latest Stable Commit: 239b013 - test: add BF013 database acceptance coverage
+Latest Stable Commit: 97e2a38 - docs: define rich property profile architecture
 
-Last Updated: 2026-09-06
+Last Updated: 2026-09-09
 
 ---
 
@@ -42,7 +42,7 @@ The application now has:
 - `users` table with a restricted Organization foreign key and indexed `organization_id`
 - AF001 Next.js Admin UI foundation under `frontend/` with secure HttpOnly auth bridge, typed API/context layer, protected App Router layout, and permission-aware navigation
 
-Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, Permissions & Authorization, BF013 Property & Ownership Foundation, and AF001-AF003 are implemented. BF013 supplies the verified backend foundation for Organization Properties, Owners, Ownership history, Acting Owner history, and System-only Global Physical Property Identity links. The broader Listing Domain Architecture and Physical Listing Data Model Architecture remain approved but not implemented; Listing workflows and frontend Property workflows remain deferred, and no subsequent sprint is selected.
+Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, Permissions & Authorization, BF013 Property & Ownership Foundation, and AF001-AF003 are implemented. BF013 remains closed. Rich Property Profile and Property Catalog/Data Governance architectures are approved but not implemented; their canonical sources are `docs/architecture/PROPERTY_PROFILE_ARCHITECTURE.md` and `docs/architecture/PROPERTY_CATALOG_ARCHITECTURE.md`. The broader Listing Domain and Add Unit/frontend Property workflows remain unimplemented, and no subsequent sprint is selected.
 
 Approved architecture now defines one authenticated Admin Application whose experience is determined by
 Organization, Position, Permissions, and applicable resource scope. It also separates future Global

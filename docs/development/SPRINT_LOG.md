@@ -291,6 +291,15 @@ Status: Implemented and verified; closed on 2026-09-06
 - Verified migrations 001-017 on MariaDB 10.4.32, database constraints and nullable uniqueness guards, lifecycle/history preservation, transactional rollback, HTTP and authorization contracts, privacy boundaries, legacy backend compatibility, regressions, and cleanup with `remaining_bf013_test_databases=0`.
 - No subsequent sprint was selected.
 
+## Rich Property Profile and Property Catalog Architecture
+
+Status: Approved and documented on 2026-09-09; not implemented
+
+- Commit `97e2a38` created `docs/architecture/PROPERTY_PROFILE_ARCHITECTURE.md` and `docs/architecture/PROPERTY_CATALOG_ARCHITECTURE.md` as the canonical Rich Property Profile and Property Catalog/Data Governance sources.
+- Reconciled the Listing Physical Data Model with derived completeness, versioned Unit Type configuration, typed Measurements/Attributes, Organization-private proposals, Property Media processing, and conceptual integrity rules.
+- Established `docs/database/SEED_DATA.md` as the approved versioned, idempotent, non-destructive baseline seed strategy.
+- Performed documentation architecture only: no schema, migrations, seeds, backend, frontend, or tests were implemented, and no subsequent sprint was selected.
+
 Every completed database contract will immediately produce:
 
 - SQL Migration

@@ -141,6 +141,8 @@ The approved conceptual Listing boundaries and behavior are defined by `docs/arc
 
 BF013 Property & Ownership Foundation is implemented, verified, and closed. Migrations 009-016 add `organization_properties`, `owners`, `ownerships`, `ownership_parties`, `authorized_acting_owner_designations`, `global_physical_property_identities`, `global_physical_identity_links`, and `property_owner_lifecycle_history`; migration 017 adds BF013 Permission capabilities. The implementation uses application-generated ULIDs, generated nullable uniqueness guards, foreign keys, `CHECK` constraints, and transactional `FOR UPDATE` locking. Listing and rich Property Profile responsibilities below remain deferred.
 
+The additive Rich Property Profile and Property Catalog physical model is approved conceptually but not implemented. `docs/architecture/PROPERTY_PROFILE_ARCHITECTURE.md` governs profile, completeness, and media behavior; `docs/architecture/PROPERTY_CATALOG_ARCHITECTURE.md` governs canonical data and private proposals. No profile/catalog tables or migrations exist. Schema migrations and seed execution are separate concerns, and `docs/database/SEED_DATA.md` defines an approved seed strategy only; no Property catalog seed scripts exist.
+
 Purpose
 
 Represents physical real estate assets.

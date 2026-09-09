@@ -370,19 +370,19 @@ No implementation starts before architecture and database design are complete.
 
 # Current Implementation State
 
-BF001-BF012 and AF001-AF003 are implemented. The current application includes Organization, Franchise,
-Partner Agency, User, Authentication, Dynamic Position, Permission/Authorization, and Admin UI
-foundation functionality.
+BF001-BF013 and AF001-AF003 are implemented. The current application includes Organization, Franchise,
+Partner Agency, User, Authentication, Dynamic Position, Permission/Authorization, the BF013 Property and
+Ownership backend foundation, and Admin UI foundation functionality.
 
 The implemented Organization hierarchy is System Organization -> Franchise -> Partner Agency. Users
 belong to an Organization in that hierarchy and receive capabilities from dynamic Positions and
 effective Permissions. Backend authorization remains authoritative and combines capability with
 applicable Organization/resource scope. Position names are not authorization rules.
 
-The BF006-BF012 database remains intentionally staged. Franchise and Partner Agency records reuse
+The BF006-BF013 database remains intentionally staged. Franchise and Partner Agency records reuse
 `organizations`; Users, authentication tokens, Positions, Permissions, and Position-Permission
-assignments use the staged tables introduced by their approved sprints. Global ULID and extended audit
-requirements remain deferred.
+assignments use the staged tables introduced by their approved sprints. BF013 adds the implemented
+Organization Property shell, Owner/Ownership history, and System-only Global Identity foundation.
 
 # Approved Admin Experience Architecture
 
@@ -409,10 +409,14 @@ reporting principles.
 
 `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md` is the canonical source for the approved, not-implemented conceptual physical model. It distinguishes System-only Global Physical Property Identity from independent Organization Property records and defines Owner/Ownership history, material versions, media/document separation, Sale Closing, Ownership Transfer boundaries, and logical constraints without approving SQL schema.
 
+`docs/architecture/PROPERTY_PROFILE_ARCHITECTURE.md` is the canonical source for the **APPROVED / NOT IMPLEMENTED** Rich Property Profile. `docs/architecture/PROPERTY_CATALOG_ARCHITECTURE.md` is the canonical source for the **APPROVED / NOT IMPLEMENTED** Property Catalog and Data Governance model. `docs/database/SEED_DATA.md` defines the approved baseline seed strategy; no catalog seed scripts exist.
+
+Organization Property remains separate from Listing. Add Unit is future business/UI terminology only. Backend completeness derives `INCOMPLETE`, `PENDING_REVIEW`, or `COMPLETE` from authoritative Property data and applicable Unit Type configuration; it does not create a Listing, and price/commercial terms remain Listing data. Catalog Proposals and Owner/Ownership data remain Organization-private and must not leak through marketplace assumptions.
+
 The architecture preserves global authenticated marketplace visibility separately from administrative authority. BF013 Property & Ownership Foundation is implemented, verified, and closed. It provides the Organization Property shell, Organization-scoped Owners, historical Ownership aggregates and Acting Owner designations, System-only Global Physical Property Identity links, migrations 009-017, eight BF013 Permission codes, and REST APIs while explicitly excluding Listing workflows and rich Property Profile behavior.
 
 AF002 provides System Franchise network administration and atomic initial administrator onboarding.
-AF003 provides Organization-scoped User and Position administration with capability-subset Permission delegation; browser QA passed and the AF003 branch was committed and pushed. The broader Listing Domain Architecture remains approved but not implemented, and no subsequent sprint is selected. Listings, Requests, Reports, Deals, Commissions, Teams, transfers, frontend Property workflows, and AF004 are not implemented.
+AF003 provides Organization-scoped User and Position administration with capability-subset Permission delegation; browser QA passed and the AF003 branch was committed and pushed. Rich Property Profile and Property Catalog architecture closure is complete; documentation closure is current. The next execution stage is sprint breakdown and selection, but no subsequent sprint is selected or named. The broader Listing Domain, Listings, Requests, Reports, Deals, Commissions, Teams, transfers, frontend Property workflows, and AF004 are not implemented.
 
 ---
 

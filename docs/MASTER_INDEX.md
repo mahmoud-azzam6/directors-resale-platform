@@ -137,6 +137,9 @@ Business rollout remains incremental.
 | Admin Experience, Marketplace Visibility, and Administrative Scope | ADMIN_EXPERIENCE_ARCHITECTURE.md |
 | Listing Domain | LISTING_DOMAIN_ARCHITECTURE.md |
 | Listing Physical Data Model | LISTING_PHYSICAL_DATA_MODEL.md |
+| Rich Property Profile | PROPERTY_PROFILE_ARCHITECTURE.md |
+| Property Catalog and Data Governance | PROPERTY_CATALOG_ARCHITECTURE.md |
+| Canonical Seed Strategy | docs/database/SEED_DATA.md |
 
 ---
 
@@ -144,10 +147,10 @@ Business rollout remains incremental.
 
 | ID | Module | Status |
 |----|-------------------------|------------|
-| M00 | Reference Data | Planned |
+| M00 | Reference Data | Legacy planning placeholders; canonical Property reference data is approved under Property Catalog architecture and not implemented |
 | M01 | Core | Organization, Franchise, Partner Agency, User, Authentication, Position, Permission, and Authorization scope implemented (BF006-BF012) |
 | M02 | CRM | Planned |
-| M03 | Property Engine | Domain and physical data-model architecture approved; not implemented |
+| M03 | Property Engine | BF013 foundation implemented/closed; Rich Property Profile, Property Catalog, and Listing architecture approved/not implemented |
 | M04 | Matching Engine | Planned |
 | M05 | Deal Engine | Planned |
 | M06 | Commission Engine | Planned |
@@ -169,7 +172,7 @@ Business rollout remains incremental.
 | Current Phase | BF013 Property & Ownership Foundation Implemented and Verified |
 | Current Sprint | BF013 - Property & Ownership Foundation (closed) |
 | Current Module | M03 - Property & Ownership foundation implemented; broader Property/Listing architecture only |
-| Current Feature | BF013 backend foundation complete; Listing domain and broader physical data model not implemented |
+| Current Feature | Rich Property Profile and Property Catalog architecture approved; documentation closure current; implementation not started |
 | Current Database Contract | BF006-BF013 implemented schema through migration 017 |
 | Current Database Module | Core plus BF013 Property/Owner/Ownership/Global Identity foundation |
 | Current Status | BF001-BF013 and AF001-AF003 implemented; BF013 verified and closed |
@@ -185,18 +188,20 @@ Business rollout remains incremental.
 
 # M00 - Reference Data
 
+The entries below are legacy planning placeholders. They are not canonical Property table contracts. In particular, `countries`, `states`, `cities`, and `districts` are superseded for Property architecture by one hierarchical `geographic_locations` concept; `property_types` is superseded by Unit Types belonging to Property Categories. Canonical Property reference data is defined by `docs/architecture/PROPERTY_CATALOG_ARCHITECTURE.md` and remains **APPROVED / NOT IMPLEMENTED**.
+
 | ID | Table | Status |
 |-----|------------------------|-----------|
-| DB001 | countries | Planned |
+| DB001 | countries | Legacy placeholder; superseded for Property by `geographic_locations` |
 | DB002 | languages | Planned |
 | DB003 | currencies | Planned |
 | DB004 | currency_rates | Planned |
-| DB005 | states | Planned |
-| DB006 | cities | Planned |
-| DB007 | districts | Planned |
+| DB005 | states | Legacy placeholder; superseded for Property by `geographic_locations` |
+| DB006 | cities | Legacy placeholder; superseded for Property by `geographic_locations` |
+| DB007 | districts | Legacy placeholder; superseded for Property by `geographic_locations` |
 | DB008 | postal_codes | Planned |
-| DB009 | property_types | Planned |
-| DB010 | property_categories | Planned |
+| DB009 | property_types | Legacy placeholder; superseded by canonical `unit_types` |
+| DB010 | property_categories | Legacy placeholder; canonical concept approved/not implemented |
 | DB011 | finishing_types | Planned |
 | DB012 | delivery_statuses | Planned |
 | DB013 | ownership_types | Planned |
@@ -239,16 +244,20 @@ Business rollout remains incremental.
 
 # M03 - Property Engine
 
-The following names are legacy planning placeholders, not approved SQL table contracts. The approved conceptual model is defined by `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md`; physical schema remains deferred.
+BF013 implemented the limited Property & Ownership foundation. The Rich Property Profile and Property Catalog physical model remains approved conceptually and additive over BF013; no corresponding migrations or tables exist.
+
+Canonical future Property reference/profile concepts are `geographic_locations`, `property_categories`, `unit_types`, versioned Unit Type configurations, `measurement_definitions`, `attribute_definitions` and options, `developers`, `projects`, and `project_phases`. See `docs/architecture/PROPERTY_PROFILE_ARCHITECTURE.md`, `docs/architecture/PROPERTY_CATALOG_ARCHITECTURE.md`, and `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md`.
+
+The following names are retained only as legacy planning placeholders, not approved SQL table contracts:
 
 | ID | Legacy Planned Record | Status |
 |-----|-----------------------------------|-----------|
-| DB301 | developers | Planned |
-| DB302 | developer_projects | Planned |
-| DB303 | compounds | Planned |
-| DB304 | compound_phases | Planned |
-| DB305 | properties | Planned |
-| DB306 | property_ownerships | Planned |
+| DB301 | developers | Canonical concept approved; table not implemented |
+| DB302 | developer_projects | Legacy placeholder; canonical concept is `projects` |
+| DB303 | compounds | Legacy placeholder; canonical concept is `projects` |
+| DB304 | compound_phases | Legacy placeholder; canonical concept is `project_phases` |
+| DB305 | properties | Legacy placeholder; BF013 uses `organization_properties` |
+| DB306 | property_ownerships | Legacy placeholder; BF013 uses `ownerships` and `ownership_parties` |
 | DB307 | property_listings | Planned |
 | DB308 | property_media | Planned |
 | DB309 | property_listing_history | Planned |
@@ -417,7 +426,7 @@ No Analytics or reporting implementation exists yet.
 | API005 | CRM | /people | Planned |
 | API006 | Leads | /leads | Planned |
 | API007 | Requirements | /requirements | Planned |
-| API008 | Properties | /properties | Planned |
+| API008 | Organization Properties | /organization-properties | BF013 foundation implemented; rich profile not implemented |
 | API009 | Listings | /listings | Planned |
 | API010 | Matching | /matches | Planned |
 | API011 | Deals | /deals | Planned |
@@ -447,7 +456,7 @@ No Analytics or reporting implementation exists yet.
 | F005 | CRM | CRM | Planned |
 | F006 | Lead Management | CRM | Planned |
 | F007 | Requirement Management | CRM | Planned |
-| F008 | Property Management | Property | Planned |
+| F008 | Organization Property Foundation | Property | Implemented (BF013); rich profile/admin workflow not implemented |
 | F009 | Listing Management | Property | Architecture approved; implementation planned |
 | F010 | Matching Engine | Matching | Planned |
 | F011 | Deal Management | Deals | Planned |
@@ -528,7 +537,7 @@ No Analytics or reporting implementation exists yet.
 |------|-------|
 | Current Phase | BF013 Property & Ownership Foundation Implemented and Verified |
 | Current Module | M03 - Property & Ownership foundation implemented; broader Property/Listing architecture only |
-| Current Documents | BF013-property-ownership-foundation.md; LISTING_DOMAIN_ARCHITECTURE.md; LISTING_PHYSICAL_DATA_MODEL.md |
+| Current Documents | PROPERTY_PROFILE_ARCHITECTURE.md; PROPERTY_CATALOG_ARCHITECTURE.md; LISTING_PHYSICAL_DATA_MODEL.md; SEED_DATA.md |
 | Current Database Contract | BF006-BF013 implemented schema through migration 017 |
 | Current ADR | ADR-002 Property / Ownership / Listing Separation |
 | Current Milestone | Milestone 2 - Core Business; BF013 closed |
@@ -731,9 +740,9 @@ A feature is considered complete only when:
 
 ## Immediate Next Development Target
 
-No subsequent sprint is selected. The completed BF013 backend foundation is ready to support future separately approved Admin Property workflows.
+No subsequent sprint is selected. Rich Property Profile and Property Catalog architecture closure is complete, documentation closure is current, and sprint breakdown/selection must precede implementation.
 
-BF001-BF013 and AF001-AF003 are implemented. Listing Domain Architecture and the broader Physical Listing Data Model Architecture remain approved but not implemented. BF013 excludes Listing workflows, rich Property Profile behavior, automatic matching, transfer behavior, and frontend Property workflows.
+BF001-BF013 and AF001-AF003 are implemented. Rich Property Profile, Property Catalog/Data Governance, Listing Domain, and the broader Physical Listing Data Model remain approved but not implemented. Add Unit is future frontend terminology for Organization Property; no subsequent sprint is selected.
 
 ## Sprint 1
 

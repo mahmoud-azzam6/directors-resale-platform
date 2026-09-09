@@ -109,6 +109,10 @@ Listing Domain Architecture is approved but not implemented:
 - Lifecycle, provenance, assignment, approvals, holds, sold, withdrawal, Owner privacy, media/document separation, and future integration boundaries are approved conceptually.
 - The physical model distinguishes System-only Global Physical Property Identity from independent Organization Property records and defines conceptual Ownership, version, media, Sale, and transfer boundaries.
 - BF013 implemented the approved Property & Ownership backend foundation. Listing workflows, rich Property Profile behavior, and frontend Property workflows remain excluded.
+- `docs/architecture/PROPERTY_PROFILE_ARCHITECTURE.md` defines the approved, not-implemented Rich Property Profile, derived completeness, progressive persistence, Property Media, and future Add Unit workflow.
+- `docs/architecture/PROPERTY_CATALOG_ARCHITECTURE.md` defines the approved, not-implemented canonical Property catalogs, versioned Unit Type configuration, and Organization-private proposal governance.
+- `docs/database/SEED_DATA.md` defines an approved versioned, idempotent, non-destructive baseline seed strategy; no catalog seed scripts exist.
+- Add Unit is frontend/business terminology only; the backend concept remains Organization Property. Property completeness is separate from Listing readiness and never creates a Listing.
 
 ## Implemented Request Path
 
@@ -151,6 +155,8 @@ It also distinguishes Global Marketplace Visibility from Administrative Scope. T
 cross-Organization Requests, while Listing management, reports, Users, commissions, and internal
 operations remain scope-controlled. Listing, Request, Report, Commission, Team, invitation, and provisioning implementations are not present. Exact Listing Permission codes, rich Listing schema and APIs, and Team scope remain deferred.
 
+Rich Property Profile and Property Catalog/Data Governance architecture closure is complete. Approved Property setup derives `INCOMPLETE`, `PENDING_REVIEW`, or `COMPLETE`; active complete records appear in Active Properties, active incomplete/review records appear in Drafts, and archived records appear in neither. Developer, Project, and Phase are optional. Canonical governance belongs to System Admin, while catalog proposals remain Organization-private until audited resolution. Arabic-first/RTL-first Add Unit UI remains future frontend scope.
+
 ## Known Discrepancies
 
 - The global no-hard-delete policy conflicts with the current Organization physical DELETE behavior.
@@ -161,4 +167,4 @@ operations remain scope-controlled. Listing, Request, Report, Commission, Team, 
 
 ## Next Development Target
 
-No subsequent sprint is selected. The completed BF013 backend foundation is ready to support a future approved Admin Property workflow, while Listing workflows remain deferred.
+No subsequent sprint is selected. Documentation closure follows the completed architecture closure; sprint breakdown and selection must occur before implementation. The completed BF013 backend foundation can support future approved Property Catalog, Rich Property Profile, and Admin Property work, while Listing workflows remain deferred.

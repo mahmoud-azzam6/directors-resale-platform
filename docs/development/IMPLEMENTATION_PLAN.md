@@ -16,15 +16,30 @@
 | BF010 | Implemented | Secure password credentials, hashed expiring bearer tokens, login/logout/me, reusable authentication protection, and protected business routes |
 | BF011 | Implemented | Dynamic Organization-owned Positions, scoped code uniqueness, nullable same-Organization User assignment, and status-based deactivation |
 | BF012 | Implemented | Controlled Permission catalog, Position-Permission inheritance, reusable authorization, Organization scope enforcement, and isolated lists |
+| BF013 | Completed | Property & Ownership backend foundation implemented, verified, and closed |
 | AF001 | Implemented | Next.js Admin UI foundation, secure HttpOnly auth bridge, context, protected layout, permission-aware navigation, dashboard, and placeholders |
 | AF002 | Implemented | Franchise network list/detail, Partner Agency overview, status-based deactivation, and atomic initial administrator onboarding |
 | AF003 | Completed | Organization-scoped User and Position administration with safe Position ownership and capability-subset delegation; browser QA passed and branch committed/pushed |
 
 BF006 smoke tests and BF007 manual acceptance/regression checks passed. No automated test suite exists.
 
-## Next Development Target
+## Current Planning State
 
-No subsequent sprint is selected. BF013 Property & Ownership Foundation is implemented, verified, and closed; its backend foundation is ready to support a future separately approved Admin Property workflow. Listing workflows remain unimplemented.
+Rich Property Profile and Property Catalog architecture closure is complete, and canonical documentation closure is current. No subsequent sprint is selected. Future work requires explicit sprint breakdown and selection before implementation.
+
+## Approved Future Execution Order
+
+This is conceptual sequencing only and assigns no sprint numbers or names:
+
+1. Architecture closure - complete
+2. Documentation closure - current
+3. Backend Canonical Property Data and Catalog foundation
+4. Backend Rich Property Profile
+5. System Admin Property Data Management frontend
+6. Initial canonical data verification and approved business additions
+7. Admin Properties frontend: Active, Drafts, Add Unit, and Property Details
+8. Listing implementation
+9. Requests, Deals, Commissions, Notifications, and Reports
 
 ## Constraints for Future Planning
 
@@ -39,6 +54,9 @@ No subsequent sprint is selected. BF013 Property & Ownership Foundation is imple
   Scope. Do not use Organization management scope to isolate marketplace-eligible available Listings.
 - Use `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md` as the canonical source for approved Listing boundaries and behavior.
 - Use `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md` as the canonical source for the approved conceptual physical model; do not treat it as a committed SQL schema.
+- Use `docs/architecture/PROPERTY_PROFILE_ARCHITECTURE.md` for approved Rich Property Profile behavior and `docs/architecture/PROPERTY_CATALOG_ARCHITECTURE.md` for approved Catalog/Data Governance behavior; both remain unimplemented.
+- Use `docs/database/SEED_DATA.md` as the approved seed strategy. Schema migrations and seed execution remain separate, and no Property catalog seed scripts currently exist.
 - Use `docs/sprints/BF013-property-ownership-foundation.md` as the authoritative closed BF013 implementation contract.
 - Keep future Listing SQL schema, APIs, Listing Permission codes, Team scope, complete Request/Deal/Commission/Transfer workflows, publication field lists, and subsequent sprint scope deferred until separately approved.
 - Do not infer implementation from broader planned architecture documents.
+- Preserve Organization Property versus Listing separation, Organization-private Owner/Ownership/Proposal data, backend-authoritative completeness, and the Arabic-first/RTL-first frontend direction.

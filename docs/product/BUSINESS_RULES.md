@@ -27,3 +27,8 @@ The Listing Domain Architecture and Physical Listing Data Model Architecture are
 - Owner identity, co-ownership, and private Listing data are Organization-scoped and hidden from the global marketplace by default.
 - Publication media and private documents remain separate.
 - BF013 implemented and verified only the Property & Ownership backend foundation; Listing workflows, rich Property Profile behavior, and frontend Property workflows remain deferred.
+- Organization Property and Listing remain separate: Property completeness never creates a Listing, and price or commercial sale terms do not contribute to Property completeness.
+- Property setup derives `INCOMPLETE`, `PENDING_REVIEW`, or `COMPLETE`; `ACTIVE + COMPLETE` appears in Active Properties, `ACTIVE + INCOMPLETE/PENDING_REVIEW` appears in Drafts, and `ARCHIVED` appears in neither.
+- Developer, Project, and Phase are optional; a standalone Organization Property may be complete with sufficient geographic context and other mandatory data.
+- System Admin governs canonical Property catalogs. Catalog Proposals remain Organization-private until exactly-once audited resolution, and Parent Franchise does not automatically see Partner Agency proposals.
+- Completeness requires at least one `READY` Property image. Approved proposed media defaults and processing policy are defined by `docs/architecture/PROPERTY_PROFILE_ARCHITECTURE.md`.
