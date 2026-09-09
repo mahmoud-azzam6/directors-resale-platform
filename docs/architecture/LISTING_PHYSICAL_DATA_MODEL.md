@@ -90,27 +90,44 @@ Buyer data captured at Sale Closing is a transaction snapshot, not automatically
 
 ## 4.1 Property data versus Listing data
 
-Organization Property holds current known physical/profile facts, including category, Unit Type, Developer, Project/Compound, phase, location, building/unit/floor, area, bedrooms, bathrooms, finishing, furnishing, occupancy, delivery/unit status, and other approved property attributes.
+Rich Property Profile behavior is defined canonically by `docs/architecture/PROPERTY_PROFILE_ARCHITECTURE.md`. Property Catalog and Data Governance behavior is defined canonically by `docs/architecture/PROPERTY_CATALOG_ARCHITECTURE.md`. Both architectures are **APPROVED / NOT IMPLEMENTED**.
+
+Organization Property remains the lean BF013 operational aggregate root. Rich profile data extends it through core relations, structured Measurements, typed canonical Attributes, free-form Additional Information, reusable Property Media, derived completeness, and append-only Property Activity. **Add Unit** is business/UI terminology; the backend domain remains Organization Property.
 
 Listing holds the current commercial sale instruction: asking amount, currency, negotiability, payment state, amount paid, remaining developer balance, seller premium/overprice, seller asking amount, installment summary, relevant fees, commission terms, marketing description, and lifecycle state.
 
-Current Property edits must not rewrite immutable historical Listing material snapshots.
+Property completeness does not create a Listing. Price and commercial terms are not Property completeness requirements. Current Property edits must not rewrite immutable historical Listing material snapshots.
 
 ## 4.2 Canonical catalogs and private proposals
 
-Developer, Project/Compound, Location, Property Category, and Unit Type use System-managed canonical catalogs shared as public/reference market data. Project may reference Developer when known, but Developer is optional; standalone properties are supported. Phase remains optional and flexible in MVP.
+System-managed canonical catalogs cover Property Categories, Unit Types, Geographic Locations, Developers, Projects/Compounds, Project Phases, Measurement Definitions, Attribute Definitions, and Attribute Options. Geographic Location and Development Structure are separate domains. Development follows Developer to Project to Phase, but every level is optional for Organization Property.
 
-Missing catalog values must not block an Organization. **Other / Not Listed** and a Pending Catalog Proposal remain private to the submitting Organization until System administration approves a new canonical entry, maps it to an existing entry, or rejects/resolves it. Other Organizations never see who proposed a value.
+Missing values use Organization-private typed Catalog Proposals. Authorized System Admin resolves a proposal once as `APPROVED_NEW`, `MERGED_EXISTING`, or `REJECTED`. Parent Franchise access does not automatically expose a Partner Agency proposal, and chained Developer, Project, and Phase approvals do not cascade.
 
-Location uses a flexible parent hierarchy such as Country, Governorate/Region, City, and Area/District without requiring a universal depth. A Project may suggest/default location, but Organization Property retains its own location relationship. Precise street/building/unit address is private by default; marketplace output exposes only appropriate approximate/searchable location.
+Location uses a flexible canonical hierarchy such as Country, Governorate/Region, City, and Area/District without requiring a universal depth. A canonical Project may derive Developer and geographic context; Organization Property avoids duplicated truth where context is derived. A standalone Organization Property may be complete using sufficient geographic context without Developer, Project, or Phase.
 
-Residential Resale is the active MVP Property Category. The catalog can later support Commercial, Administrative, and Medical categories. System-managed Unit Types belong to categories; Residential examples include Apartment, Villa, Townhouse, Twin House, Duplex, Penthouse, Chalet, and Studio. An Organization-private custom Unit Type does not automatically enter the global catalog.
+Catalog deactivation prevents new selection while preserving references. Canonical data governance and proposal review belong to System Admin. Operational users consume canonical values and may submit proposals but cannot mutate platform-wide catalogs.
 
 ## 4.3 Hybrid attributes
 
-The model avoids both a single oversized Property table and unrestricted Organization-defined EAV. Important common searchable facts remain structured. Category/type-specific values use System-controlled typed Attribute Definitions, conceptually including code, label, data type, category and Unit Type applicability, searchable/filterable behavior, and appropriate required/optional rules.
+The hybrid model avoids both a single oversized Property table and unrestricted Organization-defined EAV. Canonical searchable data remains structured rather than hidden in unrestricted JSON.
 
-Organizations cannot create arbitrary structured Attribute Definitions. A large attribute-rule engine is not part of MVP, though future applicability rules remain possible.
+Unit Type belongs to Property Category. Versioned Unit Type Configuration drives Measurement and Attribute rules. Structural changes create new versions; completed Organization Properties retain their accepted version, while incomplete Organization Properties use the current active version. Rules are `REQUIRED` or `OPTIONAL`; absence of an Attribute rule means not applicable. Attributes support `INTEGER`, `DECIMAL`, `BOOLEAN`, `TEXT`, `ENUM`, and `DATE`, with ENUM values using canonical Attribute Options.
+
+The approved, not-implemented conceptual components are:
+
+- lean `organization_properties`
+- `property_categories`, `unit_types`, and `unit_type_configuration_versions`
+- `measurement_definitions`, `unit_type_measurement_rules`, and `property_measurements`
+- `attribute_definitions`, `attribute_options`, `unit_type_attribute_rules`, and `property_attribute_values`
+- `property_additional_information`
+- `geographic_locations`, `developers`, `projects`, and `project_phases`
+- `property_catalog_proposals` with typed context and historical Property-to-Proposal links
+- `property_media` and `property_media_variants`
+- optional derived `property_completeness` snapshot/cache
+- append-only `property_activities` and `property_catalog_activities`
+
+These are conceptual physical-model names, not claims that SQL tables or migrations exist.
 
 # 5. Listing Identity, Versions, and Lifecycle
 
@@ -188,9 +205,11 @@ Private documents must support at least PDF, DOC, DOCX, XLS, XLSX, JPG, JPEG, an
 
 ## 8.3 Image and video policy
 
-Uploaded images are temporary sources. The approved conceptual pipeline validates, normalizes orientation/metadata, resizes within approximately 1920px bounds, converts to WebP, optimizes toward approximately 500 KB while preserving acceptable quality, creates a retained Master WebP, generates required variants, verifies success, then deletes the temporary original. The Master WebP supports future regeneration. Dimensions, quality, target size, variants, and formats are configurable media policy.
+Uploaded images are temporary sources. The approved conceptual pipeline validates MIME, decodeability, dimensions, and security; normalizes orientation; strips EXIF, GPS, and unnecessary metadata; generates processed WebP variants; verifies every required variant; marks the item `READY`; and then deletes the temporary original. Only processed variants are retained.
 
-Proposed configurable MVP defaults are common JPG/JPEG/PNG/WebP sources, approximately 15 MB per temporary image, and approximately 50 images per Organization Property.
+Proposed configurable V1 defaults accept JPEG, PNG, and WebP but reject SVG and animated images; allow at most 10 MB per image and 30 images per Organization Property; and require minimum dimensions of 600 x 600. Proposed processed variants are 400 px thumbnail, 800 px card, and 1600 px large.
+
+At most one active cover exists per Organization Property. Deleting the cover selects the first ordered `READY` image. Removing the last `READY` image may make the Organization Property incomplete.
 
 Proposed video defaults are primarily MP4, approximately 250 MB, approximately three minutes, 1080p recommended, and approximately five videos per Organization Property. Storage and delivery are abstracted from the PHP application server for future object storage, CDN, and transcoding services; that infrastructure is not part of this documentation task.
 
@@ -222,6 +241,15 @@ Global Physical Property Identity
 Organization Property A   Organization Property B
         |
         +-- Current Property/Profile Data
+        |       |
+        |       +-- Category / Unit Type Configuration Version
+        |       +-- Geographic / Optional Development Context
+        |       +-- Measurements
+        |       +-- Typed Attributes
+        |       +-- Additional Information
+        |       +-- Private Catalog Proposal Links
+        |       +-- Derived Completeness
+        |       +-- Property Activity
         |
         +-- Ownership History
         |       |
@@ -232,6 +260,7 @@ Organization Property A   Organization Property B
         |
         +-- Property Media Library
         |       |
+        |       +-- Processed Media Variants
         |       +-- Listing Published Media Selection
         |
         +-- Private Documents as applicable
@@ -279,6 +308,20 @@ These constraints are architectural invariants. Future implementation design det
 16. Historical versions, Ownership, lifecycle, assignment, and finalized transaction history are not silently overwritten.
 17. Cross-Organization Property duplicate information is not disclosed to Organization users.
 18. Cross-Organization Owner matching is outside MVP.
+19. Unit Type belongs to the selected Property Category.
+20. Canonical and pending Proposal values cannot both represent the same semantic role at once.
+21. Phase belongs to the selected Project.
+22. At most one Unit Type Configuration Version is active.
+23. One Measurement value exists per Definition per Organization Property.
+24. At most one Primary Measurement rule exists per Configuration Version.
+25. One Attribute value exists per Definition per Organization Property.
+26. An ENUM option belongs to its Attribute Definition, and typed values match the Definition data type.
+27. A Catalog Proposal belongs to exactly one Organization, resolves exactly once, and resolves to a target matching its type.
+28. At most one active cover image exists per Organization Property.
+29. `READY` media requires every required processed variant to be verified.
+30. A completeness snapshot is derived/cacheable and never independent truth.
+31. Property and Catalog Activity history is append-only and must not expose private Owner/Ownership data.
+32. Catalog deactivation prevents new selection while preserving historical and current references.
 
 # 12. Deferred and Non-Implemented Work
 
@@ -286,12 +329,12 @@ The architecture is ready for, but does not implement or authorize:
 
 - Listing workflows or any unapproved future Listing implementation sprint
 - BF013 work beyond the Property & Ownership Foundation contract
-- physical database schema, migrations, tables, columns, indexes, or storage constraints
+- Rich Property Profile and Property Catalog migrations, tables, APIs, services, seed scripts, and dynamic form definitions
+- Add Unit and System Admin Catalog/Proposal Review frontend workflows
 - full Property matching algorithms, advanced confidence scoring, or automated reconciliation
 - cross-Organization Owner matching
 - legal-title verification or Land Registry integration
 - general legal representative/power-of-attorney workflows
-- full Phase catalog or oversized dynamic Attribute Rule Engine
 - advanced media transcoding, CDN/provider implementation, or Organization storage quotas
 - automatic Hold expiry/release
 - detailed installment schedules
