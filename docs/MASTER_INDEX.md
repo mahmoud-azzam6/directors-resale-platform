@@ -6,7 +6,7 @@ Version: 2.0
 
 Status: Active
 
-Last Updated: 2026-09-06
+Last Updated: 2026-09-13
 
 ---
 
@@ -19,9 +19,9 @@ Last Updated: 2026-09-06
 | Project Type | Enterprise SaaS Platform |
 | Industry | Real Estate Resale |
 | Architecture Style | Modular + Event Driven |
-| Current Phase | BF013 Property & Ownership Foundation Implemented and Verified |
-| Current Sprint | BF013 - Property & Ownership Foundation (closed) |
-| Next Selected Sprint | None |
+| Current Phase | BF014 catalog foundation selected/documented; not implemented; BF013 closed |
+| Current Sprint | BF014 - Canonical Property Catalog Foundation (SELECTED / DOCUMENTED / NOT IMPLEMENTED) |
+| Next Selected Sprint | BF014 (current Backend selection); no later sprint selected |
 | Current Version | 0.1.0 |
 | Repository Status | Active |
 
@@ -83,6 +83,8 @@ Business rollout remains incremental.
 - ADMIN_EXPERIENCE_ARCHITECTURE.md
 - LISTING_DOMAIN_ARCHITECTURE.md
 - LISTING_PHYSICAL_DATA_MODEL.md
+- PROPERTY_PROFILE_ARCHITECTURE.md
+- PROPERTY_CATALOG_ARCHITECTURE.md
 
 ---
 
@@ -140,6 +142,7 @@ Business rollout remains incremental.
 | Rich Property Profile | PROPERTY_PROFILE_ARCHITECTURE.md |
 | Property Catalog and Data Governance | PROPERTY_CATALOG_ARCHITECTURE.md |
 | Canonical Seed Strategy | docs/database/SEED_DATA.md |
+| Selected BF014 Sprint and Locked Baseline Matrices | [BF014 contract](sprints/BF014-canonical-property-catalog-foundation.md) |
 
 ---
 
@@ -169,15 +172,15 @@ Business rollout remains incremental.
 
 | Item | Value |
 |------|-------|
-| Current Phase | BF013 Property & Ownership Foundation Implemented and Verified |
-| Current Sprint | BF013 - Property & Ownership Foundation (closed) |
+| Current Phase | BF014 catalog foundation selected/documented; not implemented; BF013 closed |
+| Current Sprint | BF014 - Canonical Property Catalog Foundation (SELECTED / DOCUMENTED / NOT IMPLEMENTED) |
 | Current Module | M03 - Property & Ownership foundation implemented; broader Property/Listing architecture only |
-| Current Feature | Rich Property Profile and Property Catalog architecture approved; documentation closure current; implementation not started |
+| Current Feature | BF014 canonical catalog contract documented; Property Catalog architecture approved; implementation not started |
 | Current Database Contract | BF006-BF013 implemented schema through migration 017 |
 | Current Database Module | Core plus BF013 Property/Owner/Ownership/Global Identity foundation |
 | Current Status | BF001-BF013 and AF001-AF003 implemented; BF013 verified and closed |
 | Current Milestone | Milestone 2 - Core Business |
-| Next Selected Sprint | None |
+| Next Selected Sprint | BF014 (current Backend selection); no later sprint selected |
 | Target Release | Not defined by the current canonical roadmap |
 
 ---
@@ -498,6 +501,7 @@ No Analytics or reporting implementation exists yet.
 | Sprint 14 | Testing & QA | Planned |
 | Sprint 15 | Beta Release | Planned |
 | BF013 | Property & Ownership Foundation | Implemented and verified; closed |
+| BF014 | [Canonical Property Catalog Foundation](sprints/BF014-canonical-property-catalog-foundation.md) | SELECTED / DOCUMENTED / NOT IMPLEMENTED |
 
 ---
 
@@ -535,9 +539,9 @@ No Analytics or reporting implementation exists yet.
 
 | Item | Value |
 |------|-------|
-| Current Phase | BF013 Property & Ownership Foundation Implemented and Verified |
+| Current Phase | BF014 catalog foundation selected/documented; not implemented; BF013 closed |
 | Current Module | M03 - Property & Ownership foundation implemented; broader Property/Listing architecture only |
-| Current Documents | PROPERTY_PROFILE_ARCHITECTURE.md; PROPERTY_CATALOG_ARCHITECTURE.md; LISTING_PHYSICAL_DATA_MODEL.md; SEED_DATA.md |
+| Current Documents | [BF014 contract](sprints/BF014-canonical-property-catalog-foundation.md); PROPERTY_PROFILE_ARCHITECTURE.md; PROPERTY_CATALOG_ARCHITECTURE.md; SEED_DATA.md |
 | Current Database Contract | BF006-BF013 implemented schema through migration 017 |
 | Current ADR | ADR-002 Property / Ownership / Listing Separation |
 | Current Milestone | Milestone 2 - Core Business; BF013 closed |
@@ -573,7 +577,7 @@ No Analytics or reporting implementation exists yet.
 | ADR Documents | 17 |
 | Documentation Files | 40+ |
 | Project Templates | 6 |
-| Current Sprint | BF013 - Property & Ownership Foundation (closed) |
+| Current Sprint | BF014 - Canonical Property Catalog Foundation (SELECTED / DOCUMENTED / NOT IMPLEMENTED) |
 | Current Release | R0.1.0 |
 
 ---
@@ -740,9 +744,9 @@ A feature is considered complete only when:
 
 ## Immediate Next Development Target
 
-No subsequent sprint is selected. Rich Property Profile and Property Catalog architecture closure is complete, documentation closure is current, and sprint breakdown/selection must precede implementation.
+BF014 is the selected current Backend sprint: **SELECTED / DOCUMENTED / NOT IMPLEMENTED**. Its contract is `docs/sprints/BF014-canonical-property-catalog-foundation.md`. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture remains approved; Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. No BF015 or subsequent sprint is selected.
 
-BF001-BF013 and AF001-AF003 are implemented. Rich Property Profile, Property Catalog/Data Governance, Listing Domain, and the broader Physical Listing Data Model remain approved but not implemented. Add Unit is future frontend terminology for Organization Property; no subsequent sprint is selected.
+BF001-BF013 and AF001-AF003 are implemented. Rich Property Profile, Property Catalog/Data Governance, Listing Domain, and the broader Physical Listing Data Model remain approved but not implemented. Add Unit is future frontend terminology for Organization Property; no sprint after BF014 is selected.
 
 ## Sprint 1
 

@@ -1,6 +1,6 @@
 # Current System State
 
-Status: BF013 Property & Ownership Foundation implemented, verified, and closed; AF003 completed
+Status: BF014 SELECTED / DOCUMENTED / NOT IMPLEMENTED; BF013 implemented, verified, and closed; AF003 completed
 
 ## Completed Implementation
 
@@ -167,4 +167,6 @@ Rich Property Profile and Property Catalog/Data Governance architecture closure 
 
 ## Next Development Target
 
-No subsequent sprint is selected. Documentation closure follows the completed architecture closure; sprint breakdown and selection must occur before implementation. The completed BF013 backend foundation can support future approved Property Catalog, Rich Property Profile, and Admin Property work, while Listing workflows remain deferred.
+BF014 is the selected current Backend sprint: **SELECTED / DOCUMENTED / NOT IMPLEMENTED**. Its contract is `docs/sprints/BF014-canonical-property-catalog-foundation.md`. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture remains approved; Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. No BF015 or subsequent sprint is selected.
+
+BF014 is limited to canonical catalogs, configuration/versioning, System Admin backend management, authorized reads, dynamic form configuration, and safe versioned baseline seeds. It does not assign classification or store rich values on Organization Property, implement proposals/media/completeness, or add frontend or Listing workflows.

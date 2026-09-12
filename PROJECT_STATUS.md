@@ -2,19 +2,19 @@
 
 Status: Active
 
-Current Project Phase: BF013 Property & Ownership Foundation Implemented and Verified
+Current Project Phase: BF014 catalog foundation selected and documented; implementation not started
 
 Current Milestone: Milestone 2 - Core Business
 
 Completed Sprints: BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, BF009, BF010, BF011, BF012, BF013, AF001, AF002, AF003
 
-Current Sprint: BF013 - Property & Ownership Foundation (closed)
+Current Sprint: BF014 - Canonical Property Catalog Foundation (SELECTED / DOCUMENTED / NOT IMPLEMENTED)
 
-Next Selected Sprint: None
+Next Selected Sprint: BF014 (current Backend selection); no later sprint selected
 
 Latest Stable Commit: 97e2a38 - docs: define rich property profile architecture
 
-Last Updated: 2026-09-09
+Last Updated: 2026-09-13
 
 ---
 
@@ -42,13 +42,17 @@ The application now has:
 - `users` table with a restricted Organization foreign key and indexed `organization_id`
 - AF001 Next.js Admin UI foundation under `frontend/` with secure HttpOnly auth bridge, typed API/context layer, protected App Router layout, and permission-aware navigation
 
-Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, Permissions & Authorization, BF013 Property & Ownership Foundation, and AF001-AF003 are implemented. BF013 remains closed. Rich Property Profile and Property Catalog/Data Governance architectures are approved but not implemented; their canonical sources are `docs/architecture/PROPERTY_PROFILE_ARCHITECTURE.md` and `docs/architecture/PROPERTY_CATALOG_ARCHITECTURE.md`. The broader Listing Domain and Add Unit/frontend Property workflows remain unimplemented, and no subsequent sprint is selected.
+Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, Permissions & Authorization, BF013 Property & Ownership Foundation, and AF001-AF003 are implemented. BF013 remains closed. Rich Property Profile and Property Catalog/Data Governance architectures are approved but not implemented; their canonical sources are `docs/architecture/PROPERTY_PROFILE_ARCHITECTURE.md` and `docs/architecture/PROPERTY_CATALOG_ARCHITECTURE.md`. The broader Listing Domain and Add Unit/frontend Property workflows remain unimplemented, and BF014 is selected/documented but not implemented.
 
 Approved architecture now defines one authenticated Admin Application whose experience is determined by
 Organization, Position, Permissions, and applicable resource scope. It also separates future Global
 Marketplace Visibility from Administrative Scope: authenticated Users may browse marketplace-eligible
 available Listings platform-wide, while management, reporting, commission, User, and operational access
 remain scope-controlled. `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md` defines approved Listing behavior, and `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md` defines the approved conceptual physical model without committing SQL schema. Listings, Requests, Reports, Commissions, Teams, and transfer workflows remain unimplemented.
+
+## Selected Backend Sprint
+
+BF014 is the selected current Backend sprint: **SELECTED / DOCUMENTED / NOT IMPLEMENTED**. Its contract is `docs/sprints/BF014-canonical-property-catalog-foundation.md`. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture remains approved; Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. No BF015 or subsequent sprint is selected.
 
 ## Architecture Overview
 

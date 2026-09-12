@@ -300,7 +300,19 @@ Status: Approved and documented on 2026-09-09; not implemented
 - Established `docs/database/SEED_DATA.md` as the approved versioned, idempotent, non-destructive baseline seed strategy.
 - Performed documentation architecture only: no schema, migrations, seeds, backend, frontend, or tests were implemented, and no subsequent sprint was selected.
 
-Every completed database contract will immediately produce:
+## BF014 - Canonical Property Catalog Foundation
+
+Status: SELECTED / DOCUMENTED / NOT IMPLEMENTED on 2026-09-13
+
+- Contract: [BF014 canonical property catalog foundation](../sprints/BF014-canonical-property-catalog-foundation.md).
+- BF013 remains IMPLEMENTED AND VERIFIED / CLOSED. Property Catalog is approved; Rich Property Profile and Listing remain APPROVED / NOT IMPLEMENTED.
+- Locked six Categories, 20 Unit Types, six Measurement Definitions, 15 Attribute Definitions, nine options, 20 initial V1 configurations and their rule matrices, Egypt plus exactly 27 Governorates, and zero Developer/Project/Phase seeds.
+- Documented System-only catalog management, authorized reads, dynamic property-form configuration, seven versioned seed packages, provenance, and seed rerun safety.
+- Proposed BF014.1-BF014.8 implementation units; no code, migrations, seed execution, tests, APIs, or frontend implemented by this task. No BF015 or subsequent sprint selected.
+- Earlier entries saying no subsequent sprint was selected describe their historical closure dates.
+
+For future authorized implementation, completed database contracts produce the applicable artifacts; this documentation contract creates none:
+
 
 - SQL Migration
 - Seeder

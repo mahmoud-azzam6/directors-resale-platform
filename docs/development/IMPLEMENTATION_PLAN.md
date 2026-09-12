@@ -25,15 +25,17 @@ BF006 smoke tests and BF007 manual acceptance/regression checks passed. No autom
 
 ## Current Planning State
 
-Rich Property Profile and Property Catalog architecture closure is complete, and canonical documentation closure is current. No subsequent sprint is selected. Future work requires explicit sprint breakdown and selection before implementation.
+BF014 is the selected current Backend sprint: **SELECTED / DOCUMENTED / NOT IMPLEMENTED**. Its contract is `docs/sprints/BF014-canonical-property-catalog-foundation.md`. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture remains approved; Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. No BF015 or subsequent sprint is selected.
+
+The contract records BF014.1 schema/integrity, BF014.2 repositories/read models, BF014.3 services, BF014.4 authorization/HTTP, BF014.5 seed runner/baseline, BF014.6 dynamic form projection, BF014.7 MariaDB acceptance/regressions, and BF014.8 documentation closure. These are proposed internal execution units, all NOT IMPLEMENTED.
 
 ## Approved Future Execution Order
 
-This is conceptual sequencing only and assigns no sprint numbers or names:
+BF014 is the selected Backend catalog foundation sprint. Subsequent entries remain conceptual sequencing only, with no later sprint numbers or names selected:
 
 1. Architecture closure - complete
-2. Documentation closure - current
-3. Backend Canonical Property Data and Catalog foundation
+2. BF014 sprint documentation contract - recorded; implementation not started
+3. BF014 - Canonical Property Catalog Foundation - SELECTED / DOCUMENTED / NOT IMPLEMENTED
 4. Backend Rich Property Profile
 5. System Admin Property Data Management frontend
 6. Initial canonical data verification and approved business additions
