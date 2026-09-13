@@ -52,6 +52,9 @@ use App\Modules\NetworkAdministration\Controllers\FranchiseOnboardingController;
 use App\Modules\NetworkAdministration\Services\FranchiseOnboardingService;
 use App\Modules\Property\Controllers\OrganizationPropertyController;
 use App\Modules\Property\Repositories\OrganizationPropertyRepository;
+use App\Modules\Property\Repositories\PropertyCatalogRepository;
+use App\Modules\Property\Repositories\MeasurementDefinitionRepository;
+use App\Modules\Property\Repositories\AttributeDefinitionRepository;
 use App\Modules\Property\Repositories\PropertyOwnerLifecycleHistoryRepository;
 use App\Modules\Property\Services\OrganizationPropertyService;
 use App\Modules\Owner\Controllers\OwnerController;
@@ -146,6 +149,9 @@ final class AppServiceProvider extends ServiceProvider
         $this->container->bind(FranchiseOnboardingController::class);
 
         $this->container->bind(OrganizationPropertyRepository::class);
+        $this->container->bind(PropertyCatalogRepository::class);
+        $this->container->bind(MeasurementDefinitionRepository::class);
+        $this->container->bind(AttributeDefinitionRepository::class);
         $this->container->bind(PropertyOwnerLifecycleHistoryRepository::class);
         $this->container->bind(OrganizationPropertyService::class);
         $this->container->bind(OrganizationPropertyController::class);
