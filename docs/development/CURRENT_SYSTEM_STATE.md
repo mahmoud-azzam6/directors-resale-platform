@@ -1,6 +1,6 @@
 # Current System State
 
-Status: BF014 SELECTED / DOCUMENTED / NOT IMPLEMENTED; BF013 implemented, verified, and closed; AF003 completed
+Status: BF014 IN PROGRESS; BF014.1 IMPLEMENTED AND VERIFIED / CLOSED; BF014.2 NEXT / NOT STARTED; BF013 closed; AF003 completed
 
 ## Completed Implementation
 
@@ -110,7 +110,7 @@ Listing Domain Architecture is approved but not implemented:
 - The physical model distinguishes System-only Global Physical Property Identity from independent Organization Property records and defines conceptual Ownership, version, media, Sale, and transfer boundaries.
 - BF013 implemented the approved Property & Ownership backend foundation. Listing workflows, rich Property Profile behavior, and frontend Property workflows remain excluded.
 - `docs/architecture/PROPERTY_PROFILE_ARCHITECTURE.md` defines the approved, not-implemented Rich Property Profile, derived completeness, progressive persistence, Property Media, and future Add Unit workflow.
-- `docs/architecture/PROPERTY_CATALOG_ARCHITECTURE.md` defines the approved, not-implemented canonical Property catalogs, versioned Unit Type configuration, and Organization-private proposal governance.
+- `docs/architecture/PROPERTY_CATALOG_ARCHITECTURE.md` defines approved canonical Property catalogs, versioned Unit Type configuration, and Organization-private proposal governance. BF014.1 implements the catalog/configuration schema only; proposals and behavior remain unimplemented.
 - `docs/database/SEED_DATA.md` defines an approved versioned, idempotent, non-destructive baseline seed strategy; no catalog seed scripts exist.
 - Add Unit is frontend/business terminology only; the backend concept remains Organization Property. Property completeness is separate from Listing readiness and never creates a Listing.
 
@@ -129,7 +129,7 @@ public/index.php
 
 ## Current Database State
 
-The application database foundation is applied through migration 017. The intentional BF006-BF008 staged `organizations` schema
+The repository schema extends through migration 030 and was verified on isolated MariaDB 10.4.32; this is not a claim that migrations 018-030 were applied to the normal XAMPP database. The intentional BF006-BF008 staged `organizations` schema
 contains `id`, `parent_organization_id`, `name`, `code`, `organization_type`, `status`, `created_at`,
 and `updated_at`; `parent_organization_id` is indexed and self-references `organizations.id`.
 The BF009 `users` schema contains the staged User fields plus nullable BF010 `password_hash` and BF011 `position_id`, referencing `organizations.id` and `positions.id`.
@@ -138,10 +138,12 @@ The BF011 `positions` table references `organizations.id` and uses composite Org
 The BF012 `permissions` and `position_permissions` tables provide the controlled Position-derived Permission model.
 BF013 adds `organization_properties`, `owners`, `ownerships`, `ownership_parties`, `authorized_acting_owner_designations`, `global_physical_property_identities`, `global_physical_identity_links`, and `property_owner_lifecycle_history`. The active Permission catalog contains 30 codes after migration 017.
 
+BF014.1 added 13 catalog/configuration/seed-tracking tables through migrations 018-030, with zero baseline rows and no new Permission capabilities. See the [BF014.1 implementation record](../sprints/BF014.1-database-schema-and-integrity-constraints.md) for exact scope and verification.
+
 ## Not Implemented
 
 - Direct User permissions, authorization expansion beyond BF012, roles, position hierarchy, team hierarchy, user profiles, transfers, registration, reset, refresh tokens, and sessions
-- CRM, rich Property Profile and catalogs, Listings, Deals, Commissions, and Transfers
+- CRM, rich Property Profile, catalog repositories/services/APIs/seeds/dynamic forms beyond BF014.1 schema, Listings, Deals, Commissions, and Transfers
 - Notifications, AI, Analytics, Integrations, broader Admin UI modules, and AF004
 - A unified project-wide automated test runner; legacy BF006-BF007 verification remains primarily manual
 
@@ -167,6 +169,6 @@ Rich Property Profile and Property Catalog/Data Governance architecture closure 
 
 ## Next Development Target
 
-BF014 is the selected current Backend sprint: **SELECTED / DOCUMENTED / NOT IMPLEMENTED**. Its contract is `docs/sprints/BF014-canonical-property-catalog-foundation.md`. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture remains approved; Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. No BF015 or subsequent sprint is selected.
+BF014 is the current Backend sprint: **IN PROGRESS**. The parent contract remains authoritative for overall scope, baseline matrices, non-goals, and Definition of Done. [BF014.1 implementation record](../sprints/BF014.1-database-schema-and-integrity-constraints.md) records commit `4008a76` and **IMPLEMENTED AND VERIFIED / CLOSED** status. BF014.2 - Repositories + Domain Read Models is **NEXT / NOT STARTED**; BF014.3-BF014.8 are **NOT STARTED**. These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture is **APPROVED**, partially implemented through the BF014.1 schema foundation. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. No BF015 or later sprint is selected.
 
 BF014 is limited to canonical catalogs, configuration/versioning, System Admin backend management, authorized reads, dynamic form configuration, and safe versioned baseline seeds. It does not assign classification or store rich values on Organization Property, implement proposals/media/completeness, or add frontend or Listing workflows.

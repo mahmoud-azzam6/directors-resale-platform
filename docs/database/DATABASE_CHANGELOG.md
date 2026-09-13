@@ -2,7 +2,9 @@
 
 ## BF014.1 - Database Schema + Integrity Constraints
 
-Status: Implemented and verified on 2026-09-13; BF014 remains in progress, not complete
+Status: IMPLEMENTED AND VERIFIED / CLOSED (verified 2026-09-13); BF014 remains IN PROGRESS, not complete
+
+Implementation commit: `4008a76` - feat: add BF014 canonical property catalog schema. Canonical [BF014.1 implementation record](../sprints/BF014.1-database-schema-and-integrity-constraints.md). Next internal unit: BF014.2 - Repositories + Domain Read Models - NEXT / NOT STARTED.
 
 - Additive migrations `018` through `030` create exactly `property_categories`, `unit_types`, `unit_type_configuration_versions`, `measurement_definitions`, `unit_type_measurement_rules`, `attribute_definitions`, `attribute_options`, `unit_type_attribute_rules`, `geographic_locations`, `developers`, `projects`, `project_phases`, and `property_catalog_seed_versions`.
 - Migrations `001` through `017` remain unchanged. No baseline catalog rows or BF014 Permission capabilities are inserted.

@@ -2,17 +2,19 @@
 
 Status: Active
 
-Current Project Phase: BF014 catalog foundation selected and documented; implementation not started
+Current Project Phase: BF014 IN PROGRESS; BF014.1 IMPLEMENTED AND VERIFIED / CLOSED
 
 Current Milestone: Milestone 2 - Core Business
 
 Completed Sprints: BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, BF009, BF010, BF011, BF012, BF013, AF001, AF002, AF003
 
-Current Sprint: BF014 - Canonical Property Catalog Foundation (SELECTED / DOCUMENTED / NOT IMPLEMENTED)
+Current Sprint: BF014 - Canonical Property Catalog Foundation (IN PROGRESS)
 
-Next Selected Sprint: BF014 (current Backend selection); no later sprint selected
+Next Internal Unit: BF014.2 - Repositories + Domain Read Models (NEXT / NOT STARTED)
 
-Latest Stable Commit: 97e2a38 - docs: define rich property profile architecture
+Next Selected Sprint: None after BF014; BF015 NOT SELECTED
+
+Latest Stable Commit: 4008a76 - feat: add BF014 canonical property catalog schema
 
 Last Updated: 2026-09-13
 
@@ -42,7 +44,7 @@ The application now has:
 - `users` table with a restricted Organization foreign key and indexed `organization_id`
 - AF001 Next.js Admin UI foundation under `frontend/` with secure HttpOnly auth bridge, typed API/context layer, protected App Router layout, and permission-aware navigation
 
-Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, Permissions & Authorization, BF013 Property & Ownership Foundation, and AF001-AF003 are implemented. BF013 remains closed. Rich Property Profile and Property Catalog/Data Governance architectures are approved but not implemented; their canonical sources are `docs/architecture/PROPERTY_PROFILE_ARCHITECTURE.md` and `docs/architecture/PROPERTY_CATALOG_ARCHITECTURE.md`. The broader Listing Domain and Add Unit/frontend Property workflows remain unimplemented, and BF014 is selected/documented but not implemented.
+Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, Permissions & Authorization, BF013 Property & Ownership Foundation, and AF001-AF003 are implemented. BF013 remains closed. Rich Property Profile architecture is APPROVED / NOT IMPLEMENTED; Property Catalog/Data Governance architecture is APPROVED and partially implemented through BF014.1; their canonical sources are `docs/architecture/PROPERTY_PROFILE_ARCHITECTURE.md` and `docs/architecture/PROPERTY_CATALOG_ARCHITECTURE.md`. The broader Listing Domain and Add Unit/frontend Property workflows remain unimplemented, and BF014 remains IN PROGRESS after BF014.1 closure.
 
 Approved architecture now defines one authenticated Admin Application whose experience is determined by
 Organization, Position, Permissions, and applicable resource scope. It also separates future Global
@@ -52,7 +54,7 @@ remain scope-controlled. `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md` defi
 
 ## Selected Backend Sprint
 
-BF014 is the selected current Backend sprint: **SELECTED / DOCUMENTED / NOT IMPLEMENTED**. Its contract is `docs/sprints/BF014-canonical-property-catalog-foundation.md`. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture remains approved; Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. No BF015 or subsequent sprint is selected.
+BF014 is the current Backend sprint: **IN PROGRESS**. The parent contract remains authoritative for overall scope, baseline matrices, non-goals, and Definition of Done. [BF014.1 implementation record](docs/sprints/BF014.1-database-schema-and-integrity-constraints.md) records commit `4008a76` and **IMPLEMENTED AND VERIFIED / CLOSED** status. BF014.2 - Repositories + Domain Read Models is **NEXT / NOT STARTED**; BF014.3-BF014.8 are **NOT STARTED**. These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture is **APPROVED**, partially implemented through the BF014.1 schema foundation. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. No BF015 or later sprint is selected.
 
 ## Architecture Overview
 
