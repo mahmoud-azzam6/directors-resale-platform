@@ -1,8 +1,25 @@
 # Database Changelog
 
+## BF014.1 - Database Schema + Integrity Constraints
+
+Status: Implemented and verified on 2026-09-13; BF014 remains in progress, not complete
+
+- Additive migrations `018` through `030` create exactly `property_categories`, `unit_types`, `unit_type_configuration_versions`, `measurement_definitions`, `unit_type_measurement_rules`, `attribute_definitions`, `attribute_options`, `unit_type_attribute_rules`, `geographic_locations`, `developers`, `projects`, `project_phases`, and `property_catalog_seed_versions`.
+- Migrations `001` through `017` remain unchanged. No baseline catalog rows or BF014 Permission capabilities are inserted.
+- Ten public catalog/configuration entities use application-generated ULIDs. Internal Measurement/Attribute rule rows and the seed ledger omit ULIDs under the approved BF014 exception.
+- Catalog/configuration/rule actor FKs are nullable: NULL denotes system/seed operations; non-NULL values reference human actors through `users.id`. The seed ledger follows the same rule for `applied_by_user_id`; no dedicated System User is required. This is the locked BF014 actor exception to generic audit guidance.
+- Catalog statuses are `active`/`inactive`; configuration statuses are `draft`/`active`/`historical`. Catalogs and configurations distinguish `SYSTEM_SEED` from `SYSTEM_ADMIN`; rules inherit provenance from their configuration.
+- Named unique indexes, CHECKs, and two nullable PERSISTENT guards enforce unique version/rule identities, at most one active configuration per Unit Type, at most one Primary Measurement per configuration, primary-implies-REQUIRED, permitted types/statuses, SQM-only V1 measurements, typed text limits, geographic root shape, scoped option/Phase codes, and seed-key/checksum validity.
+- All 36 new foreign keys use `ON DELETE RESTRICT ON UPDATE RESTRICT`. Tables preserve InnoDB, utf8mb4, and utf8mb4_unicode_ci; code trim/uppercase normalization remains a future Service responsibility.
+- Configuration transitions, published structural immutability, non-reused version numbers, seeded hard-delete prohibition, safe deletion, ENUM parent eligibility, and geography self-parent/cycle rejection remain future Service invariants, not claims of DB enforcement. Future Property measurements retain the DECIMAL(18,4), decimal-string contract without a value table in this unit.
+- `tests/Modules/BF014SchemaAcceptanceTest.php` applied migrations 001-030 to an isolated MariaDB 10.4.32 database and verified new-table existence, zero initial rows, FK restrictions, invalid CHECK values, nullable/invalid actors, uniqueness guards on insert/update, rollback, duplicate rules/versions/codes, flexible geography, and seed-ledger constraints. All 13 new tables were empty after migration; the existing Permission count remained 30.
+- The BF013 database acceptance migration manifest now includes 018-030 so its existing domain/HTTP/authorization/legacy regression assertions run against the extended schema. That suite and all eight other existing test scripts passed; new-test PHP syntax validation passed.
+- The configured XAMPP data directory failed startup with an existing InnoDB corruption error. Verification used the same MariaDB 10.4.32 binaries with a fresh temporary data directory instead; no repair was attempted. Disposable acceptance databases were dropped after verification.
+- BF014.2 and later units are not implemented. Catalog governance activity persistence remains deferred within BF014 until mutation/service integration is designed. Repositories, services, controllers, routes, permission implementation, seeds, Property values, proposals, completeness, media, frontend, and Listing are outside this unit. This entry is not BF014 documentation closure.
+
 ## Rich Property Profile and Property Catalog Architecture
 
-Status: Approved; not implemented
+Status at architecture approval: Approved; not implemented. BF014.1 schema implementation is recorded above.
 
 - The conceptual Rich Property Profile and Property Catalog/Data Governance physical model is approved as additive future work over the implemented BF013 schema.
 - No Rich Property Profile or Property Catalog tables, migrations, seed scripts, APIs, or frontend workflows have been created.

@@ -122,8 +122,21 @@ try {
         '014_create_global_physical_property_identities_table.sql',
         '015_create_global_physical_identity_links_table.sql',
         '016_create_property_owner_lifecycle_history_table.sql', '017_add_bf013_permissions.sql',
+        '018_create_property_categories_table.sql',
+        '019_create_unit_types_table.sql',
+        '020_create_unit_type_configuration_versions_table.sql',
+        '021_create_measurement_definitions_table.sql',
+        '022_create_unit_type_measurement_rules_table.sql',
+        '023_create_attribute_definitions_table.sql',
+        '024_create_attribute_options_table.sql',
+        '025_create_unit_type_attribute_rules_table.sql',
+        '026_create_geographic_locations_table.sql',
+        '027_create_developers_table.sql',
+        '028_create_projects_table.sql',
+        '029_create_project_phases_table.sql',
+        '030_create_property_catalog_seed_versions_table.sql',
     ];
-    bf013DbAssert($actualMigrations === $expectedMigrations, 'Migrations 001-017 were not found in the exact expected order.');
+    bf013DbAssert($actualMigrations === $expectedMigrations, 'Migrations 001-030 were not found in the exact expected order.');
     foreach ($migrationFiles as $migrationFile) {
         $sql = file_get_contents($migrationFile);
         bf013DbAssert(is_string($sql) && trim($sql) !== '', basename($migrationFile) . ' is empty or unreadable.');
