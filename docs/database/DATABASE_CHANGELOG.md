@@ -4,7 +4,7 @@
 
 Status: IMPLEMENTED AND VERIFIED / CLOSED (verified 2026-09-13); BF014 remains IN PROGRESS, not complete
 
-Implementation commit: `4008a76` - feat: add BF014 canonical property catalog schema. Canonical [BF014.1 implementation record](../sprints/BF014.1-database-schema-and-integrity-constraints.md). Next internal unit: BF014.2 - Repositories + Domain Read Models - NEXT / NOT STARTED.
+Implementation commit: `4008a76` - feat: add BF014 canonical property catalog schema. Canonical [BF014.1 implementation record](../sprints/BF014.1-database-schema-and-integrity-constraints.md). At BF014.1 closure, the next internal unit was BF014.2 - Repositories + Domain Read Models.
 
 - Additive migrations `018` through `030` create exactly `property_categories`, `unit_types`, `unit_type_configuration_versions`, `measurement_definitions`, `unit_type_measurement_rules`, `attribute_definitions`, `attribute_options`, `unit_type_attribute_rules`, `geographic_locations`, `developers`, `projects`, `project_phases`, and `property_catalog_seed_versions`.
 - Migrations `001` through `017` remain unchanged. No baseline catalog rows or BF014 Permission capabilities are inserted.
@@ -17,7 +17,8 @@ Implementation commit: `4008a76` - feat: add BF014 canonical property catalog sc
 - `tests/Modules/BF014SchemaAcceptanceTest.php` applied migrations 001-030 to an isolated MariaDB 10.4.32 database and verified new-table existence, zero initial rows, FK restrictions, invalid CHECK values, nullable/invalid actors, uniqueness guards on insert/update, rollback, duplicate rules/versions/codes, flexible geography, and seed-ledger constraints. All 13 new tables were empty after migration; the existing Permission count remained 30.
 - The BF013 database acceptance migration manifest now includes 018-030 so its existing domain/HTTP/authorization/legacy regression assertions run against the extended schema. That suite and all eight other existing test scripts passed; new-test PHP syntax validation passed.
 - The configured XAMPP data directory failed startup with an existing InnoDB corruption error. Verification used the same MariaDB 10.4.32 binaries with a fresh temporary data directory instead; no repair was attempted. Disposable acceptance databases were dropped after verification.
-- BF014.2 and later units are not implemented. Catalog governance activity persistence remains deferred within BF014 until mutation/service integration is designed. Repositories, services, controllers, routes, permission implementation, seeds, Property values, proposals, completeness, media, frontend, and Listing are outside this unit. This entry is not BF014 documentation closure.
+- At BF014.1 closure, BF014.2 and later units were not implemented. Catalog governance activity persistence remains deferred within BF014 until mutation/service integration is designed. Repositories, services, controllers, routes, permission implementation, seeds, Property values, proposals, completeness, media, frontend, and Listing are outside this schema unit. This entry is not BF014 documentation closure.
+- Subsequent verification: BF014.2D commit `2669b12` added [repository database acceptance](../../tests/Modules/BF014RepositoryDatabaseAcceptanceTest.php) against unchanged migrations 001-030 on isolated MariaDB 10.4.32. Repository acceptance, BF013 DB regression, eight non-DB regressions and cleanup passed. BF014.2 introduced no migrations or schema changes; its [implementation record](../sprints/BF014.2-repositories-and-domain-read-models.md) records IMPLEMENTED AND VERIFIED / CLOSED. BF014.3 is NEXT / NOT STARTED; BF014 remains IN PROGRESS.
 
 ## Rich Property Profile and Property Catalog Architecture
 

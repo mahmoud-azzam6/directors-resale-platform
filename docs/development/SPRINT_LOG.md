@@ -307,7 +307,7 @@ Current status: IN PROGRESS
 Selection/documentation status on 2026-09-13: SELECTED / DOCUMENTED / NOT IMPLEMENTED
 
 - Contract: [BF014 canonical property catalog foundation](../sprints/BF014-canonical-property-catalog-foundation.md).
-- BF013 remains IMPLEMENTED AND VERIFIED / CLOSED. Property Catalog is approved and now partially implemented through BF014.1 schema; Rich Property Profile and Listing remain APPROVED / NOT IMPLEMENTED.
+- BF013 remains IMPLEMENTED AND VERIFIED / CLOSED. Property Catalog is APPROVED / PARTIALLY IMPLEMENTED through BF014.1 schema and BF014.2 repositories/read models; Rich Property Profile and Listing remain APPROVED / NOT IMPLEMENTED.
 - Locked six Categories, 20 Unit Types, six Measurement Definitions, 15 Attribute Definitions, nine options, 20 initial V1 configurations and their rule matrices, Egypt plus exactly 27 Governorates, and zero Developer/Project/Phase seeds.
 - Documented System-only catalog management, authorized reads, dynamic property-form configuration, seven versioned seed packages, provenance, and seed rerun safety.
 - Proposed BF014.1-BF014.8 implementation units; no code, migrations, seed execution, tests, APIs, or frontend implemented by this task. No BF015 or subsequent sprint selected.
@@ -322,8 +322,19 @@ Implementation commit: `4008a76` - feat: add BF014 canonical property catalog sc
 - Canonical [implementation record](../sprints/BF014.1-database-schema-and-integrity-constraints.md); the parent BF014 contract remains authoritative for scope, matrices, non-goals, and Definition of Done.
 - Migrations 018-030 added exactly 13 tables; verified on isolated real MariaDB 10.4.32 with 60 CHECKs, 36 restricted FKs, 25 unique indexes, and two PERSISTENT guards. All new tables started empty; Permission count remained 30.
 - BF013 database acceptance and eight existing non-database regression scripts passed; disposable database cleanup verified.
-- Next internal unit: BF014.2 - Repositories + Domain Read Models - NEXT / NOT STARTED. BF014.3-BF014.8 are NOT STARTED.
+- At BF014.1 closure, the next internal unit was BF014.2 - Repositories + Domain Read Models - NEXT / NOT STARTED; BF014.3-BF014.8 were NOT STARTED.
 - BF014 remains IN PROGRESS, not completed. No BF015 or later sprint is selected. No implementation was added by this documentation closure.
+
+### BF014.2 - Repositories + Domain Read Models (internal BF014 unit)
+
+Status: IMPLEMENTED AND VERIFIED / CLOSED; documentation closure 2026-09-14
+
+- Canonical [BF014.2 implementation record](../sprints/BF014.2-repositories-and-domain-read-models.md); the parent BF014 Sprint Contract remains authoritative.
+- BF014.2A: `ae607cf` - Core Catalog Repository Foundation; BF014.2B: `17bef9b` - Unit Type Configuration Repository; BF014.2C: `7151acd` - Geography + Development Catalog Repositories; BF014.2D: `2669b12` - Real MariaDB Repository Acceptance. BF014.2E records documentation closure here.
+- Exactly six repositories, PHPDoc array read models, explicit batch aggregate composition, scoped persistence and caller-owned transactions. Seed ledger persistence remains deferred to BF014.5; Services, APIs, seeds and dynamic forms remain unimplemented.
+- MariaDB 10.4.32 acceptance passed against migrations 001-030; 51 + 51 aggregate rules used six queries; two-connection locking and 14 nullable Project filter cases passed. BF013 DB acceptance and all eight non-DB regressions passed; disposable database/server cleanup verified and normal development database untouched.
+- Next internal unit: BF014.3 - Catalog / Configuration Services - NEXT / NOT STARTED. BF014.4-BF014.8 remain NOT STARTED; BF015 is NOT SELECTED. BF014 remains IN PROGRESS. Rich Property Profile and Listing remain APPROVED / NOT IMPLEMENTED.
+- This closure changes documentation only; no production code, migrations, tests or frontend changes.
 
 For future authorized implementation, completed database contracts produce the applicable artifacts; this documentation closure creates none:
 
