@@ -193,6 +193,24 @@ final class AttributeDefinitionRepository
             ->delete() > 0;
     }
 
+    /** Caller owns the transaction. @return AttributeDefinitionRecord|null */
+    public function findAttributeDefinitionForUpdate(int|string $id): ?array
+    {
+        $id = $this->identifier($id);
+        $row = $this->queryBuilder->table('attribute_definitions')->select(self::ATTRIBUTE_DEFINITION_COLUMNS)
+            ->where('id', '=', $id)->forUpdate()->first();
+
+        return $row === null ? null : $this->mapAttributeDefinition($row);
+    }
+
+    public function hasAttributeOptionsForDefinition(int|string $definitionId): bool
+    {
+        $definitionId = $this->identifier($definitionId);
+
+        return $this->queryBuilder->table('attribute_options')->select(['id'])
+            ->where('attribute_definition_id', '=', $definitionId)->first() !== null;
+    }
+
     /**
      * @param list<int|string> $ids
      * @return list<AttributeDefinitionRecord>
@@ -377,6 +395,29 @@ final class AttributeDefinitionRepository
         return $this->queryBuilder->table('attribute_options')->where('id', '=', $id)
             ->where('attribute_definition_id', '=', $definitionId)
             ->delete() > 0;
+    }
+
+    /** Caller owns the transaction. @return AttributeOptionRecord|null */
+    public function findAttributeOptionForUpdate(int|string $definitionId, int|string $optionId): ?array
+    {
+        $definitionId = $this->identifier($definitionId);
+        $optionId = $this->identifier($optionId);
+        $row = $this->queryBuilder->table('attribute_options')->select(self::ATTRIBUTE_OPTION_COLUMNS)
+            ->where('attribute_definition_id', '=', $definitionId)->where('id', '=', $optionId)
+            ->forUpdate()->first();
+
+        return $row === null ? null : $this->mapAttributeOption($row);
+    }
+
+    /** Caller owns the transaction. @return list<AttributeOptionRecord> */
+    public function listActiveAttributeOptionsForUpdate(int|string $definitionId): array
+    {
+        $definitionId = $this->identifier($definitionId);
+        $rows = $this->queryBuilder->table('attribute_options')->select(self::ATTRIBUTE_OPTION_COLUMNS)
+            ->where('attribute_definition_id', '=', $definitionId)->where('status', '=', 'active')
+            ->orderBy('id')->forUpdate()->get();
+
+        return array_map(fn (array $row): array => $this->mapAttributeOption($row), $rows);
     }
 
     /**

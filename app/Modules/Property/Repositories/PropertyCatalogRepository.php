@@ -180,6 +180,28 @@ final class PropertyCatalogRepository
             ->delete() > 0;
     }
 
+    /** Caller owns the transaction. @return PropertyCategoryRecord|null */
+    public function findCategoryForUpdate(int|string $id): ?array
+    {
+        $id = $this->identifier($id);
+        $row = $this->queryBuilder->table('property_categories')->select(self::CATEGORY_COLUMNS)
+            ->where('id', '=', $id)->forUpdate()->first();
+
+        return $row === null ? null : $this->mapCategory($row);
+    }
+
+    public function hasUnitTypesForCategory(int|string $categoryId, ?string $status = null): bool
+    {
+        $categoryId = $this->identifier($categoryId);
+        $query = $this->queryBuilder->table('unit_types')->select(['id'])
+            ->where('property_category_id', '=', $categoryId);
+        if ($status !== null) {
+            $query->where('status', '=', $status);
+        }
+
+        return $query->first() !== null;
+    }
+
     /**
      * @param array<string, mixed> $row
      * @return PropertyCategoryRecord

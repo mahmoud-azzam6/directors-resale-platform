@@ -163,6 +163,16 @@ final class MeasurementDefinitionRepository
             ->delete() > 0;
     }
 
+    /** Caller owns the transaction. @return MeasurementDefinitionRecord|null */
+    public function findMeasurementDefinitionForUpdate(int|string $id): ?array
+    {
+        $id = $this->identifier($id);
+        $row = $this->queryBuilder->table('measurement_definitions')->select(self::MEASUREMENT_DEFINITION_COLUMNS)
+            ->where('id', '=', $id)->forUpdate()->first();
+
+        return $row === null ? null : $this->mapMeasurementDefinition($row);
+    }
+
     /**
      * @param list<int|string> $ids
      * @return list<MeasurementDefinitionRecord>

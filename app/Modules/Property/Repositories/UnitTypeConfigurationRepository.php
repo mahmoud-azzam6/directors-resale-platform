@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Modules\Property\Repositories;
 
+use App\Core\Database\DatabaseConnectionInterface;
 use App\Core\Database\QueryBuilderInterface;
 use InvalidArgumentException;
+use PDO;
 use RuntimeException;
 
 /**
@@ -84,7 +86,8 @@ final class UnitTypeConfigurationRepository
     public function __construct(
         private QueryBuilderInterface $queryBuilder,
         private MeasurementDefinitionRepository $measurementDefinitions,
-        private AttributeDefinitionRepository $attributeDefinitions
+        private AttributeDefinitionRepository $attributeDefinitions,
+        private DatabaseConnectionInterface $database
     ) {
     }
 
@@ -246,6 +249,40 @@ final class UnitTypeConfigurationRepository
             ->forUpdate()->first();
 
         return $row === null ? null : $this->mapConfiguration($row);
+    }
+
+    public function hasConfigurationForUnitType(int|string $unitTypeId): bool
+    {
+        $unitTypeId = $this->identifier($unitTypeId);
+
+        return $this->queryBuilder->table('unit_type_configuration_versions')->select(['id'])
+            ->where('unit_type_id', '=', $unitTypeId)->first() !== null;
+    }
+
+    public function hasActiveConfigurationWithMeasurementDefinition(int|string $definitionId): bool
+    {
+        return $this->hasActiveConfigurationDefinition('unit_type_measurement_rules', 'measurement_definition_id', $definitionId);
+    }
+
+    public function hasMeasurementRuleForDefinition(int|string $definitionId): bool
+    {
+        $definitionId = $this->identifier($definitionId);
+
+        return $this->queryBuilder->table('unit_type_measurement_rules')->select(['id'])
+            ->where('measurement_definition_id', '=', $definitionId)->first() !== null;
+    }
+
+    public function hasActiveConfigurationWithAttributeDefinition(int|string $definitionId): bool
+    {
+        return $this->hasActiveConfigurationDefinition('unit_type_attribute_rules', 'attribute_definition_id', $definitionId);
+    }
+
+    public function hasAttributeRuleForDefinition(int|string $definitionId): bool
+    {
+        $definitionId = $this->identifier($definitionId);
+
+        return $this->queryBuilder->table('unit_type_attribute_rules')->select(['id'])
+            ->where('attribute_definition_id', '=', $definitionId)->first() !== null;
     }
 
     /** @return MeasurementRuleRecord|null */
@@ -645,5 +682,26 @@ final class UnitTypeConfigurationRepository
         }
 
         throw new RuntimeException('Persisted is_primary is not a valid boolean representation.');
+    }
+
+    private function hasActiveConfigurationDefinition(string $ruleTable, string $definitionColumn, int|string $definitionId): bool
+    {
+        $definitionId = $this->identifier($definitionId);
+        $sql = sprintf(
+            'SELECT 1 FROM `%s` AS `rule` INNER JOIN `unit_type_configuration_versions` AS `configuration`'
+            . ' ON `configuration`.`id` = `rule`.`configuration_version_id`'
+            . ' WHERE `rule`.`%s` = :definition_id AND `configuration`.`status` = :status LIMIT 1',
+            $ruleTable,
+            $definitionColumn
+        );
+        $statement = $this->database->connection()->prepare($sql);
+        if ($statement === false) {
+            throw new RuntimeException('Unable to prepare active configuration dependency query.');
+        }
+        $statement->bindValue(':definition_id', $definitionId, PDO::PARAM_INT);
+        $statement->bindValue(':status', 'active', PDO::PARAM_STR);
+        $statement->execute();
+
+        return $statement->fetch(PDO::FETCH_ASSOC) !== false;
     }
 }
