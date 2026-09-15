@@ -38,6 +38,7 @@ use RuntimeException;
  *     status: string,
  *     provenance: string,
  *     sort_order: int,
+ *     last_allocated_configuration_version: int,
  *     created_by_user_id: int|null,
  *     updated_by_user_id: int|null,
  *     created_at: string,
@@ -48,7 +49,7 @@ final class PropertyCatalogRepository
 {
     private const CATEGORY_COLUMNS = ['id', 'ulid', 'code', 'name_ar', 'name_en', 'status', 'provenance', 'sort_order', 'created_by_user_id', 'updated_by_user_id', 'created_at', 'updated_at'];
 
-    private const UNIT_TYPE_COLUMNS = ['id', 'ulid', 'property_category_id', 'code', 'name_ar', 'name_en', 'status', 'provenance', 'sort_order', 'created_by_user_id', 'updated_by_user_id', 'created_at', 'updated_at'];
+    private const UNIT_TYPE_COLUMNS = ['id', 'ulid', 'property_category_id', 'code', 'name_ar', 'name_en', 'status', 'provenance', 'sort_order', 'last_allocated_configuration_version', 'created_by_user_id', 'updated_by_user_id', 'created_at', 'updated_at'];
 
     public function __construct(
         private QueryBuilderInterface $queryBuilder,
@@ -261,7 +262,7 @@ final class PropertyCatalogRepository
                 ->limit($options['limit'])->offset($options['offset'])->get();
         } else {
             // QueryBuilder cannot group OR predicates under the status/parent filters.
-            $sql = 'SELECT `id`, `ulid`, `property_category_id`, `code`, `name_ar`, `name_en`, `status`, `provenance`, `sort_order`, `created_by_user_id`, `updated_by_user_id`, `created_at`, `updated_at`'
+            $sql = 'SELECT `id`, `ulid`, `property_category_id`, `code`, `name_ar`, `name_en`, `status`, `provenance`, `sort_order`, `last_allocated_configuration_version`, `created_by_user_id`, `updated_by_user_id`, `created_at`, `updated_at`'
                 . ' FROM `unit_types` WHERE 1 = 1';
             if ($options['status'] !== null) {
                 $sql .= ' AND `status` = :status';
@@ -337,6 +338,25 @@ final class PropertyCatalogRepository
     }
 
     /**
+     * Persistence only. Caller must hold the Unit Type FOR UPDATE lock and
+     * enforce the monotonic allocation policy in its transaction.
+     * @return UnitTypeRecord|null
+     */
+    public function updateLastAllocatedConfigurationVersion(
+        int|string $id,
+        int $lastAllocatedConfigurationVersion
+    ): ?array {
+        $id = $this->identifier($id);
+        if ($lastAllocatedConfigurationVersion < 0 || $lastAllocatedConfigurationVersion > 4294967295) {
+            throw new InvalidArgumentException('last_allocated_configuration_version is outside the supported range.');
+        }
+        $this->queryBuilder->table('unit_types')->where('id', '=', $id)
+            ->update(['last_allocated_configuration_version' => $lastAllocatedConfigurationVersion]);
+
+        return $this->findUnitTypeById($id);
+    }
+
+    /**
      * @param array<string, mixed> $row
      * @return UnitTypeRecord
      */
@@ -352,6 +372,7 @@ final class PropertyCatalogRepository
             'status' => (string) $row['status'],
             'provenance' => (string) $row['provenance'],
             'sort_order' => $this->storedInteger($row['sort_order']),
+            'last_allocated_configuration_version' => $this->storedInteger($row['last_allocated_configuration_version']),
             'created_by_user_id' => $row['created_by_user_id'] === null ? null : $this->storedInteger($row['created_by_user_id']),
             'updated_by_user_id' => $row['updated_by_user_id'] === null ? null : $this->storedInteger($row['updated_by_user_id']),
             'created_at' => (string) $row['created_at'],

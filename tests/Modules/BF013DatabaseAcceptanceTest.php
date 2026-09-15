@@ -135,8 +135,9 @@ try {
         '028_create_projects_table.sql',
         '029_create_project_phases_table.sql',
         '030_create_property_catalog_seed_versions_table.sql',
+        '031_add_bf014_configuration_allocation_guards.sql',
     ];
-    bf013DbAssert($actualMigrations === $expectedMigrations, 'Migrations 001-030 were not found in the exact expected order.');
+    bf013DbAssert($actualMigrations === $expectedMigrations, 'Migrations 001-031 were not found in the exact expected order.');
     foreach ($migrationFiles as $migrationFile) {
         $sql = file_get_contents($migrationFile);
         bf013DbAssert(is_string($sql) && trim($sql) !== '', basename($migrationFile) . ' is empty or unreadable.');

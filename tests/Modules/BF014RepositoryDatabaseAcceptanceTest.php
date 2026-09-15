@@ -101,7 +101,7 @@ try {
     $pdo->exec('SET SESSION foreign_key_checks = 1, check_constraint_checks = 1');
     $migrations = glob($root . '/database/migrations/*.sql') ?: [];
     sort($migrations, SORT_STRING);
-    bf014RepoEqual(array_map(static fn ($file) => (int) substr(basename($file), 0, 3), $migrations), range(1, 30), 'Migrations 001-030');
+    bf014RepoEqual(array_map(static fn ($file) => (int) substr(basename($file), 0, 3), $migrations), range(1, 31), 'Migrations 001-031');
     foreach ($migrations as $file) { $pdo->exec(file_get_contents($file)); }
     $tables = ['property_categories', 'unit_types', 'unit_type_configuration_versions', 'measurement_definitions',
         'unit_type_measurement_rules', 'attribute_definitions', 'attribute_options', 'unit_type_attribute_rules',
@@ -109,7 +109,7 @@ try {
     foreach ($tables as $table) {
         bf014RepoEqual((int) $pdo->query("SELECT COUNT(*) FROM `{$table}`")->fetchColumn(), 0, $table . ' exists without baseline rows');
     }
-    echo "Migrations 001-030 / 13 empty BF014 tables: PASS\n";
+    echo "Migrations 001-031 / 13 empty BF014 tables: PASS\n";
 
     $container = new Container();
     (new AppServiceProvider($container, []))->register();
@@ -194,6 +194,10 @@ try {
     $category2 = $catalog->createCategory($data('SECOND_CATEGORY'));
     $unit = $catalog->createUnitType($data('UNIT', ['property_category_id' => $category['id']]));
     $unit2 = $catalog->createUnitType($data('UNIT2', ['property_category_id' => $category2['id']]));
+    bf014RepoEqual($unit['last_allocated_configuration_version'], 0, 'Unit Type allocation default mapping');
+    bf014RepoThrows(fn () => $catalog->updateUnitType($unit['id'], ['last_allocated_configuration_version' => 1]), InvalidArgumentException::class, 'Generic Unit Type allocation update rejected');
+    bf014RepoEqual($catalog->updateLastAllocatedConfigurationVersion($unit['id'], 7)['last_allocated_configuration_version'], 7, 'Unit Type allocation persistence');
+    bf014RepoThrows(fn () => $catalog->updateLastAllocatedConfigurationVersion($unit['id'], -1), InvalidArgumentException::class, 'Negative allocation rejected');
     bf014RepoEqual(bf014RepoIds($catalog->listUnitTypesByCategory($category['id'], ['search' => 'UNIT', 'status' => 'active'])), [$unit['id']], 'Category scoped units');
     bf014RepoEqual($catalog->updateUnitType($unit['id'], ['property_category_id' => $category2['id']])['property_category_id'], $category2['id'], 'Category reassignment');
     bf014RepoEqual($catalog->listUnitTypesByCategory($category['id']), [], 'Reassignment removes old scope');
@@ -256,6 +260,8 @@ try {
     bf014RepoEqual($configurations->findConfigurationByUlid($c1['ulid']), $c1, 'Configuration ULID');
     bf014RepoEqual($configurations->findConfigurationByVersion($unit['id'], 1), $c1, 'Configuration version');
     bf014RepoEqual($configurations->findActiveConfigurationForUnitType($unit['id']), $c1, 'Active configuration');
+    bf014RepoEqual($configurations->findDraftConfigurationForUnitType($unit['id']), $c2, 'Draft configuration');
+    bf014RepoEqual($configurations->findDraftConfigurationForUpdate($unit['id']), $c2, 'Draft configuration lock');
     bf014RepoEqual(bf014RepoIds($configurations->listConfigurationsForUnitType($unit['id'])), [$c2['id'], $c1['id']], 'Versions descending');
     bf014RepoEqual(bf014RepoIds($configurations->listConfigurationsForUnitType($unit['id'], ['status' => 'draft'])), [$c2['id']], 'Version status');
     bf014RepoEqual($configurations->findLatestVersionNumberForUnitType($unit['id']), 7, 'Latest persisted, no +1');

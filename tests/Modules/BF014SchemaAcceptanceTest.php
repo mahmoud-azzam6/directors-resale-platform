@@ -60,18 +60,18 @@ try {
     $tables = ['property_categories', 'unit_types', 'unit_type_configuration_versions', 'measurement_definitions', 'unit_type_measurement_rules', 'attribute_definitions', 'attribute_options', 'unit_type_attribute_rules', 'geographic_locations', 'developers', 'projects', 'project_phases', 'property_catalog_seed_versions'];
     $migrations = glob($root . '/database/migrations/*.sql') ?: [];
     sort($migrations, SORT_STRING);
-    bf014Assert(count($migrations) === 30, 'Expected exactly migrations 001-030.');
+    bf014Assert(count($migrations) === 31, 'Expected exactly migrations 001-031.');
     foreach ($migrations as $index => $path) {
         bf014Assert((int) substr(basename($path), 0, 3) === $index + 1, 'Migration sequence gap.');
         $sql = file_get_contents($path);
         bf014Assert(is_string($sql) && trim($sql) !== '', 'Unreadable migration.');
-        if ($index >= 17) {
+        if ($index >= 17 && $index < 30) {
             bf014Assert(basename($path) === sprintf('%03d_create_%s_table.sql', $index + 1, $tables[$index - 17]), 'Unexpected BF014 migration.');
             bf014Assert(substr_count($sql, 'CREATE TABLE ') === 1 && ! preg_match('/\b(INSERT|UPDATE|DELETE|TRIGGER|PROCEDURE)\s+(INTO|FROM|TABLE|ON)\b/i', $sql), 'Migration contains unexpected data/logic statements.');
         }
         $pdo->exec($sql);
     }
-    echo "MariaDB {$version}: migrations 001-030 applied.\n";
+    echo "MariaDB {$version}: migrations 001-031 applied.\n";
     foreach ($tables as $table) {
         bf014Assert((int) $pdo->query("SELECT COUNT(*) FROM `{$table}`")->fetchColumn() === 0, "{$table} was seeded by migrations.");
     }
@@ -85,8 +85,10 @@ try {
         bf014Assert($fk['DELETE_RULE'] === 'RESTRICT' && $fk['UPDATE_RULE'] === 'RESTRICT', 'Non-RESTRICT foreign key.');
     }
     $guards = $pdo->query("SELECT COLUMN_NAME, EXTRA FROM information_schema.columns WHERE table_schema = DATABASE() AND table_name IN ({$names}) AND EXTRA LIKE '%GENERATED%'")->fetchAll();
-    bf014Assert(count($guards) === 2, 'Expected two generated guards.');
+    bf014Assert(count($guards) === 3, 'Expected three generated guards.');
     foreach ($guards as $guard) { bf014Assert(str_contains($guard['EXTRA'], 'STORED GENERATED'), 'Guard is not PERSISTENT.'); }
+    bf014Assert((int) $pdo->query("SELECT COUNT(*) FROM information_schema.statistics WHERE table_schema = DATABASE() AND table_name = 'unit_type_configuration_versions' AND index_name = 'uq_unit_type_configs_active_guard'")->fetchColumn() === 1, 'ACTIVE guard changed.');
+    bf014Assert((int) $pdo->query("SELECT COUNT(*) FROM information_schema.statistics WHERE table_schema = DATABASE() AND table_name = 'unit_type_configuration_versions' AND index_name = 'uq_unit_type_configs_draft_guard'")->fetchColumn() === 1, 'DRAFT guard missing.');
 
     // Disposable constraint fixtures only: these are not baseline seeds.
     $insert = static function (string $table, array $values) use ($pdo): int {
@@ -104,6 +106,8 @@ try {
     $configRow = static fn (int $number, string $status = 'draft'): array => ['ulid' => (string) new Ulid(), 'unit_type_id' => $unit, 'version_number' => $number, 'status' => $status, 'provenance' => 'SYSTEM_SEED'];
     $active = $insert('unit_type_configuration_versions', $configRow(1, 'active'));
     $draft = $insert('unit_type_configuration_versions', $configRow(2));
+    bf014Reject(fn () => $insert('unit_type_configuration_versions', $configRow(3)), 1062, 'Multiple draft configurations');
+    $pdo->exec("UPDATE unit_type_configuration_versions SET status='historical' WHERE id={$draft}");
     $insert('unit_type_configuration_versions', $configRow(3));
     bf014Reject(fn () => $insert('unit_type_configuration_versions', $configRow(4, 'active')), 1062, 'Multiple active configurations');
     bf014Reject(fn () => $pdo->exec("UPDATE unit_type_configuration_versions SET status='active' WHERE id={$draft}"), 1062, 'Active guard on update');
@@ -115,6 +119,8 @@ try {
     $pdo->exec("UPDATE unit_type_configuration_versions SET status='active' WHERE id={$draft}");
     $pdo->rollBack();
     bf014Assert((int) $pdo->query("SELECT active_unit_type_guard FROM unit_type_configuration_versions WHERE id={$active}")->fetchColumn() === $unit, 'Guard rollback failed.');
+    bf014Assert((int) $pdo->query("SELECT last_allocated_configuration_version FROM unit_types WHERE id={$unit}")->fetchColumn() === 0, 'New Unit Type allocation default failed.');
+    bf014Reject(fn () => $pdo->exec("UPDATE unit_types SET last_allocated_configuration_version=-1 WHERE id={$unit}"), 1264, 'Negative allocation state');
 
     $measurement = $insert('measurement_definitions', $catalog(['default_unit_code' => 'SQM']));
     $measurement2 = $insert('measurement_definitions', $catalog(['default_unit_code' => 'SQM']));

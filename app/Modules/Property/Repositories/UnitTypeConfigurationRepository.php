@@ -131,6 +131,32 @@ final class UnitTypeConfigurationRepository
         return $row === null ? null : $this->mapConfiguration($row);
     }
 
+    /** @return UnitTypeConfigurationRecord|null */
+    public function findDraftConfigurationForUnitType(int|string $unitTypeId): ?array
+    {
+        $unitTypeId = $this->identifier($unitTypeId);
+        $row = $this->queryBuilder->table('unit_type_configuration_versions')
+            ->select(self::CONFIGURATION_COLUMNS)
+            ->where('unit_type_id', '=', $unitTypeId)->where('status', '=', 'draft')->first();
+
+        return $row === null ? null : $this->mapConfiguration($row);
+    }
+
+    /**
+     * Caller owns the transaction and must acquire the Unit Type lock first.
+     * @return UnitTypeConfigurationRecord|null
+     */
+    public function findDraftConfigurationForUpdate(int|string $unitTypeId): ?array
+    {
+        $unitTypeId = $this->identifier($unitTypeId);
+        $row = $this->queryBuilder->table('unit_type_configuration_versions')
+            ->select(self::CONFIGURATION_COLUMNS)
+            ->where('unit_type_id', '=', $unitTypeId)->where('status', '=', 'draft')
+            ->forUpdate()->first();
+
+        return $row === null ? null : $this->mapConfiguration($row);
+    }
+
     /**
      * @param array{status?: ?string, limit?: int, offset?: int} $options
      * @return list<UnitTypeConfigurationRecord>
