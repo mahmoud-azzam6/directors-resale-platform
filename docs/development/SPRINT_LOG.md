@@ -336,6 +336,14 @@ Status: IMPLEMENTED AND VERIFIED / CLOSED; documentation closure 2026-09-14
 - Next internal unit: BF014.3 - Catalog / Configuration Services - NEXT / NOT STARTED. BF014.4-BF014.8 remain NOT STARTED; BF015 is NOT SELECTED. BF014 remains IN PROGRESS. Rich Property Profile and Listing remain APPROVED / NOT IMPLEMENTED.
 - This closure changes documentation only; no production code, migrations, tests or frontend changes.
 
+### BF014.3C - UnitTypeConfigurationService (internal BF014 unit)
+
+Status: IMPLEMENTED AND VERIFIED / CLOSED; documentation closure 2026-09-16
+
+- Added Service-owned configuration allocation, blank/current-ACTIVE clone DRAFTs, DRAFT-only rule mutations and deletion, activation revalidation, ACTIVE-to-HISTORICAL transition, and Unit Type serialization locking.
+- Real MariaDB 10.4.32 checks passed for rollback and four independent-process concurrency cases: creation/creation, mutation/activation, deletion/mutation, and activation/activation.
+- BF014 repository/schema, Property Catalog Service, BF013 database, authorization, HTTP, and Property/Ownership regression checks passed. BF014 remains IN PROGRESS; BF014.3D-BF014.3F and BF014.4-BF014.8 remain NOT STARTED.
+
 For future authorized implementation, completed database contracts produce the applicable artifacts; this documentation closure creates none:
 
 

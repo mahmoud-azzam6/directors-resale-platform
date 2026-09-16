@@ -1,6 +1,6 @@
 # Current System State
 
-Status: BF014 IN PROGRESS; BF014.1 and BF014.2 IMPLEMENTED AND VERIFIED / CLOSED; BF014.3 NEXT / NOT STARTED; BF013 closed; AF003 completed
+Status: BF014 IN PROGRESS; BF014.1, BF014.2, and BF014.3C IMPLEMENTED AND VERIFIED / CLOSED; BF014.3D-BF014.3F NOT STARTED; BF013 closed; AF003 completed
 
 ## Completed Implementation
 
@@ -169,6 +169,6 @@ Rich Property Profile and Property Catalog/Data Governance architecture closure 
 
 ## Next Development Target
 
-BF014 is the current Backend sprint: **IN PROGRESS**. The parent contract remains authoritative for overall scope, baseline matrices, non-goals, and Definition of Done. [BF014.1 implementation record](../sprints/BF014.1-database-schema-and-integrity-constraints.md) records commit `4008a76` and **IMPLEMENTED AND VERIFIED / CLOSED** status. [BF014.2 - Repositories + Domain Read Models](../sprints/BF014.2-repositories-and-domain-read-models.md) is **IMPLEMENTED AND VERIFIED / CLOSED** (commits `ae607cf`, `17bef9b`, `7151acd`, `2669b12`). BF014.3 - Catalog / Configuration Services is **NEXT / NOT STARTED**; BF014.4-BF014.8 are **NOT STARTED**. These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture is **APPROVED**, partially implemented through BF014.1 schema and BF014.2 repositories/read models. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. No BF015 or later sprint is selected.
+BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1, BF014.2, and internal BF014.3C - UnitTypeConfigurationService are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.3D-BF014.3F and BF014.4-BF014.8 are **NOT STARTED**. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture is partially implemented through schema, repositories, PropertyCatalogService, and UnitTypeConfigurationService; Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. No BF015 or later sprint is selected.
 
 BF014 is limited to canonical catalogs, configuration/versioning, System Admin backend management, authorized reads, dynamic form configuration, and safe versioned baseline seeds. It does not assign classification or store rich values on Organization Property, implement proposals/media/completeness, or add frontend or Listing workflows.

@@ -61,6 +61,7 @@ use App\Modules\Property\Repositories\DevelopmentCatalogRepository;
 use App\Modules\Property\Repositories\PropertyOwnerLifecycleHistoryRepository;
 use App\Modules\Property\Services\OrganizationPropertyService;
 use App\Modules\Property\Services\PropertyCatalogService;
+use App\Modules\Property\Services\UnitTypeConfigurationService;
 use App\Modules\Owner\Controllers\OwnerController;
 use App\Modules\Owner\Repositories\OwnerRepository;
 use App\Modules\Owner\Services\OwnerService;
@@ -162,6 +163,7 @@ final class AppServiceProvider extends ServiceProvider
         $this->container->bind(PropertyOwnerLifecycleHistoryRepository::class);
         $this->container->bind(OrganizationPropertyService::class);
         $this->container->bind(PropertyCatalogService::class);
+        $this->container->bind(UnitTypeConfigurationService::class);
         $this->container->bind(OrganizationPropertyController::class);
         $this->container->bind(OwnerRepository::class);
         $this->container->bind(OwnerService::class);

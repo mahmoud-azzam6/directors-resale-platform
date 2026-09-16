@@ -134,6 +134,18 @@ final class UnitTypeConfigurationRepository
         return $row === null ? null : $this->mapConfiguration($row);
     }
 
+    /** Caller owns the transaction and holds the Unit Type serialization lock. */
+    public function findActiveConfigurationForUnitTypeForUpdate(int|string $unitTypeId): ?array
+    {
+        $unitTypeId = $this->identifier($unitTypeId);
+        $row = $this->queryBuilder->table('unit_type_configuration_versions')
+            ->select(self::CONFIGURATION_COLUMNS)
+            ->where('unit_type_id', '=', $unitTypeId)->where('status', '=', 'active')
+            ->forUpdate()->first();
+
+        return $row === null ? null : $this->mapConfiguration($row);
+    }
+
     /** @return UnitTypeConfigurationRecord|null */
     public function findDraftConfigurationForUnitType(int|string $unitTypeId): ?array
     {

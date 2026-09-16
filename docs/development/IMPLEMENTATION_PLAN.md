@@ -25,9 +25,9 @@ BF006 smoke tests and BF007 manual acceptance/regression checks passed at their 
 
 ## Current Planning State
 
-BF014 is the current Backend sprint: **IN PROGRESS**. The parent contract remains authoritative for overall scope, baseline matrices, non-goals, and Definition of Done. [BF014.1 implementation record](../sprints/BF014.1-database-schema-and-integrity-constraints.md) records commit `4008a76` and **IMPLEMENTED AND VERIFIED / CLOSED** status. [BF014.2 - Repositories + Domain Read Models](../sprints/BF014.2-repositories-and-domain-read-models.md) is **IMPLEMENTED AND VERIFIED / CLOSED** (commits `ae607cf`, `17bef9b`, `7151acd`, `2669b12`). BF014.3 - Catalog / Configuration Services is **NEXT / NOT STARTED**; BF014.4-BF014.8 are **NOT STARTED**. These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture is **APPROVED**, partially implemented through BF014.1 schema and BF014.2 repositories/read models. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. No BF015 or later sprint is selected.
+BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1, BF014.2, and internal BF014.3C - UnitTypeConfigurationService are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.3D-BF014.3F and BF014.4-BF014.8 are **NOT STARTED**. These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture is partially implemented through schema, repositories, PropertyCatalogService, and UnitTypeConfigurationService. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. No BF015 or later sprint is selected.
 
-The contract records BF014.1 schema/integrity, BF014.2 repositories/read models, BF014.3 services, BF014.4 authorization/HTTP, BF014.5 seed runner/baseline, BF014.6 dynamic form projection, BF014.7 MariaDB acceptance/regressions, and BF014.8 documentation closure. BF014.1 is IMPLEMENTED AND VERIFIED / CLOSED. BF014.2 is IMPLEMENTED AND VERIFIED / CLOSED. BF014.3 is NEXT / NOT STARTED; BF014.4-BF014.8 are NOT STARTED.
+The contract records BF014.1 schema/integrity, BF014.2 repositories/read models, BF014.3 services, BF014.4 authorization/HTTP, BF014.5 seed runner/baseline, BF014.6 dynamic form projection, BF014.7 MariaDB acceptance/regressions, and BF014.8 documentation closure. BF014.1, BF014.2, and BF014.3C are IMPLEMENTED AND VERIFIED / CLOSED. BF014.3D-BF014.3F and BF014.4-BF014.8 are NOT STARTED.
 
 ## Approved Future Execution Order
 
@@ -35,7 +35,7 @@ BF014 is the selected Backend catalog foundation sprint. Subsequent entries rema
 
 1. Architecture closure - complete
 2. BF014 parent sprint contract - recorded and authoritative
-3. BF014 - Canonical Property Catalog Foundation - IN PROGRESS; BF014.1 and BF014.2 closed; BF014.3 next, not started
+3. BF014 - Canonical Property Catalog Foundation - IN PROGRESS; BF014.1, BF014.2, and BF014.3C closed; BF014.3D next, not started
 4. Backend Rich Property Profile
 5. System Admin Property Data Management frontend
 6. Initial canonical data verification and approved business additions
