@@ -344,6 +344,15 @@ Status: IMPLEMENTED AND VERIFIED / CLOSED; documentation closure 2026-09-16
 - Real MariaDB 10.4.32 checks passed for rollback and four independent-process concurrency cases: creation/creation, mutation/activation, deletion/mutation, and activation/activation.
 - BF014 repository/schema, Property Catalog Service, BF013 database, authorization, HTTP, and Property/Ownership regression checks passed. BF014 remains IN PROGRESS; BF014.3D-BF014.3F and BF014.4-BF014.8 remain NOT STARTED.
 
+### BF014.3D - GeographicLocationService and DevelopmentCatalogService (internal BF014 unit)
+
+Status: IMPLEMENTED AND VERIFIED / CLOSED; documentation closure 2026-09-17
+
+- D1/D1.1 implemented Geography hierarchy/lifecycle with iterative validation, canonical Country/root-first locking and post-lock state revalidation. D2 implemented Developer/Project/Phase lifecycle and optional Project references with Developer-before-Project and Project-before-Phase serialization.
+- D3 verified all eight race orderings using independent PHP workers/connections on MariaDB 10.4.32, deterministic trigger/named-lock coordination and observed InnoDB wait edges. Domain errors, committed invariants and cleanup passed; no D3 production defect was found.
+- D4 passed all 19 requested D/BF014/BF013 scripts. Contract review reproduced a Geography pagination defect with an active 51st child; the iterative scan now visits every child page. Enhanced D1 and both D3a orderings passed after the targeted correction. PHP syntax and whitespace checks passed.
+- Canonical evidence: [BF014.3D closure record](../sprints/BF014.3-catalog-and-configuration-services.md#bf0143d-implementation-and-closure-evidence). BF014.3A-BF014.3D are CLOSED; BF014.3E is NEXT / NOT STARTED; BF014.3F and BF014.4-BF014.8 are NOT STARTED. BF014.3 and BF014 remain IN PROGRESS. No later sprint is selected.
+
 For future authorized implementation, completed database contracts produce the applicable artifacts; this documentation closure creates none:
 
 

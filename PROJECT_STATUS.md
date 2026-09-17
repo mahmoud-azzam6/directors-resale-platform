@@ -2,7 +2,7 @@
 
 Status: Active
 
-Current Project Phase: BF014 IN PROGRESS; BF014.1, BF014.2, and BF014.3C IMPLEMENTED AND VERIFIED / CLOSED
+Current Project Phase: BF014 IN PROGRESS; BF014.1, BF014.2, and BF014.3A-BF014.3D IMPLEMENTED AND VERIFIED / CLOSED
 
 Current Milestone: Milestone 2 - Core Business
 
@@ -10,13 +10,13 @@ Completed Sprints: BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, B
 
 Current Sprint: BF014 - Canonical Property Catalog Foundation (IN PROGRESS)
 
-Next Internal Unit: BF014.3D - GeographicLocationService and DevelopmentCatalogService (NOT STARTED)
+Next Internal Unit: BF014.3E - Real MariaDB Service Acceptance and regressions (NEXT / NOT STARTED)
 
 Next Selected Sprint: None after BF014; BF015 NOT SELECTED
 
 Latest Stable Commit: 2669b12 - test: add BF014 repository database acceptance
 
-Last Updated: 2026-09-16
+Last Updated: 2026-09-17
 
 ---
 
@@ -44,7 +44,7 @@ The application now has:
 - `users` table with a restricted Organization foreign key and indexed `organization_id`
 - AF001 Next.js Admin UI foundation under `frontend/` with secure HttpOnly auth bridge, typed API/context layer, protected App Router layout, and permission-aware navigation
 
-Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, Permissions & Authorization, BF013 Property & Ownership Foundation, and AF001-AF003 are implemented. BF013 remains closed. Rich Property Profile architecture is APPROVED / NOT IMPLEMENTED; Property Catalog/Data Governance architecture is APPROVED and partially implemented through BF014.1 schema, BF014.2 repositories/read models, and BF014.3C UnitTypeConfigurationService; their canonical sources are `docs/architecture/PROPERTY_PROFILE_ARCHITECTURE.md` and `docs/architecture/PROPERTY_CATALOG_ARCHITECTURE.md`. The broader Listing Domain and Add Unit/frontend Property workflows remain unimplemented, and BF014 remains IN PROGRESS.
+Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, Permissions & Authorization, BF013 Property & Ownership Foundation, and AF001-AF003 are implemented. BF013 remains closed. Rich Property Profile architecture is APPROVED / NOT IMPLEMENTED; Property Catalog/Data Governance architecture is APPROVED and partially implemented through BF014.1 schema, BF014.2 repositories/read models, and BF014.3A-BF014.3D catalog/configuration services; their canonical sources are `docs/architecture/PROPERTY_PROFILE_ARCHITECTURE.md` and `docs/architecture/PROPERTY_CATALOG_ARCHITECTURE.md`. The broader Listing Domain and Add Unit/frontend Property workflows remain unimplemented, and BF014 remains IN PROGRESS.
 
 Approved architecture now defines one authenticated Admin Application whose experience is determined by
 Organization, Position, Permissions, and applicable resource scope. It also separates future Global
@@ -54,7 +54,7 @@ remain scope-controlled. `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md` defi
 
 ## Selected Backend Sprint
 
-BF014 is the current Backend sprint: **IN PROGRESS**. The parent contract remains authoritative for overall scope, baseline matrices, non-goals, and Definition of Done. BF014.1 and BF014.2 are **IMPLEMENTED AND VERIFIED / CLOSED**. Internal BF014.3C - UnitTypeConfigurationService is **IMPLEMENTED AND VERIFIED / CLOSED** with real MariaDB concurrency verification; BF014.3D-BF014.3F and BF014.4-BF014.8 are **NOT STARTED**. These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture is partially implemented through schema, repositories, PropertyCatalogService, and UnitTypeConfigurationService. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. No BF015 or later sprint is selected.
+BF014 is the current Backend sprint: **IN PROGRESS**. The parent contract remains authoritative for overall scope, baseline matrices, non-goals, and Definition of Done. BF014.1, BF014.2, and internal BF014.3A-BF014.3D are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.3 remains **IN PROGRESS**; BF014.3E is **NEXT / NOT STARTED**, and BF014.3F and BF014.4-BF014.8 are **NOT STARTED**. D4 closure verified Geography/Development lifecycle and lock protocols, eight real MariaDB race orderings, and all 19 relevant regression scripts; it corrected Geography descendant pagination with focused regression evidence. See the [BF014.3D closure record](docs/sprints/BF014.3-catalog-and-configuration-services.md#bf0143d-implementation-and-closure-evidence). These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture is partially implemented through schema, repositories, PropertyCatalogService, UnitTypeConfigurationService, GeographicLocationService, and DevelopmentCatalogService. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. No BF015 or later sprint is selected.
 
 ## Architecture Overview
 

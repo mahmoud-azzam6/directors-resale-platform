@@ -59,6 +59,33 @@ final class GeographicLocationRepository
         return $row === null ? null : $this->mapGeographicLocation($row);
     }
 
+    /** Caller owns the transaction and hierarchy serialization protocol. */
+    public function findGeographicLocationForUpdate(int|string $id): ?array
+    {
+        $id = $this->identifier($id);
+        $row = $this->queryBuilder->table('geographic_locations')->select(self::LOCATION_COLUMNS)
+            ->where('id', '=', $id)->forUpdate()->first();
+
+        return $row === null ? null : $this->mapGeographicLocation($row);
+    }
+
+    public function hasChildren(int|string $id): bool
+    {
+        $id = $this->identifier($id);
+
+        return $this->queryBuilder->table('geographic_locations')->select(['id'])
+            ->where('parent_id', '=', $id)->first() !== null;
+    }
+
+    public function hasReferences(int|string $id): bool
+    {
+        $id = $this->identifier($id);
+
+        return $this->hasChildren($id)
+            || $this->queryBuilder->table('projects')->select(['id'])
+                ->where('geographic_location_id', '=', $id)->first() !== null;
+    }
+
     /** @return GeographicLocationRecord|null */
     public function findGeographicLocationByUlid(string $ulid): ?array
     {

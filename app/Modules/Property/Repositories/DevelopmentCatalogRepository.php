@@ -80,6 +80,57 @@ final class DevelopmentCatalogRepository
     ) {
     }
 
+    /** Caller owns the transaction and parent-before-child lock protocol. */
+    public function findDeveloperForUpdate(int|string $id): ?array
+    {
+        $id = $this->identifier($id);
+        $row = $this->queryBuilder->table('developers')->select(self::DEVELOPER_COLUMNS)
+            ->where('id', '=', $id)->forUpdate()->first();
+
+        return $row === null ? null : $this->mapDeveloper($row);
+    }
+
+    /** Caller owns the transaction and parent-before-child lock protocol. */
+    public function findProjectForUpdate(int|string $id): ?array
+    {
+        $id = $this->identifier($id);
+        $row = $this->queryBuilder->table('projects')->select(self::PROJECT_COLUMNS)
+            ->where('id', '=', $id)->forUpdate()->first();
+
+        return $row === null ? null : $this->mapProject($row);
+    }
+
+    /** Project scope is part of the persistence predicate. */
+    public function findProjectPhaseForUpdate(int|string $projectId, int|string $phaseId): ?array
+    {
+        $projectId = $this->identifier($projectId);
+        $phaseId = $this->identifier($phaseId);
+        $row = $this->queryBuilder->table('project_phases')->select(self::PHASE_COLUMNS)
+            ->where('id', '=', $phaseId)->where('project_id', '=', $projectId)->forUpdate()->first();
+
+        return $row === null ? null : $this->mapProjectPhase($row);
+    }
+
+    /** Current reference read; caller must first lock the Developer. */
+    public function hasProjectsForDeveloper(int|string $developerId, ?string $status = null): bool
+    {
+        $developerId = $this->identifier($developerId);
+        $query = $this->queryBuilder->table('projects')->select(['id'])->where('developer_id', '=', $developerId);
+        if ($status !== null) { $query->where('status', '=', $status); }
+
+        return $query->orderBy('id')->forUpdate()->first() !== null;
+    }
+
+    /** Current reference read; caller must first lock the Project. */
+    public function hasPhasesForProject(int|string $projectId, ?string $status = null): bool
+    {
+        $projectId = $this->identifier($projectId);
+        $query = $this->queryBuilder->table('project_phases')->select(['id'])->where('project_id', '=', $projectId);
+        if ($status !== null) { $query->where('status', '=', $status); }
+
+        return $query->orderBy('id')->forUpdate()->first() !== null;
+    }
+
     /** @return DeveloperRecord|null */
     public function findDeveloperById(int|string $id): ?array
     {
