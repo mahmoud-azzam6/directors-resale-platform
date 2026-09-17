@@ -353,6 +353,15 @@ Status: IMPLEMENTED AND VERIFIED / CLOSED; documentation closure 2026-09-17
 - D4 passed all 19 requested D/BF014/BF013 scripts. Contract review reproduced a Geography pagination defect with an active 51st child; the iterative scan now visits every child page. Enhanced D1 and both D3a orderings passed after the targeted correction. PHP syntax and whitespace checks passed.
 - Canonical evidence: [BF014.3D closure record](../sprints/BF014.3-catalog-and-configuration-services.md#bf0143d-implementation-and-closure-evidence). BF014.3A-BF014.3D are CLOSED; BF014.3E is NEXT / NOT STARTED; BF014.3F and BF014.4-BF014.8 are NOT STARTED. BF014.3 and BF014 remain IN PROGRESS. No later sprint is selected.
 
+### BF014.3E - Real MariaDB Service Acceptance and Regressions (internal BF014 unit)
+
+Status: IMPLEMENTED AND VERIFIED / CLOSED; documentation closure 2026-09-18
+
+- E1, E2 and E3 integrated real MariaDB acceptance passed for Catalog/Configuration, Geography/Development and cross-service boundaries. Evidence covered persisted state, lifecycle/reference/safe-delete rules, transaction rollback and aggregate-family isolation.
+- E3.1 corrected only the E1 historical assertion: version-specific configuration and rule rows are immutable, while shared canonical Definition/Option metadata remains mutable under its catalog rules. No production defect or production change occurred.
+- E4 passed all E acceptance tests, Property Catalog, C4/C5a-C5d, D1/D2/D3a-D3d, BF014 repository/schema and BF013 database/authorization/HTTP/Service/repository regression scripts. Concurrency checks used real MariaDB independent workers; syntax and whitespace checks passed.
+- Canonical evidence: [BF014.3E closure record](../sprints/BF014.3-catalog-and-configuration-services.md#bf0143e-implementation-and-closure-evidence). BF014.3A-BF014.3E are CLOSED; BF014.3F is NEXT / NOT STARTED. BF014.3 and BF014 remain IN PROGRESS. No later sprint is selected.
+
 For future authorized implementation, completed database contracts produce the applicable artifacts; this documentation closure creates none:
 
 
