@@ -110,7 +110,7 @@ Listing Domain Architecture is approved but not implemented:
 - The physical model distinguishes System-only Global Physical Property Identity from independent Organization Property records and defines conceptual Ownership, version, media, Sale, and transfer boundaries.
 - BF013 implemented the approved Property & Ownership backend foundation. Listing workflows, rich Property Profile behavior, and frontend Property workflows remain excluded.
 - `docs/architecture/PROPERTY_PROFILE_ARCHITECTURE.md` defines the approved, not-implemented Rich Property Profile, derived completeness, progressive persistence, Property Media, and future Add Unit workflow.
-- `docs/architecture/PROPERTY_CATALOG_ARCHITECTURE.md` defines approved canonical Property catalogs, versioned Unit Type configuration, and Organization-private proposal governance. BF014.1 implements the catalog/configuration schema and BF014.2 implements six repositories/read models; Services, APIs and proposals remain unimplemented.
+- `docs/architecture/PROPERTY_CATALOG_ARCHITECTURE.md` defines approved canonical Property catalogs, versioned Unit Type configuration, and Organization-private proposal governance. BF014.1 implements the catalog/configuration schema; BF014.2 implements six repositories/read models; and BF014.3 implements PropertyCatalogService, UnitTypeConfigurationService, GeographicLocationService, and DevelopmentCatalogService. Catalog HTTP/API and proposals remain unimplemented.
 - `docs/database/SEED_DATA.md` defines an approved versioned, idempotent, non-destructive baseline seed strategy; no catalog seed scripts exist.
 - Add Unit is frontend/business terminology only; the backend concept remains Organization Property. Property completeness is separate from Listing readiness and never creates a Listing.
 
@@ -129,7 +129,7 @@ public/index.php
 
 ## Current Database State
 
-The repository schema extends through migration 030 and was verified on isolated MariaDB 10.4.32; this is not a claim that migrations 018-030 were applied to the normal XAMPP database. The intentional BF006-BF008 staged `organizations` schema
+The repository schema extends through migration 031 and was verified on isolated MariaDB 10.4.32; this is not a claim that migrations 018-031 were applied to the normal XAMPP database. The intentional BF006-BF008 staged `organizations` schema
 contains `id`, `parent_organization_id`, `name`, `code`, `organization_type`, `status`, `created_at`,
 and `updated_at`; `parent_organization_id` is indexed and self-references `organizations.id`.
 The BF009 `users` schema contains the staged User fields plus nullable BF010 `password_hash` and BF011 `position_id`, referencing `organizations.id` and `positions.id`.
@@ -138,7 +138,7 @@ The BF011 `positions` table references `organizations.id` and uses composite Org
 The BF012 `permissions` and `position_permissions` tables provide the controlled Position-derived Permission model.
 BF013 adds `organization_properties`, `owners`, `ownerships`, `ownership_parties`, `authorized_acting_owner_designations`, `global_physical_property_identities`, `global_physical_identity_links`, and `property_owner_lifecycle_history`. The active Permission catalog contains 30 codes after migration 017.
 
-BF014.1 added 13 catalog/configuration/seed-tracking tables through migrations 018-030, with zero baseline rows and no new Permission capabilities. See the [BF014.1 implementation record](../sprints/BF014.1-database-schema-and-integrity-constraints.md) for exact scope and verification.
+BF014.1 added 13 catalog/configuration/seed-tracking tables through migrations 018-030; BF014.3A added migration 031 for configuration-allocation guards. These changes have zero baseline rows and no new Permission capabilities. See the [BF014.1 implementation record](../sprints/BF014.1-database-schema-and-integrity-constraints.md) for exact scope and verification.
 
 ## Not Implemented
 
