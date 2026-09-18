@@ -362,6 +362,13 @@ Status: IMPLEMENTED AND VERIFIED / CLOSED; documentation closure 2026-09-18
 - E4 passed all E acceptance tests, Property Catalog, C4/C5a-C5d, D1/D2/D3a-D3d, BF014 repository/schema and BF013 database/authorization/HTTP/Service/repository regression scripts. Concurrency checks used real MariaDB independent workers; syntax and whitespace checks passed.
 - Canonical evidence: [BF014.3E closure record](../sprints/BF014.3-catalog-and-configuration-services.md#bf0143e-implementation-and-closure-evidence). BF014.3A-BF014.3E are CLOSED; BF014.3F is NEXT / NOT STARTED. BF014.3 and BF014 remain IN PROGRESS. No later sprint is selected.
 
+### BF014.3F - Final Documentation Closure (internal BF014 unit)
+
+- Status: **IMPLEMENTED AND VERIFIED / CLOSED** on 2026-09-19.
+- Synchronized the canonical records for BF014.3 completion. This unit changed documentation only; it added no production, test, schema or migration artifact.
+- Confirms the A-E service, real MariaDB acceptance, concurrency, rollback and regression evidence. Historical configuration structure remains immutable; shared canonical Definition and Option metadata remains mutable under catalog rules.
+- Canonical evidence: [BF014.3F closure record](../sprints/BF014.3-catalog-and-configuration-services.md#bf0143f-documentation-closure-evidence). BF014.3 is CLOSED. BF014 remains IN PROGRESS; BF014.4-BF014.8 are NOT STARTED, no next internal unit is selected, and BF015 remains NOT SELECTED.
+
 For future authorized implementation, completed database contracts produce the applicable artifacts; this documentation closure creates none:
 
 

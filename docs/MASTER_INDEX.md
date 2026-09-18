@@ -6,7 +6,7 @@ Version: 2.0
 
 Status: Active
 
-Last Updated: 2026-09-18
+Last Updated: 2026-09-19
 
 ---
 
@@ -19,9 +19,9 @@ Last Updated: 2026-09-18
 | Project Type | Enterprise SaaS Platform |
 | Industry | Real Estate Resale |
 | Architecture Style | Modular + Event Driven |
-| Current Phase | BF014 IN PROGRESS; BF014.1, BF014.2, and BF014.3A-BF014.3E IMPLEMENTED AND VERIFIED / CLOSED; BF013 closed |
+| Current Phase | BF014 IN PROGRESS; BF014.1, BF014.2, and BF014.3 IMPLEMENTED AND VERIFIED / CLOSED; BF013 closed |
 | Current Sprint | BF014 - Canonical Property Catalog Foundation (IN PROGRESS) |
-| Next Internal Unit | BF014.3F - Documentation closure (NEXT / NOT STARTED) |
+| Next Internal Unit | None selected after BF014.3 closure |
 | Next Selected Sprint | None after BF014; BF015 NOT SELECTED |
 | Current Version | 0.1.0 |
 | Repository Status | Active |
@@ -175,15 +175,15 @@ Business rollout remains incremental.
 
 | Item | Value |
 |------|-------|
-| Current Phase | BF014 IN PROGRESS; BF014.1, BF014.2, and BF014.3A-BF014.3E IMPLEMENTED AND VERIFIED / CLOSED; BF013 closed |
+| Current Phase | BF014 IN PROGRESS; BF014.1, BF014.2, and BF014.3 IMPLEMENTED AND VERIFIED / CLOSED; BF013 closed |
 | Current Sprint | BF014 - Canonical Property Catalog Foundation (IN PROGRESS) |
 | Current Module | M03 - Property & Ownership foundation and Property Catalog schema/repositories/services implemented; Rich Property Profile/Listing architecture only |
-| Current Feature | BF014.3E real MariaDB acceptance/regressions verified/closed; BF014.3 remains IN PROGRESS; BF014.3F next, not started |
+| Current Feature | BF014.3 Catalog / Configuration Services IMPLEMENTED AND VERIFIED / CLOSED; BF014 remains IN PROGRESS |
 | Current Database Contract | BF006-BF013 plus BF014.1 schema through migration 030; isolated MariaDB verified |
 | Current Database Module | Core plus BF013 Property/Owner/Ownership/Global Identity foundation |
 | Current Status | BF001-BF013 and AF001-AF003 implemented; BF013 verified and closed |
 | Current Milestone | Milestone 2 - Core Business |
-| Next Internal Unit | BF014.3F - Documentation closure (NEXT / NOT STARTED) |
+| Next Internal Unit | None selected after BF014.3 closure |
 | Next Selected Sprint | None after BF014; BF015 NOT SELECTED |
 | Target Release | Not defined by the current canonical roadmap |
 
@@ -195,7 +195,7 @@ Business rollout remains incremental.
 
 # M00 - Reference Data
 
-The entries below are legacy planning placeholders. They are not canonical Property table contracts. In particular, `countries`, `states`, `cities`, and `districts` are superseded for Property architecture by one hierarchical `geographic_locations` concept; `property_types` is superseded by Unit Types belonging to Property Categories. Canonical Property reference data is defined by `docs/architecture/PROPERTY_CATALOG_ARCHITECTURE.md` and is **APPROVED**, partially implemented through BF014.1 schema, BF014.2 repositories/read models, and BF014.3A-BF014.3E services.
+The entries below are legacy planning placeholders. They are not canonical Property table contracts. In particular, `countries`, `states`, `cities`, and `districts` are superseded for Property architecture by one hierarchical `geographic_locations` concept; `property_types` is superseded by Unit Types belonging to Property Categories. Canonical Property reference data is defined by `docs/architecture/PROPERTY_CATALOG_ARCHITECTURE.md` and is **APPROVED**, partially implemented through BF014.1 schema, BF014.2 repositories/read models, and BF014.3 services.
 
 | ID | Table | Status |
 |-----|------------------------|-----------|
@@ -505,7 +505,7 @@ No Analytics or reporting implementation exists yet.
 | Sprint 14 | Testing & QA | Planned |
 | Sprint 15 | Beta Release | Planned |
 | BF013 | Property & Ownership Foundation | Implemented and verified; closed |
-| BF014 | [Canonical Property Catalog Foundation](sprints/BF014-canonical-property-catalog-foundation.md) | IN PROGRESS; internal units BF014.1, BF014.2, and BF014.3A-BF014.3E closed |
+| BF014 | [Canonical Property Catalog Foundation](sprints/BF014-canonical-property-catalog-foundation.md) | IN PROGRESS; internal units BF014.1, BF014.2, and BF014.3 closed |
 
 ---
 
@@ -543,7 +543,7 @@ No Analytics or reporting implementation exists yet.
 
 | Item | Value |
 |------|-------|
-| Current Phase | BF014 IN PROGRESS; BF014.1, BF014.2, and BF014.3A-BF014.3E IMPLEMENTED AND VERIFIED / CLOSED; BF013 closed |
+| Current Phase | BF014 IN PROGRESS; BF014.1, BF014.2, and BF014.3 IMPLEMENTED AND VERIFIED / CLOSED; BF013 closed |
 | Current Module | M03 - Property & Ownership foundation and Property Catalog schema/repositories/services implemented; Rich Property Profile/Listing architecture only |
 | Current Documents | [BF014 contract](sprints/BF014-canonical-property-catalog-foundation.md); PROPERTY_PROFILE_ARCHITECTURE.md; PROPERTY_CATALOG_ARCHITECTURE.md; SEED_DATA.md |
 | Current Database Contract | BF006-BF013 plus BF014.1 schema through migration 030; isolated MariaDB verified |
@@ -748,9 +748,9 @@ A feature is considered complete only when:
 
 ## Immediate Next Development Target
 
-BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1, BF014.2, and internal BF014.3A-BF014.3E are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.3 remains **IN PROGRESS**; BF014.3F is **NEXT / NOT STARTED**, and BF014.4-BF014.8 are **NOT STARTED**. These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture is partially implemented through schema, repositories, PropertyCatalogService, UnitTypeConfigurationService, GeographicLocationService, and DevelopmentCatalogService. E4 closure evidence is recorded in the [BF014.3 contract](sprints/BF014.3-catalog-and-configuration-services.md#bf0143e-implementation-and-closure-evidence). Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. No BF015 or later sprint is selected.
+BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1, BF014.2, and internal BF014.3 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.4-BF014.8 are **NOT STARTED**. These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture is partially implemented through schema, repositories, PropertyCatalogService, UnitTypeConfigurationService, GeographicLocationService, and DevelopmentCatalogService. The [BF014.3F closure evidence](sprints/BF014.3-catalog-and-configuration-services.md#bf0143f-documentation-closure-evidence) records the completed acceptance and regression evidence. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. No next internal unit, BF015 or later sprint is selected.
 
-BF001-BF013 and AF001-AF003 are implemented. Property Catalog/Data Governance is approved and partially implemented through BF014.1 schema, BF014.2 repositories/read models, and BF014.3A-BF014.3E services. Rich Property Profile, Listing Domain, and the broader Listing implementation remain approved but not implemented. Add Unit is future frontend terminology for Organization Property; no sprint after BF014 is selected.
+BF001-BF013 and AF001-AF003 are implemented. Property Catalog/Data Governance is approved and partially implemented through BF014.1 schema, BF014.2 repositories/read models, and BF014.3 services. Rich Property Profile, Listing Domain, and the broader Listing implementation remain approved but not implemented. Add Unit is future frontend terminology for Organization Property; no sprint after BF014 is selected.
 
 ## Sprint 1
 

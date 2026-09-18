@@ -1,6 +1,6 @@
 # BF014 - Canonical Property Catalog Foundation
 
-**Status: SELECTED / DOCUMENTED / NOT IMPLEMENTED**
+**Status: IN PROGRESS**
 
 **Foundation:** BF013 - IMPLEMENTED AND VERIFIED / CLOSED
 
@@ -14,7 +14,7 @@
 
 **Selected/documented:** 2026-09-13
 
-BF014 is the selected current Backend sprint. This is its future implementation contract; documentation and selection do not claim implementation. This task is documentation only. No BF015 or subsequent sprint is selected.
+BF014 is the selected current Backend sprint and remains **IN PROGRESS**. BF014.1, BF014.2, and BF014.3 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.4-BF014.8 remain **NOT STARTED**; no next internal unit, BF015 or subsequent sprint is selected. This parent contract remains authoritative for scope and future BF014 work.
 
 ## Authority and preserved boundaries
 
@@ -40,7 +40,7 @@ BF014 tightens the general architecture safe-delete allowance: SYSTEM_SEED recor
 
 OrganizationProperty remains the operational aggregate root with BF013 ACTIVE / ARCHIVED lifecycle. Owner and Ownership remain private_organization; Global Physical Identity remains System-only. Future Property completeness never creates a Listing; price and commercial terms remain Listing data. Property Media stays deferred; no retained original or Master WebP requirement is introduced.
 
-All schema, services, APIs, seed execution, and acceptance described below are future BF014 deliverables, not artifacts created by this documentation task.
+The schema, repositories and BF014.3 services described below are implemented where recorded in their canonical closure records. APIs, seed execution and the remaining BF014 scope are future deliverables.
 
 ## BF014 OBJECTIVE
 
@@ -663,7 +663,7 @@ The future BF014 implementation is done only when all criteria below are verifie
 
 ## IMPLEMENTATION UNIT PLAN
 
-These are proposed implementation units within BF014, not separate sprints. All remain NOT IMPLEMENTED.
+These are implementation units within BF014, not separate sprints. BF014.1, BF014.2 and BF014.3 are closed; BF014.4-BF014.8 remain NOT STARTED.
 
 | Unit | Future deliverable |
 | --- | --- |
@@ -692,4 +692,4 @@ These are proposed implementation units within BF014, not separate sprints. All 
 
 Only this contract and necessary updates to AI_CONTEXT.md, PROJECT_STATUS.md, docs/MASTER_INDEX.md, docs/development/CURRENT_SYSTEM_STATE.md, docs/development/IMPLEMENTATION_PLAN.md, docs/development/SPRINT_LOG.md, and docs/database/SEED_DATA.md are authorized in this task.
 
-Run git diff --check and git status --short; verify the documentation allowlist and review status/scope contradictions. BF013 remains CLOSED; BF014 remains SELECTED / DOCUMENTED / NOT IMPLEMENTED; Rich Property Profile and Listing remain NOT IMPLEMENTED; no BF015 or later sprint is selected. No code, tests, migrations, seeds, frontend, dependency/runtime configuration, or database schema changes belong to this documentation task. Do not commit or push. The acceptance criteria above belong to future BF014 implementation.
+Run git diff --check and git status --short; verify the documentation allowlist and review status/scope contradictions. BF013 remains CLOSED; BF014 remains IN PROGRESS; Rich Property Profile and Listing remain NOT IMPLEMENTED; no BF015 or later sprint is selected. No code, tests, migrations, seeds, frontend, dependency/runtime configuration, or database schema changes belong to this documentation task. Do not commit or push. The remaining acceptance criteria above belong to future BF014 implementation.

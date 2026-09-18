@@ -1,6 +1,6 @@
 # Current System State
 
-Status: BF014 IN PROGRESS; BF014.1, BF014.2, and BF014.3A-BF014.3E IMPLEMENTED AND VERIFIED / CLOSED; BF014.3F NEXT / NOT STARTED; BF013 closed; AF003 completed
+Status: BF014 IN PROGRESS; BF014.1, BF014.2, and BF014.3 IMPLEMENTED AND VERIFIED / CLOSED; BF013 closed; AF003 completed
 
 ## Completed Implementation
 
@@ -169,6 +169,6 @@ Rich Property Profile and Property Catalog/Data Governance architecture closure 
 
 ## Next Development Target
 
-BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1, BF014.2, and internal BF014.3A-BF014.3E are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.3 remains **IN PROGRESS**; BF014.3F is **NEXT / NOT STARTED**, and BF014.4-BF014.8 are **NOT STARTED**. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture is partially implemented through schema, repositories, PropertyCatalogService, UnitTypeConfigurationService, GeographicLocationService, and DevelopmentCatalogService. E4’s real MariaDB acceptance/regression evidence and the test-only E3.1 historical-assertion clarification are recorded in the [BF014.3E closure evidence](../sprints/BF014.3-catalog-and-configuration-services.md#bf0143e-implementation-and-closure-evidence). Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. No BF015 or later sprint is selected.
+BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1, BF014.2, and internal BF014.3 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.4-BF014.8 are **NOT STARTED**. Property Catalog architecture is partially implemented through schema, repositories, PropertyCatalogService, UnitTypeConfigurationService, GeographicLocationService, and DevelopmentCatalogService. The [BF014.3F closure evidence](../sprints/BF014.3-catalog-and-configuration-services.md#bf0143f-documentation-closure-evidence) records E1-E4 acceptance and regression evidence, including the test-only E3.1 historical-structure/shared-canonical-metadata clarification. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. No next internal unit, BF015 or later sprint is selected.
 
 BF014 is limited to canonical catalogs, configuration/versioning, System Admin backend management, authorized reads, dynamic form configuration, and safe versioned baseline seeds. It does not assign classification or store rich values on Organization Property, implement proposals/media/completeness, or add frontend or Listing workflows.
