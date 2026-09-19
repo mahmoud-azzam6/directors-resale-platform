@@ -19,6 +19,7 @@ use App\Modules\Authorization\Services\OrganizationScopeService;
 use App\Modules\Property\Controllers\OrganizationPropertyController;
 use App\Modules\Property\Controllers\PropertyCatalogReadController;
 use App\Modules\Property\Controllers\PropertyCatalogMutationController;
+use App\Modules\Property\Controllers\UnitTypeConfigurationController;
 use App\Modules\Owner\Controllers\OwnerController;
 use App\Modules\Ownership\Controllers\OwnershipController;
 use App\Modules\GlobalPropertyIdentity\Controllers\GlobalPhysicalIdentityController;
@@ -297,6 +298,22 @@ return static function (Router $router, Container $container, array $config): vo
     $router->post('/attribute-definitions/{definitionId}/options/{optionId}/deactivate', $catalogMutation(fn(Request $r,string $definitionId,string $optionId):Response=>$container->make(PropertyCatalogMutationController::class)->deactivateAttributeOption($r,$definitionId,$optionId)));
     $router->post('/attribute-definitions/{definitionId}/options/{optionId}/reactivate', $catalogMutation(fn(Request $r,string $definitionId,string $optionId):Response=>$container->make(PropertyCatalogMutationController::class)->reactivateAttributeOption($r,$definitionId,$optionId)));
     $router->delete('/attribute-definitions/{definitionId}/options/{optionId}', $catalogMutation(fn(Request $r,string $definitionId,string $optionId):Response=>$container->make(PropertyCatalogMutationController::class)->deleteAttributeOption($r,$definitionId,$optionId)));
+
+    $router->get('/unit-types/{unitTypeId}/configurations/active', $authorize(fn(Request $r,string $unitTypeId):Response=>$container->make(UnitTypeConfigurationController::class)->active($r,$unitTypeId),'property_catalogs.view'));
+    $router->get('/unit-types/{unitTypeId}/configurations/draft', $authorize(fn(Request $r,string $unitTypeId):Response=>$container->make(UnitTypeConfigurationController::class)->draft($r,$unitTypeId),'property_catalogs.view'));
+    $router->post('/unit-types/{unitTypeId}/configurations/drafts', $catalogMutation(fn(Request $r,string $unitTypeId):Response=>$container->make(UnitTypeConfigurationController::class)->createDraft($r,$unitTypeId)));
+    $router->post('/unit-types/{unitTypeId}/configurations/drafts/clone-active', $catalogMutation(fn(Request $r,string $unitTypeId):Response=>$container->make(UnitTypeConfigurationController::class)->cloneActive($r,$unitTypeId)));
+    $router->post('/unit-types/{unitTypeId}/configurations/{configurationId}/activate', $catalogMutation(fn(Request $r,string $unitTypeId,string $configurationId):Response=>$container->make(UnitTypeConfigurationController::class)->activate($r,$unitTypeId,$configurationId)));
+    $router->delete('/unit-types/{unitTypeId}/configurations/{configurationId}', $catalogMutation(fn(Request $r,string $unitTypeId,string $configurationId):Response=>$container->make(UnitTypeConfigurationController::class)->deleteDraft($r,$unitTypeId,$configurationId)));
+    $router->get('/unit-types/{unitTypeId}/configurations/{configurationId}/aggregate', $authorize(fn(Request $r,string $unitTypeId,string $configurationId):Response=>$container->make(UnitTypeConfigurationController::class)->aggregate($r,$unitTypeId,$configurationId),'property_catalogs.view'));
+    $router->get('/unit-types/{unitTypeId}/configurations/{configurationId}', $authorize(fn(Request $r,string $unitTypeId,string $configurationId):Response=>$container->make(UnitTypeConfigurationController::class)->show($r,$unitTypeId,$configurationId),'property_catalogs.view'));
+    $router->get('/unit-types/{unitTypeId}/configurations', $authorize(fn(Request $r,string $unitTypeId):Response=>$container->make(UnitTypeConfigurationController::class)->index($r,$unitTypeId),'property_catalogs.view'));
+    $router->post('/unit-types/{unitTypeId}/configurations/{configurationId}/measurement-rules', $catalogMutation(fn(Request $r,string $unitTypeId,string $configurationId):Response=>$container->make(UnitTypeConfigurationController::class)->addMeasurementRule($r,$unitTypeId,$configurationId)));
+    $router->patch('/unit-types/{unitTypeId}/configurations/{configurationId}/measurement-rules/{ruleId}', $catalogMutation(fn(Request $r,string $unitTypeId,string $configurationId,string $ruleId):Response=>$container->make(UnitTypeConfigurationController::class)->updateMeasurementRule($r,$unitTypeId,$configurationId,$ruleId)));
+    $router->delete('/unit-types/{unitTypeId}/configurations/{configurationId}/measurement-rules/{ruleId}', $catalogMutation(fn(Request $r,string $unitTypeId,string $configurationId,string $ruleId):Response=>$container->make(UnitTypeConfigurationController::class)->removeMeasurementRule($r,$unitTypeId,$configurationId,$ruleId)));
+    $router->post('/unit-types/{unitTypeId}/configurations/{configurationId}/attribute-rules', $catalogMutation(fn(Request $r,string $unitTypeId,string $configurationId):Response=>$container->make(UnitTypeConfigurationController::class)->addAttributeRule($r,$unitTypeId,$configurationId)));
+    $router->patch('/unit-types/{unitTypeId}/configurations/{configurationId}/attribute-rules/{ruleId}', $catalogMutation(fn(Request $r,string $unitTypeId,string $configurationId,string $ruleId):Response=>$container->make(UnitTypeConfigurationController::class)->updateAttributeRule($r,$unitTypeId,$configurationId,$ruleId)));
+    $router->delete('/unit-types/{unitTypeId}/configurations/{configurationId}/attribute-rules/{ruleId}', $catalogMutation(fn(Request $r,string $unitTypeId,string $configurationId,string $ruleId):Response=>$container->make(UnitTypeConfigurationController::class)->removeAttributeRule($r,$unitTypeId,$configurationId,$ruleId)));
 
     $router->get('/positions/{id}/permissions', $authorize(function (Request $request, string $id) use ($container): Response {
         return $container->make(PositionPermissionController::class)->index($request, $id);
