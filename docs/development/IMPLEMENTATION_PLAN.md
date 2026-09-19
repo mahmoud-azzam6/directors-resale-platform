@@ -25,7 +25,7 @@ BF006 smoke tests and BF007 manual acceptance/regression checks passed at their 
 
 ## Current Planning State
 
-BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1, BF014.2, and internal BF014.3 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.4 is **SELECTED / ARCHITECTURE LOCKED / NOT IMPLEMENTED**; BF014.5-BF014.8 are **NOT STARTED**. These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. [BF014.4 authorization and HTTP contract](../sprints/BF014.4-authorization-and-http.md) records the next planned internal unit. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. BF015 and later sprints are not selected.
+BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1, BF014.2, BF014.3, and BF014.4A are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.4 remains **IN PROGRESS** with BF014.4B **NEXT / NOT STARTED**; BF014.4C-BF014.4F and BF014.5-BF014.8 are **NOT STARTED**. These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. [BF014.4 authorization and HTTP contract](../sprints/BF014.4-authorization-and-http.md) records the next planned internal unit. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. BF015 and later sprints are not selected.
 
 The contract records BF014.1 schema/integrity, BF014.2 repositories/read models, BF014.3 services, BF014.4 authorization/HTTP, BF014.5 seed runner/baseline, BF014.6 dynamic form projection, BF014.7 MariaDB acceptance/regressions, and BF014.8 documentation closure. BF014.1, BF014.2, and BF014.3 are IMPLEMENTED AND VERIFIED / CLOSED. BF014.4 is SELECTED / ARCHITECTURE LOCKED / NOT IMPLEMENTED; BF014.5-BF014.8 are NOT STARTED.
 

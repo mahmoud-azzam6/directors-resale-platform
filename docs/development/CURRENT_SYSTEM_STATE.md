@@ -169,6 +169,6 @@ Rich Property Profile and Property Catalog/Data Governance architecture closure 
 
 ## Next Development Target
 
-BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1, BF014.2, and internal BF014.3 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.4 is **SELECTED / ARCHITECTURE LOCKED / NOT IMPLEMENTED**; BF014.5-BF014.8 are **NOT STARTED**. The [BF014.4 contract](../sprints/BF014.4-authorization-and-http.md) records the planned authorization and HTTP boundary. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. BF015 and later sprints are not selected.
+BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1, BF014.2, BF014.3, and BF014.4A are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.4 remains **IN PROGRESS** with BF014.4B **NEXT / NOT STARTED**; BF014.4C-BF014.4F and BF014.5-BF014.8 are **NOT STARTED**. The [BF014.4 contract](../sprints/BF014.4-authorization-and-http.md) records the authorization and HTTP boundary. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. BF015 and later sprints are not selected.
 
 BF014 is limited to canonical catalogs, configuration/versioning, System Admin backend management, authorized reads, dynamic form configuration, and safe versioned baseline seeds. It does not assign classification or store rich values on Organization Property, implement proposals/media/completeness, or add frontend or Listing workflows.

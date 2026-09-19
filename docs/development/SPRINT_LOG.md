@@ -375,6 +375,12 @@ Status: IMPLEMENTED AND VERIFIED / CLOSED; documentation closure 2026-09-18
 - The [BF014.4 contract](../sprints/BF014.4-authorization-and-http.md) locks the `property_catalogs.view` read capability, `property_catalogs.manage` plus SYSTEM_ONLY mutation boundary, route families, controller-to-Service boundary, explicit configuration lifecycle routes, and required additive Permission-catalog migration.
 - BF014 remains IN PROGRESS. BF014.5-BF014.8 are NOT STARTED and BF015 remains NOT SELECTED. This selection adds no code, routes, permissions, migrations, tests, or schema changes.
 
+### BF014.4A - Permission Capability Foundation (internal BF014 unit)
+
+- Status: **IMPLEMENTED AND VERIFIED / CLOSED**.
+- Added migration 032 with exactly `property_catalogs.view` and `property_catalogs.manage`, taking the controlled Permission catalog from 30 to 32. Existing Position Permission assignment and BF012 active-Permission authorization resolve both capabilities without special-case code.
+- Focused real-MariaDB acceptance and BF013 database, authorization, and HTTP regressions passed. BF014.4 remains IN PROGRESS; BF014.4B is NEXT / NOT STARTED. No routes or controllers were added.
+
 For future authorized implementation, completed database contracts produce the applicable artifacts; this documentation closure creates none:
 
 

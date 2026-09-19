@@ -10,7 +10,7 @@ Completed Sprints: BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, B
 
 Current Sprint: BF014 - Canonical Property Catalog Foundation (IN PROGRESS)
 
-Next Internal Unit: BF014.4 — Authorization + HTTP (SELECTED / ARCHITECTURE LOCKED / NOT IMPLEMENTED)
+Next Internal Unit: BF014.4B — Catalog HTTP reads and mutations (NEXT / NOT STARTED)
 
 Next Selected Sprint: None after BF014; BF015 NOT SELECTED
 
@@ -54,7 +54,7 @@ remain scope-controlled. `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md` defi
 
 ## Selected Backend Sprint
 
-BF014 is the current Backend sprint: **IN PROGRESS**. The parent contract remains authoritative for overall scope, baseline matrices, non-goals, and Definition of Done. BF014.1, BF014.2, and internal BF014.3 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.4 is **SELECTED / ARCHITECTURE LOCKED / NOT IMPLEMENTED**; it defines the authorization and HTTP boundary only. BF014.5-BF014.8 are **NOT STARTED** and BF015 is not selected. See the [BF014.4 contract](docs/sprints/BF014.4-authorization-and-http.md). These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture is partially implemented through schema, repositories, PropertyCatalogService, UnitTypeConfigurationService, GeographicLocationService, and DevelopmentCatalogService. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**.
+BF014 is the current Backend sprint: **IN PROGRESS**. The parent contract remains authoritative for overall scope, baseline matrices, non-goals, and Definition of Done. BF014.1, BF014.2, BF014.3, and BF014.4A are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.4 remains **IN PROGRESS** with BF014.4B **NEXT / NOT STARTED**; BF014.4C-BF014.4F and BF014.5-BF014.8 are **NOT STARTED** and BF015 is not selected. See the [BF014.4 contract](docs/sprints/BF014.4-authorization-and-http.md). These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture is partially implemented through schema, repositories, PropertyCatalogService, UnitTypeConfigurationService, GeographicLocationService, and DevelopmentCatalogService. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**.
 
 ## Architecture Overview
 
