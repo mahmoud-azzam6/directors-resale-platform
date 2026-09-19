@@ -101,7 +101,7 @@ try {
     $pdo->exec('SET SESSION foreign_key_checks = 1, check_constraint_checks = 1');
     $migrations = glob($root . '/database/migrations/*.sql') ?: [];
     sort($migrations, SORT_STRING);
-    bf014RepoEqual(array_map(static fn ($file) => (int) substr(basename($file), 0, 3), $migrations), range(1, 31), 'Migrations 001-031');
+    bf014RepoEqual(array_map(static fn ($file) => (int) substr(basename($file), 0, 3), $migrations), range(1, 32), 'Migrations 001-032');
     foreach ($migrations as $file) { $pdo->exec(file_get_contents($file)); }
     $tables = ['property_categories', 'unit_types', 'unit_type_configuration_versions', 'measurement_definitions',
         'unit_type_measurement_rules', 'attribute_definitions', 'attribute_options', 'unit_type_attribute_rules',
@@ -109,7 +109,7 @@ try {
     foreach ($tables as $table) {
         bf014RepoEqual((int) $pdo->query("SELECT COUNT(*) FROM `{$table}`")->fetchColumn(), 0, $table . ' exists without baseline rows');
     }
-    echo "Migrations 001-031 / 13 empty BF014 tables: PASS\n";
+    echo "Migrations 001-032 / 13 empty BF014 tables: PASS\n";
 
     $container = new Container();
     (new AppServiceProvider($container, []))->register();
@@ -121,7 +121,7 @@ try {
     [$catalog, $measurements, $attributes, $configurations, $geography, $development] = $repositories;
     $ulids = $container->make(UlidGeneratorInterface::class);
     $data = static fn (string $code, array $extra = []): array => array_replace([
-        'ulid' => $ulids->generate(), 'code' => $code, 'name_ar' => 'اسم ' . $code, 'name_en' => 'Name ' . $code,
+        'ulid' => $ulids->generate(), 'code' => $code, 'name_ar' => 'Ø§Ø³Ù… ' . $code, 'name_en' => 'Name ' . $code,
         'status' => 'active', 'provenance' => 'SYSTEM_ADMIN', 'sort_order' => 0,
     ], $extra);
     $missing = 999999999;
@@ -170,7 +170,7 @@ try {
         bf014RepoAssert(count($repo->$list(['status' => 'inactive'])) >= 1, $stem . ' QueryBuilder list');
         bf014RepoEqual($repo->$update($row['id'], []), $row, $stem . ' empty update');
         bf014RepoEqual($repo->$update($row['id'], ['name_en' => $row['name_en']]), $row, $stem . ' unchanged update');
-        $changed = $repo->$update($row['id'], ['name_ar' => 'تعديل', 'name_en' => 'Changed', 'sort_order' => 9, 'status' => 'inactive', 'updated_by_user_id' => null]);
+        $changed = $repo->$update($row['id'], ['name_ar' => 'ØªØ¹Ø¯ÙŠÙ„', 'name_en' => 'Changed', 'sort_order' => 9, 'status' => 'inactive', 'updated_by_user_id' => null]);
         bf014RepoEqual($changed['name_en'], 'Changed', $stem . ' update');
         bf014RepoEqual($changed['sort_order'], 9, $stem . ' sort update');
         foreach (['ulid', 'code', 'provenance', 'created_by_user_id', 'unknown', 'updated_at'] as $field) {

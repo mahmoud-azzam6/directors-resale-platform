@@ -60,7 +60,7 @@ try {
     $tables = ['property_categories', 'unit_types', 'unit_type_configuration_versions', 'measurement_definitions', 'unit_type_measurement_rules', 'attribute_definitions', 'attribute_options', 'unit_type_attribute_rules', 'geographic_locations', 'developers', 'projects', 'project_phases', 'property_catalog_seed_versions'];
     $migrations = glob($root . '/database/migrations/*.sql') ?: [];
     sort($migrations, SORT_STRING);
-    bf014Assert(count($migrations) === 31, 'Expected exactly migrations 001-031.');
+    bf014Assert(count($migrations) === 32, 'Expected exactly migrations 001-032.');
     foreach ($migrations as $index => $path) {
         bf014Assert((int) substr(basename($path), 0, 3) === $index + 1, 'Migration sequence gap.');
         $sql = file_get_contents($path);
@@ -71,12 +71,12 @@ try {
         }
         $pdo->exec($sql);
     }
-    echo "MariaDB {$version}: migrations 001-031 applied.\n";
+    echo "MariaDB {$version}: migrations 001-032 applied.\n";
     foreach ($tables as $table) {
         bf014Assert((int) $pdo->query("SELECT COUNT(*) FROM `{$table}`")->fetchColumn() === 0, "{$table} was seeded by migrations.");
     }
-    bf014Assert((int) $pdo->query('SELECT COUNT(*) FROM permissions')->fetchColumn() === 30, 'BF014 unexpectedly changed permissions.');
-    echo "All 13 new tables contain zero rows after migration; permissions remain 30.\n";
+    bf014Assert((int) $pdo->query('SELECT COUNT(*) FROM permissions')->fetchColumn() === 32, 'Permission migration did not add the BF014.4 capabilities.');
+    echo "All 13 new tables contain zero rows after migration; permissions are 32.\n";
 
     $names = "'" . implode("','", $tables) . "'";
     $fks = $pdo->query("SELECT CONSTRAINT_NAME, DELETE_RULE, UPDATE_RULE FROM information_schema.referential_constraints WHERE constraint_schema = DATABASE() AND table_name IN ({$names})")->fetchAll();
@@ -99,7 +99,7 @@ try {
     };
     $serial = 0;
     $catalog = static function (array $extra = []) use (&$serial): array {
-        return array_replace(['ulid' => (string) new Ulid(), 'code' => 'TEST_' . ++$serial, 'name_ar' => 'اختبار', 'name_en' => 'Test', 'status' => 'active', 'provenance' => 'SYSTEM_ADMIN'], $extra);
+        return array_replace(['ulid' => (string) new Ulid(), 'code' => 'TEST_' . ++$serial, 'name_ar' => 'Ø§Ø®ØªØ¨Ø§Ø±', 'name_en' => 'Test', 'status' => 'active', 'provenance' => 'SYSTEM_ADMIN'], $extra);
     };
     $cat = $insert('property_categories', $catalog());
     $unit = $insert('unit_types', $catalog(['property_category_id' => $cat]));
