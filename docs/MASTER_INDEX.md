@@ -21,7 +21,7 @@ Last Updated: 2026-09-19
 | Architecture Style | Modular + Event Driven |
 | Current Phase | BF014 IN PROGRESS; BF014.1, BF014.2, and BF014.3 IMPLEMENTED AND VERIFIED / CLOSED; BF013 closed |
 | Current Sprint | BF014 - Canonical Property Catalog Foundation (IN PROGRESS) |
-| Next Internal Unit | BF014.4B — Catalog HTTP reads and mutations (NEXT / NOT STARTED) |
+| Next Internal Unit | BF014.5 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Catalog HTTP reads and mutations (NEXT / NOT STARTED) |
 | Next Selected Sprint | None after BF014; BF015 NOT SELECTED |
 | Current Version | 0.1.0 |
 | Repository Status | Active |
@@ -178,12 +178,12 @@ Business rollout remains incremental.
 | Current Phase | BF014 IN PROGRESS; BF014.1, BF014.2, and BF014.3 IMPLEMENTED AND VERIFIED / CLOSED; BF013 closed |
 | Current Sprint | BF014 - Canonical Property Catalog Foundation (IN PROGRESS) |
 | Current Module | M03 - Property & Ownership foundation and Property Catalog schema/repositories/services implemented; Rich Property Profile/Listing architecture only |
-| Current Feature | BF014.4A Permission Capability Foundation IMPLEMENTED AND VERIFIED / CLOSED; BF014.4B next |
+| Current Feature | BF014.4A Permission Capability Foundation IMPLEMENTED AND VERIFIED / CLOSED; BF014.5 next |
 | Current Database Contract | BF006-BF013 plus BF014.1 schema through migration 030; isolated MariaDB verified |
 | Current Database Module | Core plus BF013 Property/Owner/Ownership/Global Identity foundation |
 | Current Status | BF001-BF013 and AF001-AF003 implemented; BF013 verified and closed |
 | Current Milestone | Milestone 2 - Core Business |
-| Next Internal Unit | BF014.4B — Catalog HTTP reads and mutations (NEXT / NOT STARTED) |
+| Next Internal Unit | BF014.5 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Catalog HTTP reads and mutations (NEXT / NOT STARTED) |
 | Next Selected Sprint | None after BF014; BF015 NOT SELECTED |
 | Target Release | Not defined by the current canonical roadmap |
 
@@ -398,8 +398,8 @@ No Analytics or reporting implementation exists yet.
 
 | ADR | Title | Status |
 |------|-----------------------------------------------------------|-----------|
-| ADR-001 | Organization Hierarchy | ✅ Approved |
-| ADR-002 | Property / Ownership / Listing Separation | ✅ Approved |
+| ADR-001 | Organization Hierarchy | ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Approved |
+| ADR-002 | Property / Ownership / Listing Separation | ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Approved |
 | ADR-003 | Requirement Groups | Planned |
 | ADR-004 | Event Driven Architecture | Planned |
 | ADR-005 | ULID Strategy | Planned |
@@ -488,7 +488,7 @@ No Analytics or reporting implementation exists yet.
 
 | Sprint | Goal | Status |
 |----------|----------------------------------------------|-------------|
-| Sprint 0 | Discovery & Architecture Foundation | ✅ Completed |
+| Sprint 0 | Discovery & Architecture Foundation | ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Completed |
 | Sprint 1 | Core Database Module | Legacy roadmap; superseded by BF milestone sequence |
 | Sprint 2 | CRM Module | Planned |
 | Sprint 3 | Property Engine | Planned |
@@ -505,7 +505,7 @@ No Analytics or reporting implementation exists yet.
 | Sprint 14 | Testing & QA | Planned |
 | Sprint 15 | Beta Release | Planned |
 | BF013 | Property & Ownership Foundation | Implemented and verified; closed |
-| BF014 | [Canonical Property Catalog Foundation](sprints/BF014-canonical-property-catalog-foundation.md) | IN PROGRESS; BF014.1-BF014.3 and BF014.4A closed; BF014.4B next |
+| BF014 | [Canonical Property Catalog Foundation](sprints/BF014-canonical-property-catalog-foundation.md) | IN PROGRESS; BF014.1-BF014.4 closed; BF014.5 next |
 
 ---
 
@@ -557,16 +557,16 @@ No Analytics or reporting implementation exists yet.
 
 | Area | Progress |
 |------|----------|
-| Product Discovery | ████████████████████ 100% |
-| Business Analysis | ████████████████████ 100% |
-| Architecture | ████████████████████ 100% |
-| Documentation | ██████████████████░░ 90% |
-| Database Design | ███░░░░░░░░░░░░░░░░░ 10% |
+| Product Discovery | ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€  100% |
+| Business Analysis | ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€  100% |
+| Architecture | ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€  100% |
+| Documentation | ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬Ëœ 90% |
+| Database Design | ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬Ëœ 10% |
 | Backend Development | BF001-BF013 foundation and Core business/security scope implemented |
 | Frontend Development | AF001 Admin UI Foundation implemented; feature CRUD UI planned |
-| AI Development | ░░░░░░░░░░░░░░░░░░░░ 0% |
-| Testing | ░░░░░░░░░░░░░░░░░░░░ 0% |
-| Production Readiness | ░░░░░░░░░░░░░░░░░░░░ 0% |
+| AI Development | ÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬Ëœ 0% |
+| Testing | ÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬Ëœ 0% |
+| Production Readiness | ÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬Ëœ 0% |
 
 ---
 
@@ -651,43 +651,43 @@ Every feature follows the same lifecycle.
 
 Idea
 
-↓
+ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
 
 Workshop (if required)
 
-↓
+ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
 
 ADR (if required)
 
-↓
+ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
 
 Business Rules
 
-↓
+ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
 
 Architecture
 
-↓
+ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
 
 Database
 
-↓
+ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
 
 API
 
-↓
+ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
 
 Backend
 
-↓
+ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
 
 Frontend
 
-↓
+ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
 
 Testing
 
-↓
+ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
 
 Release
 
@@ -748,7 +748,7 @@ A feature is considered complete only when:
 
 ## Immediate Next Development Target
 
-BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1, BF014.2, BF014.3, and BF014.4A are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.4 remains **IN PROGRESS** with BF014.4B **NEXT / NOT STARTED**; BF014.4C-BF014.4F and BF014.5-BF014.8 are **NOT STARTED**. These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. The [BF014.4 contract](sprints/BF014.4-authorization-and-http.md) records the authorization and HTTP boundary. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. BF015 and later sprints are not selected.
+BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1 through BF014.4 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.5 is **NEXT / NOT STARTED**; BF014.6-BF014.8 are **NOT STARTED**. These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. The [BF014.4 contract](sprints/BF014.4-authorization-and-http.md) records the authorization and HTTP boundary. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. BF015 and later sprints are not selected.
 
 BF001-BF013 and AF001-AF003 are implemented. Property Catalog/Data Governance is approved and partially implemented through BF014.1 schema, BF014.2 repositories/read models, and BF014.3 services. Rich Property Profile, Listing Domain, and the broader Listing implementation remain approved but not implemented. Add Unit is future frontend terminology for Organization Property; no sprint after BF014 is selected.
 
