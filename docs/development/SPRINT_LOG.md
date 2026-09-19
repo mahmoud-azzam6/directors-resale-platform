@@ -369,6 +369,12 @@ Status: IMPLEMENTED AND VERIFIED / CLOSED; documentation closure 2026-09-18
 - Confirms the A-E service, real MariaDB acceptance, concurrency, rollback and regression evidence. Historical configuration structure remains immutable; shared canonical Definition and Option metadata remains mutable under catalog rules.
 - Canonical evidence: [BF014.3F closure record](../sprints/BF014.3-catalog-and-configuration-services.md#bf0143f-documentation-closure-evidence). BF014.3 is CLOSED. BF014 remains IN PROGRESS; BF014.4-BF014.8 are NOT STARTED, no next internal unit is selected, and BF015 remains NOT SELECTED.
 
+### BF014.4 - Authorization + HTTP (internal BF014 unit)
+
+- Status: **SELECTED / ARCHITECTURE LOCKED / NOT IMPLEMENTED**.
+- The [BF014.4 contract](../sprints/BF014.4-authorization-and-http.md) locks the `property_catalogs.view` read capability, `property_catalogs.manage` plus SYSTEM_ONLY mutation boundary, route families, controller-to-Service boundary, explicit configuration lifecycle routes, and required additive Permission-catalog migration.
+- BF014 remains IN PROGRESS. BF014.5-BF014.8 are NOT STARTED and BF015 remains NOT SELECTED. This selection adds no code, routes, permissions, migrations, tests, or schema changes.
+
 For future authorized implementation, completed database contracts produce the applicable artifacts; this documentation closure creates none:
 
 

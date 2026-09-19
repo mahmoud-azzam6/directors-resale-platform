@@ -25,9 +25,9 @@ BF006 smoke tests and BF007 manual acceptance/regression checks passed at their 
 
 ## Current Planning State
 
-BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1, BF014.2, and internal BF014.3 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.4-BF014.8 are **NOT STARTED**. These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture is partially implemented through schema, repositories, PropertyCatalogService, UnitTypeConfigurationService, GeographicLocationService, and DevelopmentCatalogService. [BF014.3F closure evidence](../sprints/BF014.3-catalog-and-configuration-services.md#bf0143f-documentation-closure-evidence) records the completed acceptance and regression evidence. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. No next internal unit, BF015 or later sprint is selected.
+BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1, BF014.2, and internal BF014.3 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.4 is **SELECTED / ARCHITECTURE LOCKED / NOT IMPLEMENTED**; BF014.5-BF014.8 are **NOT STARTED**. These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. [BF014.4 authorization and HTTP contract](../sprints/BF014.4-authorization-and-http.md) records the next planned internal unit. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. BF015 and later sprints are not selected.
 
-The contract records BF014.1 schema/integrity, BF014.2 repositories/read models, BF014.3 services, BF014.4 authorization/HTTP, BF014.5 seed runner/baseline, BF014.6 dynamic form projection, BF014.7 MariaDB acceptance/regressions, and BF014.8 documentation closure. BF014.1, BF014.2, and BF014.3 are IMPLEMENTED AND VERIFIED / CLOSED. BF014.4-BF014.8 are NOT STARTED.
+The contract records BF014.1 schema/integrity, BF014.2 repositories/read models, BF014.3 services, BF014.4 authorization/HTTP, BF014.5 seed runner/baseline, BF014.6 dynamic form projection, BF014.7 MariaDB acceptance/regressions, and BF014.8 documentation closure. BF014.1, BF014.2, and BF014.3 are IMPLEMENTED AND VERIFIED / CLOSED. BF014.4 is SELECTED / ARCHITECTURE LOCKED / NOT IMPLEMENTED; BF014.5-BF014.8 are NOT STARTED.
 
 ## Approved Future Execution Order
 
