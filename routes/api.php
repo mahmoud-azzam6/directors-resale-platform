@@ -17,6 +17,8 @@ use App\Modules\Authorization\Middleware\AuthorizationMiddleware;
 use App\Modules\Authorization\Services\AuthorizationService;
 use App\Modules\Authorization\Services\OrganizationScopeService;
 use App\Modules\Property\Controllers\OrganizationPropertyController;
+use App\Modules\Property\Controllers\PropertyCatalogReadController;
+use App\Modules\Property\Controllers\PropertyCatalogMutationController;
 use App\Modules\Owner\Controllers\OwnerController;
 use App\Modules\Ownership\Controllers\OwnershipController;
 use App\Modules\GlobalPropertyIdentity\Controllers\GlobalPhysicalIdentityController;
@@ -258,6 +260,43 @@ return static function (Router $router, Container $container, array $config): vo
     $router->get('/permissions', $authorize(function (Request $request) use ($container): Response {
         return $container->make(PermissionController::class)->index($request);
     }, 'permissions.view'));
+
+    $router->get('/property-categories', $authorize(fn (Request $request): Response => $container->make(PropertyCatalogReadController::class)->categories($request), 'property_catalogs.view'));
+    $router->get('/property-categories/{id}', $authorize(fn (Request $request, string $id): Response => $container->make(PropertyCatalogReadController::class)->category($request, $id), 'property_catalogs.view'));
+    $router->get('/unit-types', $authorize(fn (Request $request): Response => $container->make(PropertyCatalogReadController::class)->unitTypes($request), 'property_catalogs.view'));
+    $router->get('/unit-types/{id}', $authorize(fn (Request $request, string $id): Response => $container->make(PropertyCatalogReadController::class)->unitType($request, $id), 'property_catalogs.view'));
+    $router->get('/measurement-definitions', $authorize(fn (Request $request): Response => $container->make(PropertyCatalogReadController::class)->measurementDefinitions($request), 'property_catalogs.view'));
+    $router->get('/measurement-definitions/{id}', $authorize(fn (Request $request, string $id): Response => $container->make(PropertyCatalogReadController::class)->measurementDefinition($request, $id), 'property_catalogs.view'));
+    $router->get('/attribute-definitions', $authorize(fn (Request $request): Response => $container->make(PropertyCatalogReadController::class)->attributeDefinitions($request), 'property_catalogs.view'));
+    $router->get('/attribute-definitions/{id}', $authorize(fn (Request $request, string $id): Response => $container->make(PropertyCatalogReadController::class)->attributeDefinition($request, $id), 'property_catalogs.view'));
+    $router->get('/attribute-definitions/{definitionId}/options', $authorize(fn (Request $request, string $definitionId): Response => $container->make(PropertyCatalogReadController::class)->attributeOptions($request, $definitionId), 'property_catalogs.view'));
+
+    $catalogMutation = static fn (callable $handler) => $authorize($handler, 'property_catalogs.manage', null, OrganizationScopeService::SYSTEM_ONLY);
+    $router->post('/property-categories', $catalogMutation(fn(Request $r):Response=>$container->make(PropertyCatalogMutationController::class)->createCategory($r)));
+    $router->patch('/property-categories/{id}', $catalogMutation(fn(Request $r,string $id):Response=>$container->make(PropertyCatalogMutationController::class)->updateCategory($r,$id)));
+    $router->post('/property-categories/{id}/deactivate', $catalogMutation(fn(Request $r,string $id):Response=>$container->make(PropertyCatalogMutationController::class)->deactivateCategory($r,$id)));
+    $router->post('/property-categories/{id}/reactivate', $catalogMutation(fn(Request $r,string $id):Response=>$container->make(PropertyCatalogMutationController::class)->reactivateCategory($r,$id)));
+    $router->delete('/property-categories/{id}', $catalogMutation(fn(Request $r,string $id):Response=>$container->make(PropertyCatalogMutationController::class)->deleteCategory($r,$id)));
+    $router->post('/unit-types', $catalogMutation(fn(Request $r):Response=>$container->make(PropertyCatalogMutationController::class)->createUnitType($r)));
+    $router->patch('/unit-types/{id}', $catalogMutation(fn(Request $r,string $id):Response=>$container->make(PropertyCatalogMutationController::class)->updateUnitType($r,$id)));
+    $router->post('/unit-types/{id}/deactivate', $catalogMutation(fn(Request $r,string $id):Response=>$container->make(PropertyCatalogMutationController::class)->deactivateUnitType($r,$id)));
+    $router->post('/unit-types/{id}/reactivate', $catalogMutation(fn(Request $r,string $id):Response=>$container->make(PropertyCatalogMutationController::class)->reactivateUnitType($r,$id)));
+    $router->delete('/unit-types/{id}', $catalogMutation(fn(Request $r,string $id):Response=>$container->make(PropertyCatalogMutationController::class)->deleteUnitType($r,$id)));
+    $router->post('/measurement-definitions', $catalogMutation(fn(Request $r):Response=>$container->make(PropertyCatalogMutationController::class)->createMeasurementDefinition($r)));
+    $router->patch('/measurement-definitions/{id}', $catalogMutation(fn(Request $r,string $id):Response=>$container->make(PropertyCatalogMutationController::class)->updateMeasurementDefinition($r,$id)));
+    $router->post('/measurement-definitions/{id}/deactivate', $catalogMutation(fn(Request $r,string $id):Response=>$container->make(PropertyCatalogMutationController::class)->deactivateMeasurementDefinition($r,$id)));
+    $router->post('/measurement-definitions/{id}/reactivate', $catalogMutation(fn(Request $r,string $id):Response=>$container->make(PropertyCatalogMutationController::class)->reactivateMeasurementDefinition($r,$id)));
+    $router->delete('/measurement-definitions/{id}', $catalogMutation(fn(Request $r,string $id):Response=>$container->make(PropertyCatalogMutationController::class)->deleteMeasurementDefinition($r,$id)));
+    $router->post('/attribute-definitions', $catalogMutation(fn(Request $r):Response=>$container->make(PropertyCatalogMutationController::class)->createAttributeDefinition($r)));
+    $router->patch('/attribute-definitions/{id}', $catalogMutation(fn(Request $r,string $id):Response=>$container->make(PropertyCatalogMutationController::class)->updateAttributeDefinition($r,$id)));
+    $router->post('/attribute-definitions/{id}/deactivate', $catalogMutation(fn(Request $r,string $id):Response=>$container->make(PropertyCatalogMutationController::class)->deactivateAttributeDefinition($r,$id)));
+    $router->post('/attribute-definitions/{id}/reactivate', $catalogMutation(fn(Request $r,string $id):Response=>$container->make(PropertyCatalogMutationController::class)->reactivateAttributeDefinition($r,$id)));
+    $router->delete('/attribute-definitions/{id}', $catalogMutation(fn(Request $r,string $id):Response=>$container->make(PropertyCatalogMutationController::class)->deleteAttributeDefinition($r,$id)));
+    $router->post('/attribute-definitions/{definitionId}/options', $catalogMutation(fn(Request $r,string $definitionId):Response=>$container->make(PropertyCatalogMutationController::class)->createAttributeOption($r,$definitionId)));
+    $router->patch('/attribute-definitions/{definitionId}/options/{optionId}', $catalogMutation(fn(Request $r,string $definitionId,string $optionId):Response=>$container->make(PropertyCatalogMutationController::class)->updateAttributeOption($r,$definitionId,$optionId)));
+    $router->post('/attribute-definitions/{definitionId}/options/{optionId}/deactivate', $catalogMutation(fn(Request $r,string $definitionId,string $optionId):Response=>$container->make(PropertyCatalogMutationController::class)->deactivateAttributeOption($r,$definitionId,$optionId)));
+    $router->post('/attribute-definitions/{definitionId}/options/{optionId}/reactivate', $catalogMutation(fn(Request $r,string $definitionId,string $optionId):Response=>$container->make(PropertyCatalogMutationController::class)->reactivateAttributeOption($r,$definitionId,$optionId)));
+    $router->delete('/attribute-definitions/{definitionId}/options/{optionId}', $catalogMutation(fn(Request $r,string $definitionId,string $optionId):Response=>$container->make(PropertyCatalogMutationController::class)->deleteAttributeOption($r,$definitionId,$optionId)));
 
     $router->get('/positions/{id}/permissions', $authorize(function (Request $request, string $id) use ($container): Response {
         return $container->make(PositionPermissionController::class)->index($request, $id);
