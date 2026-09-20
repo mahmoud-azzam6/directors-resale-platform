@@ -1,0 +1,5 @@
+<?php
+declare(strict_types=1);
+namespace App\Modules\Property\Services;
+use App\Core\Database\DatabaseConnectionInterface;use App\Modules\Property\Repositories\PropertyCatalogSeedVersionRepository;
+final class PropertyCatalogSeedRunner { public function __construct(private PropertyCatalogSeedVersionRepository $ledger,private DatabaseConnectionInterface $db){} public function run(array $packages,?int $actor=null):array{$keys=[];$orders=[];foreach($packages as$p){if(isset($keys[$p->key])||isset($orders[$p->order]))throw new \RuntimeException('SEED_PACKAGE_DUPLICATE');$keys[$p->key]=1;$orders[$p->order]=1;}usort($packages,fn($a,$b)=>$a->order<=>$b->order);$out=[];foreach($packages as$p){$old=$this->ledger->findBySeedKey($p->key);if($old){if(!hash_equals($old['checksum'],$p->checksum()))throw new \RuntimeException('SEED_PACKAGE_CHECKSUM_MISMATCH');$out[]='SKIP '.$p->key;continue;}$this->db->transaction(function()use($p,$actor,&$out){$out[]='APPLY '.$p->key;($p->apply)();$this->ledger->recordSuccessfulApplication($p->key,$p->checksum(),$actor);$out[]='DONE '.$p->key;});}return $out;} }
