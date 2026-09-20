@@ -17,6 +17,8 @@ final class DatabaseManager implements DatabaseConnectionInterface
 
     private ?PDO $connection = null;
 
+    private int $transactionDepth = 0;
+
     /**
      * @param array<string, mixed> $config
      */
@@ -73,31 +75,75 @@ final class DatabaseManager implements DatabaseConnectionInterface
 
     public function beginTransaction(): void
     {
-        $this->connection()->beginTransaction();
+        $connection = $this->connection();
+        if (!$connection->inTransaction()) {
+            $this->transactionDepth = 0;
+        }
+
+        if ($this->transactionDepth === 0) {
+            $connection->beginTransaction();
+        } else {
+            $connection->exec('SAVEPOINT database_manager_' . ($this->transactionDepth + 1));
+        }
+        ++$this->transactionDepth;
     }
 
     public function commit(): void
     {
-        $this->connection()->commit();
+        try {
+            if ($this->transactionDepth > 1) {
+                $this->connection()->exec('RELEASE SAVEPOINT database_manager_' . $this->transactionDepth);
+                --$this->transactionDepth;
+            } else {
+                $this->connection()->commit();
+                $this->transactionDepth = 0;
+            }
+        } finally {
+            if (!$this->connection()->inTransaction()) {
+                $this->transactionDepth = 0;
+            }
+        }
     }
 
     public function rollback(): void
     {
-        $this->connection()->rollBack();
+        try {
+            if ($this->transactionDepth > 1) {
+                $savepoint = 'database_manager_' . $this->transactionDepth;
+                $this->connection()->exec('ROLLBACK TO SAVEPOINT ' . $savepoint);
+                $this->connection()->exec('RELEASE SAVEPOINT ' . $savepoint);
+                --$this->transactionDepth;
+            } else {
+                $this->connection()->rollBack();
+                $this->transactionDepth = 0;
+            }
+        } finally {
+            if (!$this->connection()->inTransaction()) {
+                $this->transactionDepth = 0;
+            }
+        }
     }
 
     public function transaction(callable $callback): mixed
     {
         $this->beginTransaction();
+        $scopeDepth = $this->transactionDepth;
 
         try {
             $result = $callback($this);
+            if ($this->transactionDepth !== $scopeDepth) {
+                throw new RuntimeException('Unbalanced transaction scope.');
+            }
             $this->commit();
 
             return $result;
         } catch (\Throwable $exception) {
-            if ($this->connection()->inTransaction()) {
+            while ($this->connection()->inTransaction() && $this->transactionDepth >= $scopeDepth) {
                 $this->rollback();
+            }
+
+            if (!$this->connection()->inTransaction()) {
+                $this->transactionDepth = 0;
             }
 
             throw $exception;

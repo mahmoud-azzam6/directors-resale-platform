@@ -1,0 +1,7 @@
+<?php
+declare(strict_types=1);
+namespace App\Modules\Property\Seeds;
+use App\Modules\Property\Services\PropertyCatalogSeedPackage;use App\Modules\Property\Services\PropertyCatalogService;
+final class UnitTypesSeedPackage {
+ public static function make(PropertyCatalogService $catalog):PropertyCatalogSeedPackage {$rows=['RESIDENTIAL'=>['APARTMENT','DUPLEX','PENTHOUSE','STUDIO','VILLA','TOWNHOUSE','TWIN_HOUSE','CHALET'],'COMMERCIAL'=>['RETAIL_SHOP','COMMERCIAL_UNIT','WAREHOUSE'],'ADMINISTRATIVE'=>['OFFICE','ADMINISTRATIVE_UNIT'],'MEDICAL'=>['CLINIC','MEDICAL_CENTER'],'LAND'=>['RESIDENTIAL_LAND','COMMERCIAL_LAND','AGRICULTURAL_LAND','INDUSTRIAL_LAND'],'OTHER'=>['OTHER']];return new PropertyCatalogSeedPackage('002-unit-types',2,json_encode($rows,JSON_THROW_ON_ERROR),function()use($catalog,$rows):void{$categories=[];foreach($catalog->listCategories()as$r)$categories[$r['code']]=$r;foreach($rows as$category=>$codes){if(!isset($categories[$category]))throw new \RuntimeException('SEED_PACKAGE_COLLISION');foreach($codes as$code){$found=array_values(array_filter($catalog->listUnitTypes(),fn($r)=>$r['code']===$code));if($found!==[]){$r=$found[0];if($r['provenance']!=='SYSTEM_SEED'||(int)$r['property_category_id']!==(int)$categories[$category]['id']||$r['status']!=='active')throw new \RuntimeException('SEED_PACKAGE_COLLISION');continue;}$catalog->createUnitType(['code'=>$code,'name_ar'=>$code,'name_en'=>$code,'property_category_id'=>$categories[$category]['id'],'provenance'=>'SYSTEM_SEED']);}}});}
+}
