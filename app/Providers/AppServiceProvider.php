@@ -66,6 +66,7 @@ use App\Modules\Property\Services\UnitTypeConfigurationService;
 use App\Modules\Property\Services\GeographicLocationService;
 use App\Modules\Property\Services\DevelopmentCatalogService;
 use App\Modules\Property\Services\PropertyCatalogSeedRunner;
+use App\Modules\Property\Services\PropertyFormProjectionService;
 use App\Modules\Owner\Controllers\OwnerController;
 use App\Modules\Owner\Repositories\OwnerRepository;
 use App\Modules\Owner\Services\OwnerService;
@@ -172,6 +173,7 @@ final class AppServiceProvider extends ServiceProvider
         $this->container->bind(GeographicLocationService::class);
         $this->container->bind(DevelopmentCatalogService::class);
         $this->container->bind(PropertyCatalogSeedRunner::class);
+        $this->container->bind(PropertyFormProjectionService::class);
         $this->container->bind(OrganizationPropertyController::class);
         $this->container->bind(OwnerRepository::class);
         $this->container->bind(OwnerService::class);
