@@ -6,6 +6,8 @@ namespace App\Modules\Property\Services;
 
 use App\Exceptions\ValidationException;
 use App\Modules\Property\Repositories\AttributeDefinitionRepository;
+use App\Modules\Property\Repositories\DevelopmentCatalogRepository;
+use App\Modules\Property\Repositories\GeographicLocationRepository;
 use App\Modules\Property\Repositories\MeasurementDefinitionRepository;
 use App\Modules\Property\Repositories\PropertyCatalogRepository;
 use App\Modules\Property\Repositories\UnitTypeConfigurationRepository;
@@ -20,7 +22,9 @@ final class PropertyFormProjectionService
         private PropertyCatalogRepository $catalogs,
         private UnitTypeConfigurationRepository $configurations,
         private MeasurementDefinitionRepository $measurements,
-        private AttributeDefinitionRepository $attributes
+        private AttributeDefinitionRepository $attributes,
+        private GeographicLocationRepository $locations,
+        private DevelopmentCatalogRepository $developments
     ) {
     }
 
@@ -140,6 +144,49 @@ final class PropertyFormProjectionService
             ],
             'measurements' => $measurementFields,
             'attributes' => $attributeFields,
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    public function getCoreForm(): array
+    {
+        $categories = $this->catalogs->listCategories(['status' => 'active', 'limit' => 200]);
+        $unitTypes = $this->catalogs->listUnitTypes(['status' => 'active', 'limit' => 200]);
+        $countries = $this->locations->listGeographicLocations([
+            'status' => 'active', 'location_type' => 'COUNTRY', 'parent_id' => null, 'limit' => 200,
+        ]);
+        $developers = $this->developments->listDevelopers(['status' => 'active', 'limit' => 200]);
+
+        return [
+            'categories' => array_map(static fn (array $category): array => [
+                'id' => $category['id'],
+                'code' => $category['code'],
+                'name_en' => $category['name_en'],
+                'name_ar' => $category['name_ar'],
+            ], $categories),
+            'unit_types' => array_map(static fn (array $unitType): array => [
+                'id' => $unitType['id'],
+                'category_id' => $unitType['property_category_id'],
+                'code' => $unitType['code'],
+                'name_en' => $unitType['name_en'],
+                'name_ar' => $unitType['name_ar'],
+            ], $unitTypes),
+            'geography' => [
+                'countries' => array_map(static fn (array $country): array => [
+                    'id' => $country['id'],
+                    'code' => $country['code'],
+                    'name_en' => $country['name_en'],
+                    'name_ar' => $country['name_ar'],
+                ], $countries),
+            ],
+            'development' => [
+                'developers' => array_map(static fn (array $developer): array => [
+                    'id' => $developer['id'],
+                    'code' => $developer['code'],
+                    'name_en' => $developer['name_en'],
+                    'name_ar' => $developer['name_ar'],
+                ], $developers),
+            ],
         ];
     }
 
