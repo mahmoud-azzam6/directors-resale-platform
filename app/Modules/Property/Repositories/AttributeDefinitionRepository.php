@@ -439,6 +439,27 @@ final class AttributeDefinitionRepository
     }
 
     /**
+     * Projection-specific active option read. This does not alter the complete
+     * historical option read used by configuration administration.
+     * @param list<int|string> $definitionIds
+     * @return list<AttributeOptionRecord>
+     */
+    public function listActiveAttributeOptionsForDefinitions(array $definitionIds): array
+    {
+        $ids = array_map(fn (mixed $id): int => $this->identifier($id), array_values($definitionIds));
+        if ($ids === []) {
+            return [];
+        }
+        $rows = $this->queryBuilder->table('attribute_options')->select(self::ATTRIBUTE_OPTION_COLUMNS)
+            ->whereIn('attribute_definition_id', array_values(array_unique($ids)))
+            ->where('status', '=', 'active')
+            ->orderBy('attribute_definition_id')->orderBy('sort_order')
+            ->orderBy('id')->get();
+
+        return array_map(fn (array $row): array => $this->mapAttributeOption($row), $rows);
+    }
+
+    /**
      * @param array<string, mixed> $row
      * @return AttributeOptionRecord
      */
