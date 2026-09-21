@@ -178,7 +178,7 @@ Business rollout remains incremental.
 | Current Phase | BF014 IN PROGRESS; BF014.1, BF014.2, and BF014.3 IMPLEMENTED AND VERIFIED / CLOSED; BF013 closed |
 | Current Sprint | BF014 - Canonical Property Catalog Foundation (IN PROGRESS) |
 | Current Module | M03 - Property & Ownership foundation and Property Catalog schema/repositories/services implemented; Rich Property Profile/Listing architecture only |
-| Current Feature | BF014.4A Permission Capability Foundation IMPLEMENTED AND VERIFIED / CLOSED; BF014.5 next |
+| Current Feature | BF014.5 Seed Runner + Canonical Baseline Data IMPLEMENTED AND VERIFIED / CLOSED; BF014.6 next |
 | Current Database Contract | BF006-BF013 plus BF014.1 schema through migration 030; isolated MariaDB verified |
 | Current Database Module | Core plus BF013 Property/Owner/Ownership/Global Identity foundation |
 | Current Status | BF001-BF013 and AF001-AF003 implemented; BF013 verified and closed |
@@ -505,7 +505,7 @@ No Analytics or reporting implementation exists yet.
 | Sprint 14 | Testing & QA | Planned |
 | Sprint 15 | Beta Release | Planned |
 | BF013 | Property & Ownership Foundation | Implemented and verified; closed |
-| BF014 | [Canonical Property Catalog Foundation](sprints/BF014-canonical-property-catalog-foundation.md) | IN PROGRESS; BF014.1-BF014.4 closed; BF014.5 next |
+| BF014 | [Canonical Property Catalog Foundation](sprints/BF014-canonical-property-catalog-foundation.md) | IN PROGRESS; BF014.1-BF014.5 closed; BF014.6 next |
 
 ---
 
@@ -748,7 +748,7 @@ A feature is considered complete only when:
 
 ## Immediate Next Development Target
 
-BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1 through BF014.4 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.5 is **NEXT / NOT STARTED**; BF014.6-BF014.8 are **NOT STARTED**. These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. The [BF014.4 contract](sprints/BF014.4-authorization-and-http.md) records the authorization and HTTP boundary. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. BF015 and later sprints are not selected.
+BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1 through BF014.5 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.6 is **NEXT / NOT STARTED**; BF014.7-BF014.8 are **NOT STARTED**. These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. The [BF014.4 contract](sprints/BF014.4-authorization-and-http.md) records the authorization and HTTP boundary. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. BF015 and later sprints are not selected.
 
 BF001-BF013 and AF001-AF003 are implemented. Property Catalog/Data Governance is approved and partially implemented through BF014.1 schema, BF014.2 repositories/read models, and BF014.3 services. Rich Property Profile, Listing Domain, and the broader Listing implementation remain approved but not implemented. Add Unit is future frontend terminology for Organization Property; no sprint after BF014 is selected.
 

@@ -54,7 +54,7 @@ remain scope-controlled. `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md` defi
 
 ## Selected Backend Sprint
 
-BF014 is the current Backend sprint: **IN PROGRESS**. The parent contract remains authoritative for overall scope, baseline matrices, non-goals, and Definition of Done. BF014.1 through BF014.4 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.5 is **NEXT / NOT STARTED**; BF014.6-BF014.8 are **NOT STARTED** and BF015 is not selected. See the [BF014.4 contract](docs/sprints/BF014.4-authorization-and-http.md). These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture is partially implemented through schema, repositories, PropertyCatalogService, UnitTypeConfigurationService, GeographicLocationService, and DevelopmentCatalogService. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**.
+BF014 is the current Backend sprint: **IN PROGRESS**. The parent contract remains authoritative for overall scope, baseline matrices, non-goals, and Definition of Done. BF014.1 through BF014.5 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.6 is **NEXT / NOT STARTED**; BF014.7-BF014.8 are **NOT STARTED** and BF015 is not selected. See the [BF014.4 contract](docs/sprints/BF014.4-authorization-and-http.md). These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture is partially implemented through schema, repositories, Services, HTTP integration, and canonical baseline seeding. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**.
 
 ## Architecture Overview
 
