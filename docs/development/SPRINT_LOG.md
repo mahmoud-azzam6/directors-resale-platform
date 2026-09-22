@@ -397,3 +397,11 @@ Status: **IMPLEMENTED AND VERIFIED / CLOSED**
 - BF014.7A passed the parent real-MariaDB acceptance across schema/integrity, seed packages 001-007 and their exact baseline, idempotency and checksum protection, catalog and configuration lifecycles, measurement/attribute semantics, Geography and Development journeys, authorization and mutation SYSTEM_ONLY boundaries, four representative property-form projections, lifecycle errors, query budgets, privacy, rollback/failure, representative concurrency, and negative-space preservation.
 - BF014.7B passed the authoritative schema/repository, catalog, configuration C4/C5a-C5d, Geography D1/D3a, Development D2/D3b-D3d, HTTP/authorization, seed, nested transaction/SAVEPOINT, projection, parent, and BF013 database/HTTP regression gate across bounded execution windows.
 - BF014.7C closes acceptance documentation only. No production defect was found and no production, test, schema, or seed change was required. BF014 remains IN PROGRESS; BF014.8 is NEXT / NOT STARTED; BF015 remains NOT SELECTED.
+
+### BF014 - Canonical Property Catalog Foundation closure
+
+Status: **IMPLEMENTED AND VERIFIED / CLOSED**
+
+- Delivered the canonical catalog and configuration foundation, Geography and Development catalogs, repositories/services, authorization and HTTP APIs, deterministic seed packages 001-007 and Egypt baseline, dynamic Property-form projection, and real-MariaDB integrated acceptance.
+- BF014.7 parent integrated acceptance and the full regression gate passed. No unresolved production defect was found.
+- BF014 does not implement rich Property Profile persistence, Property values/completeness/media/private documents, Listing workflows, marketplace/request workflows, or frontend Property management UI. BF015 is NOT SELECTED; the next workstream is to be selected.

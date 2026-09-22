@@ -2,21 +2,20 @@
 
 Status: Active
 
-Current Project Phase: BF014 IN PROGRESS; BF014.1, BF014.2, and BF014.3 IMPLEMENTED AND VERIFIED / CLOSED
+Current Project Phase: BF014 IMPLEMENTED AND VERIFIED / CLOSED
 
 Current Milestone: Milestone 2 - Core Business
 
 Completed Sprints: BF001, BF002, BF002.1, BF002.2, BF003, BF004, BF005, BF006, BF007, BF008, BF009, BF010, BF011, BF012, BF013, AF001, AF002, AF003
 
-Current Sprint: BF014 - Canonical Property Catalog Foundation (IN PROGRESS)
+Current Sprint: None — BF014 - Canonical Property Catalog Foundation is IMPLEMENTED AND VERIFIED / CLOSED
 
-Next Internal Unit: BF014.5 ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Catalog HTTP reads and mutations (NEXT / NOT STARTED)
 
-Next Selected Sprint: None after BF014; BF015 NOT SELECTED
+Next Workstream: TO BE SELECTED after BF014 closure; BF015 NOT SELECTED
 
-Latest Stable Commit: 2669b12 - test: add BF014 repository database acceptance
+Latest Stable Commit: a893cc7 - docs: close BF014.7 integrated acceptance
 
-Last Updated: 2026-09-19
+Last Updated: 2026-09-22
 
 ---
 
@@ -44,7 +43,7 @@ The application now has:
 - `users` table with a restricted Organization foreign key and indexed `organization_id`
 - AF001 Next.js Admin UI foundation under `frontend/` with secure HttpOnly auth bridge, typed API/context layer, protected App Router layout, and permission-aware navigation
 
-Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, Permissions & Authorization, BF013 Property & Ownership Foundation, and AF001-AF003 are implemented. BF013 remains closed. Rich Property Profile architecture is APPROVED / NOT IMPLEMENTED; Property Catalog/Data Governance architecture is APPROVED and partially implemented through BF014.1 schema, BF014.2 repositories/read models, and BF014.3 services; their canonical sources are `docs/architecture/PROPERTY_PROFILE_ARCHITECTURE.md` and `docs/architecture/PROPERTY_CATALOG_ARCHITECTURE.md`. The broader Listing Domain and Add Unit/frontend Property workflows remain unimplemented, and BF014 remains IN PROGRESS.
+Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, Permissions & Authorization, BF013 Property & Ownership Foundation, AF001-AF003, and BF014 Canonical Property Catalog Foundation are implemented and verified. BF014 provides the canonical catalog, configuration/versioning, geography/development catalogs, authorization and HTTP APIs, seed baseline, and dynamic Property-form projection; it does not assign catalog records to Organization Properties or persist the rich Property Profile. Rich Property Profile architecture remains APPROVED / NOT IMPLEMENTED. The broader Listing Domain and frontend Property workflows remain unimplemented. BF015 is not selected.
 
 Approved architecture now defines one authenticated Admin Application whose experience is determined by
 Organization, Position, Permissions, and applicable resource scope. It also separates future Global
@@ -54,7 +53,7 @@ remain scope-controlled. `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md` defi
 
 ## Selected Backend Sprint
 
-BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1 through BF014.7 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.8 is **NEXT / NOT STARTED** and BF015 is not selected. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**.
+BF014 is **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.1 through BF014.8 are **CLOSED**. The next workstream is **TO BE SELECTED**; BF015 is not selected. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**.
 
 ## Architecture Overview
 

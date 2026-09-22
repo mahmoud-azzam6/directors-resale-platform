@@ -143,7 +143,7 @@ BF014.1 added 13 catalog/configuration/seed-tracking tables through migrations 0
 ## Not Implemented
 
 - Direct User permissions, authorization expansion beyond BF012, roles, position hierarchy, team hierarchy, user profiles, transfers, registration, reset, refresh tokens, and sessions
-- CRM, rich Property Profile, catalog Services/APIs/seeds/dynamic forms beyond the implemented BF014.1 schema and BF014.2 repositories/read models, Listings, Deals, Commissions, and Transfers
+- CRM, rich Property Profile persistence/integration, Property values/completeness/media/private documents, Catalog Proposals, Listings, Deals, Commissions, and Transfers
 - Notifications, AI, Analytics, Integrations, broader Admin UI modules, and AF004
 - A unified project-wide automated test runner; legacy BF006-BF007 verification remains primarily manual
 
@@ -169,6 +169,6 @@ Rich Property Profile and Property Catalog/Data Governance architecture closure 
 
 ## Next Development Target
 
-BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1 through BF014.7 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.8 is **NEXT / NOT STARTED**. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. BF015 and later sprints are not selected.
+BF014 — Canonical Property Catalog Foundation — is **IMPLEMENTED AND VERIFIED / CLOSED**. Its completed backend capability includes canonical catalogs and configuration/versioning, geography and development catalogs, catalog authorization and HTTP APIs, deterministic seed packages 001-007, and dynamic Property-form projection. BF013 Property & Ownership Foundation remains closed. Rich Property Profile persistence/integration, Property values/completeness/media/private documents, Listing workflows, marketplace/request workflows, and frontend Property management UI remain **NOT IMPLEMENTED**. The next workstream is **TO BE SELECTED**; BF015 and later sprints are not selected.
 
-BF014 is limited to canonical catalogs, configuration/versioning, System Admin backend management, authorized reads, dynamic form configuration, and safe versioned baseline seeds. It does not assign classification or store rich values on Organization Property, implement proposals/media/completeness, or add frontend or Listing workflows.
+BF014 delivered canonical catalogs, configuration/versioning, System Admin catalog management, authorized reads, dynamic form configuration, and safe versioned baseline seeds. It does not assign classification or store rich values on Organization Property, implement proposals/media/completeness, or add frontend or Listing workflows.

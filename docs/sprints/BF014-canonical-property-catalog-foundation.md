@@ -1,10 +1,10 @@
 # BF014 - Canonical Property Catalog Foundation
 
-**Status: IN PROGRESS**
+**Status: IMPLEMENTED AND VERIFIED / CLOSED**
 
 **Foundation:** BF013 - IMPLEMENTED AND VERIFIED / CLOSED
 
-**Architecture:** Property Catalog - APPROVED / NOT IMPLEMENTED; Rich Property Profile - APPROVED / NOT IMPLEMENTED; Listing Domain - APPROVED / NOT IMPLEMENTED.
+**Architecture:** Property Catalog - IMPLEMENTED AND VERIFIED / CLOSED; Rich Property Profile - APPROVED / NOT IMPLEMENTED; Listing Domain - APPROVED / NOT IMPLEMENTED.
 
 **Sprint Family:** BF - Backend / Domain / Foundation
 
@@ -14,7 +14,7 @@
 
 **Selected/documented:** 2026-09-13
 
-BF014 is the selected current Backend sprint and remains **IN PROGRESS**. BF014.1 through BF014.7 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.8 is **NEXT / NOT STARTED**, and BF015 or subsequent sprints are not selected. This parent contract remains authoritative for scope and future BF014 work.
+BF014 — Canonical Property Catalog Foundation — is **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.1 through BF014.8 are closed. BF015 or a subsequent sprint is not selected; the next workstream is to be selected after BF014 closure. This parent contract remains authoritative for scope and the preserved boundary with future Property Profile work.
 
 ## Authority and preserved boundaries
 
@@ -40,7 +40,7 @@ BF014 tightens the general architecture safe-delete allowance: SYSTEM_SEED recor
 
 OrganizationProperty remains the operational aggregate root with BF013 ACTIVE / ARCHIVED lifecycle. Owner and Ownership remain private_organization; Global Physical Identity remains System-only. Future Property completeness never creates a Listing; price and commercial terms remain Listing data. Property Media stays deferred; no retained original or Master WebP requirement is introduced.
 
-The schema, repositories, BF014.3 services, BF014.4 HTTP layer, BF014.5 seed system, BF014.6 projections, and BF014.7 acceptance described below are implemented where recorded in their canonical closure records. BF014.8 documentation closure is the next internal unit.
+The completed foundation provides Property Categories, Unit Types, versioned Unit Type Configurations and Measurement/Attribute rules, Geographic Locations, Developers, Projects, and Project Phases; repositories/read models; catalog, configuration, geography, and development services; property_catalogs.view and property_catalogs.manage with the System-only mutation boundary; catalog/configuration/geography/development HTTP APIs; a seed runner and ledger with deterministic packages 001-007; the Egypt baseline; dynamic Property-form projection; and real-MariaDB integrated acceptance and parent regression evidence. It does not assign catalog data to Organization Properties or implement rich Property Profile persistence.
 
 ## BF014 OBJECTIVE
 
@@ -663,7 +663,7 @@ The future BF014 implementation is done only when all criteria below are verifie
 
 ## IMPLEMENTATION UNIT PLAN
 
-These are implementation units within BF014, not separate sprints. BF014.1 through BF014.7 are closed; BF014.8 is NEXT / NOT STARTED.
+These are implementation units within BF014, not separate sprints. BF014.1 through BF014.8 are closed.
 
 | Unit | Future deliverable |
 | --- | --- |
@@ -692,4 +692,4 @@ These are implementation units within BF014, not separate sprints. BF014.1 throu
 
 Only this contract and necessary updates to AI_CONTEXT.md, PROJECT_STATUS.md, docs/MASTER_INDEX.md, docs/development/CURRENT_SYSTEM_STATE.md, docs/development/IMPLEMENTATION_PLAN.md, docs/development/SPRINT_LOG.md, and docs/database/SEED_DATA.md are authorized in this task.
 
-Run git diff --check and git status --short; verify the documentation allowlist and review status/scope contradictions. BF013 remains CLOSED; BF014 remains IN PROGRESS; Rich Property Profile and Listing remain NOT IMPLEMENTED; no BF015 or later sprint is selected. No code, tests, migrations, seeds, frontend, dependency/runtime configuration, or database schema changes belong to this documentation task. Do not commit or push. The remaining acceptance criteria above belong to future BF014 implementation.
+BF013 and BF014 remain CLOSED; Rich Property Profile and Listing remain NOT IMPLEMENTED; BF015 or a later sprint is not selected. The completed BF014 evidence is recorded in its closure records; no code, tests, migrations, seeds, frontend, dependency/runtime configuration, or database schema change is part of this documentation closure.
