@@ -14,7 +14,7 @@
 
 **Selected/documented:** 2026-09-13
 
-BF014 is the selected current Backend sprint and remains **IN PROGRESS**. BF014.1 through BF014.6 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.7 is **NEXT / NOT STARTED**; BF014.8 remains **NOT STARTED**, and BF015 or subsequent sprints are not selected. This parent contract remains authoritative for scope and future BF014 work.
+BF014 is the selected current Backend sprint and remains **IN PROGRESS**. BF014.1 through BF014.6 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.7 is **IN PROGRESS** with BF014.7A **NEXT / NOT STARTED**; BF014.7B-C and BF014.8 remain **NOT STARTED**, and BF015 or subsequent sprints are not selected. This parent contract remains authoritative for scope and future BF014 work.
 
 ## Authority and preserved boundaries
 

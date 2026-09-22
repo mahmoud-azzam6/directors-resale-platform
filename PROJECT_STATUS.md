@@ -54,7 +54,7 @@ remain scope-controlled. `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md` defi
 
 ## Selected Backend Sprint
 
-BF014 is the current Backend sprint: **IN PROGRESS**. The parent contract remains authoritative for overall scope, baseline matrices, non-goals, and Definition of Done. BF014.1 through BF014.6 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.7 is **NEXT / NOT STARTED**; BF014.8 is **NOT STARTED** and BF015 is not selected. BF014.6 delivered bounded dynamic form projections and authorized HTTP reads. These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**.
+BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1 through BF014.6 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.7 is **IN PROGRESS** with BF014.7A next; BF014.7B-C and BF014.8 are **NOT STARTED** and BF015 is not selected. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**.
 
 ## Architecture Overview
 
