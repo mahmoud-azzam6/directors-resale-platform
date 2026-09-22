@@ -1,6 +1,6 @@
 # BF015 — Property Profile Persistence Bridge
 
-**Status:** IN PROGRESS — BF015.1 NEXT / NOT STARTED
+**Status:** IN PROGRESS — BF015.1 IMPLEMENTED AND VERIFIED / CLOSED; BF015.2 NEXT / NOT STARTED
 
 **Foundation:** BF013 — Property & Ownership Foundation — CLOSED; BF014 — Canonical Property Catalog Foundation — CLOSED
 
@@ -74,8 +74,8 @@ BF015 does not create or mutate Owner, Ownership, Ownership Parties, shares, or 
 
 | Unit | Deliverable | Status |
 | --- | --- | --- |
-| BF015.1 | Schema & Integrity Foundation | NEXT / NOT STARTED |
-| BF015.2 | Repository Foundation | NOT STARTED |
+| BF015.1 | Schema & Integrity Foundation | IMPLEMENTED AND VERIFIED / CLOSED |
+| BF015.2 | Repository Foundation | NEXT / NOT STARTED |
 | BF015.3 | Property Profile Domain Service | NOT STARTED |
 | BF015.4 | HTTP & Authorization | NOT STARTED |
 | BF015.5 | Integrated Acceptance | NOT STARTED |
@@ -90,3 +90,13 @@ BF015 acceptance must prove shell-without-profile, partial and Category-only sav
 BF015 does not implement completeness, media, private documents, Catalog Proposals, Listing or Listing Versions, Listing approvals, Owner Listing Approval, Marketplace, Requests, HOLD, SOLD workflow, Sale Closing, Ownership Transfer Confirmation, Commission Engine, Transfer Engine, or frontend Property UI.
 
 The next frontend workstream is intentionally not defined by this contract.
+
+## BF015.1 implementation result
+
+Migration 033 creates organization_property_profiles, property_measurements, and property_attribute_values without altering BF013 or BF014 tables. Development uses development_reference_type with exactly one matching nullable canonical FK: developer_id, project_id, or project_phase_id. The database CHECK prevents contradictory combinations.
+
+Profile revision is INT UNSIGNED, defaults to 1, and is constrained positive. Profile and value rows use the existing operational creator/updater user references and timestamps. Measurements enforce positive DECIMAL(18,4) values and nonblank unit snapshots. Attribute rows enforce the six canonical data types, boolean shape, and exactly one compatible typed representation.
+
+All operational-to-canonical and operational-to-Property FKs use RESTRICT. Value rows also reference the one-to-one profile key, so a profile with values cannot be deleted independently. This preserves Property data and prevents catalog deletes from cascading into operational values.
+
+Existing BF014 keys do not provide clean composite foreign keys for Category-to-Unit Type membership, Configuration-to-Unit Type membership, or Attribute Option-to-Definition ownership. BF015.1 intentionally uses simple existence FKs; BF015.3 Service validation will enforce those cross-table semantics, active-state selection, configuration-rule membership, hierarchy relationships, and canonical measurement-unit equality.

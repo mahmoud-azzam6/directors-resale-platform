@@ -60,7 +60,7 @@ try {
     $tables = ['property_categories', 'unit_types', 'unit_type_configuration_versions', 'measurement_definitions', 'unit_type_measurement_rules', 'attribute_definitions', 'attribute_options', 'unit_type_attribute_rules', 'geographic_locations', 'developers', 'projects', 'project_phases', 'property_catalog_seed_versions'];
     $migrations = glob($root . '/database/migrations/*.sql') ?: [];
     sort($migrations, SORT_STRING);
-    bf014Assert(count($migrations) === 32, 'Expected exactly migrations 001-032.');
+    bf014Assert(count($migrations) === 33, 'Expected exactly migrations 001-033.');
     foreach ($migrations as $index => $path) {
         bf014Assert((int) substr(basename($path), 0, 3) === $index + 1, 'Migration sequence gap.');
         $sql = file_get_contents($path);
@@ -71,7 +71,7 @@ try {
         }
         $pdo->exec($sql);
     }
-    echo "MariaDB {$version}: migrations 001-032 applied.\n";
+    echo "MariaDB {$version}: migrations 001-033 applied.\n";
     foreach ($tables as $table) {
         bf014Assert((int) $pdo->query("SELECT COUNT(*) FROM `{$table}`")->fetchColumn() === 0, "{$table} was seeded by migrations.");
     }
