@@ -22,6 +22,7 @@ use App\Modules\Property\Controllers\PropertyCatalogMutationController;
 use App\Modules\Property\Controllers\UnitTypeConfigurationController;
 use App\Modules\Property\Controllers\GeographicLocationController;
 use App\Modules\Property\Controllers\DevelopmentCatalogController;
+use App\Modules\Property\Controllers\PropertyFormProjectionController;
 use App\Modules\Owner\Controllers\OwnerController;
 use App\Modules\Ownership\Controllers\OwnershipController;
 use App\Modules\GlobalPropertyIdentity\Controllers\GlobalPhysicalIdentityController;
@@ -267,7 +268,9 @@ return static function (Router $router, Container $container, array $config): vo
     $router->get('/property-categories', $authorize(fn (Request $request): Response => $container->make(PropertyCatalogReadController::class)->categories($request), 'property_catalogs.view'));
     $router->get('/property-categories/{id}', $authorize(fn (Request $request, string $id): Response => $container->make(PropertyCatalogReadController::class)->category($request, $id), 'property_catalogs.view'));
     $router->get('/unit-types', $authorize(fn (Request $request): Response => $container->make(PropertyCatalogReadController::class)->unitTypes($request), 'property_catalogs.view'));
+    $router->get('/unit-types/{id}/property-form', $authorize(fn (Request $request, string $id): Response => $container->make(PropertyFormProjectionController::class)->unitTypePropertyForm($request, $id), 'property_catalogs.view'));
     $router->get('/unit-types/{id}', $authorize(fn (Request $request, string $id): Response => $container->make(PropertyCatalogReadController::class)->unitType($request, $id), 'property_catalogs.view'));
+    $router->get('/property-profile/core-form', $authorize(fn (Request $request): Response => $container->make(PropertyFormProjectionController::class)->coreForm($request), 'property_catalogs.view'));
     $router->get('/measurement-definitions', $authorize(fn (Request $request): Response => $container->make(PropertyCatalogReadController::class)->measurementDefinitions($request), 'property_catalogs.view'));
     $router->get('/measurement-definitions/{id}', $authorize(fn (Request $request, string $id): Response => $container->make(PropertyCatalogReadController::class)->measurementDefinition($request, $id), 'property_catalogs.view'));
     $router->get('/attribute-definitions', $authorize(fn (Request $request): Response => $container->make(PropertyCatalogReadController::class)->attributeDefinitions($request), 'property_catalogs.view'));
