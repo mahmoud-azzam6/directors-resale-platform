@@ -1,0 +1,92 @@
+# BF015 — Property Profile Persistence Bridge
+
+**Status:** IN PROGRESS — BF015.1 NEXT / NOT STARTED
+
+**Foundation:** BF013 — Property & Ownership Foundation — CLOSED; BF014 — Canonical Property Catalog Foundation — CLOSED
+
+## Purpose and boundary
+
+BF015 makes the BF013 Organization Property shell persistable as a Property Profile by attaching canonical BF014 selections and configuration-bound typed values. It unlocks genuine Property Admin Add Unit Steps 1 and 2 without fake persistence.
+
+BF015 is not a general Property-domain or Listing-domain sprint. It reuses BF013 Owner, Ownership, Ownership Parties, Authorized Acting Owner, and Global Physical Property Identity unchanged. It reuses BF014 catalogs, configuration rules, Geography, Development, and dynamic form projections unchanged.
+
+## Physical model
+
+BF015 adds exactly three normalized tables: organization_property_profiles, property_measurements, and property_attribute_values.
+
+organization_property_profiles is a one-to-one extension of organization_properties. Its row may be absent while a BF013 Property shell exists; BF015 does not widen organization_properties with rich-profile columns.
+
+The profile row contains organization_property_id, nullable property_category_id, unit_type_id, accepted_configuration_version_id, and geographic_location_id; a nullable development_reference_type plus nullable developer_id, project_id, and project_phase_id; a monotonic revision; and creator/updater/timestamps consistent with repository conventions. When development_reference_type is present, exactly its matching canonical FK is present; the other two are null.
+
+### Category, Unit Type, and configuration
+
+Category is persisted directly because progressive setup may select a Category before a Unit Type. Unit Type is nullable. A newly assigned Unit Type must be ACTIVE and belong to the persisted Category.
+
+accepted_configuration_version_id is the configuration against which typed values are interpreted. When a Property first becomes configuration-bound, the server accepts only the selected Unit Type’s current ACTIVE configuration. Once values are saved against that version, later activation of a newer version does not rebind the Property or change value semantics.
+
+For example, a Property bound to APARTMENT V1 remains bound to V1 after APARTMENT V2 becomes ACTIVE. An unbound partial profile may use the current ACTIVE projection for entry guidance. Rebinding requires an explicit authorized replacement or migration operation; BF015 does not implement a general profile-version-history system.
+
+When a Unit Type changes and configuration-bound values exist, the API uses explicit transactional replacement: the request supplies the new Unit Type, its current ACTIVE configuration, and replacement values. The service rejects a change that would silently retain stale values.
+
+### Geography and Development
+
+The profile stores one nullable geographic_location_id, representing the deepest selected canonical BF014 location. Its Country/Governorate/City/Area/District ancestry is resolved from the canonical hierarchy and is never redundantly stored.
+
+Development stores only the most-specific selected canonical reference: no reference, Developer, Project, or Phase. The reference type identifies which of developer_id, project_id, or project_phase_id is populated. A Project derives its Developer where present; a Phase derives its Project and Developer. Project and Phase validation uses their canonical parent relationships. BF015 creates no fake hierarchy records and introduces no new Geography/Development coupling.
+
+### Measurements
+
+property_measurements stores organization_property_id, measurement_definition_id, value_decimal DECIMAL(18,4), canonical unit code snapshot, and actor/timestamp metadata. The pair of organization_property_id and measurement_definition_id is unique.
+
+Each submitted Definition must belong to the accepted configuration. Values are positive decimals in the Definition’s canonical unit; the bridge accepts neither frontend-defined measurement codes nor unit conversion.
+
+### Attributes
+
+property_attribute_values stores organization_property_id, attribute_definition_id, a data-type snapshot, typed nullable value columns, an Attribute Option FK where applicable, and actor/timestamp metadata. The pair of organization_property_id and attribute_definition_id is unique.
+
+The bridge supports every BF014 Attribute Definition type: INTEGER, DECIMAL, BOOLEAN, TEXT, ENUM, and DATE. A row has exactly one compatible representation: signed integer, DECIMAL(18,4), text, boolean, date, or ENUM Option. Submitted Definitions must belong to the accepted configuration. ENUM Option ownership must match the Attribute Definition, and a new ENUM assignment requires an active valid Option.
+
+## Progressive persistence and validation
+
+BF015 supports a shell without a profile and a profile with Category only, Category plus Unit Type, partial Geography/Development, and partial Measurements or Attributes. Missing configured required values do not reject ordinary profile saves. Requiredness belongs to a future completeness/validation boundary.
+
+BF015 adds no DRAFT Property lifecycle. BF013 ACTIVE and ARCHIVED remain authoritative.
+
+Every profile save is one aggregate transaction. It locks the Property/profile, validates authorization and expected revision, revalidates canonical references and hierarchy, validates configuration membership and typed values, and persists supplied core/value replacements atomically. Failure rolls back the complete aggregate.
+
+Concurrent updates use row locking and a monotonic profile revision or equivalent expected-update token. Stale updates fail rather than silently overwriting newer state.
+
+The bridge records current-state creator/updater attribution, timestamps, configuration binding, and revision. It does not add a full Property Activity/event-history system or full Property Profile version history.
+
+## HTTP, authorization, privacy, and lifecycle
+
+BF013 shell creation remains separate at POST /organization-properties. BF015 adds GET /organization-properties/{id}/profile and PUT /organization-properties/{id}/profile.
+
+The profile API is a bounded domain API, not a React-wizard endpoint. The frontend may orchestrate shell creation, profile save, and existing BF013 Owner/Ownership calls without a mandatory giant orchestration endpoint.
+
+Profile reads require properties.view; profile saves require properties.manage. property_catalogs.manage never authorizes operational Property mutation, and catalog visibility never grants Property access. Profile data follows explicit private-Organization rules: parent Franchise supervision does not automatically expose child Organization Property Profile data; System-wide access requires explicit authorized System capability.
+
+Archived Properties retain Profile and values, remain readable where authorized, and reject normal profile mutation. Reactivation resumes profile mutation. BF015 adds no hard delete; clearing or replacing values is an explicit authorized profile update.
+
+BF015 does not create or mutate Owner, Ownership, Ownership Parties, shares, or Authorized Acting Owner data. Those remain BF013 operations and APIs.
+
+## Internal implementation units
+
+| Unit | Deliverable | Status |
+| --- | --- | --- |
+| BF015.1 | Schema & Integrity Foundation | NEXT / NOT STARTED |
+| BF015.2 | Repository Foundation | NOT STARTED |
+| BF015.3 | Property Profile Domain Service | NOT STARTED |
+| BF015.4 | HTTP & Authorization | NOT STARTED |
+| BF015.5 | Integrated Acceptance | NOT STARTED |
+| BF015.6 | Documentation Closure | NOT STARTED |
+
+## Acceptance target
+
+BF015 acceptance must prove shell-without-profile, partial and Category-only saves, Category/Unit Type pairing, ACTIVE Unit Type assignment, V1-to-V2 configuration safety, explicit atomic Unit Type replacement, canonical Geography and normalized Development validation, measurement membership/uniqueness/unit/numeric validation, every Attribute type and ENUM ownership, allowed missing required values during progressive save, rollback, optimistic-concurrency conflict, archived-Property mutation rejection, Property authorization/private-profile scope, BF013 Ownership compatibility, BF014 catalog compatibility, and no Listing side effects.
+
+## Explicit non-goals
+
+BF015 does not implement completeness, media, private documents, Catalog Proposals, Listing or Listing Versions, Listing approvals, Owner Listing Approval, Marketplace, Requests, HOLD, SOLD workflow, Sale Closing, Ownership Transfer Confirmation, Commission Engine, Transfer Engine, or frontend Property UI.
+
+The next frontend workstream is intentionally not defined by this contract.

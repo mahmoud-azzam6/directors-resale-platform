@@ -405,3 +405,10 @@ Status: **IMPLEMENTED AND VERIFIED / CLOSED**
 - Delivered the canonical catalog and configuration foundation, Geography and Development catalogs, repositories/services, authorization and HTTP APIs, deterministic seed packages 001-007 and Egypt baseline, dynamic Property-form projection, and real-MariaDB integrated acceptance.
 - BF014.7 parent integrated acceptance and the full regression gate passed. No unresolved production defect was found.
 - BF014 does not implement rich Property Profile persistence, Property values/completeness/media/private documents, Listing workflows, marketplace/request workflows, or frontend Property management UI. BF015 is NOT SELECTED; the next workstream is to be selected.
+
+## BF015 - Property Profile Persistence Bridge
+
+Status: IN PROGRESS
+
+- Established the authoritative [BF015 contract](../sprints/BF015-property-profile-persistence-bridge.md) for the smallest backend bridge from the BF013 Organization Property shell to canonical BF014 profile selections and configuration-bound typed values.
+- BF015.1 — Schema & Integrity Foundation — is NEXT / NOT STARTED. The bridge excludes completeness, media, Listing, and frontend Property UI.

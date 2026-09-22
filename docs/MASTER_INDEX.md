@@ -748,9 +748,9 @@ A feature is considered complete only when:
 
 ## Immediate Next Development Target
 
-BF014 — [Canonical Property Catalog Foundation](sprints/BF014-canonical-property-catalog-foundation.md) — is **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.1 through BF014.8 are closed. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. The completed foundation includes the schema, repositories/read models, services, authorization and HTTP APIs, seed baseline, dynamic Property-form projection, and real-MariaDB acceptance. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. The next workstream is **TO BE SELECTED**; BF015 and later sprints are not selected.
+BF014 — [Canonical Property Catalog Foundation](sprints/BF014-canonical-property-catalog-foundation.md) — is **IMPLEMENTED AND VERIFIED / CLOSED**. BF015 — [Property Profile Persistence Bridge](sprints/BF015-property-profile-persistence-bridge.md) — is **IN PROGRESS** with BF015.1 **NEXT / NOT STARTED**. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. BF015 is limited to persistable canonical Property Profile selections and typed values; Listing and frontend Property UI remain unimplemented.
 
-BF001-BF014 and AF001-AF003 are implemented. Property Catalog/Data Governance is implemented through BF014.8, including the schema, repositories/read models, services, HTTP/authorization, seed baseline, dynamic form projection, and integrated acceptance. Rich Property Profile, Listing Domain, and the broader Listing implementation remain approved but not implemented. Add Unit is future frontend terminology for Organization Property; the next workstream is to be selected.
+BF001-BF014 and AF001-AF003 are implemented. BF015 is the selected Property Profile Persistence Bridge and introduces no Listing or frontend work. Property Catalog/Data Governance remains implemented through BF014.8. Rich Property Profile beyond the BF015 bridge, Listing Domain, and the broader Listing implementation remain approved but not implemented.
 
 ## Sprint 1
 

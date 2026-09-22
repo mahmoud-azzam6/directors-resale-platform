@@ -25,23 +25,24 @@ BF006 smoke tests and BF007 manual acceptance/regression checks passed at their 
 
 ## Current Planning State
 
-BF014 is **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.1 through BF014.8 are closed. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. Next workstream: **TO BE SELECTED**. BF015 and later sprints are not selected.
+BF014 is **IMPLEMENTED AND VERIFIED / CLOSED**. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. BF015 — Property Profile Persistence Bridge — is **IN PROGRESS** with BF015.1 **NEXT / NOT STARTED**. Rich Property Profile beyond the bridge and Listing remain **APPROVED / NOT IMPLEMENTED**. No later sprint is selected.
 
-The closed contract records BF014.1 schema/integrity, BF014.2 repositories/read models, BF014.3 services, BF014.4 authorization/HTTP, BF014.5 seed runner/baseline, BF014.6 dynamic form projection, BF014.7 MariaDB acceptance/regressions, and BF014.8 documentation closure.
+The closed BF014 contract records schema/integrity, repositories/read models, services, authorization/HTTP, seed runner/baseline, dynamic form projection, MariaDB acceptance/regressions, and documentation closure. BF015 records the bounded Property Profile persistence bridge.
 
 ## Approved Future Execution Order
 
-BF014 is complete. Subsequent entries remain conceptual sequencing only; no later sprint number or name is selected:
+BF015 is the selected bounded Property Profile persistence sprint. Subsequent entries remain conceptual sequencing only; no later sprint number or name is selected:
 
 1. Architecture closure - complete
 2. BF014 parent sprint contract - recorded and authoritative
 3. BF014 - Canonical Property Catalog Foundation - IMPLEMENTED AND VERIFIED / CLOSED
-4. Backend Rich Property Profile
-5. System Admin Property Data Management frontend
-6. Initial canonical data verification and approved business additions
-7. Admin Properties frontend: Active, Drafts, Add Unit, and Property Details
-8. Listing implementation
-9. Requests, Deals, Commissions, Notifications, and Reports
+4. BF015 - Property Profile Persistence Bridge - IN PROGRESS; BF015.1 NEXT / NOT STARTED
+5. Rich Property Profile beyond the bridge
+6. System Admin Property Data Management frontend
+7. Initial canonical data verification and approved business additions
+8. Admin Properties frontend: Active, Drafts, Add Unit, and Property Details
+9. Listing implementation
+10. Requests, Deals, Commissions, Notifications, and Reports
 
 ## Constraints for Future Planning
 
