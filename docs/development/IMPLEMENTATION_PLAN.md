@@ -25,9 +25,9 @@ BF006 smoke tests and BF007 manual acceptance/regression checks passed at their 
 
 ## Current Planning State
 
-BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1 through BF014.6 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.7 is **NEXT / NOT STARTED**; BF014.8 is **NOT STARTED**. These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. BF015 and later sprints are not selected.
+BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1 through BF014.7 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.8 is **NEXT / NOT STARTED**. These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. BF015 and later sprints are not selected.
 
-The contract records BF014.1 schema/integrity, BF014.2 repositories/read models, BF014.3 services, BF014.4 authorization/HTTP, BF014.5 seed runner/baseline, BF014.6 dynamic form projection, BF014.7 MariaDB acceptance/regressions, and BF014.8 documentation closure. BF014.1 through BF014.6 are IMPLEMENTED AND VERIFIED / CLOSED. BF014.7 is NEXT / NOT STARTED; BF014.8 is NOT STARTED.
+The contract records BF014.1 schema/integrity, BF014.2 repositories/read models, BF014.3 services, BF014.4 authorization/HTTP, BF014.5 seed runner/baseline, BF014.6 dynamic form projection, BF014.7 MariaDB acceptance/regressions, and BF014.8 documentation closure. BF014.1 through BF014.7 are IMPLEMENTED AND VERIFIED / CLOSED. BF014.8 is NEXT / NOT STARTED.
 
 ## Approved Future Execution Order
 
@@ -35,7 +35,7 @@ BF014 is the selected Backend catalog foundation sprint. Subsequent entries rema
 
 1. Architecture closure - complete
 2. BF014 parent sprint contract - recorded and authoritative
-3. BF014 - Canonical Property Catalog Foundation - IN PROGRESS; BF014.1, BF014.2, and BF014.3 closed; BF014.4-BF014.8 not started; no next internal unit selected
+3. BF014 - Canonical Property Catalog Foundation - IN PROGRESS; BF014.1-BF014.7 closed; BF014.8 NEXT / NOT STARTED
 4. Backend Rich Property Profile
 5. System Admin Property Data Management frontend
 6. Initial canonical data verification and approved business additions

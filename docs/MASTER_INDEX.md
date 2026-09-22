@@ -748,9 +748,9 @@ A feature is considered complete only when:
 
 ## Immediate Next Development Target
 
-BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1 through BF014.5 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.6 is **NEXT / NOT STARTED**; BF014.7-BF014.8 are **NOT STARTED**. These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. The [BF014.4 contract](sprints/BF014.4-authorization-and-http.md) records the authorization and HTTP boundary. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. BF015 and later sprints are not selected.
+BF014 is the current Backend sprint: **IN PROGRESS**. BF014.1 through BF014.7 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF014.8 is **NEXT / NOT STARTED**. These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. The [BF014.4 contract](sprints/BF014.4-authorization-and-http.md) records the authorization and HTTP boundary. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. BF015 and later sprints are not selected.
 
-BF001-BF013 and AF001-AF003 are implemented. Property Catalog/Data Governance is approved and partially implemented through BF014.1 schema, BF014.2 repositories/read models, and BF014.3 services. Rich Property Profile, Listing Domain, and the broader Listing implementation remain approved but not implemented. Add Unit is future frontend terminology for Organization Property; no sprint after BF014 is selected.
+BF001-BF013 and AF001-AF003 are implemented. Property Catalog/Data Governance is implemented through BF014.7, including the schema, repositories/read models, services, HTTP/authorization, seed baseline, dynamic form projection, and integrated acceptance. Rich Property Profile, Listing Domain, and the broader Listing implementation remain approved but not implemented. Add Unit is future frontend terminology for Organization Property; no sprint after BF014 is selected.
 
 ## Sprint 1
 
