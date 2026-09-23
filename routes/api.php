@@ -17,6 +17,7 @@ use App\Modules\Authorization\Middleware\AuthorizationMiddleware;
 use App\Modules\Authorization\Services\AuthorizationService;
 use App\Modules\Authorization\Services\OrganizationScopeService;
 use App\Modules\Property\Controllers\OrganizationPropertyController;
+use App\Modules\Property\Controllers\OrganizationPropertyProfileController;
 use App\Modules\Property\Controllers\PropertyCatalogReadController;
 use App\Modules\Property\Controllers\PropertyCatalogMutationController;
 use App\Modules\Property\Controllers\UnitTypeConfigurationController;
@@ -361,6 +362,8 @@ return static function (Router $router, Container $container, array $config): vo
     $ownershipTarget = $target('ownerships');
     $private = OrganizationScopeService::PRIVATE_ORGANIZATION;
     $systemOnly = OrganizationScopeService::SYSTEM_ONLY;
+    $router->get('/organization-properties/{id}/profile', $authorize(fn (Request $request, string $id): Response => $container->make(OrganizationPropertyProfileController::class)->show($request, $id), 'properties.view', $propertyTarget, $private));
+    $router->put('/organization-properties/{id}/profile', $authorize(fn (Request $request, string $id): Response => $container->make(OrganizationPropertyProfileController::class)->update($request, $id), 'properties.manage', $propertyTarget, $private));
     $router->post('/organization-properties/{propertyId}/ownerships', $authorize(fn (Request $request, string $propertyId): Response => $container->make(OwnershipController::class)->store($request, $propertyId), 'ownerships.manage', $propertyTarget, $private));
     $router->get('/organization-properties/{propertyId}/ownerships/current', $authorize(fn (Request $request, string $propertyId): Response => $container->make(OwnershipController::class)->currentForProperty($request, $propertyId), 'ownerships.view', $propertyTarget, $private));
     $router->get('/organization-properties/{propertyId}/ownerships', $authorize(fn (Request $request, string $propertyId): Response => $container->make(OwnershipController::class)->historyForProperty($request, $propertyId), 'ownerships.view', $propertyTarget, $private));

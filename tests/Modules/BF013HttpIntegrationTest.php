@@ -157,6 +157,7 @@ bf013HttpAssert(bf013HttpDispatch($router, 'GET', '/organization-properties')['s
 $protectedRoutes = [
     ['GET', '/organization-properties'], ['POST', '/organization-properties'],
     ['GET', '/organization-properties/101'], ['PUT', '/organization-properties/101'],
+    ['GET', '/organization-properties/101/profile'], ['PUT', '/organization-properties/101/profile'],
     ['DELETE', '/organization-properties/101'], ['POST', '/organization-properties/101/reactivate'],
     ['GET', '/owners'], ['POST', '/owners'], ['GET', '/owners/201'], ['PUT', '/owners/201'],
     ['DELETE', '/owners/201'], ['POST', '/owners/201/reactivate'],
