@@ -1,6 +1,6 @@
 # BF015 — Property Profile Persistence Bridge
 
-**Status:** IN PROGRESS — BF015.1 CLOSED; BF015.2 IMPLEMENTED AND VERIFIED / CLOSED; BF015.3 NEXT / NOT STARTED
+**Status:** IN PROGRESS — BF015.1 CLOSED; BF015.2 CLOSED; BF015.3 IMPLEMENTED AND VERIFIED / CLOSED; BF015.4 NEXT / NOT STARTED
 
 **Foundation:** BF013 — Property & Ownership Foundation — CLOSED; BF014 — Canonical Property Catalog Foundation — CLOSED
 
@@ -76,7 +76,7 @@ BF015 does not create or mutate Owner, Ownership, Ownership Parties, shares, or 
 | --- | --- | --- |
 | BF015.1 | Schema & Integrity Foundation | IMPLEMENTED AND VERIFIED / CLOSED |
 | BF015.2 | Repository Foundation | IMPLEMENTED AND VERIFIED / CLOSED |
-| BF015.3 | Property Profile Domain Service | NOT STARTED |
+| BF015.3 | Property Profile Domain Service | IMPLEMENTED AND VERIFIED / CLOSED |
 | BF015.4 | HTTP & Authorization | NOT STARTED |
 | BF015.5 | Integrated Acceptance | NOT STARTED |
 | BF015.6 | Documentation Closure | NOT STARTED |
@@ -108,3 +108,15 @@ OrganizationPropertyProfileRepository, PropertyMeasurementRepository, and Proper
 Measurement and Attribute reads use deterministic Definition-ID ordering. Attribute upsert persists the complete typed shape on replacement, clearing incompatible stored columns while preserving creation attribution. Repositories do not begin, commit, or roll back transactions; BF015.3 owns aggregate transactions and all semantic validation, including canonical lifecycle, membership, hierarchy, and typed-value rules.
 
 Focused real-MariaDB acceptance verified profile locking and revision behavior, scoped value persistence, all six Attribute representations, constraint-failure recovery, and caller-owned rollback/commit behavior. BF015 schema, BF014 repository, BF013 database, QueryBuilder FOR UPDATE, and DatabaseManager transaction regressions passed.
+
+## BF015.3 implementation result
+
+OrganizationPropertyProfileService provides `getProfile(propertyId, organizationId)` and `saveProfile(propertyId, organizationId, payload, actorId)`. Reads return the BF013 shell with the nullable profile, pinned configuration and canonical context, Geography ancestry, Development context, and persisted values. A missing profile remains a stable empty profile aggregate for an existing shell.
+
+Save payloads are patches: omitted core fields and value collections remain unchanged; nullable core fields use explicit null to clear; `clear_measurement_definition_ids` and `clear_attribute_definition_ids` explicitly remove individual values. New Unit Type binding selects the current ACTIVE configuration once, while later unrelated saves retain the existing pinned version. Changing Unit Type with values requires `replace_values: true` and complete replacement value collections; stale values are removed inside the same transaction.
+
+The Service owns the aggregate transaction, locks the Property then Profile, validates canonical active state and relationships, normalizes all six Attribute shapes and measurements, and uses the expected profile revision for existing updates. A stale expected revision returns `PROFILE_REVISION_CONFLICT`. Canonical lifecycle, configuration membership, units, option ownership, Geography, and Development are Service validation concerns; repositories remain persistence-only.
+
+Focused real-MariaDB service acceptance and BF015 repository/schema, BF014 projection/configuration/catalog/geography/development, BF013 database, and DatabaseManager transaction regressions passed.
+
+The Service normalizes DECIMAL(18,4) values as validated strings without PHP float conversion: measurements are positive and Attribute DECIMAL values may be negative. Clear lists are validated against the pinned configuration before deletion, while not requiring historical definitions to remain ACTIVE merely to clear their persisted values. Focused acceptance also verifies replacement rollback, omitted-value preservation, explicit clear behavior, and historical V1 validation after V2 activation.

@@ -52,6 +52,7 @@ use App\Modules\NetworkAdministration\Controllers\FranchiseOnboardingController;
 use App\Modules\NetworkAdministration\Services\FranchiseOnboardingService;
 use App\Modules\Property\Controllers\OrganizationPropertyController;
 use App\Modules\Property\Controllers\PropertyFormProjectionController;
+use App\Modules\Property\Services\OrganizationPropertyProfileService;
 use App\Modules\Property\Repositories\OrganizationPropertyRepository;
 use App\Modules\Property\Repositories\OrganizationPropertyProfileRepository;
 use App\Modules\Property\Repositories\PropertyMeasurementRepository;
@@ -163,6 +164,7 @@ final class AppServiceProvider extends ServiceProvider
         $this->container->bind(FranchiseOnboardingController::class);
 
         $this->container->bind(OrganizationPropertyRepository::class);
+        $this->container->bind(OrganizationPropertyProfileService::class);
         $this->container->bind(OrganizationPropertyProfileRepository::class);
         $this->container->bind(PropertyMeasurementRepository::class);
         $this->container->bind(PropertyAttributeValueRepository::class);
