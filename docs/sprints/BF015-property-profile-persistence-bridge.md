@@ -1,6 +1,6 @@
 # BF015 — Property Profile Persistence Bridge
 
-**Status:** IN PROGRESS — BF015.1 IMPLEMENTED AND VERIFIED / CLOSED; BF015.2 NEXT / NOT STARTED
+**Status:** IN PROGRESS — BF015.1 CLOSED; BF015.2 IMPLEMENTED AND VERIFIED / CLOSED; BF015.3 NEXT / NOT STARTED
 
 **Foundation:** BF013 — Property & Ownership Foundation — CLOSED; BF014 — Canonical Property Catalog Foundation — CLOSED
 
@@ -75,7 +75,7 @@ BF015 does not create or mutate Owner, Ownership, Ownership Parties, shares, or 
 | Unit | Deliverable | Status |
 | --- | --- | --- |
 | BF015.1 | Schema & Integrity Foundation | IMPLEMENTED AND VERIFIED / CLOSED |
-| BF015.2 | Repository Foundation | NEXT / NOT STARTED |
+| BF015.2 | Repository Foundation | IMPLEMENTED AND VERIFIED / CLOSED |
 | BF015.3 | Property Profile Domain Service | NOT STARTED |
 | BF015.4 | HTTP & Authorization | NOT STARTED |
 | BF015.5 | Integrated Acceptance | NOT STARTED |
@@ -100,3 +100,11 @@ Profile revision is INT UNSIGNED, defaults to 1, and is constrained positive. Pr
 All operational-to-canonical and operational-to-Property FKs use RESTRICT. Value rows also reference the one-to-one profile key, so a profile with values cannot be deleted independently. This preserves Property data and prevents catalog deletes from cascading into operational values.
 
 Existing BF014 keys do not provide clean composite foreign keys for Category-to-Unit Type membership, Configuration-to-Unit Type membership, or Attribute Option-to-Definition ownership. BF015.1 intentionally uses simple existence FKs; BF015.3 Service validation will enforce those cross-table semantics, active-state selection, configuration-rule membership, hierarchy relationships, and canonical measurement-unit equality.
+
+## BF015.2 implementation result
+
+OrganizationPropertyProfileRepository, PropertyMeasurementRepository, and PropertyAttributeValueRepository provide persistence-only reads and writes for the three BF015 tables. The profile repository provides an optimistic expected-revision update primitive that increments the revision exactly once and returns no row for a stale expected revision.
+
+Measurement and Attribute reads use deterministic Definition-ID ordering. Attribute upsert persists the complete typed shape on replacement, clearing incompatible stored columns while preserving creation attribution. Repositories do not begin, commit, or roll back transactions; BF015.3 owns aggregate transactions and all semantic validation, including canonical lifecycle, membership, hierarchy, and typed-value rules.
+
+Focused real-MariaDB acceptance verified profile locking and revision behavior, scoped value persistence, all six Attribute representations, constraint-failure recovery, and caller-owned rollback/commit behavior. BF015 schema, BF014 repository, BF013 database, QueryBuilder FOR UPDATE, and DatabaseManager transaction regressions passed.
