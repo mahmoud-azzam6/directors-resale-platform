@@ -751,7 +751,7 @@ A feature is considered complete only when:
 
 BF014 — [Canonical Property Catalog Foundation](sprints/BF014-canonical-property-catalog-foundation.md) — is **IMPLEMENTED AND VERIFIED / CLOSED**. BF015 — [Property Profile Persistence Bridge](sprints/BF015-property-profile-persistence-bridge.md) — is **IMPLEMENTED AND VERIFIED / CLOSED**. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. BF015 is limited to persistable canonical Property Profile selections and typed values; Listing and frontend Property UI remain unimplemented.
 
-BF001-BF014 and AF001-AF003 are implemented. BF015 is the selected Property Profile Persistence Bridge and introduces no Listing or frontend work. Property Catalog/Data Governance remains implemented through BF014.8. Rich Property Profile beyond the BF015 bridge, Listing Domain, and the broader Listing implementation remain approved but not implemented.
+BF001-BF015 and AF001-AF003 are implemented and verified. BF015 is closed and no next workstream is currently selected. Property Catalog/Data Governance is implemented through BF014, and Rich Property Profile beyond the BF015 bridge, Listing Domain, and the broader Listing implementation remain approved but not implemented.
 
 ## Sprint 1
 
