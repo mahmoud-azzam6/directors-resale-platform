@@ -55,7 +55,7 @@ Examples:
 
 ---
 
-## 3. AI Suggests — Human Decides
+## 3. AI Suggests â€” Human Decides
 
 Artificial Intelligence never makes final business decisions.
 
@@ -147,19 +147,19 @@ Architecture Pattern:
 
 Repository Pattern
 
-↓
+â†“
 
 Service Layer
 
-↓
+â†“
 
 Controller Layer
 
-↓
+â†“
 
 REST API
 
-↓
+â†“
 
 Frontend
 
@@ -340,27 +340,27 @@ Every feature follows the same lifecycle.
 
 Business Rule
 
-↓
+â†“
 
 Architecture
 
-↓
+â†“
 
 Database
 
-↓
+â†“
 
 API
 
-↓
+â†“
 
 Backend
 
-↓
+â†“
 
 Frontend
 
-↓
+â†“
 
 Testing
 

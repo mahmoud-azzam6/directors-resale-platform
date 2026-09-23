@@ -1,8 +1,8 @@
-# BF015 — Property Profile Persistence Bridge
+# BF015 Ã¢â‚¬â€ Property Profile Persistence Bridge
 
-**Status:** IN PROGRESS — BF015.1 CLOSED; BF015.2 CLOSED; BF015.3 IMPLEMENTED AND VERIFIED / CLOSED; BF015.4 NEXT / NOT STARTED
+**Status:** IMPLEMENTED AND VERIFIED / CLOSED — BF015.1 through BF015.6 IMPLEMENTED AND VERIFIED / CLOSED
 
-**Foundation:** BF013 — Property & Ownership Foundation — CLOSED; BF014 — Canonical Property Catalog Foundation — CLOSED
+**Foundation:** BF013 Ã¢â‚¬â€ Property & Ownership Foundation Ã¢â‚¬â€ CLOSED; BF014 Ã¢â‚¬â€ Canonical Property Catalog Foundation Ã¢â‚¬â€ CLOSED
 
 ## Purpose and boundary
 
@@ -22,7 +22,7 @@ The profile row contains organization_property_id, nullable property_category_id
 
 Category is persisted directly because progressive setup may select a Category before a Unit Type. Unit Type is nullable. A newly assigned Unit Type must be ACTIVE and belong to the persisted Category.
 
-accepted_configuration_version_id is the configuration against which typed values are interpreted. When a Property first becomes configuration-bound, the server accepts only the selected Unit Type’s current ACTIVE configuration. Once values are saved against that version, later activation of a newer version does not rebind the Property or change value semantics.
+accepted_configuration_version_id is the configuration against which typed values are interpreted. When a Property first becomes configuration-bound, the server accepts only the selected Unit TypeÃ¢â‚¬â„¢s current ACTIVE configuration. Once values are saved against that version, later activation of a newer version does not rebind the Property or change value semantics.
 
 For example, a Property bound to APARTMENT V1 remains bound to V1 after APARTMENT V2 becomes ACTIVE. An unbound partial profile may use the current ACTIVE projection for entry guidance. Rebinding requires an explicit authorized replacement or migration operation; BF015 does not implement a general profile-version-history system.
 
@@ -38,7 +38,7 @@ Development stores only the most-specific selected canonical reference: no refer
 
 property_measurements stores organization_property_id, measurement_definition_id, value_decimal DECIMAL(18,4), canonical unit code snapshot, and actor/timestamp metadata. The pair of organization_property_id and measurement_definition_id is unique.
 
-Each submitted Definition must belong to the accepted configuration. Values are positive decimals in the Definition’s canonical unit; the bridge accepts neither frontend-defined measurement codes nor unit conversion.
+Each submitted Definition must belong to the accepted configuration. Values are positive decimals in the DefinitionÃ¢â‚¬â„¢s canonical unit; the bridge accepts neither frontend-defined measurement codes nor unit conversion.
 
 ### Attributes
 
@@ -77,9 +77,9 @@ BF015 does not create or mutate Owner, Ownership, Ownership Parties, shares, or 
 | BF015.1 | Schema & Integrity Foundation | IMPLEMENTED AND VERIFIED / CLOSED |
 | BF015.2 | Repository Foundation | IMPLEMENTED AND VERIFIED / CLOSED |
 | BF015.3 | Property Profile Domain Service | IMPLEMENTED AND VERIFIED / CLOSED |
-| BF015.4 | HTTP & Authorization | NOT STARTED |
-| BF015.5 | Integrated Acceptance | NOT STARTED |
-| BF015.6 | Documentation Closure | NOT STARTED |
+| BF015.4 | HTTP & Authorization | IMPLEMENTED AND VERIFIED / CLOSED |
+| BF015.5 | Integrated Acceptance | IMPLEMENTED AND VERIFIED / CLOSED |
+| BF015.6 | Documentation Closure | IMPLEMENTED AND VERIFIED / CLOSED |
 
 ## Acceptance target
 

@@ -12,7 +12,7 @@ Enterprise Foundation
 
 ## Status
 
-Completed ✅
+Completed âœ…
 
 ---
 
@@ -411,4 +411,13 @@ Status: **IMPLEMENTED AND VERIFIED / CLOSED**
 Status: IN PROGRESS
 
 - Established the authoritative [BF015 contract](../sprints/BF015-property-profile-persistence-bridge.md) for the smallest backend bridge from the BF013 Organization Property shell to canonical BF014 profile selections and configuration-bound typed values.
-- BF015.1 — Schema & Integrity Foundation — is NEXT / NOT STARTED. The bridge excludes completeness, media, Listing, and frontend Property UI.
+- BF015.1 â€” Schema & Integrity Foundation â€” is NEXT / NOT STARTED. The bridge excludes completeness, media, Listing, and frontend Property UI.
+
+## BF015 - Property Profile Persistence Bridge Closure
+
+Status: IMPLEMENTED AND VERIFIED / CLOSED
+
+- BF015.1 schema and integrity, BF015.2 repositories, BF015.3 domain Service, BF015.4 private-scope HTTP authorization, and BF015.5 integrated acceptance passed real MariaDB verification.
+- The bridge adds profile persistence only: configuration-pinned typed values, private Organization profile reads/writes, optimistic revision handling, and atomic replacement behavior.
+- BF013 and BF014 database, HTTP, authorization, seed, projection, and regression gates passed. Baseline merge `d09853c` records BF015.5 completion; BF015.6 closes documentation.
+- Completeness, media, private documents, Catalog Proposals, Listing, Marketplace, Requests, Deals, Commissions, and frontend Property UI remain deferred.
