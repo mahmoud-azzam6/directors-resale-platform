@@ -25,7 +25,7 @@ BF006 smoke tests and BF007 manual acceptance/regression checks passed at their 
 
 ## Current Planning State
 
-BF014 is **IMPLEMENTED AND VERIFIED / CLOSED**. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. BF015 â€” Property Profile Persistence Bridge â€” is **IMPLEMENTED AND VERIFIED / CLOSED**. Rich Property Profile beyond the bridge and Listing remain **APPROVED / NOT IMPLEMENTED**. No later sprint is selected.
+BF014 is **IMPLEMENTED AND VERIFIED / CLOSED**. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. BF015 — Property Profile Persistence Bridge — is **IMPLEMENTED AND VERIFIED / CLOSED**. Rich Property Profile beyond the bridge and Listing remain **APPROVED / NOT IMPLEMENTED**. No later sprint is selected.
 
 The closed BF014 contract records schema/integrity, repositories/read models, services, authorization/HTTP, seed runner/baseline, dynamic form projection, MariaDB acceptance/regressions, and documentation closure. BF015 records the bounded Property Profile persistence bridge.
 

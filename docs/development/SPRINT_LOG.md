@@ -1,5 +1,7 @@
 # Sprint Log
 
+This log preserves historical checkpoint status. The current project state is BF013, BF014, and BF015 IMPLEMENTED AND VERIFIED / CLOSED, with no current sprint or next internal unit selected.
+
 ---
 
 # Sprint 0
@@ -12,7 +14,7 @@ Enterprise Foundation
 
 ## Status
 
-Completed âœ…
+Completed ✅
 
 ---
 
@@ -406,18 +408,18 @@ Status: **IMPLEMENTED AND VERIFIED / CLOSED**
 - BF014.7 parent integrated acceptance and the full regression gate passed. No unresolved production defect was found.
 - BF014 does not implement rich Property Profile persistence, Property values/completeness/media/private documents, Listing workflows, marketplace/request workflows, or frontend Property management UI. BF015 is NOT SELECTED; the next workstream is to be selected.
 
-## BF015 - Property Profile Persistence Bridge
+## Historical BF015 Planning Entry - Property Profile Persistence Bridge
 
-Status: IN PROGRESS
+Status: Historical planning record; superseded by the BF015 closure record below
 
 - Established the authoritative [BF015 contract](../sprints/BF015-property-profile-persistence-bridge.md) for the smallest backend bridge from the BF013 Organization Property shell to canonical BF014 profile selections and configuration-bound typed values.
-- BF015.1 â€” Schema & Integrity Foundation â€” is NEXT / NOT STARTED. The bridge excludes completeness, media, Listing, and frontend Property UI.
+- At this historical planning checkpoint, BF015.1 had not started. The closure record below supersedes this state; the bridge excludes completeness, media, Listing, and frontend Property UI.
 
-## BF015 - Property Profile Persistence Bridge Closure
+## BF015 - Property Profile Persistence Bridge Closure (Current Final State)
 
 Status: IMPLEMENTED AND VERIFIED / CLOSED
 
 - BF015.1 schema and integrity, BF015.2 repositories, BF015.3 domain Service, BF015.4 private-scope HTTP authorization, and BF015.5 integrated acceptance passed real MariaDB verification.
 - The bridge adds profile persistence only: configuration-pinned typed values, private Organization profile reads/writes, optimistic revision handling, and atomic replacement behavior.
-- BF013 and BF014 database, HTTP, authorization, seed, projection, and regression gates passed. Baseline merge `d09853c` records BF015.5 completion; BF015.6 closes documentation.
+- BF013 and BF014 database, HTTP, authorization, seed, projection, and regression gates passed. Baseline merge `d09853c` records BF015.5 completion; BF015.6 documentation closure is complete. BF013, BF014, BF015.1 through BF015.6, and BF015 are IMPLEMENTED AND VERIFIED / CLOSED; no current sprint or next internal unit is selected.
 - Completeness, media, private documents, Catalog Proposals, Listing, Marketplace, Requests, Deals, Commissions, and frontend Property UI remain deferred.

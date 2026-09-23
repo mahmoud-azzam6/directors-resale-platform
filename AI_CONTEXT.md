@@ -55,7 +55,7 @@ Examples:
 
 ---
 
-## 3. AI Suggests â€” Human Decides
+## 3. AI Suggests — Human Decides
 
 Artificial Intelligence never makes final business decisions.
 
@@ -147,19 +147,19 @@ Architecture Pattern:
 
 Repository Pattern
 
-â†“
+↓
 
 Service Layer
 
-â†“
+↓
 
 Controller Layer
 
-â†“
+↓
 
 REST API
 
-â†“
+↓
 
 Frontend
 
@@ -340,27 +340,27 @@ Every feature follows the same lifecycle.
 
 Business Rule
 
-â†“
+↓
 
 Architecture
 
-â†“
+↓
 
 Database
 
-â†“
+↓
 
 API
 
-â†“
+↓
 
 Backend
 
-â†“
+↓
 
 Frontend
 
-â†“
+↓
 
 Testing
 
@@ -416,7 +416,7 @@ Organization Property remains separate from Listing. Add Unit is future business
 The architecture preserves global authenticated marketplace visibility separately from administrative authority. BF013 Property & Ownership Foundation is implemented, verified, and closed. It provides the Organization Property shell, Organization-scoped Owners, historical Ownership aggregates and Acting Owner designations, System-only Global Physical Property Identity links, migrations 009-017, eight BF013 Permission codes, and REST APIs while explicitly excluding Listing workflows and rich Property Profile behavior.
 
 AF002 provides System Franchise network administration and atomic initial administrator onboarding.
-AF003 provides Organization-scoped User and Position administration with capability-subset Permission delegation; browser QA passed and the AF003 branch was committed and pushed. BF014 is the current Backend sprint: **IN PROGRESS**. The parent contract remains authoritative for overall scope, baseline matrices, non-goals, and Definition of Done. [BF014.1 implementation record](docs/sprints/BF014.1-database-schema-and-integrity-constraints.md) records commit `4008a76` and **IMPLEMENTED AND VERIFIED / CLOSED** status. [BF014.2 - Repositories + Domain Read Models](docs/sprints/BF014.2-repositories-and-domain-read-models.md) is **IMPLEMENTED AND VERIFIED / CLOSED** (commits `ae607cf`, `17bef9b`, `7151acd`, `2669b12`). BF014.3 - Catalog / Configuration Services is **NEXT / NOT STARTED**; BF014.4-BF014.8 are **NOT STARTED**. These are internal BF014 units, not separate sprints. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. Property Catalog architecture is **APPROVED**, partially implemented through BF014.1 schema and BF014.2 repositories/read models. Rich Property Profile and Listing remain **APPROVED / NOT IMPLEMENTED**. No BF015 or later sprint is selected. The broader Listing Domain, Listings, Requests, Reports, Deals, Commissions, Teams, transfers, frontend Property workflows, and AF004 are not implemented.
+AF003 provides Organization-scoped User and Position administration with capability-subset Permission delegation. BF013, BF014, and BF015 are **IMPLEMENTED AND VERIFIED / CLOSED**. BF015 delivered the bounded Property Profile Persistence Bridge: schema, repositories, domain Service, private Organization HTTP authorization, and real-MariaDB integrated acceptance. No current sprint or next internal unit is selected. Rich Property Profile beyond the bridge, completeness, media, private documents, Catalog Proposals, Listing, Marketplace, Requests, Deals, Commissions, and frontend Property UI remain deferred or not implemented.
 
 ---
 

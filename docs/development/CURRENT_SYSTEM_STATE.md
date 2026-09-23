@@ -1,6 +1,6 @@
 # Current System State
 
-Status: BF014 IN PROGRESS; BF014.1, BF014.2, and BF014.3 IMPLEMENTED AND VERIFIED / CLOSED; BF013 closed; AF003 completed
+Status: BF013, BF014, and BF015 IMPLEMENTED AND VERIFIED / CLOSED; no current sprint or next internal unit selected
 
 ## Completed Implementation
 
@@ -169,6 +169,4 @@ Rich Property Profile and Property Catalog/Data Governance architecture closure 
 
 ## Next Development Target
 
-BF014 — Canonical Property Catalog Foundation — is **IMPLEMENTED AND VERIFIED / CLOSED**. Its completed backend capability includes canonical catalogs and configuration/versioning, geography and development catalogs, catalog authorization and HTTP APIs, deterministic seed packages 001-007, and dynamic Property-form projection. BF013 Property & Ownership Foundation remains closed. BF015 — Property Profile Persistence Bridge — is **IMPLEMENTED AND VERIFIED / CLOSED**. It delivers the bounded schema, repositories, profile Service, private Organization HTTP routes, and real-MariaDB acceptance; completeness, media, private documents, Listing workflows, marketplace/request workflows, and frontend Property management UI remain **NOT IMPLEMENTED**.
-
-BF014 — Canonical Property Catalog Foundation — is **IMPLEMENTED AND VERIFIED / CLOSED**. Its completed backend capability includes canonical catalogs and configuration/versioning, geography and development catalogs, catalog authorization and HTTP APIs, deterministic seed packages 001-007, and dynamic Property-form projection. BF013 Property & Ownership Foundation remains closed. BF015 — Property Profile Persistence Bridge — is **IMPLEMENTED AND VERIFIED / CLOSED**. It delivers the bounded schema, repositories, profile Service, private Organization HTTP routes, and real-MariaDB acceptance; completeness, media, private documents, Listing workflows, marketplace/request workflows, and frontend Property management UI remain **NOT IMPLEMENTED**.
+BF013 — Property & Ownership Foundation, BF014 — Canonical Property Catalog Foundation, and BF015 — Property Profile Persistence Bridge are **IMPLEMENTED AND VERIFIED / CLOSED**. BF015 delivered its bounded schema, repositories, profile Service, private Organization HTTP routes, and real-MariaDB integrated acceptance. No current sprint or next internal unit is selected. Rich Property Profile beyond the BF015 bridge, completeness, media, private documents, Catalog Proposals, Listing, Marketplace, Requests, Deals, Commissions, and frontend Property UI remain **NOT IMPLEMENTED**.
