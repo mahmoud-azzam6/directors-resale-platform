@@ -25,18 +25,18 @@ BF006 smoke tests and BF007 manual acceptance/regression checks passed at their 
 
 ## Current Planning State
 
-BF014 is **IMPLEMENTED AND VERIFIED / CLOSED**. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. BF015 — Property Profile Persistence Bridge — is **IN PROGRESS** with BF015.1 **NEXT / NOT STARTED**. Rich Property Profile beyond the bridge and Listing remain **APPROVED / NOT IMPLEMENTED**. No later sprint is selected.
+BF014 is **IMPLEMENTED AND VERIFIED / CLOSED**. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. BF015 — Property Profile Persistence Bridge — is **IMPLEMENTED AND VERIFIED / CLOSED**. Rich Property Profile beyond the bridge and Listing remain **APPROVED / NOT IMPLEMENTED**. No later sprint is selected.
 
 The closed BF014 contract records schema/integrity, repositories/read models, services, authorization/HTTP, seed runner/baseline, dynamic form projection, MariaDB acceptance/regressions, and documentation closure. BF015 records the bounded Property Profile persistence bridge.
 
 ## Approved Future Execution Order
 
-BF015 is the selected bounded Property Profile persistence sprint. Subsequent entries remain conceptual sequencing only; no later sprint number or name is selected:
+BF015 is closed. The next workstream has not been selected. Subsequent entries remain conceptual sequencing only; no later sprint number or name is selected:
 
 1. Architecture closure - complete
 2. BF014 parent sprint contract - recorded and authoritative
 3. BF014 - Canonical Property Catalog Foundation - IMPLEMENTED AND VERIFIED / CLOSED
-4. BF015 - Property Profile Persistence Bridge - IN PROGRESS; BF015.1 NEXT / NOT STARTED
+4. BF015 - Property Profile Persistence Bridge - IMPLEMENTED AND VERIFIED / CLOSED
 5. Rich Property Profile beyond the bridge
 6. System Admin Property Data Management frontend
 7. Initial canonical data verification and approved business additions

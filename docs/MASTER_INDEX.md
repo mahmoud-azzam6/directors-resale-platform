@@ -6,7 +6,7 @@ Version: 2.0
 
 Status: Active
 
-Last Updated: 2026-09-19
+Last Updated: 2026-09-23
 
 ---
 
@@ -19,10 +19,10 @@ Last Updated: 2026-09-19
 | Project Type | Enterprise SaaS Platform |
 | Industry | Real Estate Resale |
 | Architecture Style | Modular + Event Driven |
-| Current Phase | BF014 IN PROGRESS; BF014.1, BF014.2, and BF014.3 IMPLEMENTED AND VERIFIED / CLOSED; BF013 closed |
-| Current Sprint | BF014 - Canonical Property Catalog Foundation (IN PROGRESS) |
-| Next Internal Unit | BF014.5 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Catalog HTTP reads and mutations (NEXT / NOT STARTED) |
-| Next Selected Sprint | None after BF014; BF015 NOT SELECTED |
+| Current Phase | BF013, BF014, and BF015 IMPLEMENTED AND VERIFIED / CLOSED |
+| Current Sprint | None selected after BF015 closure |
+| Next Internal Unit | No next internal unit selected |
+| Next Selected Sprint | None selected |
 | Current Version | 0.1.0 |
 | Repository Status | Active |
 
@@ -156,7 +156,7 @@ Business rollout remains incremental.
 | M00 | Reference Data | Legacy planning placeholders; canonical Property schema and repositories implemented through BF014.2; baseline seeds and Services not implemented |
 | M01 | Core | Organization, Franchise, Partner Agency, User, Authentication, Position, Permission, and Authorization scope implemented (BF006-BF012) |
 | M02 | CRM | Planned |
-| M03 | Property Engine | BF013 closed; Property Catalog architecture approved, partially implemented through BF014.1 schema and BF014.2 repositories/read models; Rich Property Profile and Listing approved/not implemented |
+| M03 | Property Engine | BF013, BF014, and BF015 closed; Rich Property Profile beyond the BF015 bridge and Listing remain approved/not implemented |
 | M04 | Matching Engine | Planned |
 | M05 | Deal Engine | Planned |
 | M06 | Commission Engine | Planned |
@@ -175,16 +175,16 @@ Business rollout remains incremental.
 
 | Item | Value |
 |------|-------|
-| Current Phase | BF014 IN PROGRESS; BF014.1, BF014.2, and BF014.3 IMPLEMENTED AND VERIFIED / CLOSED; BF013 closed |
-| Current Sprint | BF014 - Canonical Property Catalog Foundation (IN PROGRESS) |
-| Current Module | M03 - Property & Ownership foundation and Property Catalog schema/repositories/services implemented; Rich Property Profile/Listing architecture only |
-| Current Feature | BF014.5 Seed Runner + Canonical Baseline Data IMPLEMENTED AND VERIFIED / CLOSED; BF014.6 next |
-| Current Database Contract | BF006-BF013 plus BF014.1 schema through migration 030; isolated MariaDB verified |
+| Current Phase | BF013, BF014, and BF015 IMPLEMENTED AND VERIFIED / CLOSED |
+| Current Sprint | None selected after BF015 closure |
+| Current Module | M03 - Property & Ownership, canonical Property Catalog, and the bounded Property Profile Persistence Bridge implemented; later Property-domain work deferred |
+| Current Feature | No current feature selected after BF015 closure |
+| Current Database Contract | BF006-BF015; BF015 profile bridge schema through migration 033; real MariaDB verified |
 | Current Database Module | Core plus BF013 Property/Owner/Ownership/Global Identity foundation |
-| Current Status | BF001-BF013 and AF001-AF003 implemented; BF013 verified and closed |
+| Current Status | BF001-BF015 and AF001-AF003 implemented and verified; BF013, BF014, and BF015 closed |
 | Current Milestone | Milestone 2 - Core Business |
-| Next Internal Unit | BF014.5 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Catalog HTTP reads and mutations (NEXT / NOT STARTED) |
-| Next Selected Sprint | None after BF014; BF015 NOT SELECTED |
+| Next Internal Unit | No next internal unit selected |
+| Next Selected Sprint | None selected |
 | Target Release | Not defined by the current canonical roadmap |
 
 ---
@@ -398,8 +398,8 @@ No Analytics or reporting implementation exists yet.
 
 | ADR | Title | Status |
 |------|-----------------------------------------------------------|-----------|
-| ADR-001 | Organization Hierarchy | ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Approved |
-| ADR-002 | Property / Ownership / Listing Separation | ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Approved |
+| ADR-001 | Organization Hierarchy | ✅ Approved |
+| ADR-002 | Property / Ownership / Listing Separation | ✅ Approved |
 | ADR-003 | Requirement Groups | Planned |
 | ADR-004 | Event Driven Architecture | Planned |
 | ADR-005 | ULID Strategy | Planned |
@@ -488,7 +488,7 @@ No Analytics or reporting implementation exists yet.
 
 | Sprint | Goal | Status |
 |----------|----------------------------------------------|-------------|
-| Sprint 0 | Discovery & Architecture Foundation | ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Completed |
+| Sprint 0 | Discovery & Architecture Foundation | ✅ Completed |
 | Sprint 1 | Core Database Module | Legacy roadmap; superseded by BF milestone sequence |
 | Sprint 2 | CRM Module | Planned |
 | Sprint 3 | Property Engine | Planned |
@@ -505,7 +505,8 @@ No Analytics or reporting implementation exists yet.
 | Sprint 14 | Testing & QA | Planned |
 | Sprint 15 | Beta Release | Planned |
 | BF013 | Property & Ownership Foundation | Implemented and verified; closed |
-| BF014 | [Canonical Property Catalog Foundation](sprints/BF014-canonical-property-catalog-foundation.md) | IN PROGRESS; BF014.1-BF014.5 closed; BF014.6 next |
+| BF014 | [Canonical Property Catalog Foundation](sprints/BF014-canonical-property-catalog-foundation.md) | Implemented and verified; closed |
+| BF015 | [Property Profile Persistence Bridge](sprints/BF015-property-profile-persistence-bridge.md) | Implemented and verified; closed |
 
 ---
 
@@ -543,10 +544,10 @@ No Analytics or reporting implementation exists yet.
 
 | Item | Value |
 |------|-------|
-| Current Phase | BF014 IN PROGRESS; BF014.1, BF014.2, and BF014.3 IMPLEMENTED AND VERIFIED / CLOSED; BF013 closed |
-| Current Module | M03 - Property & Ownership foundation and Property Catalog schema/repositories/services implemented; Rich Property Profile/Listing architecture only |
+| Current Phase | BF013, BF014, and BF015 IMPLEMENTED AND VERIFIED / CLOSED |
+| Current Module | M03 - Property & Ownership, canonical Property Catalog, and the bounded Property Profile Persistence Bridge implemented; later Property-domain work deferred |
 | Current Documents | [BF014 contract](sprints/BF014-canonical-property-catalog-foundation.md); PROPERTY_PROFILE_ARCHITECTURE.md; PROPERTY_CATALOG_ARCHITECTURE.md; SEED_DATA.md |
-| Current Database Contract | BF006-BF013 plus BF014.1 schema through migration 030; isolated MariaDB verified |
+| Current Database Contract | BF006-BF015; BF015 profile bridge schema through migration 033; real MariaDB verified |
 | Current ADR | ADR-002 Property / Ownership / Listing Separation |
 | Current Milestone | Milestone 2 - Core Business; BF013 closed |
 | Current Release Target | Not defined by the current canonical roadmap |
@@ -557,16 +558,16 @@ No Analytics or reporting implementation exists yet.
 
 | Area | Progress |
 |------|----------|
-| Product Discovery | ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€  100% |
-| Business Analysis | ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€  100% |
-| Architecture | ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€  100% |
-| Documentation | ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬Ëœ 90% |
-| Database Design | ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ‹â€ ÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬Ëœ 10% |
+| Product Discovery | ████████████████████ 100% |
+| Business Analysis | ████████████████████ 100% |
+| Architecture | ████████████████████ 100% |
+| Documentation | ██████████████████░░ 90% |
+| Database Design | ███░░░░░░░░░░░░░░░░░ 10% |
 | Backend Development | BF001-BF013 foundation and Core business/security scope implemented |
 | Frontend Development | AF001 Admin UI Foundation implemented; feature CRUD UI planned |
-| AI Development | ÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬Ëœ 0% |
-| Testing | ÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬Ëœ 0% |
-| Production Readiness | ÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬ËœÃƒÂ¢Ã¢â‚¬â€œÃ¢â‚¬Ëœ 0% |
+| AI Development | ░░░░░░░░░░░░░░░░░░░░ 0% |
+| Testing | ░░░░░░░░░░░░░░░░░░░░ 0% |
+| Production Readiness | ░░░░░░░░░░░░░░░░░░░░ 0% |
 
 ---
 
@@ -581,7 +582,7 @@ No Analytics or reporting implementation exists yet.
 | ADR Documents | 17 |
 | Documentation Files | 40+ |
 | Project Templates | 6 |
-| Current Sprint | BF014 - Canonical Property Catalog Foundation (IN PROGRESS) |
+| Current Sprint | None selected after BF015 closure |
 | Current Release | R0.1.0 |
 
 ---
@@ -651,43 +652,43 @@ Every feature follows the same lifecycle.
 
 Idea
 
-ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
+↓
 
 Workshop (if required)
 
-ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
+↓
 
 ADR (if required)
 
-ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
+↓
 
 Business Rules
 
-ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
+↓
 
 Architecture
 
-ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
+↓
 
 Database
 
-ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
+↓
 
 API
 
-ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
+↓
 
 Backend
 
-ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
+↓
 
 Frontend
 
-ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
+↓
 
 Testing
 
-ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
+↓
 
 Release
 
@@ -748,9 +749,9 @@ A feature is considered complete only when:
 
 ## Immediate Next Development Target
 
-BF014 — [Canonical Property Catalog Foundation](sprints/BF014-canonical-property-catalog-foundation.md) — is **IMPLEMENTED AND VERIFIED / CLOSED**. BF015 — [Property Profile Persistence Bridge](sprints/BF015-property-profile-persistence-bridge.md) — is **IN PROGRESS** with BF015.1 **NEXT / NOT STARTED**. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. BF015 is limited to persistable canonical Property Profile selections and typed values; Listing and frontend Property UI remain unimplemented.
+BF014 — [Canonical Property Catalog Foundation](sprints/BF014-canonical-property-catalog-foundation.md) — is **IMPLEMENTED AND VERIFIED / CLOSED**. BF015 — [Property Profile Persistence Bridge](sprints/BF015-property-profile-persistence-bridge.md) — is **IMPLEMENTED AND VERIFIED / CLOSED**. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. BF015 is limited to persistable canonical Property Profile selections and typed values; Listing and frontend Property UI remain unimplemented.
 
-BF001-BF014 and AF001-AF003 are implemented. BF015 is the selected Property Profile Persistence Bridge and introduces no Listing or frontend work. Property Catalog/Data Governance remains implemented through BF014.8. Rich Property Profile beyond the BF015 bridge, Listing Domain, and the broader Listing implementation remain approved but not implemented.
+BF001-BF015 and AF001-AF003 are implemented and verified. BF015 is closed and no next workstream is currently selected. Property Catalog/Data Governance is implemented through BF014, and Rich Property Profile beyond the BF015 bridge, Listing Domain, and the broader Listing implementation remain approved but not implemented.
 
 ## Sprint 1
 

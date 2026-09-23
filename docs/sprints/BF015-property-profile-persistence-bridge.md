@@ -1,8 +1,8 @@
 # BF015 — Property Profile Persistence Bridge
 
-**Status:** IN PROGRESS — BF015.1 CLOSED; BF015.2 CLOSED; BF015.3 IMPLEMENTED AND VERIFIED / CLOSED; BF015.4 NEXT / NOT STARTED
+**Status:** IMPLEMENTED AND VERIFIED / CLOSED — BF015.1 through BF015.6 IMPLEMENTED AND VERIFIED / CLOSED
 
-**Foundation:** BF013 — Property & Ownership Foundation — CLOSED; BF014 — Canonical Property Catalog Foundation — CLOSED
+**Foundation:** BF013 — Property & Ownership Foundation — IMPLEMENTED AND VERIFIED / CLOSED; BF014 — Canonical Property Catalog Foundation — IMPLEMENTED AND VERIFIED / CLOSED
 
 ## Purpose and boundary
 
@@ -77,9 +77,9 @@ BF015 does not create or mutate Owner, Ownership, Ownership Parties, shares, or 
 | BF015.1 | Schema & Integrity Foundation | IMPLEMENTED AND VERIFIED / CLOSED |
 | BF015.2 | Repository Foundation | IMPLEMENTED AND VERIFIED / CLOSED |
 | BF015.3 | Property Profile Domain Service | IMPLEMENTED AND VERIFIED / CLOSED |
-| BF015.4 | HTTP & Authorization | NOT STARTED |
-| BF015.5 | Integrated Acceptance | NOT STARTED |
-| BF015.6 | Documentation Closure | NOT STARTED |
+| BF015.4 | HTTP & Authorization | IMPLEMENTED AND VERIFIED / CLOSED |
+| BF015.5 | Integrated Acceptance | IMPLEMENTED AND VERIFIED / CLOSED |
+| BF015.6 | Documentation Closure | IMPLEMENTED AND VERIFIED / CLOSED |
 
 ## Acceptance target
 
