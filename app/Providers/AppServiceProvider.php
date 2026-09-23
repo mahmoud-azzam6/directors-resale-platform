@@ -51,6 +51,7 @@ use App\Modules\User\Validators\UserValidator;
 use App\Modules\NetworkAdministration\Controllers\FranchiseOnboardingController;
 use App\Modules\NetworkAdministration\Services\FranchiseOnboardingService;
 use App\Modules\Property\Controllers\OrganizationPropertyController;
+use App\Modules\Property\Controllers\OrganizationPropertyProfileController;
 use App\Modules\Property\Controllers\PropertyFormProjectionController;
 use App\Modules\Property\Services\OrganizationPropertyProfileService;
 use App\Modules\Property\Repositories\OrganizationPropertyRepository;
@@ -185,6 +186,7 @@ final class AppServiceProvider extends ServiceProvider
         $this->container->bind(PropertyFormProjectionService::class);
         $this->container->bind(PropertyFormProjectionController::class);
         $this->container->bind(OrganizationPropertyController::class);
+        $this->container->bind(OrganizationPropertyProfileController::class);
         $this->container->bind(OwnerRepository::class);
         $this->container->bind(OwnerService::class);
         $this->container->bind(OwnerController::class);
