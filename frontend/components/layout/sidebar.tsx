@@ -16,6 +16,7 @@ const navigation = [
   { label: 'Users', href: '/admin/users', permission: 'users.view', icon: UsersRound },
   { label: 'Positions', href: '/admin/positions', permission: 'positions.view', icon: ShieldCheck },
   { label: 'Permissions', href: '/admin/permissions', permission: 'permissions.view', icon: LockKeyhole },
+  { label: 'Properties', href: '/admin/properties', permission: 'properties.view', icon: Building2 },
 ];
 
 export function Sidebar({ context, open, onClose }: { context: AuthContext; open: boolean; onClose: () => void }) {

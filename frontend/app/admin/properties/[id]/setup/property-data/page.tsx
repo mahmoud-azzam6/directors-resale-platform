@@ -1,0 +1,2 @@
+import { PropertyDataPage } from '@/features/properties/property-data-page';
+export default function PropertyDataRoute({ params }: { params: { id: string } }) { return <PropertyDataPage id={params.id} />; }

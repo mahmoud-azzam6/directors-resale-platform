@@ -5,7 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Avatar } from '@/components/ui/avatar';
 
-const shortcuts = [{ label: 'Organizations', href: '/admin/organizations', permission: 'organizations.view', icon: Building2 }, { label: 'Franchises', href: '/admin/franchises', permission: 'franchises.view', icon: Network }, { label: 'Partner agencies', href: '/admin/partner-agencies', permission: 'partner_agencies.view', icon: Files }, { label: 'Users', href: '/admin/users', permission: 'users.view', icon: UsersRound }, { label: 'Positions', href: '/admin/positions', permission: 'positions.view', icon: ShieldCheck }, { label: 'Permissions', href: '/admin/permissions', permission: 'permissions.view', icon: LockKeyhole }];
+const shortcuts = [{ label: 'Organizations', href: '/admin/organizations', permission: 'organizations.view', icon: Building2 }, { label: 'Franchises', href: '/admin/franchises', permission: 'franchises.view', icon: Network }, { label: 'Partner agencies', href: '/admin/partner-agencies', permission: 'partner_agencies.view', icon: Files }, { label: 'Users', href: '/admin/users', permission: 'users.view', icon: UsersRound }, { label: 'Positions', href: '/admin/positions', permission: 'positions.view', icon: ShieldCheck }, { label: 'Permissions', href: '/admin/permissions', permission: 'permissions.view', icon: LockKeyhole }, { label: 'Properties', href: '/admin/properties', permission: 'properties.view', icon: Building2 }];
 
 export default async function DashboardPage() {
   const context = await getServerAuthContext();
