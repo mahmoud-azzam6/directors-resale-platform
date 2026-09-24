@@ -1,6 +1,6 @@
 # Current System State
 
-Status: BF013, BF014, and BF015 IMPLEMENTED AND VERIFIED / CLOSED; no current sprint or next internal unit selected
+Status: BF013, BF014, BF015, and AF001-AF003 IMPLEMENTED AND VERIFIED / CLOSED; AF004.1 ARCHITECTURE APPROVED / NOT IMPLEMENTED
 
 ## Completed Implementation
 
@@ -144,7 +144,7 @@ BF014.1 added 13 catalog/configuration/seed-tracking tables through migrations 0
 
 - Direct User permissions, authorization expansion beyond BF012, roles, position hierarchy, team hierarchy, user profiles, transfers, registration, reset, refresh tokens, and sessions
 - CRM, rich Property Profile persistence/integration, Property values/completeness/media/private documents, Catalog Proposals, Listings, Deals, Commissions, and Transfers
-- Notifications, AI, Analytics, Integrations, broader Admin UI modules, and AF004
+- Notifications, AI, Analytics, Integrations, and broader Admin UI modules beyond AF004 architecture
 - A unified project-wide automated test runner; legacy BF006-BF007 verification remains primarily manual
 
 ## Approved Architecture, Not Implemented
@@ -169,4 +169,4 @@ Rich Property Profile and Property Catalog/Data Governance architecture closure 
 
 ## Next Development Target
 
-BF013 — Property & Ownership Foundation, BF014 — Canonical Property Catalog Foundation, and BF015 — Property Profile Persistence Bridge are **IMPLEMENTED AND VERIFIED / CLOSED**. BF015 delivered its bounded schema, repositories, profile Service, private Organization HTTP routes, and real-MariaDB integrated acceptance. No current sprint or next internal unit is selected. Rich Property Profile beyond the BF015 bridge, completeness, media, private documents, Catalog Proposals, Listing, Marketplace, Requests, Deals, Commissions, and frontend Property UI remain **NOT IMPLEMENTED**.
+BF013 — Property & Ownership Foundation, BF014 — Canonical Property Catalog Foundation, BF015 — Property Profile Persistence Bridge, and AF001–AF003 are **IMPLEMENTED AND VERIFIED / CLOSED**. AF004 — Property Administration UI — is **ARCHITECTURE APPROVED / NOT IMPLEMENTED**. AF004.1 locks the existing /admin route contract and the BF013/BF014/BF015 composition; AF004.2 — Property Data Step is next and not started. The contract defers Rich Property Profile beyond BF015, frontend-owned completeness, media, private documents, Listing, Marketplace, Requests, Deals, Commissions, and all Listing side effects.

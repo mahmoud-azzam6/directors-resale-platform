@@ -25,13 +25,13 @@ BF006 smoke tests and BF007 manual acceptance/regression checks passed at their 
 
 ## Current Planning State
 
-BF014 is **IMPLEMENTED AND VERIFIED / CLOSED**. BF013 remains **IMPLEMENTED AND VERIFIED / CLOSED**. BF015 — Property Profile Persistence Bridge — is **IMPLEMENTED AND VERIFIED / CLOSED**. Rich Property Profile beyond the bridge and Listing remain **APPROVED / NOT IMPLEMENTED**. No later sprint is selected.
+BF013, BF014, BF015, and AF001–AF003 are **IMPLEMENTED AND VERIFIED / CLOSED**. AF004 — Property Administration UI — is **ARCHITECTURE APPROVED / NOT IMPLEMENTED**; AF004.1 locks the route and orchestration contract. AF004.2–AF004.6 remain not started.
 
 The closed BF014 contract records schema/integrity, repositories/read models, services, authorization/HTTP, seed runner/baseline, dynamic form projection, MariaDB acceptance/regressions, and documentation closure. BF015 records the bounded Property Profile persistence bridge.
 
 ## Approved Future Execution Order
 
-BF015 is closed. The next workstream has not been selected. Subsequent entries remain conceptual sequencing only; no later sprint number or name is selected:
+AF004 is selected for architecture only. AF004.1 is approved; AF004.2 is the next internal unit and has not started. No later workstream is selected.
 
 1. Architecture closure - complete
 2. BF014 parent sprint contract - recorded and authoritative

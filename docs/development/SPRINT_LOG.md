@@ -423,3 +423,12 @@ Status: IMPLEMENTED AND VERIFIED / CLOSED
 - The bridge adds profile persistence only: configuration-pinned typed values, private Organization profile reads/writes, optimistic revision handling, and atomic replacement behavior.
 - BF013 and BF014 database, HTTP, authorization, seed, projection, and regression gates passed. Baseline merge `d09853c` records BF015.5 completion; BF015.6 documentation closure is complete. BF013, BF014, BF015.1 through BF015.6, and BF015 are IMPLEMENTED AND VERIFIED / CLOSED; no current sprint or next internal unit is selected.
 - Completeness, media, private documents, Catalog Proposals, Listing, Marketplace, Requests, Deals, Commissions, and frontend Property UI remain deferred.
+## AF004.1 - Property Administration UI Architecture & Route Contract
+
+Status: **ARCHITECTURE APPROVED / NOT IMPLEMENTED**
+
+- Selected AF004 as the next frontend workstream after BF015 closure and AF001-AF003 completion.
+- Locked the existing `/admin` App Router extension for Property list, Add Unit, details, and the three setup routes: Property Data, Owner & Ownership, and Review.
+- Reuses implemented BF013 Property/Owner/Ownership APIs, BF014 catalog/projection APIs, and BF015 progressive Profile persistence with server-authoritative revision conflict handling.
+- Does not implement frontend code, media/private-document persistence, completeness truth, Listing behavior, marketplace, Request, Deal, Commission, or a new authorization model.
+- AF004.2 is next / not started; AF004.3-AF004.6 are not started.
