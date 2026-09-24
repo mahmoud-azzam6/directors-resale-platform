@@ -6,7 +6,7 @@ Version: 2.0
 
 Status: Active
 
-Last Updated: 2026-09-23
+Last Updated: 2026-09-24
 
 ---
 
@@ -19,10 +19,10 @@ Last Updated: 2026-09-23
 | Project Type | Enterprise SaaS Platform |
 | Industry | Real Estate Resale |
 | Architecture Style | Modular + Event Driven |
-| Current Phase | BF013, BF014, and BF015 IMPLEMENTED AND VERIFIED / CLOSED |
-| Current Sprint | None selected after BF015 closure |
-| Next Internal Unit | No next internal unit selected |
-| Next Selected Sprint | None selected |
+| Current Phase | BF013, BF014, BF015, and AF001-AF003 IMPLEMENTED AND VERIFIED / CLOSED; AF004.1 ARCHITECTURE APPROVED / NOT IMPLEMENTED |
+| Current Sprint | AF004 - Property Administration UI; AF004.1 Architecture & Route Contract |
+| Next Internal Unit | AF004.2 - Property Data Step / NOT STARTED |
+| Next Selected Sprint | AF004 selected; implementation not started |
 | Current Version | 0.1.0 |
 | Repository Status | Active |
 
@@ -144,6 +144,7 @@ Business rollout remains incremental.
 | Property Catalog and Data Governance | PROPERTY_CATALOG_ARCHITECTURE.md |
 | Canonical Seed Strategy | docs/database/SEED_DATA.md |
 | Selected BF014 Sprint and Locked Baseline Matrices | [BF014 contract](sprints/BF014-canonical-property-catalog-foundation.md) |
+| AF004 Property Administration UI Architecture & Route Contract | [AF004 contract](sprints/AF004-property-administration-ui.md) |
 | BF014 Internal Unit BF014.1 Implementation Record | [BF014.1 schema and integrity](sprints/BF014.1-database-schema-and-integrity-constraints.md) |
 | BF014 Internal Unit BF014.2 Implementation Record | [BF014.2 repositories and read models](sprints/BF014.2-repositories-and-domain-read-models.md) |
 
@@ -175,16 +176,16 @@ Business rollout remains incremental.
 
 | Item | Value |
 |------|-------|
-| Current Phase | BF013, BF014, and BF015 IMPLEMENTED AND VERIFIED / CLOSED |
-| Current Sprint | None selected after BF015 closure |
-| Current Module | M03 - Property & Ownership, canonical Property Catalog, and the bounded Property Profile Persistence Bridge implemented; later Property-domain work deferred |
-| Current Feature | No current feature selected after BF015 closure |
+| Current Phase | BF013, BF014, BF015, and AF001-AF003 IMPLEMENTED AND VERIFIED / CLOSED; AF004.1 ARCHITECTURE APPROVED / NOT IMPLEMENTED |
+| Current Sprint | AF004 - Property Administration UI; AF004.1 Architecture & Route Contract |
+| Current Module | M03 - Property Administration UI architecture approved; BF013/BF014/BF015 backend contracts implemented; frontend implementation deferred |
+| Current Feature | AF004.1 - Property Administration UI Architecture & Route Contract |
 | Current Database Contract | BF006-BF015; BF015 profile bridge schema through migration 033; real MariaDB verified |
 | Current Database Module | Core plus BF013 Property/Owner/Ownership/Global Identity foundation |
-| Current Status | BF001-BF015 and AF001-AF003 implemented and verified; BF013, BF014, and BF015 closed |
+| Current Status | BF001-BF015 and AF001-AF003 implemented and verified; AF004.1 architecture approved only |
 | Current Milestone | Milestone 2 - Core Business |
-| Next Internal Unit | No next internal unit selected |
-| Next Selected Sprint | None selected |
+| Next Internal Unit | AF004.2 - Property Data Step / NOT STARTED |
+| Next Selected Sprint | AF004 selected; implementation not started |
 | Target Release | Not defined by the current canonical roadmap |
 
 ---
@@ -507,6 +508,7 @@ No Analytics or reporting implementation exists yet.
 | BF013 | Property & Ownership Foundation | Implemented and verified; closed |
 | BF014 | [Canonical Property Catalog Foundation](sprints/BF014-canonical-property-catalog-foundation.md) | Implemented and verified; closed |
 | BF015 | [Property Profile Persistence Bridge](sprints/BF015-property-profile-persistence-bridge.md) | Implemented and verified; closed |
+| AF004 | [Property Administration UI](sprints/AF004-property-administration-ui.md) | Architecture approved; not implemented |
 
 ---
 
@@ -544,8 +546,8 @@ No Analytics or reporting implementation exists yet.
 
 | Item | Value |
 |------|-------|
-| Current Phase | BF013, BF014, and BF015 IMPLEMENTED AND VERIFIED / CLOSED |
-| Current Module | M03 - Property & Ownership, canonical Property Catalog, and the bounded Property Profile Persistence Bridge implemented; later Property-domain work deferred |
+| Current Phase | BF013, BF014, BF015, and AF001-AF003 IMPLEMENTED AND VERIFIED / CLOSED; AF004.1 ARCHITECTURE APPROVED / NOT IMPLEMENTED |
+| Current Module | M03 - Property Administration UI architecture approved; BF013/BF014/BF015 backend contracts implemented; frontend implementation deferred |
 | Current Documents | [BF014 contract](sprints/BF014-canonical-property-catalog-foundation.md); PROPERTY_PROFILE_ARCHITECTURE.md; PROPERTY_CATALOG_ARCHITECTURE.md; SEED_DATA.md |
 | Current Database Contract | BF006-BF015; BF015 profile bridge schema through migration 033; real MariaDB verified |
 | Current ADR | ADR-002 Property / Ownership / Listing Separation |
@@ -582,7 +584,7 @@ No Analytics or reporting implementation exists yet.
 | ADR Documents | 17 |
 | Documentation Files | 40+ |
 | Project Templates | 6 |
-| Current Sprint | None selected after BF015 closure |
+| Current Sprint | AF004 - Property Administration UI; AF004.1 Architecture & Route Contract |
 | Current Release | R0.1.0 |
 
 ---
