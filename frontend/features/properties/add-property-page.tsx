@@ -1,0 +1,11 @@
+'use client';
+import { useRouter } from 'next/navigation';
+import { useMutation } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { propertyApi } from '@/lib/api/property';
+import { ApiClientError } from '@/lib/api/client';
+import { Alert } from '@/components/ui/alert'; import { Button } from '@/components/ui/button'; import { Card, CardContent, CardHeader } from '@/components/ui/card'; import { Input } from '@/components/ui/input'; import { Label } from '@/components/ui/label';
+const schema=z.object({property_label:z.string().trim().min(1,'Property label is required.')}); type Values=z.infer<typeof schema>;
+export function AddPropertyPage(){const router=useRouter();const form=useForm<Values>({resolver:zodResolver(schema)});const mutation=useMutation({mutationFn:(v:Values)=>propertyApi.create(v.property_label),onSuccess:(property)=>router.push(`/admin/properties/${property.id}/setup/property-data`)});const error=mutation.error instanceof ApiClientError?mutation.error:null;return <main className="page-shell fade-up"><div><p className="eyebrow">Add Unit</p><h1 className="mt-2 text-3xl font-semibold text-ink">Create Property shell</h1><p className="mt-2 text-sm text-muted">This creates only the BF013 Organization Property shell. No Listing or media record is created.</p></div><Card className="mt-8 max-w-xl"><CardHeader><h2 className="font-semibold text-ink">Property identity</h2></CardHeader><CardContent>{mutation.error&&<Alert>{error?.message??'The Property shell could not be created.'}</Alert>}<form className="mt-5 space-y-5" onSubmit={form.handleSubmit((v)=>mutation.mutate(v))} noValidate><div><Label htmlFor="property_label">Property label</Label><Input id="property_label" placeholder="مثال: شقة 101" {...form.register('property_label')}/>{form.formState.errors.property_label&&<p className="mt-2 text-xs text-danger">{form.formState.errors.property_label.message}</p>}</div><Button type="submit" disabled={mutation.isPending}>{mutation.isPending?'Creating...':'Continue to Property Data'}</Button></form></CardContent></Card></main>}
