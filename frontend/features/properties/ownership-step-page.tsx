@@ -123,6 +123,7 @@ export function OwnershipStepPage({ id }: { id: string }) {
           <p className="mt-2 text-sm text-muted">Owner and Ownership remain private BF013 records. They are never stored in the Property Profile.</p>
         </div>
         <Button asChild variant="outline"><Link href={`/admin/properties/${id}/setup/property-data`}>العودة إلى بيانات الوحدة</Link></Button>
+        <Button asChild variant="outline"><Link href={`/admin/properties/${id}/setup/review`}>{"\u0645\u0631\u0627\u062c\u0639\u0629 \u0627\u0644\u0625\u0639\u062f\u0627\u062f"}</Link></Button>
       </div>
 
       {successMessage && <div className="mt-6"><Alert tone="success">{successMessage}</Alert></div>}
