@@ -1,8 +1,8 @@
 # AF004 — Property Administration UI
 
 **Milestone:** Admin Frontend / Property Administration  
-**Status:** ARCHITECTURE APPROVED / NOT IMPLEMENTED  
-**Current internal unit:** AF004.1 — Architecture & Route Contract  
+**Status:** IMPLEMENTED AND VERIFIED / CLOSED
+**Current internal unit:** None — AF004.1 through AF004.6 IMPLEMENTED AND VERIFIED / CLOSED
 **Depends on:** AF001, AF002, AF003, BF013, BF014, BF015  
 **Frontend:** Existing `frontend/` Next.js Admin Application
 
@@ -12,7 +12,7 @@
 
 AF004 defines the approved frontend contract for administration of an Organization Property. It composes the implemented BF013 Property and Ownership APIs, BF014 canonical catalogs and dynamic form projections, and BF015 Property Profile Persistence Bridge inside the existing AF001–AF003 Admin application.
 
-This document approves architecture only. It does not implement a frontend route, component, API proxy, backend endpoint, schema, migration, media store, completeness calculation, Listing behavior, or a new authorization rule.
+AF004.1 approved this architecture. AF004.2 through AF004.6 subsequently implemented and verified the bounded Property Administration UI. This contract does not add a frontend-owned API, schema, persistence flow, media capability, completeness system, Listing flow, or Organization provisioning.
 
 The status terms are distinct:
 
@@ -21,7 +21,7 @@ The status terms are distinct:
 - **Verified** means the implemented behavior has passed its agreed evidence.
 - **Closed** means the relevant internal unit has completed its approved delivery and evidence.
 
-AF004 is not implemented or verified. AF004.1 is ready for implementation planning after architecture review; AF004.2–AF004.6 are not started.
+AF004 is implemented and verified. AF004.1 through AF004.6 are IMPLEMENTED AND VERIFIED / CLOSED; no next internal unit is selected.
 
 ---
 
@@ -164,3 +164,16 @@ AF004.1 is ready when this contract:
 - states backend-authoritative authorization and the Parent Franchise/child Partner Agency privacy boundary;
 - records AF004.2–AF004.6 scope, dependencies, non-goals, and acceptance evidence;
 - makes no source, test, schema, or backend behavior change.
+## 10. AF004 implementation and closure evidence
+
+**Status:** AF004 and AF004.1 through AF004.6 are **IMPLEMENTED AND VERIFIED / CLOSED**.
+
+Delivered frontend routes are `/admin/properties`, `/admin/properties/new`, `/admin/properties/[id]/setup/property-data`, `/admin/properties/[id]/setup/ownership`, and `/admin/properties/[id]/setup/review`.
+
+- AF004.2 delivered the BF013 shell, BF014 dynamic Property Data projection, BF015 progressive Profile persistence, saved-value hydration, and explicit revision-conflict handling.
+- AF004.3 delivered private Organization Owner, Ownership, Ownership Party, and Authorized Acting Owner composition through existing BF013 APIs.
+- AF004.4 delivered a read-only review of persisted Property, Profile, Ownership, and available history aggregates.
+- AF004.5 delivered an honest unavailable state for Property Images and Private Documents without upload, storage, local persistence, or placeholder records.
+- AF004.6 verified the frontend typecheck, lint, and production build. The frontend package has no test runner; no framework was added.
+
+AF004 does not implement media or private-document persistence, frontend-owned completeness truth, `COMPLETE`/`INCOMPLETE` semantics, Listing creation or Listing Ready, Marketplace, Requests, Deals, Commissions, transfers, or other Listing side effects. Property setup review and any future Property Setup Complete state are not Listing Ready.

@@ -2,18 +2,18 @@
 
 Status: Active
 
-Current Project Phase: AF004.1 ARCHITECTURE APPROVED / NOT IMPLEMENTED — Property Administration UI Architecture & Route Contract
+Current Project Phase: No current sprint selected — AF004 Property Administration UI IMPLEMENTED AND VERIFIED / CLOSED
 
 Current Milestone: Milestone 2 - Core Business
 
-Completed Sprints: BF001-BF015, AF001, AF002, AF003
+Completed Sprints: BF001-BF015, AF001-AF004
 
-Current Sprint: AF004 — Property Administration UI; AF004.1 Architecture & Route Contract
+Current Sprint: None — AF004 IMPLEMENTED AND VERIFIED / CLOSED
 
 
-Next Internal Unit: AF004.2 — Property Data Step / NOT STARTED
+Next Internal Unit: None selected
 
-Latest Stable Commit: d25487a - finalize BF015 current development target wording
+Latest Stable Commit: AF004 closure pending documentation commit on codex-review
 
 Last Updated: 2026-09-24
 
@@ -43,7 +43,7 @@ The application now has:
 - `users` table with a restricted Organization foreign key and indexed `organization_id`
 - AF001 Next.js Admin UI foundation under `frontend/` with secure HttpOnly auth bridge, typed API/context layer, protected App Router layout, and permission-aware navigation
 
-Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, Permissions & Authorization, BF013 Property & Ownership Foundation, AF001-AF003, BF014 Canonical Property Catalog Foundation, and BF015 Property Profile Persistence Bridge are implemented and verified. AF004.1 approves the Property Administration UI information architecture and existing `/admin` route contract only; AF004 implementation has not started. It reuses BF013 Property/Ownership, BF014 projections/catalogs, and BF015 progressive Profile persistence without implementing Rich Property Profile beyond the bridge, completeness truth, media, private documents, Listing, Marketplace, Requests, Deals, Commissions, or frontend Property behavior.
+Organization, Franchise, Partner Agency, staged User Management, Authentication Foundation, Dynamic Positions, Permissions & Authorization, BF013 Property & Ownership Foundation, AF001-AF004, BF014 Canonical Property Catalog Foundation, and BF015 Property Profile Persistence Bridge are implemented and verified. AF004 delivers the `/admin/properties` administration flow through existing BF013 Property/Ownership, BF014 projections/catalogs, and BF015 progressive Profile persistence. Rich Property Profile beyond the bridge, completeness truth, media and private-document persistence, Listing, Marketplace, Requests, Deals, Commissions, transfers, and Listing readiness remain unimplemented.
 
 Approved architecture now defines one authenticated Admin Application whose experience is determined by
 Organization, Position, Permissions, and applicable resource scope. It also separates future Global
@@ -53,7 +53,7 @@ remain scope-controlled. `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md` defi
 
 ## Selected Backend Sprint
 
-BF013, BF014, and BF015 are **IMPLEMENTED AND VERIFIED / CLOSED**. AF004 — Property Administration UI — is **ARCHITECTURE APPROVED / NOT IMPLEMENTED**. AF004.1 is the approved architecture and route contract; AF004.2–AF004.6 are not started. Rich Property Profile persistence beyond BF015, Listing, and frontend Property implementation remain unimplemented.
+BF013, BF014, BF015, AF001–AF003, and AF004 are **IMPLEMENTED AND VERIFIED / CLOSED**. AF004.1 through AF004.6 are closed. No current sprint or next internal unit is selected. Rich Property Profile persistence beyond BF015, media/private-document persistence, frontend-owned completeness, Listing, Marketplace, Requests, Deals, Commissions, and transfers remain unimplemented; Property setup review is not Listing Ready.
 
 ## Architecture Overview
 
