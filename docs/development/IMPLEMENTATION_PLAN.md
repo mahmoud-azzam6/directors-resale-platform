@@ -25,13 +25,13 @@ BF006 smoke tests and BF007 manual acceptance/regression checks passed at their 
 
 ## Current Planning State
 
-BF013, BF014, BF015, and AF001–AF003 are **IMPLEMENTED AND VERIFIED / CLOSED**. AF004 — Property Administration UI — is **ARCHITECTURE APPROVED / NOT IMPLEMENTED**; AF004.1 locks the route and orchestration contract. AF004.2–AF004.6 remain not started.
+BF013, BF014, BF015, AF001–AF003, and AF004 — Property Administration UI — are **IMPLEMENTED AND VERIFIED / CLOSED**. AF004.1 through AF004.6 are closed.
 
 The closed BF014 contract records schema/integrity, repositories/read models, services, authorization/HTTP, seed runner/baseline, dynamic form projection, MariaDB acceptance/regressions, and documentation closure. BF015 records the bounded Property Profile persistence bridge.
 
 ## Approved Future Execution Order
 
-AF004 is selected for architecture only. AF004.1 is approved; AF004.2 is the next internal unit and has not started. No later workstream is selected.
+AF004 is closed. No current sprint, next internal unit, or later workstream is selected. AF004 remains limited to administrative composition of BF013/BF014/BF015; completeness, media/private-document persistence, Listing, Marketplace, Requests, Deals, Commissions, and transfers remain deferred.
 
 1. Architecture closure - complete
 2. BF014 parent sprint contract - recorded and authoritative

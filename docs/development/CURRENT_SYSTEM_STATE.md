@@ -1,6 +1,6 @@
 # Current System State
 
-Status: BF013, BF014, BF015, and AF001-AF003 IMPLEMENTED AND VERIFIED / CLOSED; AF004.1 ARCHITECTURE APPROVED / NOT IMPLEMENTED
+Status: BF013, BF014, BF015, AF001-AF003, and AF004 IMPLEMENTED AND VERIFIED / CLOSED; no current sprint selected
 
 ## Completed Implementation
 
@@ -169,4 +169,4 @@ Rich Property Profile and Property Catalog/Data Governance architecture closure 
 
 ## Next Development Target
 
-BF013 — Property & Ownership Foundation, BF014 — Canonical Property Catalog Foundation, BF015 — Property Profile Persistence Bridge, and AF001–AF003 are **IMPLEMENTED AND VERIFIED / CLOSED**. AF004 — Property Administration UI — is **ARCHITECTURE APPROVED / NOT IMPLEMENTED**. AF004.1 locks the existing /admin route contract and the BF013/BF014/BF015 composition; AF004.2 — Property Data Step is next and not started. The contract defers Rich Property Profile beyond BF015, frontend-owned completeness, media, private documents, Listing, Marketplace, Requests, Deals, Commissions, and all Listing side effects.
+BF013 — Property & Ownership Foundation, BF014 — Canonical Property Catalog Foundation, BF015 — Property Profile Persistence Bridge, AF001–AF003, and AF004 — Property Administration UI — are **IMPLEMENTED AND VERIFIED / CLOSED**. AF004 delivers the authorized `/admin/properties` flow: Property list and shell creation, BF014/BF015 Property Data, BF013 Owner/Ownership composition, read-only review, and an honest Media/Private Document unavailable state. It creates no media or private-document persistence, frontend completeness truth, Listing, Marketplace, Request, Deal, Commission, transfer, or Listing side effect. Property setup review is not Listing Ready. No current sprint or next internal unit is selected.

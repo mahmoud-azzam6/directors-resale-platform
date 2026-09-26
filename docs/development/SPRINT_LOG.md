@@ -1,6 +1,6 @@
 # Sprint Log
 
-This log preserves historical checkpoint status. The current project state is BF013, BF014, and BF015 IMPLEMENTED AND VERIFIED / CLOSED, with no current sprint or next internal unit selected.
+This log preserves historical checkpoint status. The current project state is BF013, BF014, BF015, AF001–AF003, and AF004 IMPLEMENTED AND VERIFIED / CLOSED, with no current sprint or next internal unit selected.
 
 ---
 
@@ -423,7 +423,7 @@ Status: IMPLEMENTED AND VERIFIED / CLOSED
 - The bridge adds profile persistence only: configuration-pinned typed values, private Organization profile reads/writes, optimistic revision handling, and atomic replacement behavior.
 - BF013 and BF014 database, HTTP, authorization, seed, projection, and regression gates passed. Baseline merge `d09853c` records BF015.5 completion; BF015.6 documentation closure is complete. BF013, BF014, BF015.1 through BF015.6, and BF015 are IMPLEMENTED AND VERIFIED / CLOSED; no current sprint or next internal unit is selected.
 - Completeness, media, private documents, Catalog Proposals, Listing, Marketplace, Requests, Deals, Commissions, and frontend Property UI remain deferred.
-## AF004.1 - Property Administration UI Architecture & Route Contract
+## Historical AF004.1 - Property Administration UI Architecture & Route Contract
 
 Status: **ARCHITECTURE APPROVED / NOT IMPLEMENTED**
 
@@ -432,3 +432,12 @@ Status: **ARCHITECTURE APPROVED / NOT IMPLEMENTED**
 - Reuses implemented BF013 Property/Owner/Ownership APIs, BF014 catalog/projection APIs, and BF015 progressive Profile persistence with server-authoritative revision conflict handling.
 - Does not implement frontend code, media/private-document persistence, completeness truth, Listing behavior, marketplace, Request, Deal, Commission, or a new authorization model.
 - AF004.2 is next / not started; AF004.3-AF004.6 are not started.
+
+## AF004 - Property Administration UI closure
+
+Status: **IMPLEMENTED AND VERIFIED / CLOSED**
+
+- AF004.1 through AF004.6 closed the existing `/admin/properties` administration flow: Property list, Add Unit BF013 shell, BF014/BF015 Property Data and revision-conflict handling, BF013 Owner/Ownership/Party/Acting Owner composition, read-only review, and the Media/Private Document unavailable boundary.
+- Final frontend acceptance passed `npm run typecheck`, `npm run lint`, and `npm run build`; the package has no frontend test runner and no framework was added. Authorization and private-scope behavior remain backend-authoritative through the existing BF013/BF014/BF015 APIs.
+- AF004 added no media persistence, private-document persistence, completeness engine, `COMPLETE`/`INCOMPLETE` semantics, Listing or Listing Ready behavior, Marketplace, Request, Deal, Commission, transfer, or backend domain change. Property setup review is not Listing Ready.
+- No current sprint or next internal unit is selected.
