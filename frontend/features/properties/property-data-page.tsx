@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ApiClientError } from '@/lib/api/client';
@@ -300,6 +301,7 @@ export function PropertyDataPage({ id }: { id: string }) {
 
       <div className="mt-7 flex items-center gap-4">
         <Button onClick={submit} disabled={save.isPending}>{save.isPending ? 'Saving...' : 'Save Property Data'}</Button>
+        <Button asChild variant="outline"><Link href={`/admin/properties/${id}/setup/ownership`}>Owner & Ownership</Link></Button>
         {profile.data?.profile && <p className="text-xs text-muted">Profile revision {profile.data.profile.revision}</p>}
       </div>
     </main>
