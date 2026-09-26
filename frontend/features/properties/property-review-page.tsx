@@ -34,6 +34,9 @@ const ar = {
   actingOwner: '\u0627\u0644\u0645\u0627\u0644\u0643 \u0627\u0644\u0645\u062a\u0635\u0631\u0641',
   parties: '\u0623\u0637\u0631\u0627\u0641 \u0627\u0644\u0645\u0644\u0643\u064a\u0629',
   history: '\u0633\u062c\u0644 \u0627\u0644\u0645\u0644\u0643\u064a\u0629',
+  mediaBoundary: '\u0627\u0644\u0635\u0648\u0631 \u0648\u0627\u0644\u0645\u0633\u062a\u0646\u062f\u0627\u062a',
+  images: '\u0635\u0648\u0631 \u0627\u0644\u0648\u062d\u062f\u0629',
+  documents: '\u0645\u0633\u062a\u0646\u062f\u0627\u062a \u062e\u0627\u0635\u0629',
 };
 
 const label = (item: CatalogItem | null | undefined) => item ? (item.name_ar || item.name_en || item.code) : null;
@@ -106,6 +109,24 @@ export function PropertyReviewPage({ id }: { id: string }) {
       <Card className="mt-6">
         <CardHeader><h2 className="font-semibold text-ink">{ar.ownership}</h2></CardHeader>
         <CardContent>{currentMissing ? <EmptyState title="No current Ownership" description="No current Ownership record is exposed for this authorized Property." /> : current.data ? <><dl className="grid gap-5 sm:grid-cols-2"><Summary label={ar.currentOwnership} value={`#${current.data.id}  -  ${current.data.status}`} /><Summary label={ar.actingOwner} value={actingMissing ? 'No current designation.' : actingParty ? ownerFor(actingParty)?.display_name || `Owner #${actingParty.owner_id}` : unavailable} /></dl><ValueSection title={ar.parties} empty="No Ownership Parties are exposed." values={currentParties.map((party) => [ownerFor(party)?.display_name || `Owner #${party.owner_id}`, `${party.share_percentage}%`])} /></> : <Alert>{current.error instanceof ApiClientError ? current.error.message : 'Current Ownership could not be loaded.'}</Alert>}<ValueSection title={ar.history} empty="No Ownership history is exposed." values={history.data?.map((ownership) => [`Ownership #${ownership.id}`, ownership.closed_at ? `closed  -  ${ownership.closed_at}` : ownership.status]) ?? []} /></CardContent>
+      </Card>
+
+      <Card className="mt-6">
+        <CardHeader><h2 className="font-semibold text-ink">{ar.mediaBoundary}</h2></CardHeader>
+        <CardContent>
+          <p className="text-sm text-muted">You can continue reviewing the currently persisted Property, Profile, and Ownership data above. Media and private documents are not available in this workflow yet.</p>
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            <section className="rounded-md border border-dashed border-line bg-surface-muted/40 p-5">
+              <h3 className="font-semibold text-ink">{ar.images}</h3>
+              <p className="mt-2 text-sm text-muted">Image upload is not available yet. No image record, URL, or upload has been created.</p>
+            </section>
+            <section className="rounded-md border border-dashed border-line bg-surface-muted/40 p-5">
+              <h3 className="font-semibold text-ink">{ar.documents}</h3>
+              <p className="mt-2 text-sm text-muted">Private document upload is not available yet. No private document record or storage has been created.</p>
+            </section>
+          </div>
+          <p className="mt-5 text-sm text-muted">This unavailable state does not create or publish a Listing, and it does not determine Property Setup Complete or Listing Ready.</p>
+        </CardContent>
       </Card>
     </main>
   );
