@@ -74,6 +74,14 @@ final class UserRepository extends BaseRepository
             ->update(['password_hash' => $passwordHash]) > 0;
     }
 
+    public function activateWithPasswordHash(int|string $id, string $passwordHash): bool
+    {
+        return $this->query()
+            ->where('id', '=', $id)
+            ->where('status', '=', 'inactive')
+            ->update(['password_hash' => $passwordHash, 'status' => 'active']) > 0;
+    }
+
     /** @return array<string, mixed>|null */
     public function deactivate(int|string $id): ?array
     {

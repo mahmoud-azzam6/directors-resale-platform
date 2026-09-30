@@ -12,7 +12,7 @@ use App\Modules\Position\Services\PositionService;
 use App\Modules\User\Services\UserService;
 
 /**
- * Atomically provisions a Franchise and its initial credential-less administrator.
+ * Atomically provisions a Franchise and its initial active administrator.
  */
 final class FranchiseOnboardingService
 {
@@ -37,8 +37,16 @@ final class FranchiseOnboardingService
         if ($data['permissions'] === []) {
             throw new ValidationException(['permissions' => 'At least one administrator Permission is required.']);
         }
+        $password = $data['administrator']['password'] ?? null;
+        $confirmation = $data['administrator']['password_confirmation'] ?? null;
+        if (! is_string($password) || $password === '') {
+            throw new ValidationException(['password' => 'Password is required.']);
+        }
+        if (! is_string($confirmation) || $confirmation !== $password) {
+            throw new ValidationException(['password_confirmation' => 'Password confirmation must match.']);
+        }
 
-        return $this->database->transaction(function () use ($data): array {
+        return $this->database->transaction(function () use ($data, $password): array {
             $franchise = $this->franchiseService->create($data['franchise']);
             $position = $this->positionService->create(array_merge($data['position'], [
                 'organization_id' => $franchise['id'],
@@ -50,13 +58,14 @@ final class FranchiseOnboardingService
                 'position_id' => $position['id'],
                 'status' => 'inactive',
             ]));
+            $administrator = $this->userService->activateWithInitialPassword($administrator['id'], $password);
 
             return [
                 'franchise' => $franchise,
                 'position' => $position,
                 'permissions' => $permissions,
                 'administrator' => $administrator,
-                'activation_status' => 'credential_setup_required',
+                'activation_status' => 'active',
             ];
         });
     }

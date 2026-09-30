@@ -91,6 +91,30 @@ final class UserService
         return $updated === null ? null : User::fromArray($updated)->toArray();
     }
 
+    /** @return array<string, mixed> */
+    public function activateWithInitialPassword(int|string $id, string $password): array
+    {
+        if ($password === '') {
+            throw new ValidationException(['password' => 'Password is required.']);
+        }
+
+        $user = $this->repository->find($id);
+        if ($user === null || ($user['status'] ?? null) !== 'inactive') {
+            throw new ValidationException(['administrator' => 'Initial administrator cannot be activated.']);
+        }
+
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+        if ($passwordHash === false || ! $this->repository->activateWithPasswordHash($id, $passwordHash)) {
+            throw new ValidationException(['administrator' => 'Initial administrator cannot be activated.']);
+        }
+
+        $activated = $this->repository->find($id);
+        if ($activated === null) {
+            throw new ValidationException(['administrator' => 'Initial administrator cannot be activated.']);
+        }
+
+        return User::fromArray($activated)->toArray();
+    }
     public function deactivate(int|string $id): bool
     {
         if ($this->repository->findActive($id) === null) {

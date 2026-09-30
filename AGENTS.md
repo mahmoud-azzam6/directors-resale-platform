@@ -58,8 +58,8 @@ Before reporting a completed unit:
 
 - BF013, BF014, and BF015 are **IMPLEMENTED AND VERIFIED / CLOSED**.
 - AF001, AF002, and AF003 are **IMPLEMENTED AND VERIFIED / CLOSED**.
-- AF004 — Property Administration UI — is **ARCHITECTURE APPROVED / NOT IMPLEMENTED**.
-- AF004.1 is approved.
-- AF004.2 is the next implementation unit.
+- AF004 — Property Administration UI — is **IMPLEMENTED AND VERIFIED / CLOSED**.
+- AF004.1 through AF004.6 are **IMPLEMENTED AND VERIFIED / CLOSED**.
+- No current sprint or next internal unit is selected.
 
 Follow the current canonical documentation when a unit-specific contract adds more specific instructions. Do not add implementation-specific rules that conflict with those documents.

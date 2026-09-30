@@ -41,7 +41,7 @@ final class FranchiseOnboardingController
 
         try {
             return Response::success(
-                'Franchise onboarding completed. Administrator credential activation is required.',
+                'Franchise onboarding completed. Initial administrator is active.',
                 $this->service->onboard($request->all()),
                 [],
                 201

@@ -13,7 +13,7 @@ export interface PartnerAgency extends Organization {
 export interface OnboardFranchiseInput {
   franchise: { name: string; code: string; parent_organization_id: number; status: 'active' };
   position: { name: string; code: string };
-  administrator: { full_name: string; email: string; phone: string | null };
+  administrator: { full_name: string; email: string; phone: string | null; password: string; password_confirmation: string };
   permissions: number[];
 }
 
@@ -28,7 +28,7 @@ export interface OnboardingResult {
     full_name: string;
     email: string;
     phone: string | null;
-    status: 'inactive';
+    status: 'active';
   };
-  activation_status: 'credential_setup_required';
+  activation_status: 'active';
 }
