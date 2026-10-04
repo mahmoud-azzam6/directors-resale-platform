@@ -16,6 +16,7 @@ use App\Modules\Permission\Controllers\PositionPermissionController;
 use App\Modules\Authorization\Middleware\AuthorizationMiddleware;
 use App\Modules\Authorization\Services\AuthorizationService;
 use App\Modules\Authorization\Services\OrganizationScopeService;
+use App\Modules\Organization\Controllers\OrganizationBasicProfileController;
 use App\Modules\Property\Controllers\OrganizationPropertyController;
 use App\Modules\Property\Controllers\OrganizationPropertyProfileController;
 use App\Modules\Property\Controllers\PropertyCatalogReadController;
@@ -143,6 +144,9 @@ return static function (Router $router, Container $container, array $config): vo
     $router->delete('/organizations/{id}', $authorize(function (Request $request, string $id) use ($container): Response {
         return $container->make(OrganizationController::class)->destroy($request, $id);
     }, 'organizations.archive', $target('organizations')));
+
+    $router->get('/organizations/{id}/basic-profile', $authorize(fn (Request $request, string $id): Response => $container->make(OrganizationBasicProfileController::class)->show($request, $id), 'organizations.view', $target('organizations'), OrganizationScopeService::PRIVATE_ORGANIZATION));
+    $router->put('/organizations/{id}/basic-profile', $authorize(fn (Request $request, string $id): Response => $container->make(OrganizationBasicProfileController::class)->update($request, $id), 'organizations.update', $target('organizations'), OrganizationScopeService::PRIVATE_ORGANIZATION));
 
     $router->get('/franchises', $authorize(function (Request $request) use ($container): Response {
         return $container->make(FranchiseController::class)->index($request);

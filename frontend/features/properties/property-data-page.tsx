@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { GeographySelector } from '@/features/network/geography-selector';
 
 type LocalValueState = {
   measurements: Record<number, string>;
@@ -76,6 +77,13 @@ export function PropertyDataPage({ id }: { id: string }) {
   const [category, setCategory] = useState<number | null>(null);
   const [unitType, setUnitType] = useState<number | null>(null);
   const [geography, setGeography] = useState<number | null>(null);
+  const [geographyHydration, setGeographyHydration] = useState<number | null>(null);
+  const [selectorVersion, setSelectorVersion] = useState(0);
+  const [address, setAddress] = useState('');
+  const [askingPrice, setAskingPrice] = useState('');
+  const [currency, setCurrency] = useState('EGP');
+  const [dirty, setDirty] = useState(false);
+  const [conflictReadError, setConflictReadError] = useState(false);
   const [developer, setDeveloper] = useState<number | null>(null);
   const [measurementValues, setMeasurementValues] = useState<Record<number, string>>({});
   const [attributeValues, setAttributeValues] = useState<Record<number, string>>({});
@@ -85,7 +93,7 @@ export function PropertyDataPage({ id }: { id: string }) {
   const [latestServerAggregate, setLatestServerAggregate] = useState<ProfileAggregate | null>(null);
 
   const core = useQuery({ queryKey: ['property-core-form'], queryFn: propertyApi.coreForm });
-  const profile = useQuery({ queryKey: ['property-profile', id], queryFn: () => propertyApi.profile(id) });
+  const profile = useQuery({ queryKey: ['property-profile', id], queryFn: () => propertyApi.profile(id), refetchOnWindowFocus: false, retry: false });
   const projection = useQuery({
     queryKey: ['property-form', unitType],
     queryFn: () => propertyApi.unitTypeForm(unitType!),
@@ -99,6 +107,11 @@ export function PropertyDataPage({ id }: { id: string }) {
     setCategory(savedProfile?.property_category_id ?? null);
     setUnitType(savedProfile?.unit_type_id ?? null);
     setGeography(savedProfile?.geographic_location_id ?? null);
+    setGeographyHydration(savedProfile?.geographic_location_id ?? null);
+    setSelectorVersion((version) => version + 1);
+    setAddress(savedProfile?.address_text ?? '');
+    setAskingPrice(savedProfile?.initial_asking_price ?? '');
+    setCurrency(savedProfile?.currency_code ?? 'EGP');
     setDeveloper(savedProfile?.developer_id ?? null);
     setMeasurementValues(values.measurements);
     setAttributeValues(values.attributes);
@@ -107,10 +120,10 @@ export function PropertyDataPage({ id }: { id: string }) {
   }, []);
 
   useEffect(() => {
-    if (profile.data && !conflict) {
+    if (profile.data && !conflict && !dirty) {
       hydrateAggregate(profile.data);
     }
-  }, [conflict, hydrateAggregate, profile.data]);
+  }, [conflict, dirty, hydrateAggregate, profile.data]);
 
   const unitTypes = useMemo(
     () => core.data?.unit_types.filter((item) => item.category_id === category) ?? [],
@@ -122,6 +135,8 @@ export function PropertyDataPage({ id }: { id: string }) {
     onSuccess: (aggregate) => {
       setConflict(false);
       setLatestServerAggregate(null);
+      setConflictReadError(false);
+      setDirty(false);
       queryClient.setQueryData(['property-profile', id], aggregate);
       hydrateAggregate(aggregate);
     },
@@ -132,11 +147,12 @@ export function PropertyDataPage({ id }: { id: string }) {
         && error.fields?.PROFILE_REVISION_CONFLICT
       ) {
         setConflict(true);
-        const currentAggregate = await queryClient.fetchQuery({
-          queryKey: ['property-profile', id],
-          queryFn: () => propertyApi.profile(id),
-        });
-        setLatestServerAggregate(currentAggregate);
+        setLatestServerAggregate(null);
+        try {
+          const currentAggregate = await queryClient.fetchQuery({ queryKey: ['property-profile', id], queryFn: () => propertyApi.profile(id) });
+          setLatestServerAggregate(currentAggregate);
+          setConflictReadError(false);
+        } catch { setConflictReadError(true); }
       }
     },
   });
@@ -145,20 +161,22 @@ export function PropertyDataPage({ id }: { id: string }) {
     return <main className="page-shell"><p className="text-sm text-muted">Loading Property Data...</p></main>;
   }
 
-  if (core.error || profile.error) {
+  if ((core.error && !core.data) || (profile.error && !profile.data)) {
     const error = (core.error ?? profile.error) as ApiClientError;
-    return <main className="page-shell"><Alert>{error?.status === 403 ? 'Your current backend permissions do not allow this Property.' : error?.message ?? 'Property Data could not be loaded.'}</Alert></main>;
+    return <main className="page-shell" dir="rtl"><Alert>{error?.status === 401 ? 'انتهت الجلسة. سجّل الدخول مجدداً.' : error?.status === 403 ? 'ليس لديك صلاحية عرض بيانات هذه الوحدة.' : error?.message ?? 'تعذر تحميل بيانات الوحدة.'}
+      {![401, 403].includes(error?.status) && <Button onClick={() => { void core.refetch(); void profile.refetch(); }}>إعادة المحاولة</Button>}
+    </Alert></main>;
   }
 
   const submit = () => {
     const payload: SaveProfileInput = {
       property_category_id: category,
       unit_type_id: unitType,
+      geographic_location_id: geography,
+      address_text: address.trim() || null,
+      initial_asking_price: askingPrice.trim() || null,
+      currency_code: askingPrice.trim() ? currency : null,
     };
-
-    if (geography !== null) {
-      payload.geographic_location_id = geography;
-    }
 
     if (developer !== null) {
       payload.development_reference_type = 'DEVELOPER';
@@ -195,7 +213,7 @@ export function PropertyDataPage({ id }: { id: string }) {
     }
 
     if (profile.data?.profile) {
-      payload.expected_revision = profile.data.profile.revision;
+      payload.expected_revision = conflict ? latestServerAggregate?.profile?.revision : profile.data.profile.revision;
     }
 
     save.mutate(payload);
@@ -204,7 +222,7 @@ export function PropertyDataPage({ id }: { id: string }) {
   const apiError = save.error instanceof ApiClientError ? save.error : null;
 
   return (
-    <main className="page-shell fade-up">
+    <main className="page-shell fade-up" dir="rtl" onChange={() => setDirty(true)}>
       <div>
         <p className="eyebrow">Property setup · 1 of 3</p>
         <h1 className="mt-2 text-3xl font-semibold text-ink">Property Data / بيانات الوحدة</h1>
@@ -217,12 +235,33 @@ export function PropertyDataPage({ id }: { id: string }) {
             <div>
               <strong>This Profile changed elsewhere.</strong>
               <p className="mt-1">Your input is still on this page. The latest server revision is {latestServerAggregate?.profile?.revision ?? 'available'}; review it, reconcile intentionally, then explicitly save again to retry.</p>
+              {conflictReadError && <Button onClick={async () => {
+                try { const latest = await queryClient.fetchQuery({ queryKey: ['property-profile', id], queryFn: () => propertyApi.profile(id) }); setLatestServerAggregate(latest); setConflictReadError(false); }
+                catch { setConflictReadError(true); }
+              }}>إعادة تحميل المراجعة الحالية</Button>}
             </div>
           </Alert>
         </div>
       )}
 
       {save.error && !conflict && <div className="mt-6"><Alert>{apiError?.message ?? 'Property Profile could not be saved.'}</Alert></div>}
+      {apiError?.fields && !conflict && <Alert><ul>{Object.entries(apiError.fields).map(([field, message]) => <li key={field}>{field}: {message}</li>)}</ul></Alert>}
+
+      <Card className="mt-8">
+        <CardHeader><h2 className="font-semibold text-ink">البيانات الإدارية للوحدة</h2></CardHeader>
+        <CardContent className="space-y-5">
+          <div><Label htmlFor="property-code">كود الوحدة (يُنشأ تلقائياً)</Label><Input id="property-code" dir="ltr" readOnly value={profile.data?.property.property_code ?? ''} /></div>
+          <GeographySelector key={selectorVersion} canRead savedLocationId={geographyHydration} onChange={setGeography} />
+          <Button variant="outline" onClick={() => { setGeography(null); setGeographyHydration(null); setSelectorVersion((version) => version + 1); setDirty(true); }}>مسح الموقع</Button>
+          <div><Label htmlFor="property-address">الشارع والعنوان</Label><Input id="property-address" maxLength={1000} value={address} onChange={(event) => setAddress(event.target.value)} /></div>
+          <div className="grid gap-5 md:grid-cols-2">
+            <div><Label htmlFor="initial-price">سعر الطلب الابتدائي (اختياري)</Label><Input id="initial-price" dir="ltr" inputMode="decimal" value={askingPrice} onChange={(event) => setAskingPrice(event.target.value)} /></div>
+            <div><Label htmlFor="price-currency">العملة</Label><select id="price-currency" className="h-12 w-full rounded-md border border-line bg-surface px-3" value={currency} onChange={(event) => setCurrency(event.target.value)}>{['EGP', 'USD', 'SAR', 'AED'].map((code) => <option key={code}>{code}</option>)}</select></div>
+          </div>
+          <div className="rounded-md border border-dashed border-line bg-surface-muted p-5 text-sm text-muted" role="img" aria-label="صورة عامة غير محفوظة">صورة عامة مؤقتة — لا توجد صورة مرفوعة أو محفوظة. رفع الصور مؤجل.</div>
+          <p className="text-xs text-muted">السعر بيانات إدارية فقط. حفظ إعداد الوحدة لا ينشئ إعلاناً أو عمولة ولا يحدد جاهزية النشر.</p>
+        </CardContent>
+      </Card>
 
       <Card className="mt-8">
         <CardHeader><h2 className="font-semibold text-ink">Canonical selections</h2></CardHeader>
@@ -241,14 +280,6 @@ export function PropertyDataPage({ id }: { id: string }) {
                 <option value="">Select Unit Type</option>
                 {unitTypes.map((item) => <option key={item.id} value={item.id}>{title(item)}</option>)}
               </select>
-            </div>
-            <div>
-              <Label htmlFor="geography">Geography</Label>
-              <select id="geography" className="h-12 w-full rounded-md border border-line bg-surface px-3 text-sm" value={geography ?? ''} onChange={(event) => setGeography(value(event))}>
-                <option value="">No Geography selected</option>
-                {core.data?.geography.countries.map((item) => <option key={item.id} value={item.id}>{title(item)}</option>)}
-              </select>
-              <p className="mt-1 text-xs text-muted">The current BF014 core-form contract exposes countries only. Governorate, City, Area, and District selection are not implemented in this bounded AF004.2 UI.</p>
             </div>
             <div>
               <Label htmlFor="developer">Development hierarchy</Label>
@@ -300,7 +331,7 @@ export function PropertyDataPage({ id }: { id: string }) {
       )}
 
       <div className="mt-7 flex items-center gap-4">
-        <Button onClick={submit} disabled={save.isPending}>{save.isPending ? 'Saving...' : 'Save Property Data'}</Button>
+        <Button onClick={submit} disabled={save.isPending || (conflict && !latestServerAggregate?.profile) || (apiError !== null && [401, 403].includes(apiError.status))}>{save.isPending ? 'جارٍ الحفظ...' : conflict ? 'إعادة الحفظ بالمراجعة الحالية' : 'حفظ بيانات الوحدة'}</Button>
         <Button asChild variant="outline"><Link href={`/admin/properties/${id}/setup/ownership`}>Owner & Ownership</Link></Button>
         {profile.data?.profile && <p className="text-xs text-muted">Profile revision {profile.data.profile.revision}</p>}
       </div>

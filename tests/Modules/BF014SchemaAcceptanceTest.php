@@ -60,7 +60,37 @@ try {
     $tables = ['property_categories', 'unit_types', 'unit_type_configuration_versions', 'measurement_definitions', 'unit_type_measurement_rules', 'attribute_definitions', 'attribute_options', 'unit_type_attribute_rules', 'geographic_locations', 'developers', 'projects', 'project_phases', 'property_catalog_seed_versions'];
     $migrations = glob($root . '/database/migrations/*.sql') ?: [];
     sort($migrations, SORT_STRING);
-    bf014Assert(count($migrations) === 33, 'Expected exactly migrations 001-033.');
+    $expectedMigrations = [
+        '001_create_organizations_table.sql', '002_add_parent_organization_id_to_organizations_table.sql',
+        '003_create_users_table.sql', '004_add_password_hash_to_users_table.sql',
+        '005_create_auth_tokens_table.sql', '006_create_positions_table.sql',
+        '007_add_position_id_to_users_table.sql', '008_create_permissions_tables.sql',
+        '009_create_organization_properties_table.sql', '010_create_owners_table.sql',
+        '011_create_ownerships_table.sql', '012_create_ownership_parties_table.sql',
+        '013_create_authorized_acting_owner_designations_table.sql',
+        '014_create_global_physical_property_identities_table.sql',
+        '015_create_global_physical_identity_links_table.sql',
+        '016_create_property_owner_lifecycle_history_table.sql', '017_add_bf013_permissions.sql',
+        '018_create_property_categories_table.sql',
+        '019_create_unit_types_table.sql',
+        '020_create_unit_type_configuration_versions_table.sql',
+        '021_create_measurement_definitions_table.sql',
+        '022_create_unit_type_measurement_rules_table.sql',
+        '023_create_attribute_definitions_table.sql',
+        '024_create_attribute_options_table.sql',
+        '025_create_unit_type_attribute_rules_table.sql',
+        '026_create_geographic_locations_table.sql',
+        '027_create_developers_table.sql',
+        '028_create_projects_table.sql',
+        '029_create_project_phases_table.sql',
+        '030_create_property_catalog_seed_versions_table.sql',
+        '031_add_bf014_configuration_allocation_guards.sql',
+        '032_add_bf014_property_catalog_permissions.sql',
+        '033_create_bf015_property_profile_tables.sql',
+        '034_create_organization_basic_profiles_table.sql',
+        '035_add_property_administrative_details.sql',
+    ];
+    bf014Assert(array_map('basename', $migrations) === $expectedMigrations, 'Migrations 001-035 were not found in the exact expected order.');
     foreach ($migrations as $index => $path) {
         bf014Assert((int) substr(basename($path), 0, 3) === $index + 1, 'Migration sequence gap.');
         $sql = file_get_contents($path);
@@ -71,7 +101,7 @@ try {
         }
         $pdo->exec($sql);
     }
-    echo "MariaDB {$version}: migrations 001-033 applied.\n";
+    echo "MariaDB {$version}: migrations 001-035 applied.\n";
     foreach ($tables as $table) {
         bf014Assert((int) $pdo->query("SELECT COUNT(*) FROM `{$table}`")->fetchColumn() === 0, "{$table} was seeded by migrations.");
     }

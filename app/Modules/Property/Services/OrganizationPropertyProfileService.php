@@ -23,6 +23,7 @@ final class OrganizationPropertyProfileService
         private GeographicLocationRepository $locations,
         private DevelopmentCatalogRepository $developments,
         private DatabaseConnectionInterface $database,
+        private CanonicalGeographyValidator $geographyValidator,
     ) {}
 
     public function getProfile(int|string $propertyId, int|string $organizationId): array
@@ -42,10 +43,11 @@ final class OrganizationPropertyProfileService
                 if (!array_key_exists('expected_revision', $data) || $this->id($data['expected_revision'], 'PROFILE_REVISION_CONFLICT') !== $profile['revision']) $this->fail('PROFILE_REVISION_CONFLICT');
             }
             $this->assertKeys($data);
-            $current = $profile ?? ['property_category_id'=>null,'unit_type_id'=>null,'accepted_configuration_version_id'=>null,'geographic_location_id'=>null,'development_reference_type'=>null,'developer_id'=>null,'project_id'=>null,'project_phase_id'=>null];
+            $current = $profile ?? ['property_category_id'=>null,'unit_type_id'=>null,'accepted_configuration_version_id'=>null,'geographic_location_id'=>null,'development_reference_type'=>null,'developer_id'=>null,'project_id'=>null,'project_phase_id'=>null,'address_text'=>null,'initial_asking_price'=>null,'currency_code'=>null];
             $next = $current;
             foreach (['property_category_id','unit_type_id','geographic_location_id'] as $field) if (array_key_exists($field, $data)) $next[$field] = $data[$field] === null ? null : $this->id($data[$field], 'CATALOG_ITEM_NOT_FOUND');
             $this->development($next, $data);
+            $this->administrativeDetails($next, $data);
             $categoryChanged = $current['property_category_id'] !== $next['property_category_id'];
             $unitChanged = $current['unit_type_id'] !== $next['unit_type_id'];
             $category = $next['property_category_id'] === null ? null : $this->need($this->catalogs->findCategoryById($next['property_category_id']), 'CATALOG_ITEM_NOT_FOUND');
@@ -55,7 +57,10 @@ final class OrganizationPropertyProfileService
                 if ($unitChanged && $unit['status'] !== 'active') $this->fail('CATALOG_ITEM_INACTIVE');
                 if ($category === null || $unit['property_category_id'] !== $category['id']) $this->fail('CATEGORY_UNIT_TYPE_MISMATCH');
             } elseif ($current['unit_type_id'] !== null && $categoryChanged) $this->fail('CATEGORY_UNIT_TYPE_MISMATCH');
-            if ($next['geographic_location_id'] !== null && array_key_exists('geographic_location_id', $data)) $this->active($this->locations->findGeographicLocationById($next['geographic_location_id']));
+            if ($next['geographic_location_id'] !== null && array_key_exists('geographic_location_id', $data)) {
+                $this->active($this->locations->findGeographicLocationById($next['geographic_location_id']));
+                if (!$this->geographyValidator->accepts($next['geographic_location_id'])) $this->fail('GEOGRAPHIC_HIERARCHY_INVALID');
+            }
 
             $hasValues = $profile !== null && ($this->measurements->listForProperty($property['id']) !== [] || $this->attributeValues->listForProperty($property['id']) !== []);
             $replacement = ($data['replace_values'] ?? false) === true;
@@ -77,7 +82,7 @@ final class OrganizationPropertyProfileService
                 $profile = $this->profiles->create($next + ['organization_property_id'=>$property['id'],'created_by_user_id'=>$actor,'updated_by_user_id'=>$actor]);
             } else {
                 $changes = [];
-                foreach (['property_category_id','unit_type_id','accepted_configuration_version_id','geographic_location_id','development_reference_type','developer_id','project_id','project_phase_id'] as $field) if ($next[$field] !== $current[$field]) $changes[$field] = $next[$field];
+                foreach (['property_category_id','unit_type_id','accepted_configuration_version_id','geographic_location_id','development_reference_type','developer_id','project_id','project_phase_id','address_text','initial_asking_price','currency_code'] as $field) if ($next[$field] !== $current[$field]) $changes[$field] = $next[$field];
                 if ($changes !== [] || $this->hasValueOperation($data)) {
                     $changes['updated_by_user_id'] = $actor;
                     $profile = $this->need($this->profiles->updateWithExpectedRevision($property['id'], $profile['revision'], $changes), 'PROFILE_REVISION_CONFLICT');
@@ -90,6 +95,24 @@ final class OrganizationPropertyProfileService
             }
             return $this->aggregate($property, $profile);
         });
+    }
+
+    private function administrativeDetails(array &$next, array $data): void
+    {
+        if (array_key_exists('address_text', $data)) {
+            $address = $data['address_text'];
+            if ($address !== null && (!is_string($address) || trim($address) === '' || mb_strlen(trim($address)) > 1000)) $this->fail('INVALID_ADDRESS_TEXT');
+            $next['address_text'] = $address === null ? null : trim($address);
+        }
+        if (array_key_exists('initial_asking_price', $data)) {
+            $next['initial_asking_price'] = $data['initial_asking_price'] === null ? null : $this->decimal($data['initial_asking_price'], true, 'INVALID_ASKING_PRICE');
+        }
+        if (array_key_exists('currency_code', $data)) {
+            $currency = $data['currency_code'];
+            if ($currency !== null && !in_array($currency, ['EGP','USD','SAR','AED'], true)) $this->fail('INVALID_CURRENCY');
+            $next['currency_code'] = $currency;
+        }
+        if (($next['initial_asking_price'] === null) !== ($next['currency_code'] === null)) $this->fail('PRICE_CURRENCY_REQUIRED');
     }
 
     private function development(array &$next, array $data): void
@@ -163,7 +186,7 @@ final class OrganizationPropertyProfileService
     private function hasValueOperation(array $data): bool { return array_key_exists('measurements',$data)||array_key_exists('attributes',$data)||($data['clear_measurement_definition_ids']??[])!==[]||($data['clear_attribute_definition_ids']??[])!==[]; }
     private function active(?array $row): array { $row=$this->need($row,'CATALOG_ITEM_NOT_FOUND'); if ($row['status']!=='active') $this->fail('CATALOG_ITEM_INACTIVE'); return $row; }
     private function decimal(mixed $value, bool $positive, string $code): string { if (!is_int($value) && !is_string($value)) $this->fail($code); $raw=(string)$value; if (!preg_match('/^-?(?:0|[1-9][0-9]*)(?:\.[0-9]{1,4})?$/D',$raw)) $this->fail($code); $negative=str_starts_with($raw,'-'); if($negative)$raw=substr($raw,1); [$integer,$fraction]=array_pad(explode('.',$raw,2),2,''); $integer=ltrim($integer,'0'); if($integer==='')$integer='0'; if(strlen($integer)>14)$this->fail($code); $nonZero=trim($integer,'0')!==''||trim($fraction,'0')!==''; if($positive&&(!$nonZero||$negative))$this->fail($code); return ($negative?'-':'').$integer.'.'.str_pad($fraction,4,'0'); }
-    private function assertKeys(array $data): void { foreach(array_keys($data) as $key) if(!in_array($key,['expected_revision','property_category_id','unit_type_id','geographic_location_id','development_reference_type','developer_id','project_id','project_phase_id','measurements','attributes','clear_measurement_definition_ids','clear_attribute_definition_ids','replace_values'],true)) $this->fail('CATALOG_ITEM_NOT_FOUND'); }
+    private function assertKeys(array $data): void { foreach(array_keys($data) as $key) if(!in_array($key,['address_text','initial_asking_price','currency_code','expected_revision','property_category_id','unit_type_id','geographic_location_id','development_reference_type','developer_id','project_id','project_phase_id','measurements','attributes','clear_measurement_definition_ids','clear_attribute_definition_ids','replace_values'],true)) $this->fail('CATALOG_ITEM_NOT_FOUND'); }
     private function id(mixed $value,string $code): int { if((!is_int($value)&&(!is_string($value)||!ctype_digit($value)))||(int)$value<1)$this->fail($code);return(int)$value; }
     private function need(?array $value,string $code): array { if($value===null)$this->fail($code); return $value; }
     private function fail(string $code): never { throw new ValidationException([$code=>$code]); }

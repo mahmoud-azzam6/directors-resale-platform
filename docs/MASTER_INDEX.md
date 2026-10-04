@@ -6,7 +6,7 @@ Version: 2.0
 
 Status: Active
 
-Last Updated: 2026-09-24
+Last Updated: 2026-10-05
 
 ---
 
@@ -19,8 +19,8 @@ Last Updated: 2026-09-24
 | Project Type | Enterprise SaaS Platform |
 | Industry | Real Estate Resale |
 | Architecture Style | Modular + Event Driven |
-| Current Phase | BF013, BF014, BF015, AF001-AF003, and AF004 IMPLEMENTED AND VERIFIED / CLOSED |
-| Current Sprint | None selected; AF004 Property Administration UI IMPLEMENTED AND VERIFIED / CLOSED |
+| Current Phase | BF016 IN PROGRESS / OPEN; BF016.2/BF016.3 IMPLEMENTED AND VERIFIED; BF013/BF014/BF015/AF001-AF004 remain CLOSED |
+| Current Sprint | BF016 — Organization and Property Setup Data Foundation — IN PROGRESS / OPEN |
 | Next Internal Unit | None selected |
 | Next Selected Sprint | No next sprint selected |
 | Current Version | 0.1.0 |
@@ -176,13 +176,13 @@ Business rollout remains incremental.
 
 | Item | Value |
 |------|-------|
-| Current Phase | BF013, BF014, BF015, AF001-AF003, and AF004 IMPLEMENTED AND VERIFIED / CLOSED |
-| Current Sprint | None selected; AF004 Property Administration UI IMPLEMENTED AND VERIFIED / CLOSED |
+| Current Phase | BF016 IN PROGRESS / OPEN; BF016.2/BF016.3 IMPLEMENTED AND VERIFIED; BF013/BF014/BF015/AF001-AF004 remain CLOSED |
+| Current Sprint | BF016 — Organization and Property Setup Data Foundation — IN PROGRESS / OPEN |
 | Current Module | M03 - Property Administration UI implemented through AF004; BF013/BF014/BF015 contracts composed |
-| Current Feature | None selected; AF004.1-AF004.6 IMPLEMENTED AND VERIFIED / CLOSED |
-| Current Database Contract | BF006-BF015; BF015 profile bridge schema through migration 033; real MariaDB verified |
+| Current Feature | BF016.2 Franchise Basic Profile and BF016.3 Property Administrative Details — IMPLEMENTED AND VERIFIED |
+| Current Database Contract | Repository migrations 001–035 verified in disposable MariaDB; migrations 034 and 035 remain unapplied to directors_resale_platform |
 | Current Database Module | Core plus BF013 Property/Owner/Ownership/Global Identity foundation |
-| Current Status | BF001-BF015 and AF001-AF004 implemented and verified; no current sprint selected |
+| Current Status | BF016.2/BF016.3 IMPLEMENTED AND VERIFIED; BF016 parent OPEN; next internal unit not selected |
 | Current Milestone | Milestone 2 - Core Business |
 | Next Internal Unit | None selected |
 | Next Selected Sprint | No next sprint selected |
@@ -509,6 +509,9 @@ No Analytics or reporting implementation exists yet.
 | BF014 | [Canonical Property Catalog Foundation](sprints/BF014-canonical-property-catalog-foundation.md) | Implemented and verified; closed |
 | BF015 | [Property Profile Persistence Bridge](sprints/BF015-property-profile-persistence-bridge.md) | Implemented and verified; closed |
 | AF004 | [Property Administration UI](sprints/AF004-property-administration-ui.md) | IMPLEMENTED AND VERIFIED / CLOSED |
+| BF016 | [Organization and Property Setup Data Foundation](sprints/BF016-organization-and-property-setup-data-foundation.md) | IN PROGRESS / OPEN; BF016.4–BF016.6 pending |
+| BF016.2 | [Franchise Basic Profile Implementation](sprints/BF016-organization-and-property-setup-data-foundation.md#bf0162--franchise-basic-profile-implementation) | IMPLEMENTED AND VERIFIED |
+| BF016.3 | [Property Administrative Details](sprints/BF016-organization-and-property-setup-data-foundation.md#bf0163--property-administrative-details-contract) | IMPLEMENTED AND VERIFIED |
 
 ---
 
@@ -546,10 +549,10 @@ No Analytics or reporting implementation exists yet.
 
 | Item | Value |
 |------|-------|
-| Current Phase | BF013, BF014, BF015, AF001-AF003, and AF004 IMPLEMENTED AND VERIFIED / CLOSED |
+| Current Phase | BF016 IN PROGRESS / OPEN; BF016.2/BF016.3 IMPLEMENTED AND VERIFIED; BF013/BF014/BF015/AF001-AF004 remain CLOSED |
 | Current Module | M03 - Property Administration UI implemented through AF004; BF013/BF014/BF015 contracts composed |
-| Current Documents | [BF014 contract](sprints/BF014-canonical-property-catalog-foundation.md); PROPERTY_PROFILE_ARCHITECTURE.md; PROPERTY_CATALOG_ARCHITECTURE.md; SEED_DATA.md |
-| Current Database Contract | BF006-BF015; BF015 profile bridge schema through migration 033; real MariaDB verified |
+| Current Documents | [BF016 implementation record](sprints/BF016-organization-and-property-setup-data-foundation.md); PROPERTY_PROFILE_ARCHITECTURE.md; PROPERTY_CATALOG_ARCHITECTURE.md; SEED_DATA.md |
+| Current Database Contract | Repository migrations 001–035 verified in disposable MariaDB; migrations 034 and 035 remain unapplied to directors_resale_platform |
 | Current ADR | ADR-002 Property / Ownership / Listing Separation |
 | Current Milestone | Milestone 2 - Core Business; BF013 closed |
 | Current Release Target | Not defined by the current canonical roadmap |
@@ -584,7 +587,7 @@ No Analytics or reporting implementation exists yet.
 | ADR Documents | 17 |
 | Documentation Files | 40+ |
 | Project Templates | 6 |
-| Current Sprint | None selected; AF004 Property Administration UI IMPLEMENTED AND VERIFIED / CLOSED |
+| Current Sprint | BF016 — Organization and Property Setup Data Foundation — IN PROGRESS / OPEN |
 | Current Release | R0.1.0 |
 
 ---
@@ -797,3 +800,27 @@ Every module, database table, API, feature, architecture decision, sprint, and r
 MASTER_INDEX.md is the first document to review before starting any development session.
 
 AI assistants, developers, and contributors should use this file together with AI_CONTEXT.md as the primary navigation guide for the project.
+
+## BF016 — Organization and Property Setup Data Foundation
+
+**BF016.2 — Franchise Basic Profile Implementation and BF016.3 — Property Administrative Details: IMPLEMENTED AND VERIFIED**, recorded 2026-10-05. The BF016 parent is **IN PROGRESS / OPEN** until BF016.4–BF016.6 are completed. No next internal unit is selected by this handoff. BF013, BF014, BF015 and AF004 remain closed.
+
+Focused real-MariaDB acceptance and Operational Franchise Admin Activation passed. All 51 required BF016/BF013/BF014/BF015 test/regression entry points passed, including integrated suites and additional service/concurrency tests; all 147 process cleanup checks passed. PHP syntax and frontend typecheck, lint and build passed. No real development database schema/data was modified.
+
+Organization logo/media, persisted Property images, documents/contracts, galleries/videos, Listing, Marketplace, Requests, Deals, Commissions, completeness and Listing Ready remain deferred. Property setup is not Listing readiness.
+
+Migration synchronization is planned only for `directors_resale_platform` on `127.0.0.1:3306`: migrations 034 then 035 only, in repository order, no canonical seed impact, verified backup and explicit user approval required, all test/acceptance/demo/fixture data excluded, and preflight/post-apply checks required. Migrations 034 and 035 remain unapplied to the real database; no synchronization was executed.
+
+The 14 mojibake sequences are pre-existing in two BF014 fixtures (eight in `BF014RepositoryDatabaseAcceptanceTest.php`, six in `BF014SchemaAcceptanceTest.php`), match `HEAD`, and were not changed by this work. No invalid UTF-8, replacement characters or new mojibake were introduced.
+
+Canonical implementation evidence and synchronization preflight/backup/post-apply requirements: [BF016 implementation record](sprints/BF016-organization-and-property-setup-data-foundation.md). Documentation and handoff remain uncommitted; no commit or push was performed.
+
+### BF016.2/BF016.3 final review evidence — 2026-10-05
+
+Company profile now supports existing Organization name, System Franchise selection, private own-Franchise editing, optional street address and protected five-level canonical geography with legitimate skips, safe empty reads and ancestry hydration. Property Data/review now expose an immutable persisted `PROP-<ULID>` code, canonical address, optional positive DECIMAL(18,4) asking price with explicit EGP/USD/SAR/AED currency, and a labelled generic image placeholder without storage. Existing BF015 typed-value patches, atomic revisions and explicit conflict retry are preserved. Authorization remains backend-owned; no permission codes or Listing side effects were added.
+
+Verification: 51/51 PHP matrix entry points passed (two focused BF016 acceptances, Operational Franchise Admin Activation, three BF013, 28 BF014 entry/integrated suites, 12 additional BF014 service/concurrency tests, five BF015). All 147 process cleanup checks passed. PHP syntax passed for 190 files. Frontend typecheck, lint, the BF016 canonical-geography/empty-profile/hydration/error contract acceptance and production build passed. The build completed final trace collection in an identical isolated source copy with shared installed dependencies because the running development server held the original `.next` trace; the development server was left running. Strict UTF-8 and diff checks passed. The 14 pre-existing mojibake sequences in the two BF014 fixtures match HEAD and were not changed; no new mojibake or replacement characters were introduced.
+
+MariaDB remained available at 127.0.0.1:3306; configuration targeted exactly directors_resale_platform. Read-only before/after schema, row-count and data fingerprints matched for all 30 real tables. All newly created disposable databases were removed; the pre-existing directors_resale_platform_e1_test_9740 remained untouched. Repository migrations 001–035 are verified by exact ordered filename equality. Migrations 034 and 035 remain unapplied to the real database. Future synchronization requires a reviewed preflight, verified backup, explicit user approval, 034 then 035 only, no canonical seed impact, exclusion of all test/acceptance/demo/fixture data, and post-apply schema/index/constraint, application and unchanged-business-data checks. No real schema/data operation was performed.
+
+BF016.2 and BF016.3 are IMPLEMENTED AND VERIFIED / READY for review on codex-review. BF016 parent remains OPEN; BF016.4–BF016.6 remain OPEN / PENDING and no next unit is selected. Full media/logo/image persistence, galleries/videos, private documents/contracts, Listing, Marketplace, Requests, Deals, Commissions, completeness and Listing Ready remain deferred. Official-branch merge remains controlled by the human owner.

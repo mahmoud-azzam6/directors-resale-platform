@@ -11,6 +11,7 @@ import { IconButton } from '@/components/ui/button';
 const navigation = [
   { label: 'Dashboard', href: '/admin', icon: LayoutDashboard },
   { label: 'Organizations', href: '/admin/organizations', permission: 'organizations.view', icon: Building2 },
+  { label: 'الملف الأساسي للمؤسسة', href: '/admin/organization-profile', permission: 'organizations.view', icon: Building2 },
   { label: 'Franchises', href: '/admin/franchises', permission: 'franchises.view', icon: Network },
   { label: 'Partner agencies', href: '/admin/partner-agencies', permission: 'partner_agencies.view', icon: Files },
   { label: 'Users', href: '/admin/users', permission: 'users.view', icon: UsersRound },
@@ -33,7 +34,8 @@ export function Sidebar({ context, open, onClose }: { context: AuthContext; open
       </div>
       <div className="mt-10 px-2"><p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/35">Workspace</p></div>
       <nav className="mt-3 space-y-1" aria-label="Primary navigation">
-        {navigation.filter((item) => !item.permission || context.permissions.includes(item.permission)).map((item) => {
+        {navigation.filter((item) => (!item.permission || context.permissions.includes(item.permission))
+          && (item.href !== '/admin/organization-profile' || ['franchise', 'system'].includes(context.organization?.organization_type ?? ''))).map((item) => {
           const active = item.href === '/admin' ? pathname === item.href : pathname.startsWith(item.href);
           const Icon = item.icon;
           return <Link key={item.href} href={item.href} onClick={onClose} className={cn('group flex items-center gap-3 rounded-md px-3 py-3 text-sm font-medium text-white/65 transition hover:bg-white/10 hover:text-white', active && 'bg-white/10 text-white')}>
