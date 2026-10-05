@@ -12,6 +12,14 @@ final class Response
     private array $payload;
 
     private int $statusCode;
+    private ?string $imageBytes = null;
+
+    public static function webp(string $bytes): self
+    {
+        $response = new self([], 200);
+        $response->imageBytes = $bytes;
+        return $response;
+    }
 
     /**
      * @param array<string, mixed> $payload
@@ -62,6 +70,15 @@ final class Response
     public function send(): void
     {
         http_response_code($this->statusCode);
+
+        if ($this->imageBytes !== null) {
+            header('Content-Type: image/webp');
+            header('Content-Length: '.strlen($this->imageBytes));
+            header('Cache-Control: private, no-store');
+            header('X-Content-Type-Options: nosniff');
+            echo $this->imageBytes;
+            return;
+        }
 
         if (! headers_sent()) {
             header('Content-Type: application/json');

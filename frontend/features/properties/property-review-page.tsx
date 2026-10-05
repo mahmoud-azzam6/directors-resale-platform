@@ -11,6 +11,7 @@ import { Alert } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { EmptyState } from '@/components/ui/empty-state';
+import { PropertyPrimaryImage } from './property-primary-image';
 
 const ar = {
   eyebrow: '\u0645\u0631\u0627\u062c\u0639\u0629 \u0625\u0639\u062f\u0627\u062f \u0627\u0644\u0648\u062d\u062f\u0629',
@@ -79,7 +80,7 @@ export function PropertyReviewPage({ id }: { id: string }) {
   const currentParties = parties.data ?? [];
   const ownerFor = (party: OwnershipParty) => owners.data?.find((owner) => owner.id === party.owner_id);
   const actingParty = currentParties.find((party) => party.id === actingOwner.data?.ownership_party_id);
-  const geography = aggregate.geography?.ancestry?.map(label).filter(Boolean).join(' / ') || label(aggregate.geography?.location) || unavailable;
+  const geography = aggregate.geography?.ancestry?.locations.slice().reverse().map(label).filter(Boolean).join(' / ') || label(aggregate.geography?.location) || unavailable;
   const development = label(aggregate.development?.phase) || label(aggregate.development?.project) || label(aggregate.development?.developer) || unavailable;
   const configuration = aggregate.configuration ? `${aggregate.configuration.code}${aggregate.configuration.version_number ?? aggregate.configuration.version ? `  -  V${aggregate.configuration.version_number ?? aggregate.configuration.version}` : ''}` : aggregate.profile?.accepted_configuration_version_id ? `Configuration #${aggregate.profile.accepted_configuration_version_id}` : unavailable;
 
@@ -98,12 +99,12 @@ export function PropertyReviewPage({ id }: { id: string }) {
 
       <Card className="mt-6">
         <CardHeader><h2 className="font-semibold text-ink">{ar.property}</h2></CardHeader>
-        <CardContent><dl className="grid gap-5 sm:grid-cols-2"><Summary label={ar.propertyLabel} value={property.property_label} /><Summary label={ar.propertyId} value={`#${property.id}`} /><Summary label={ar.organization} value={property.organization_id ? `Organization #${property.organization_id}` : unavailable} /><Summary label={ar.lifecycle} value={property.status} /></dl>{property.status === 'archived' && <p className="mt-5 text-sm text-muted">This Property is archived and is displayed read-only according to the backend lifecycle response.</p>}</CardContent>
+        <CardContent><dl className="grid gap-5 sm:grid-cols-2"><Summary label={ar.propertyLabel} value={property.property_label} /><Summary label="كود الوحدة" value={property.property_code || unavailable} /><Summary label={ar.propertyId} value={`#${property.id}`} /><Summary label={ar.organization} value={property.organization_id ? `Organization #${property.organization_id}` : unavailable} /><Summary label={ar.lifecycle} value={property.status} /></dl>{property.status === 'archived' && <p className="mt-5 text-sm text-muted">This Property is archived and is displayed read-only according to the backend lifecycle response.</p>}</CardContent>
       </Card>
 
       <Card className="mt-6">
         <CardHeader><h2 className="font-semibold text-ink">{ar.propertyData}</h2></CardHeader>
-        <CardContent>{aggregate.profile === null ? <EmptyState title="No Property Profile yet" description="This authorized Property shell has no persisted BF015 Profile." /> : <><dl className="grid gap-5 sm:grid-cols-2"><Summary label={ar.category} value={label(aggregate.category) || unavailable} /><Summary label={ar.unitType} value={label(aggregate.unit_type) || unavailable} /><Summary label={ar.configuration} value={configuration} /><Summary label={ar.revision} value={String(aggregate.profile.revision)} /><Summary label={ar.geography} value={geography} /><Summary label={ar.development} value={development} /></dl><ValueSection title={ar.measurements} empty="No persisted measurements." values={aggregate.measurements.map((measurement) => [`Definition #${measurement.measurement_definition_id}`, `${measurement.value_decimal} ${measurement.unit_code}`])} /><ValueSection title={ar.attributes} empty="No persisted attributes." values={aggregate.attributes.map((attribute) => [`Definition #${attribute.attribute_definition_id} (${attribute.data_type})`, String(attributeValue(attribute))])} /></>}</CardContent>
+        <CardContent>{aggregate.profile === null ? <EmptyState title="No Property Profile yet" description="This authorized Property shell has no persisted BF015 Profile." /> : <><dl className="grid gap-5 sm:grid-cols-2"><Summary label={ar.category} value={label(aggregate.category) || unavailable} /><Summary label={ar.unitType} value={label(aggregate.unit_type) || unavailable} /><Summary label={ar.configuration} value={configuration} /><Summary label={ar.revision} value={String(aggregate.profile.revision)} /><Summary label={ar.geography} value={geography} /><Summary label={ar.development} value={development} /><Summary label="الشارع والعنوان" value={aggregate.profile.address_text || unavailable} /><Summary label="سعر الطلب الابتدائي" value={aggregate.profile.initial_asking_price ? `${aggregate.profile.initial_asking_price} ${aggregate.profile.currency_code}` : unavailable} /></dl><ValueSection title={ar.measurements} empty="No persisted measurements." values={aggregate.measurements.map((measurement) => [`Definition #${measurement.measurement_definition_id}`, `${measurement.value_decimal} ${measurement.unit_code}`])} /><ValueSection title={ar.attributes} empty="No persisted attributes." values={aggregate.attributes.map((attribute) => [`Definition #${attribute.attribute_definition_id} (${attribute.data_type})`, String(attributeValue(attribute))])} /></>}</CardContent>
       </Card>
 
       <Card className="mt-6">
@@ -114,11 +115,11 @@ export function PropertyReviewPage({ id }: { id: string }) {
       <Card className="mt-6">
         <CardHeader><h2 className="font-semibold text-ink">{ar.mediaBoundary}</h2></CardHeader>
         <CardContent>
-          <p className="text-sm text-muted">You can continue reviewing the currently persisted Property, Profile, and Ownership data above. Media and private documents are not available in this workflow yet.</p>
+          <p className="text-sm text-muted">تتوفر صورة أساسية واحدة خاصة بالمؤسسة أدناه. معارض الصور والفيديو والوثائق الخاصة مؤجلة.</p>
           <div className="mt-5 grid gap-4 md:grid-cols-2">
             <section className="rounded-md border border-dashed border-line bg-surface-muted/40 p-5">
               <h3 className="font-semibold text-ink">{ar.images}</h3>
-              <p className="mt-2 text-sm text-muted">Image upload is not available yet. No image record, URL, or upload has been created.</p>
+              <p className="mt-2 text-sm text-muted">يمكن رفع الصورة الأساسية واستبدالها وإزالتها من صفحة بيانات الوحدة. لا يوجد معرض صور.</p>
             </section>
             <section className="rounded-md border border-dashed border-line bg-surface-muted/40 p-5">
               <h3 className="font-semibold text-ink">{ar.documents}</h3>
@@ -128,6 +129,7 @@ export function PropertyReviewPage({ id }: { id: string }) {
           <p className="mt-5 text-sm text-muted">This unavailable state does not create or publish a Listing, and it does not determine Property Setup Complete or Listing Ready.</p>
         </CardContent>
       </Card>
+      <PropertyPrimaryImage id={id} readOnly />
     </main>
   );
 }

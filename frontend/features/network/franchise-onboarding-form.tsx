@@ -17,10 +17,13 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { GeographySelector } from './geography-selector';
 
 const schema = z.object({
   franchiseName: z.string().trim().min(1, 'Franchise name is required.'),
   franchiseCode: z.string().trim().min(1, 'Franchise code is required.'),
+  geographicLocationId: z.string().trim().optional(),
+  addressText: z.string().trim().optional(),
   administratorName: z.string().trim().min(1, 'Administrator name is required.'),
   administratorEmail: z.string().trim().email('Enter a valid administrator email.'),
   administratorPhone: z.string().trim().optional(),
@@ -40,7 +43,7 @@ export function FranchiseOnboardingForm({ context }: { context: AuthContext }) {
   const queryClient = useQueryClient();
   const [result, setResult] = useState<OnboardingResult | null>(null);
   const permissions = useQuery({ queryKey: ['permissions'], queryFn: networkApi.permissions });
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormValues>({
+  const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: { permissions: [] },
   });
@@ -71,6 +74,7 @@ export function FranchiseOnboardingForm({ context }: { context: AuthContext }) {
         password_confirmation: values.administratorPasswordConfirmation,
       },
       permissions: values.permissions,
+      basic_profile: values.geographicLocationId || values.addressText ? { geographic_location_id: values.geographicLocationId ? Number(values.geographicLocationId) : null, address_text: values.addressText || null } : undefined,
     });
   }
 
@@ -82,6 +86,7 @@ export function FranchiseOnboardingForm({ context }: { context: AuthContext }) {
     {result && <div className="mt-5"><Alert tone="success"><div><p className="font-semibold">{result.franchise.name} is onboarded.</p><p className="mt-1 text-xs leading-5">{result.administrator.email} is assigned to {result.position.name}. The initial administrator is active and can sign in with the credential supplied during onboarding.</p><Link href={`/admin/franchises/${result.franchise.id}`} className="mt-3 inline-flex font-semibold text-brand hover:underline">View Franchise</Link></div></Alert></div>}
     {!result && <form className="mt-6 space-y-7" onSubmit={handleSubmit(submit)} noValidate>
       <fieldset className="grid gap-4 md:grid-cols-2"><legend className="sr-only">Franchise identity</legend><div><Label htmlFor="franchiseName">Franchise name</Label><Input id="franchiseName" {...register('franchiseName')} />{errors.franchiseName && <p className="mt-2 text-xs text-danger">{errors.franchiseName.message}</p>}</div><div><Label htmlFor="franchiseCode">Franchise code</Label><Input id="franchiseCode" {...register('franchiseCode')} />{errors.franchiseCode && <p className="mt-2 text-xs text-danger">{errors.franchiseCode.message}</p>}</div></fieldset>
+      <fieldset className="grid gap-4 md:grid-cols-2"><legend className="mb-1 text-sm font-semibold text-ink">Basic profile <span className="font-normal text-muted">(optional)</span></legend><GeographySelector canRead={context.permissions.includes('property_catalogs.view')} onChange={(id) => setValue('geographicLocationId', id === null ? '' : String(id))} /><div><Label htmlFor="addressText">Address</Label><Input id="addressText" {...register('addressText')} /></div></fieldset>
       <div className="rounded-md border border-line bg-surface-muted/55 px-4 py-3 text-sm"><span className="text-muted">Parent Organization</span><span className="ml-2 font-semibold text-ink">{context.organization?.name}</span><Badge variant="success" className="ml-3">Active on creation</Badge></div>
       <fieldset className="grid gap-4 md:grid-cols-2"><legend className="mb-4 flex items-center gap-2 text-sm font-semibold text-ink"><ShieldCheck size={17} className="text-brand" /> Initial administrator Position</legend><div><Label htmlFor="positionName">Position name</Label><Input id="positionName" {...register('positionName')} />{errors.positionName && <p className="mt-2 text-xs text-danger">{errors.positionName.message}</p>}</div><div><Label htmlFor="positionCode">Position code</Label><Input id="positionCode" {...register('positionCode')} />{errors.positionCode && <p className="mt-2 text-xs text-danger">{errors.positionCode.message}</p>}</div></fieldset>
       <fieldset><legend className="text-sm font-semibold text-ink">Approved capabilities</legend><p className="mt-1 text-xs leading-5 text-muted">Select from the System-controlled Permission catalog. The Position name does not grant authority.</p>{permissions.isLoading ? <p className="mt-4 text-sm text-muted">Loading Permission catalog...</p> : permissions.error ? <div className="mt-4"><Alert>Permission catalog could not be loaded.</Alert></div> : <div className="mt-4 grid max-h-56 gap-2 overflow-y-auto rounded-md border border-line bg-surface p-3 sm:grid-cols-2">{permissions.data?.map((permission) => <label key={permission.id} className="flex cursor-pointer items-start gap-3 rounded-sm px-2 py-2 text-sm hover:bg-surface-muted"><Checkbox value={permission.id} {...register('permissions')} /><span><span className="block font-medium text-ink">{permission.name}</span><span className="block text-xs text-muted">{permission.code}</span></span></label>)}</div>}{errors.permissions && <p className="mt-2 text-xs text-danger">{errors.permissions.message}</p>}</fieldset>

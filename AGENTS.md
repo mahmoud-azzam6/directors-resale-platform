@@ -31,6 +31,39 @@ Before reporting a completed unit:
 7. Push to `origin/codex-review`.
 8. Report changed files, summary, verification results, commit SHA, and a `READY` or `NOT READY` verdict.
 
+## Environment Schema Synchronization Agent
+
+After an approved implementation unit is merged or explicitly approved for environment synchronization, the Environment Schema Synchronization Agent must:
+
+1. Inspect the repository migrations and canonical seed packages required by the approved unit.
+2. Compare the required schema and canonical reference data with the configured real development database.
+3. Clearly distinguish schema migrations, canonical/system seed data, test fixtures, acceptance-test data, and local demo/business data.
+4. Never copy test fixtures, acceptance-test records, test users, test properties, test owners, test tokens, or other temporary test data into the real development database.
+5. Never apply a migration or data change to the real database without confirming the configured database name, identifying the exact target database, producing a preflight report, taking a verified backup, listing the exact migrations and canonical seed packages to be applied, and receiving explicit approval for the database synchronization step.
+6. Apply only the approved missing migrations and official canonical seed packages, in repository-defined order.
+7. Do not rerun already-applied migrations unless the user explicitly approves a recovery procedure.
+8. Stop on schema conflicts, seed collisions, unexpected existing data, failed backup, or any uncertainty.
+9. Remember that MariaDB DDL may implicitly commit; do not claim transaction rollback can undo completed DDL.
+10. Verify expected tables and columns, indexes and constraints, canonical permissions/reference data, application boot, and relevant authenticated endpoint behavior after synchronization.
+11. Produce a before/after report containing the database name; backup path and verification; migrations and canonical seed packages applied; records intentionally excluded; verification results; and remaining differences.
+12. Keep application tests isolated. Real-database synchronization must never import test-generated business records.
+
+Required workflow:
+
+```text
+Implementation
+→ Review
+→ Approval
+→ Schema/Data Sync Plan
+→ Verified Backup
+→ Explicit User Approval
+→ Apply to Real Development Database
+→ Verify
+→ Report
+```
+
+Synchronization is never automatic because tests passed. It always requires explicit approval for the database operation.
+
 ## Scope discipline
 
 - Work on one internal unit at a time.

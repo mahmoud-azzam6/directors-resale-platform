@@ -16,6 +16,7 @@ use App\Modules\Permission\Controllers\PositionPermissionController;
 use App\Modules\Authorization\Middleware\AuthorizationMiddleware;
 use App\Modules\Authorization\Services\AuthorizationService;
 use App\Modules\Authorization\Services\OrganizationScopeService;
+use App\Modules\Organization\Controllers\OrganizationBasicProfileController;
 use App\Modules\Property\Controllers\OrganizationPropertyController;
 use App\Modules\Property\Controllers\OrganizationPropertyProfileController;
 use App\Modules\Property\Controllers\PropertyCatalogReadController;
@@ -143,6 +144,9 @@ return static function (Router $router, Container $container, array $config): vo
     $router->delete('/organizations/{id}', $authorize(function (Request $request, string $id) use ($container): Response {
         return $container->make(OrganizationController::class)->destroy($request, $id);
     }, 'organizations.archive', $target('organizations')));
+
+    $router->get('/organizations/{id}/basic-profile', $authorize(fn (Request $request, string $id): Response => $container->make(OrganizationBasicProfileController::class)->show($request, $id), 'organizations.view', $target('organizations'), OrganizationScopeService::PRIVATE_ORGANIZATION));
+    $router->put('/organizations/{id}/basic-profile', $authorize(fn (Request $request, string $id): Response => $container->make(OrganizationBasicProfileController::class)->update($request, $id), 'organizations.update', $target('organizations'), OrganizationScopeService::PRIVATE_ORGANIZATION));
 
     $router->get('/franchises', $authorize(function (Request $request) use ($container): Response {
         return $container->make(FranchiseController::class)->index($request);
@@ -361,6 +365,10 @@ return static function (Router $router, Container $container, array $config): vo
     $propertyTarget = $target('organization_properties');
     $ownershipTarget = $target('ownerships');
     $private = OrganizationScopeService::PRIVATE_ORGANIZATION;
+    foreach (['GET'=>'metadata','POST'=>'replace','DELETE'=>'remove'] as $method=>$operation) {
+        $router->{strtolower($method)}('/organization-properties/{id}/primary-image', $authorize(fn (Request $request,string $id): Response => $container->make(\App\Modules\Property\Controllers\PropertyPrimaryImageController::class)->handle($request,$id,$operation), $method==='GET'?'properties.view':'properties.manage', $propertyTarget, $private));
+    }
+    $router->get('/organization-properties/{id}/primary-image/content', $authorize(fn (Request $request,string $id): Response => $container->make(\App\Modules\Property\Controllers\PropertyPrimaryImageController::class)->handle($request,$id,'content'), 'properties.view', $propertyTarget, $private));
     $systemOnly = OrganizationScopeService::SYSTEM_ONLY;
     $router->get('/organization-properties/{id}/profile', $authorize(fn (Request $request, string $id): Response => $container->make(OrganizationPropertyProfileController::class)->show($request, $id), 'properties.view', $propertyTarget, $private));
     $router->put('/organization-properties/{id}/profile', $authorize(fn (Request $request, string $id): Response => $container->make(OrganizationPropertyProfileController::class)->update($request, $id), 'properties.manage', $propertyTarget, $private));

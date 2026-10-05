@@ -15,7 +15,10 @@ export interface OnboardFranchiseInput {
   position: { name: string; code: string };
   administrator: { full_name: string; email: string; phone: string | null; password: string; password_confirmation: string };
   permissions: number[];
+  basic_profile?: { geographic_location_id?: number | null; address_text?: string | null };
 }
+
+export interface OrganizationBasicProfile { id: number; organization_id: number; geographic_location_id: number | null; address_text: string | null; geography: { id: number; code: string; name_en: string; name_ar: string } | null; }
 
 export interface OnboardingResult {
   franchise: Franchise;

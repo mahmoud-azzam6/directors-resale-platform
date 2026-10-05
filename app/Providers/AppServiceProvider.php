@@ -24,6 +24,9 @@ use App\Modules\Authentication\Middleware\AuthenticationMiddleware;
 use App\Modules\Authentication\Repositories\AuthTokenRepository;
 use App\Modules\Authentication\Services\AuthenticationService;
 use App\Modules\Organization\Controllers\OrganizationController;
+use App\Modules\Organization\Controllers\OrganizationBasicProfileController;
+use App\Modules\Organization\Repositories\OrganizationBasicProfileRepository;
+use App\Modules\Organization\Services\OrganizationBasicProfileService;
 use App\Modules\Organization\Repositories\OrganizationRepository;
 use App\Modules\Organization\Services\OrganizationService;
 use App\Modules\Organization\Validators\OrganizationValidator;
@@ -126,6 +129,10 @@ final class AppServiceProvider extends ServiceProvider
         $this->container->bind(OrganizationValidator::class);
         $this->container->bind(OrganizationService::class);
         $this->container->bind(OrganizationController::class);
+        $this->container->bind(OrganizationBasicProfileRepository::class);
+        $this->container->bind(OrganizationBasicProfileService::class);
+        $this->container->bind(\App\Modules\Property\Services\CanonicalGeographyValidator::class);
+        $this->container->bind(OrganizationBasicProfileController::class);
 
         $this->container->bind(FranchiseRepository::class);
         $this->container->bind(FranchiseValidator::class);
@@ -187,6 +194,8 @@ final class AppServiceProvider extends ServiceProvider
         $this->container->bind(PropertyFormProjectionController::class);
         $this->container->bind(OrganizationPropertyController::class);
         $this->container->bind(OrganizationPropertyProfileController::class);
+        $this->container->bind(\App\Modules\Property\Services\PropertyPrimaryImageService::class);
+        $this->container->bind(\App\Modules\Property\Controllers\PropertyPrimaryImageController::class);
         $this->container->bind(OwnerRepository::class);
         $this->container->bind(OwnerService::class);
         $this->container->bind(OwnerController::class);
