@@ -133,11 +133,15 @@ return static function (Router $router, Container $container, array $config): vo
         return $container->make(OrganizationController::class)->show($request, $id);
     }, 'organizations.view', $target('organizations')));
 
-    $router->post('/organizations', $authorize(function (Request $request) use ($container): Response {
+    $router->post('/organizations', $authorize(function (Request $request) use ($container, $authorizationService): Response {
+        $failure = $authorizationService->authorizeOrganizationType((array) $request->attribute('auth.user'), $request->input('organization_type'));
+        if ($failure !== null) { return $failure; }
         return $container->make(OrganizationController::class)->store($request);
     }, 'organizations.create', $createTarget));
 
-    $router->put('/organizations/{id}', $authorize(function (Request $request, string $id) use ($container): Response {
+    $router->put('/organizations/{id}', $authorize(function (Request $request, string $id) use ($container, $authorizationService): Response {
+        $failure = $authorizationService->authorizeOrganizationType((array) $request->attribute('auth.user'), $request->input('organization_type'), (int) $id);
+        if ($failure !== null) { return $failure; }
         return $container->make(OrganizationController::class)->update($request, $id);
     }, 'organizations.update', $target('organizations')));
 
@@ -190,7 +194,12 @@ return static function (Router $router, Container $container, array $config): vo
         return is_numeric($request->input('parent_organization_id')) ? (int) $request->input('parent_organization_id') : null;
     }));
 
-    $router->put('/partner-agencies/{id}', $authorize(function (Request $request, string $id) use ($container): Response {
+    $router->put('/partner-agencies/{id}', $authorize(function (Request $request, string $id) use ($container, $authorizationService): Response {
+        $parent = $request->input('parent_organization_id');
+        if ((is_int($parent) || (is_string($parent) && ctype_digit($parent))) && (int) $parent > 0) {
+            $failure = $authorizationService->authorize((array) $request->attribute('auth.user'), 'partner_agencies.update', (int) $parent);
+            if ($failure !== null) { return $failure; }
+        }
         return $container->make(PartnerAgencyController::class)->update($request, $id);
     }, 'partner_agencies.update', $target('partner_agencies')));
 
