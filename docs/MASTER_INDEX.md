@@ -19,8 +19,8 @@ Last Updated: 2026-10-05
 | Project Type | Enterprise SaaS Platform |
 | Industry | Real Estate Resale |
 | Architecture Style | Modular + Event Driven |
-| Current Phase | BF016 IN PROGRESS / OPEN; BF016.2–BF016.5 IMPLEMENTED AND VERIFIED; BF013/BF014/BF015/AF001-AF004 remain CLOSED |
-| Current Sprint | BF016 — Organization and Property Setup Data Foundation — IN PROGRESS / OPEN |
+| Current Phase | BF016 and BF016.2–BF016.6 IMPLEMENTED AND VERIFIED / CLOSED; BF013/BF014/BF015/AF001-AF004 remain CLOSED |
+| Current Sprint | BF016 — Organization and Property Setup Data Foundation — IMPLEMENTED AND VERIFIED / CLOSED |
 | Next Internal Unit | None selected |
 | Next Selected Sprint | No next sprint selected |
 | Current Version | 0.1.0 |
@@ -176,8 +176,8 @@ Business rollout remains incremental.
 
 | Item | Value |
 |------|-------|
-| Current Phase | BF016 IN PROGRESS / OPEN; BF016.2–BF016.5 IMPLEMENTED AND VERIFIED; BF013/BF014/BF015/AF001-AF004 remain CLOSED |
-| Current Sprint | BF016 — Organization and Property Setup Data Foundation — IN PROGRESS / OPEN |
+| Current Phase | BF016 and BF016.2–BF016.6 IMPLEMENTED AND VERIFIED / CLOSED; BF013/BF014/BF015/AF001-AF004 remain CLOSED |
+| Current Sprint | BF016 — Organization and Property Setup Data Foundation — IMPLEMENTED AND VERIFIED / CLOSED |
 | Current Module | M03 - Property Administration UI implemented through AF004; BF013/BF014/BF015 contracts composed |
 | Current Feature | BF016.5 Minimal Primary Property Image Foundation — IMPLEMENTED AND VERIFIED / READY |
 | Current Database Contract | Repository migrations 001–036 verified in disposable MariaDB; migrations 034, 035 and 036 remain unapplied to directors_resale_platform |
@@ -551,7 +551,7 @@ No Analytics or reporting implementation exists yet.
 
 | Item | Value |
 |------|-------|
-| Current Phase | BF016 IN PROGRESS / OPEN; BF016.2–BF016.5 IMPLEMENTED AND VERIFIED; BF013/BF014/BF015/AF001-AF004 remain CLOSED |
+| Current Phase | BF016 and BF016.2–BF016.6 IMPLEMENTED AND VERIFIED / CLOSED; BF013/BF014/BF015/AF001-AF004 remain CLOSED |
 | Current Module | M03 - Property Administration UI implemented through AF004; BF013/BF014/BF015 contracts composed |
 | Current Documents | [BF016 implementation record](sprints/BF016-organization-and-property-setup-data-foundation.md); PROPERTY_PROFILE_ARCHITECTURE.md; PROPERTY_CATALOG_ARCHITECTURE.md; SEED_DATA.md |
 | Current Database Contract | Repository migrations 001–036 verified in disposable MariaDB; migrations 034, 035 and 036 remain unapplied to directors_resale_platform |
@@ -589,7 +589,7 @@ No Analytics or reporting implementation exists yet.
 | ADR Documents | 17 |
 | Documentation Files | 40+ |
 | Project Templates | 6 |
-| Current Sprint | BF016 — Organization and Property Setup Data Foundation — IN PROGRESS / OPEN |
+| Current Sprint | BF016 — Organization and Property Setup Data Foundation — IMPLEMENTED AND VERIFIED / CLOSED |
 | Current Release | R0.1.0 |
 
 ---
@@ -803,7 +803,7 @@ MASTER_INDEX.md is the first document to review before starting any development 
 
 AI assistants, developers, and contributors should use this file together with AI_CONTEXT.md as the primary navigation guide for the project.
 
-## BF016 — Organization and Property Setup Data Foundation
+## Historical BF016 — Organization and Property Setup Data Foundation
 
 **BF016.2 — Franchise Basic Profile Implementation and BF016.3 — Property Administrative Details: IMPLEMENTED AND VERIFIED**, recorded 2026-10-05. The BF016 parent is **IN PROGRESS / OPEN** until BF016.6 are completed. No next internal unit is selected by this handoff. BF013, BF014, BF015 and AF004 remain closed.
 
@@ -837,7 +837,7 @@ All 146 process cleanup checks passed with no new disposable database residue. A
 
 BF016.5 remains OPEN for the minimum one-primary-property-image foundation; the generic UI placeholder is not a persisted image. BF016.6 remains OPEN for final closure; BF016 parent remains OPEN. Media, galleries/video, Franchise logo, documents, Listing, Marketplace, Requests, Deals, Commissions, completeness and Listing Ready remain deferred. No next unit is selected. [Exact verification and acceptance evidence](sprints/BF016-organization-and-property-setup-data-foundation.md#bf0164--verification-evidence).
 
-## BF016.5 — Minimal Primary Property Image Foundation
+## Historical BF016.5 — Minimal Primary Property Image Foundation
 
 Registry addition: migration `036_create_property_primary_images_table.sql` implements dedicated `property_primary_images` metadata (one private image per Property); the broader `property_media` library remains planned. Protected GET/POST/DELETE `/organization-properties/{id}/primary-image` and GET `/organization-properties/{id}/primary-image/content` reuse existing Property permissions and PRIVATE_ORGANIZATION.
 
@@ -848,3 +848,19 @@ CLI and Apache PHP loaded GD/WebP from C:\xampp\php\php.ini. Focused acceptance 
 Migrations 001–036 are required by exact ordered filename equality; migration 036 alone adds the dedicated primary-image metadata table and has no seed impact. Migrations 034/035/036 remain unapplied to directors_resale_platform. Read-only schema/row-count/data fingerprints matched across all 30 real tables. Disposable databases, processed/source files and temporary Apache acceptance endpoints were removed; pre-existing e1_test_9740 stayed untouched. Future real synchronization requires reviewed preflight, verified backup, exact ordered approval and post-apply checks; no test/acceptance/demo/fixture data or files may be imported.
 
 BF016.6 and BF016 parent remain OPEN. Galleries/multiple images, video, documents, Franchise logo, full media processing/platform, Listing media management, Marketplace, Requests, Deals, Commissions, completeness and Listing Ready remain deferred. No next unit is selected. [Bounded contract and full evidence](sprints/BF016-organization-and-property-setup-data-foundation.md#bf0165--implementation-and-verification-evidence).
+
+## BF016.6 — Final Acceptance and Closure
+
+**BF016 parent and BF016.2, BF016.3, BF016.4, BF016.5, BF016.6: IMPLEMENTED AND VERIFIED / CLOSED**, 2026-10-05. This final record supersedes historical open/pending checkpoints below or above; their evidence is preserved. BF016.3 remains the administrative-details implementation and BF016.4 its verification/formal acceptance. No duplicate implementation or migration was created. No next internal unit is selected; official-branch merge remains human-owner controlled.
+
+Final integrated real-MariaDB acceptance composes the existing Organization basic profile, Property administrative details, primary-image, BF013 ownership HTTP and BF015 Profile HTTP contracts. It covers canonical geography/address, persisted generated Property Code and duplicate display names, positive asking price/currency, preserved BF015 measurements/attributes and Ownership, private image upload/replacement/removal/validation/metadata-free WebP, Organization authorization/privacy and absence of future workflow/readiness side effects.
+
+All 53 unique PHP matrix entry points passed: one final BF016 integrated runner, three BF016 focused acceptances (BF016.4 reuses BF016.3), Operational Franchise Admin Activation, three BF013, 28 BF014 entry/integrated suites, 12 additional BF014 service/concurrency tests and five BF015. All 153 nested/process disposable database cleanup checks passed. Temporary source/processed images and Apache acceptance endpoints were removed. Frontend typecheck, lint and contract tests passed. Production build completed final trace and 33 static pages in an isolated copy matching all 122 source hashes, leaving the running development server untouched. PHP syntax passed for 194 files. Strict UTF-8 and replacement-character validation passed; changed-file mojibake and git diff checks passed.
+
+Encoding baseline: the unchanged historical BF014 sprint document contains 4,852 pre-existing scan matches; worktree and HEAD Git blob hashes both equal `02f651068658df167ca9f62d2a55e8eeca7f98ed`. Per explicit owner instruction these are baseline findings, not BF016 defects; the document was not rewritten. The known 14 pre-existing fixture sequences remain unchanged (eight in BF014RepositoryDatabaseAcceptanceTest.php, six in BF014SchemaAcceptanceTest.php). No new mojibake or replacement characters were introduced in BF016 or changed files.
+
+MariaDB 10.4.32 was available at 127.0.0.1:3306 on DESKTOP-5EI3DP1; .env targets exactly directors_resale_platform. All 30 real-table schema, row-count and data fingerprints remained unchanged. Migrations 034, 035 and 036 remain unapplied. No test/acceptance/demo/fixture data or images were imported. The pre-existing directors_resale_platform_e1_test_9740 was left untouched. Schema synchronization remains a separate handoff requiring renewed preflight, verified backup and explicit owner approval; there is no canonical seed impact.
+
+Deferred: full media system, galleries/multiple images, videos, Franchise logo/media, private documents/contracts, Listing, Marketplace, Requests, Deals, Commissions, completeness, Listing Ready and other future business workflows. Property setup is not Listing readiness.
+
+[Complete individual matrix and schema synchronization handoff](sprints/BF016-organization-and-property-setup-data-foundation.md#bf0166--final-acceptance-and-closure).
