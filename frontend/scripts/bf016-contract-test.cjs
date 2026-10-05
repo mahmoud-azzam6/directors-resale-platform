@@ -23,6 +23,7 @@ for (const extension of ['.ts', '.tsx']) {
 const { canonicalPath, activeChildren } = require('../features/network/geography-contract.ts');
 const { GeographySelector } = require('../features/network/geography-selector.tsx');
 const { OrganizationProfilePage } = require('../features/network/organization-profile-page.tsx');
+const { PropertyPrimaryImage } = require('../features/properties/property-primary-image.tsx');
 const { networkApi } = require('../lib/api/network.ts');
 const { ApiClientError } = require('../lib/api/client.ts');
 const row = (id, type, parent) => ({ id, location_type: type, parent_id: parent, status: 'active', code: type, name_ar: type, name_en: type });
@@ -73,6 +74,32 @@ async function main() {
   assert.ok(empty.includes('لا يوجد ملف أساسي محفوظ'));
   assert.ok(empty.includes('value="Saved company name"'));
   assert.ok(empty.includes('dir="rtl"'));
+  const imageCache = () => {
+    const c = client();
+    c.setQueryData(['auth-context'], { permissions: ['properties.view', 'properties.manage'], user: {} });
+    return c;
+  };
+  const noImage = imageCache();
+  noImage.setQueryData(['property-primary-image', '7'], { primary_image: null });
+  const emptyImage = render(React.createElement(PropertyPrimaryImage, { id: '7' }), noImage);
+  assert.ok(emptyImage.includes('لا توجد صورة أساسية محفوظة'));
+  assert.ok(emptyImage.includes('type="file"'));
+  assert.equal(emptyImage.includes('multiple='), false);
+  const savedImage = imageCache();
+  savedImage.setQueryData(['property-primary-image', '7'], { primary_image: { reference: 'a'.repeat(32), mime_type: 'image/webp', width: 600, height: 800, byte_size: 123 } });
+  const imageHtml = render(React.createElement(PropertyPrimaryImage, { id: '7' }), savedImage);
+  assert.ok(imageHtml.includes('/api/properties/7/primary-image/content?v='));
+  assert.ok(imageHtml.includes('استبدال الصورة الأساسية'));
+  assert.ok(imageHtml.includes('إزالة الصورة الأساسية'));
+  assert.equal(render(React.createElement(PropertyPrimaryImage, { id: '7', readOnly: true }), savedImage).includes('type="file"'), false);
+  assert.ok(render(React.createElement(PropertyPrimaryImage, { id: '7' }), imageCache()).includes('جارٍ تحميل الصورة'));
+  for (const status of [401, 403, 500]) {
+    const c = imageCache();
+    await c.fetchQuery({ queryKey: ['property-primary-image', '7'], queryFn: () => Promise.reject(new ApiClientError(status, { success: false, error: { code: 'error', message: 'Rejected' } })) }).catch(() => {});
+    const html = render(React.createElement(PropertyPrimaryImage, { id: '7' }), c);
+    assert.ok(html.includes(status === 401 ? 'انتهت الجلسة' : status === 403 ? 'ليس لديك صلاحية' : 'إعادة تحميل الصورة'));
+    if (status !== 500) assert.ok(html.includes('disabled=""'));
+  }
   const originalFetch = global.fetch;
   global.fetch = async () => ({ ok: true, status: 200, json: async () => ({ success: true, data: { profile: null } }) });
   assert.equal(await networkApi.basicProfile('2'), null, 'Empty envelope must unwrap to null safely.');
@@ -81,6 +108,47 @@ async function main() {
   assert.equal(saved.address_text, 'Saved street');
   assert.equal(saved.geographic_location_id, 5);
   global.fetch = originalFetch;
-  console.log('BF016 frontend geography hydration, empty company envelope and error-state contracts: PASS');
+  // Test real multipart/binary proxy behavior without exposing a real auth token or DB.
+  let proxyToken = 'isolated-test-token';
+  const load = Module._load;
+  Module._load = function (name, ...args) {
+    if (name === 'next/headers') return { cookies: () => ({ get: () => proxyToken ? { value: proxyToken } : undefined }) };
+    return load.call(this, name, ...args);
+  };
+  const { primaryImageProxy } = require('../lib/api/primary-image-proxy.ts');
+  Module._load = load;
+  try {
+    let calls = 0;
+    global.fetch = async (_url, options) => {
+      calls += 1;
+      assert.equal(options.headers.Authorization, 'Bearer isolated-test-token');
+      assert.equal(options.headers['Content-Type'], undefined, 'Fetch must generate the multipart boundary.');
+      assert.ok(options.body instanceof FormData);
+      assert.equal(options.body.get('image').name, 'image.png');
+      return Response.json({ success: true, data: { primary_image: { reference: 'b'.repeat(32) } } });
+    };
+    const data = new FormData(); data.append('image', new File(['fixture'], 'image.png', { type: 'image/png' }));
+    assert.equal((await primaryImageProxy(new Request('http://localhost/api', { method: 'POST', body: data }), '7')).status, 200);
+    assert.equal(calls, 1);
+    const invalid = new FormData(); invalid.append('reference', '../../outside');
+    assert.equal((await primaryImageProxy(new Request('http://localhost/api', { method: 'POST', body: invalid }), '7')).status, 422);
+    assert.equal(calls, 1);
+    proxyToken = null;
+    assert.equal((await primaryImageProxy(new Request('http://localhost/api'), '7')).status, 401);
+    assert.equal(calls, 1);
+    proxyToken = 'isolated-test-token';
+    global.fetch = async () => new Response('binary-fixture', { headers: { 'Content-Type': 'image/webp' } });
+    const content = await primaryImageProxy(new Request('http://localhost/api'), '7', true);
+    assert.equal(content.headers.get('content-type'), 'image/webp');
+    assert.equal(content.headers.get('cache-control'), 'private, no-store');
+    assert.equal(await content.text(), 'binary-fixture');
+    global.fetch = async () => Response.json({ success: false, error: { code: 'unauthenticated', message: 'Expired' } }, { status: 401 });
+    const expired = await primaryImageProxy(new Request('http://localhost/api'), '7');
+    assert.equal(expired.status, 401);
+    assert.ok(expired.headers.get('set-cookie').includes('directors_admin_token='));
+    global.fetch = async () => { throw new Error('Disconnected'); };
+    assert.equal((await primaryImageProxy(new Request('http://localhost/api'), '7')).status, 503);
+  } finally { global.fetch = originalFetch; }
+  console.log('BF016 frontend geography/company and primary-image hydration, authorization, empty/error states: PASS');
 }
 main().catch((error) => { console.error(error); process.exitCode = 1; });

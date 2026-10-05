@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { GeographySelector } from '@/features/network/geography-selector';
+import { PropertyPrimaryImage } from './property-primary-image';
 
 type LocalValueState = {
   measurements: Record<number, string>;
@@ -258,7 +259,6 @@ export function PropertyDataPage({ id }: { id: string }) {
             <div><Label htmlFor="initial-price">سعر الطلب الابتدائي (اختياري)</Label><Input id="initial-price" dir="ltr" inputMode="decimal" value={askingPrice} onChange={(event) => setAskingPrice(event.target.value)} /></div>
             <div><Label htmlFor="price-currency">العملة</Label><select id="price-currency" className="h-12 w-full rounded-md border border-line bg-surface px-3" value={currency} onChange={(event) => setCurrency(event.target.value)}>{['EGP', 'USD', 'SAR', 'AED'].map((code) => <option key={code}>{code}</option>)}</select></div>
           </div>
-          <div className="rounded-md border border-dashed border-line bg-surface-muted p-5 text-sm text-muted" role="img" aria-label="صورة عامة غير محفوظة">صورة عامة مؤقتة — لا توجد صورة مرفوعة أو محفوظة. رفع الصور مؤجل.</div>
           <p className="text-xs text-muted">السعر بيانات إدارية فقط. حفظ إعداد الوحدة لا ينشئ إعلاناً أو عمولة ولا يحدد جاهزية النشر.</p>
         </CardContent>
       </Card>
@@ -330,6 +330,7 @@ export function PropertyDataPage({ id }: { id: string }) {
         </Card>
       )}
 
+      <PropertyPrimaryImage id={id} />
       <div className="mt-7 flex items-center gap-4">
         <Button onClick={submit} disabled={save.isPending || (conflict && !latestServerAggregate?.profile) || (apiError !== null && [401, 403].includes(apiError.status))}>{save.isPending ? 'جارٍ الحفظ...' : conflict ? 'إعادة الحفظ بالمراجعة الحالية' : 'حفظ بيانات الوحدة'}</Button>
         <Button asChild variant="outline"><Link href={`/admin/properties/${id}/setup/ownership`}>Owner & Ownership</Link></Button>

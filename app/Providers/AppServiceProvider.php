@@ -194,6 +194,8 @@ final class AppServiceProvider extends ServiceProvider
         $this->container->bind(PropertyFormProjectionController::class);
         $this->container->bind(OrganizationPropertyController::class);
         $this->container->bind(OrganizationPropertyProfileController::class);
+        $this->container->bind(\App\Modules\Property\Services\PropertyPrimaryImageService::class);
+        $this->container->bind(\App\Modules\Property\Controllers\PropertyPrimaryImageController::class);
         $this->container->bind(OwnerRepository::class);
         $this->container->bind(OwnerService::class);
         $this->container->bind(OwnerController::class);

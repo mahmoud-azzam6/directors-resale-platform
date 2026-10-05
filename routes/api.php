@@ -365,6 +365,10 @@ return static function (Router $router, Container $container, array $config): vo
     $propertyTarget = $target('organization_properties');
     $ownershipTarget = $target('ownerships');
     $private = OrganizationScopeService::PRIVATE_ORGANIZATION;
+    foreach (['GET'=>'metadata','POST'=>'replace','DELETE'=>'remove'] as $method=>$operation) {
+        $router->{strtolower($method)}('/organization-properties/{id}/primary-image', $authorize(fn (Request $request,string $id): Response => $container->make(\App\Modules\Property\Controllers\PropertyPrimaryImageController::class)->handle($request,$id,$operation), $method==='GET'?'properties.view':'properties.manage', $propertyTarget, $private));
+    }
+    $router->get('/organization-properties/{id}/primary-image/content', $authorize(fn (Request $request,string $id): Response => $container->make(\App\Modules\Property\Controllers\PropertyPrimaryImageController::class)->handle($request,$id,'content'), 'properties.view', $propertyTarget, $private));
     $systemOnly = OrganizationScopeService::SYSTEM_ONLY;
     $router->get('/organization-properties/{id}/profile', $authorize(fn (Request $request, string $id): Response => $container->make(OrganizationPropertyProfileController::class)->show($request, $id), 'properties.view', $propertyTarget, $private));
     $router->put('/organization-properties/{id}/profile', $authorize(fn (Request $request, string $id): Response => $container->make(OrganizationPropertyProfileController::class)->update($request, $id), 'properties.manage', $propertyTarget, $private));

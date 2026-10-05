@@ -140,8 +140,9 @@ try {
         '033_create_bf015_property_profile_tables.sql',
         '034_create_organization_basic_profiles_table.sql',
         '035_add_property_administrative_details.sql',
+        '036_create_property_primary_images_table.sql',
     ];
-    bf013DbAssert($actualMigrations === $expectedMigrations, 'Migrations 001-035 were not found in the exact expected order.');
+    bf013DbAssert($actualMigrations === $expectedMigrations, 'Migrations 001-036 were not found in the exact expected order.');
     foreach ($migrationFiles as $migrationFile) {
         $sql = file_get_contents($migrationFile);
         bf013DbAssert(is_string($sql) && trim($sql) !== '', basename($migrationFile) . ' is empty or unreadable.');

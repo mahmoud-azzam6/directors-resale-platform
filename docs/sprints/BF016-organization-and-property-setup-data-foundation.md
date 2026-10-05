@@ -1,10 +1,10 @@
 # BF016 — Organization and Property Setup Data Foundation
 
-**Status:** IN PROGRESS / OPEN — BF016.2/BF016.3/BF016.4 IMPLEMENTED AND VERIFIED
-**Current internal unit:** BF016.4 — Property Administrative Details Verification and Formal Acceptance — IMPLEMENTED AND VERIFIED / READY
+**Status:** IN PROGRESS / OPEN — BF016.2–BF016.5 IMPLEMENTED AND VERIFIED
+**Current internal unit:** BF016.5 — Minimal Primary Property Image Foundation — IMPLEMENTED AND VERIFIED / READY
 **Depends on:** BF013, BF014, BF015, AF004
 
-**Last updated:** 2026-10-05. The BF016 parent remains open until BF016.5–BF016.6 are completed. No next internal unit is selected by this handoff.
+**Last updated:** 2026-10-05. The BF016 parent remains open until BF016.6 final acceptance and closure is completed. No next internal unit is selected by this handoff.
 
 ## Purpose
 
@@ -81,9 +81,17 @@ The user-authorized unit completed the BF016.2 company address experience and th
 
 **IMPLEMENTED AND VERIFIED / READY.** User-authorized reconciliation defines BF016.4 as verification and formal acceptance of the existing BF016.3 implementation. The complete rerun and acceptance evidence are recorded below; no duplicate implementation or migration was created.
 
-## BF016.5 — Private Media Foundation Architecture
+## BF016.5 — Minimal Primary Property Image Foundation
 
-**OPEN.** The minimum one-primary-property-image foundation remains deferred to this unit. It defines future authorized logo and primary-image storage, including the distinction between `USER_UPLOAD` and `SYSTEM_PLACEHOLDER`. It does not implement storage, uploads, delivery, media records, or placeholder persistence.
+**IMPLEMENTED AND VERIFIED / READY.** This user-authorized unit implements one private primary image per Property. Upload, replacement, removal and authenticated delivery are included. There is no gallery, logo, video, document, CDN, Listing media management or completeness behavior. The current verification evidence and bounded storage/processing contract are recorded below.
+
+### Historical BF016.5 blocked preflight — resolved, 2026-10-05
+
+This historical blocker was resolved after the user enabled GD; both CLI and Apache GD/WebP were verified before implementation. The user authorized a minimal single-primary-image implementation with protected upload, replacement, removal and delivery, while excluding advanced image processing and a broader media platform. Preflight found multipart request normalization (`Request::file`, `UploadedFile`, `Kernel`) but no implemented image codec, private storage service, authenticated binary response or multipart frontend proxy. The existing backend response and frontend proxy support JSON only; these transport pieces could be extended within the bounded unit.
+
+The blocking prerequisite is safe image decoding/processing: `C:\xampp\php\php.exe -m` reports neither GD nor Imagick. Fileinfo can detect MIME signatures but cannot prove full image decodeability or remove EXIF/GPS metadata. The canonical `PROPERTY_PROFILE_ARCHITECTURE.md` section 5 and `LISTING_PHYSICAL_DATA_MODEL.md` section 8.3 require decoded validation, metadata-safe processed output and temporary originals. Persisting an unprocessed original would bypass that security policy. The minimal one-image scope needs an explicit bounded processing contract and an enabled, verified codec in both acceptance CLI and serving PHP runtimes before implementation proceeds; full multi-variant processing remains outside the requested scope unless separately approved.
+
+No application code, migration, test or runtime configuration was changed. No database or uploaded-file operation was performed, and no regression gate was run for an implementation that does not exist. No commit or push is authorized at this blocked checkpoint. BF016.5 remains OPEN / NOT READY; BF016.6 and BF016 parent remain OPEN. Existing BF016.2–BF016.4 implementation and acceptance evidence are preserved.
 
 ## BF016.6 — Acceptance and Closure
 
@@ -132,3 +140,29 @@ MariaDB 10.4.32 was available at 127.0.0.1:3306 and .env targeted exactly direct
 The 14 pre-existing mojibake sequences remain unchanged: eight in BF014RepositoryDatabaseAcceptanceTest.php and six in BF014SchemaAcceptanceTest.php. No invalid UTF-8 or replacement characters were found in the 44 implementation/handoff files or the updated canonical documentation.
 
 BF016.3 retains the implementation record. BF016.4 is formally accepted / READY. BF016.5 remains OPEN for the minimum one-primary-property-image foundation; the current generic UI placeholder is not a persisted image and does not meet that future requirement. BF016.6 remains OPEN for final BF016 closure. BF016 parent remains OPEN. Media persistence, galleries/video, Franchise logo, documents, Listing, Marketplace, Requests, Deals, Commissions, completeness and Listing Ready remain deferred. No next unit is selected and no official-branch merge is performed.
+
+## BF016.5 — Implementation and Verification Evidence
+
+### Bounded single-image contract
+
+- Migration 036 creates `property_primary_images`: one row per Property, composite owning-Organization foreign key, unique random internal storage key, dimensions, processed byte size and last actor/time only. Existing BF015 aggregates and migrations 034/035 are unchanged. No client path, URL, filename or raw binary is persisted in Property/Profile tables.
+- Backend routes: GET/POST/DELETE `/organization-properties/{id}/primary-image` return `{ primary_image: null | metadata }`; GET `/organization-properties/{id}/primary-image/content` returns authorized WebP bytes with private/no-store and nosniff headers. Metadata exposes an opaque 32-character reference, MIME, width, height and byte size, never a filesystem path. No new permission codes are introduced.
+- Upload accepts one static JPEG/PNG/WebP only, at most 10 MiB, dimensions at least 600×600, each side at most 8192 and at most 4,000,000 pixels. Server MIME inspection and GD decoding are authoritative; SVG, animation, malformed content, invalid upload errors and supplied references are rejected. JPEG orientation is normalized; GD re-encodes one metadata-free WebP at quality 85 and verifies it. Only that processed file is retained. Multi-variant transforms and the broader conceptual media-library pipeline remain deferred under this explicit bounded unit.
+- `PROPERTY_IMAGE_STORAGE_PATH` optionally sets an absolute private root; default is `C:/xampp/private/directors-resale-platform/property-images` in this workspace layout. Both configured and resolved paths must be outside the repository and document root; traversal and public-root storage are rejected. Grant only the serving application account the necessary filesystem access. Client filenames and MIME declarations do not determine the stored filename or content type. No uploaded file is copied into the repository.
+- Property row locks serialize mutations. A fully processed file is written under a fresh random key before the metadata transaction; failed persistence deletes that staged file and preserves the old reference. Replacement/removal affects only image metadata; old files are removed after commit. A process/OS crash or failed filesystem deletion can leave an unreferenced private file; failed deletion is logged for operator cleanup, rather than pretending database rollback can undo a committed filesystem operation. There is no gallery or publication side effect.
+- Property Data has one upload control, selected/current preview, explicit save/replace/remove, saved hydration and Arabic loading/validation/401/403/retry states. Review uses the same payload read-only. Temporary browser object URLs are revoked. Image updates do not invalidate or save the BF015 Profile, preserving local form edits and conflict handling. A primary image alone does not imply completeness or Listing Ready.
+- Focused evidence: `tests/Modules/BF016PrimaryImageHttpIntegrationTest.php`; frontend/proxy evidence extends `frontend/scripts/bf016-contract-test.cjs`. Existing BF016.2/BF016.3 acceptances are unchanged and BF016.4 formal acceptance reuses that implementation evidence.
+
+### Future synchronization — not executed
+
+Reconfirm the exact real target and missing migration ledger/schema; require a verified backup and explicit user approval for missing migrations 034, 035 then 036 in repository order. Migration 036 has no canonical seed impact. Preflight must verify referenced keys/engines, private storage outside the serving web root, serving-account permissions, GD/WebP/EXIF, upload limits and adequate PHP memory before deployment. Post-apply must verify one-row uniqueness, composite Property/Organization FK, actor FK and image constraints, unchanged existing business data, application boot and authorized empty image reads/private denial. Mutation acceptance remains disposable. Backup/recovery planning must cover both metadata and processed private files once live uploads exist; no acceptance/source/demo files or test business records may be imported. All three migrations remain unapplied to `directors_resale_platform`; no synchronization or backup operation was performed by this unit.
+
+**IMPLEMENTED AND VERIFIED / READY**, 2026-10-05. One private primary-image reference per Property now supports upload, replacement, removal and protected WebP delivery. The Property Data editor and read-only review hydrate this dedicated payload without changing Property/Profile revisions, code, address, price, typed values or Ownership. Existing properties.view/properties.manage and PRIVATE_ORGANIZATION remain authoritative; parent Franchise access does not grant child Partner image access.
+
+CLI and Apache PHP loaded GD/WebP from C:\xampp\php\php.ini. Focused acceptance passed, including actual Apache multipart upload/binary delivery, EXIF/GPS stripping and orientation, invalid type/content/size/reference rejection, atomic persistence-failure cleanup and private scope. The full 52-entry PHP matrix passed (three BF016 focus tests including BF016.4 reuse of BF016.3, Operational Activation, three BF013, 28 BF014, 12 additional BF014 service/concurrency, five BF015); all 147 process cleanup checks passed. PHP syntax passed for 193 files. Frontend typecheck, lint, expanded image/proxy contract acceptance and production build including final trace passed; the isolated build copy matched all 122 source hashes. UTF-8 and diff checks passed; the 14 pre-existing BF014 fixture mojibake markers remain unchanged.
+
+Migrations 001–036 are required by exact ordered filename equality; migration 036 alone adds the dedicated primary-image metadata table and has no seed impact. Migrations 034/035/036 remain unapplied to directors_resale_platform. Read-only schema/row-count/data fingerprints matched across all 30 real tables. Disposable databases, processed/source files and temporary Apache acceptance endpoints were removed; pre-existing e1_test_9740 stayed untouched. Future real synchronization requires reviewed preflight, verified backup, exact ordered approval and post-apply checks; no test/acceptance/demo/fixture data or files may be imported.
+
+BF016.6 and BF016 parent remain OPEN. Galleries/multiple images, video, documents, Franchise logo, full media processing/platform, Listing media management, Marketplace, Requests, Deals, Commissions, completeness and Listing Ready remain deferred. No next unit is selected.
+
+Final supplemental focused acceptance also passed for Franchise-own image CRUD and same-Organization users lacking properties.view/properties.manage. Its additional process cleanup check passed (147 matrix checks plus one supplemental check). Final real-table fingerprints still matched the gate baseline.

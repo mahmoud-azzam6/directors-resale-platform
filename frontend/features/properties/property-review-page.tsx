@@ -11,6 +11,7 @@ import { Alert } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { EmptyState } from '@/components/ui/empty-state';
+import { PropertyPrimaryImage } from './property-primary-image';
 
 const ar = {
   eyebrow: '\u0645\u0631\u0627\u062c\u0639\u0629 \u0625\u0639\u062f\u0627\u062f \u0627\u0644\u0648\u062d\u062f\u0629',
@@ -114,11 +115,11 @@ export function PropertyReviewPage({ id }: { id: string }) {
       <Card className="mt-6">
         <CardHeader><h2 className="font-semibold text-ink">{ar.mediaBoundary}</h2></CardHeader>
         <CardContent>
-          <p className="text-sm text-muted">You can continue reviewing the currently persisted Property, Profile, and Ownership data above. Media and private documents are not available in this workflow yet.</p>
+          <p className="text-sm text-muted">تتوفر صورة أساسية واحدة خاصة بالمؤسسة أدناه. معارض الصور والفيديو والوثائق الخاصة مؤجلة.</p>
           <div className="mt-5 grid gap-4 md:grid-cols-2">
             <section className="rounded-md border border-dashed border-line bg-surface-muted/40 p-5">
               <h3 className="font-semibold text-ink">{ar.images}</h3>
-              <p className="mt-2 text-sm text-muted">Image upload is not available yet. No image record, URL, or upload has been created.</p>
+              <p className="mt-2 text-sm text-muted">يمكن رفع الصورة الأساسية واستبدالها وإزالتها من صفحة بيانات الوحدة. لا يوجد معرض صور.</p>
             </section>
             <section className="rounded-md border border-dashed border-line bg-surface-muted/40 p-5">
               <h3 className="font-semibold text-ink">{ar.documents}</h3>
@@ -128,6 +129,7 @@ export function PropertyReviewPage({ id }: { id: string }) {
           <p className="mt-5 text-sm text-muted">This unavailable state does not create or publish a Listing, and it does not determine Property Setup Complete or Listing Ready.</p>
         </CardContent>
       </Card>
+      <PropertyPrimaryImage id={id} readOnly />
     </main>
   );
 }
