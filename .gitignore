@@ -83,3 +83,4 @@ composer.phar
 *.zip
 *.rar
 *.7z
+storage/local-demo-credentials.json

@@ -38,6 +38,20 @@ final class AuthorizationService
         return $this->scopeService->organizationIds((int) $user['organization_id'], $scopeMode);
     }
 
+    /** Structural type changes are not ordinary Organization administration. */
+    public function authorizeOrganizationType(array $user, mixed $requestedType, ?int $organizationId = null): ?Response
+    {
+        if (! is_string($requestedType)) { return null; }
+        $requestedType = trim($requestedType);
+        $existing = $organizationId === null ? null : $this->organizationRepository->find($organizationId);
+        $changesType = $existing !== null && $requestedType !== (string) $existing['organization_type'];
+
+        if (strcasecmp($requestedType, 'system') !== 0 && ! $changesType) { return null; }
+        if ($this->scopeFor($user, OrganizationScopeService::SYSTEM_ONLY) !== []) { return null; }
+
+        return Response::error('forbidden', 'Organization type changes and System Organization creation require a System actor.', 403);
+    }
+
     public function authorize(
         array $user,
         string $permissionCode,
