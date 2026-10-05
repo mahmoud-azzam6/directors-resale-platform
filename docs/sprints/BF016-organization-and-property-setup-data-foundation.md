@@ -1,10 +1,10 @@
 # BF016 — Organization and Property Setup Data Foundation
 
-**Status:** IN PROGRESS / OPEN — BF016.2/BF016.3 IMPLEMENTED AND VERIFIED
-**Current internal unit:** BF016.2 company profile completion and BF016.3 Property Administrative Details — IMPLEMENTED AND VERIFIED; review handoff prepared
+**Status:** IN PROGRESS / OPEN — BF016.2/BF016.3/BF016.4 IMPLEMENTED AND VERIFIED
+**Current internal unit:** BF016.4 — Property Administrative Details Verification and Formal Acceptance — IMPLEMENTED AND VERIFIED / READY
 **Depends on:** BF013, BF014, BF015, AF004
 
-**Last updated:** 2026-10-05. The BF016 parent remains open until BF016.4–BF016.6 are completed. No next internal unit is selected by this handoff.
+**Last updated:** 2026-10-05. The BF016 parent remains open until BF016.5–BF016.6 are completed. No next internal unit is selected by this handoff.
 
 ## Purpose
 
@@ -59,13 +59,13 @@ The encoding scan found **14 pre-existing mojibake sequences in two BF014 fixtur
 
 **Synchronization status: NOT EXECUTED / migrations 034 and 035 UNAPPLIED to `directors_resale_platform`.** The migration-034 plan above remains limited to that migration. A subsequent explicitly approved combined synchronization must apply 034 then 035, never seeds or test data. For 035, preflight must verify the existing Property/Profile tables, immutable ULIDs, code uniqueness and price/currency constraints against existing rows. Post-apply must verify the generated persisted code and scoped unique index, nullable address/price/currency columns and both CHECK constraints, preserved Profile revisions/typed values and unchanged existing business data. The same verified-backup, explicit-approval and stop-on-conflict requirements apply. No database synchronization is authorized by this review handoff.
 
-## BF016.3 — Property Administrative Details Contract
+## BF016.3 — Property Administrative Details Implementation
 
 **Status: IMPLEMENTED AND VERIFIED.** The bounded contract below was recorded before implementation. It delivers an immutable backend-generated Property Code, canonical geographic selection plus separate address text, and an initial asking price with currency through the existing BF015 aggregate. These are not typed Profile values, Listing price, Offer, Commission input, or Listing Ready evidence. No image upload is included.
 
 ### Bounded execution contract — 2026-10-05
 
-The user-authorized unit completed the BF016.2 company address experience and these BF016.3 administrative details. All required verification passed; this selection does not close BF016.4–BF016.6 or the BF016 parent.
+The user-authorized unit completed the BF016.2 company address experience and these BF016.3 administrative details. All required verification passed; this selection does not close BF016.5–BF016.6 or the BF016 parent.
 
 - Migration 035 extends existing aggregates only. `organization_properties.property_code` is the persisted generated value `PROP-` plus the immutable existing ULID, with an Organization-scoped unique index. Existing and new properties receive deterministic codes; display labels remain nonunique. Clients cannot supply or change codes. ULID uniqueness prevents collisions without truncated names, race-prone counters or retries.
 - Extend the existing BF015 Profile GET/PUT contract with optional `address_text`, `initial_asking_price` and `currency_code`; reuse its canonical `geographic_location_id`, property lock, atomic transaction and `expected_revision`. Omitted fields preserve saved data and typed values. Explicit null clears optional fields; price and currency must both be null or both supplied. No second Property aggregate or parallel revision is introduced.
@@ -77,23 +77,23 @@ The user-authorized unit completed the BF016.2 company address experience and th
 - For BF016.2, System users choose a Franchise through the existing authorized Organization catalog; Franchise users edit their own profile. The existing Organization name is updated only through the private basic-profile transaction and existing `organizations.update` permission. Empty reads retain `{ profile: null }`; no new legal-name model is invented.
 - Migration acceptance must require the exact repository filenames 001–035, sorted and executed in repository order. Migrations 034/035 may run only on isolated disposable test databases. Real `directors_resale_platform` synchronization remains prohibited in this unit.
 
-## BF016.4 — Property Administrative Details Implementation
+## BF016.4 — Property Administrative Details Verification and Formal Acceptance
 
-OPEN / PENDING. The current user-authorized BF016.3 implementation does not automatically close this separately recorded internal unit; its remaining scope and acceptance require Architect reconciliation before selection.
+**IMPLEMENTED AND VERIFIED / READY.** User-authorized reconciliation defines BF016.4 as verification and formal acceptance of the existing BF016.3 implementation. The complete rerun and acceptance evidence are recorded below; no duplicate implementation or migration was created.
 
 ## BF016.5 — Private Media Foundation Architecture
 
-Architecture only. It defines future authorized logo and primary-image storage, including the distinction between `USER_UPLOAD` and `SYSTEM_PLACEHOLDER`. It does not implement storage, uploads, delivery, media records, or placeholder persistence.
+**OPEN.** The minimum one-primary-property-image foundation remains deferred to this unit. It defines future authorized logo and primary-image storage, including the distinction between `USER_UPLOAD` and `SYSTEM_PLACEHOLDER`. It does not implement storage, uploads, delivery, media records, or placeholder persistence.
 
 ## BF016.6 — Acceptance and Closure
 
-Cross-module real-MariaDB and frontend regression evidence, documentation closure, and deferred-boundary confirmation.
+**OPEN.** Final BF016 closure requires the remaining approved foundation and final cross-module acceptance; the current BF016.4 evidence does not close BF016.6.
 
 ## Deferred boundaries
 
-BF016.2 does not implement Organization logo/media, persisted Property images, documents/contracts, galleries/videos, Listing, Marketplace, Requests, Deals, Commissions, completeness or Listing Ready. Commercial registration, tax records, licenses, verification, public profiles, Offers and transfers also remain deferred. Property setup remains separate from Listing readiness. BF016.4–BF016.6 remain pending; the BF016 parent is not closed.
+BF016.2 does not implement Organization logo/media, persisted Property images, documents/contracts, galleries/videos, Listing, Marketplace, Requests, Deals, Commissions, completeness or Listing Ready. Commercial registration, tax records, licenses, verification, public profiles, Offers and transfers also remain deferred. Property setup remains separate from Listing readiness. BF016.5–BF016.6 remain pending; the BF016 parent is not closed.
 
-### BF016.2/BF016.3 final review evidence — 2026-10-05
+### Historical BF016.2/BF016.3 review evidence — 2026-10-05
 
 Company profile now supports existing Organization name, System Franchise selection, private own-Franchise editing, optional street address and protected five-level canonical geography with legitimate skips, safe empty reads and ancestry hydration. Property Data/review now expose an immutable persisted `PROP-<ULID>` code, canonical address, optional positive DECIMAL(18,4) asking price with explicit EGP/USD/SAR/AED currency, and a labelled generic image placeholder without storage. Existing BF015 typed-value patches, atomic revisions and explicit conflict retry are preserved. Authorization remains backend-owned; no permission codes or Listing side effects were added.
 
@@ -102,3 +102,33 @@ Verification: 51/51 PHP matrix entry points passed (two focused BF016 acceptance
 MariaDB remained available at 127.0.0.1:3306; configuration targeted exactly directors_resale_platform. Read-only before/after schema, row-count and data fingerprints matched for all 30 real tables. All newly created disposable databases were removed; the pre-existing directors_resale_platform_e1_test_9740 remained untouched. Repository migrations 001–035 are verified by exact ordered filename equality. Migrations 034 and 035 remain unapplied to the real database. Future synchronization requires a reviewed preflight, verified backup, explicit user approval, 034 then 035 only, no canonical seed impact, exclusion of all test/acceptance/demo/fixture data, and post-apply schema/index/constraint, application and unchanged-business-data checks. No real schema/data operation was performed.
 
 BF016.2 and BF016.3 are IMPLEMENTED AND VERIFIED / READY for review on codex-review. BF016 parent remains OPEN; BF016.4–BF016.6 remain OPEN / PENDING and no next unit is selected. Full media/logo/image persistence, galleries/videos, private documents/contracts, Listing, Marketplace, Requests, Deals, Commissions, completeness and Listing Ready remain deferred. Official-branch merge remains controlled by the human owner.
+
+## BF016.4 — Verification Evidence
+
+**Status: IMPLEMENTED AND VERIFIED / READY**, verified 2026-10-05 on codex-review against implementation commit `c06aa78600aabf22aaeefef017c10ba3f3695e84`.
+
+The user reconciled BF016.3 as implementation and BF016.4 as verification, proven-gap fixing, regression evidence and formal acceptance. Existing Property Code, canonical address/geography and initial asking price/currency were inspected and accepted through the existing BF013/BF015 backend and AF004 frontend. No implementation gap was proven; no application code, test, permission, field or migration was added or changed by BF016.4.
+
+| Verification | Result |
+|---|---|
+| BF016.2 focused MariaDB acceptance | PASS (1/1) |
+| BF016.3 Property administrative details MariaDB acceptance, reused for BF016.4 | PASS (1/1) |
+| Operational Franchise Admin Activation | PASS (1/1) |
+| BF013 authorization, HTTP and database | PASS (3/3) |
+| BF014 full entry points and integrated suites | PASS (28/28) |
+| Additional BF014 service/concurrency tests | PASS (12/12) |
+| BF015 full entry points and integrated suite | PASS (5/5) |
+| PHP syntax | PASS (190 files) |
+| Frontend typecheck / lint / existing BF016 contract acceptance | PASS / PASS / PASS |
+| Production build including final trace collection | PASS; 33 static pages; isolated source-identical copy, 118 matching source hashes |
+| Strict UTF-8 / replacement scan / git diff --check | PASS; no introduced mojibake |
+| Disposable database process cleanup | PASS (146/146), including nested suites and workers; no new residue |
+| Real database schema, row-count and data fingerprints | PASS; unchanged across all 30 tables |
+
+The focused acceptance proves persisted immutable `PROP-<ULID>` codes, the Organization/code unique index and duplicate display names; five-level canonical address round-trip and valid skips; invalid, inactive, cyclic and wrong hierarchy rejection; positive exact-decimal price/currency and invalid-input atomic rejection; BF015 typed-value preservation; stale-revision denial; own/System success and anonymous, unrelated and parent-to-child private Profile denial. Existing schema foreign keys and root CHECK constraints prevent broken/non-Country-root records; the validator rejects ancestry that does not terminate at an active COUNTRY root. Existing frontend contract acceptance exercises canonical saved ancestry and error states. Direct Property Data/review inspection confirms editable address/price/currency, immutable code display, effect-based saved-value hydration, dirty-state preservation, typed-value patch guards and explicit retry using the fetched current revision. This evidence does not claim an interactive browser automation run.
+
+MariaDB 10.4.32 was available at 127.0.0.1:3306 and .env targeted exactly directors_resale_platform. Migration setup used isolated disposable targets only, never the real database. Migrations 034 and 035 remain unapplied to the real database; organization_basic_profiles remains absent. No real schema/data changes or fixture imports occurred. The only remaining disposable-name database is the pre-existing directors_resale_platform_e1_test_9740, left untouched. Synchronization still requires the recorded preflight, verified backup, exact migration list and explicit user approval. There is no canonical seed impact.
+
+The 14 pre-existing mojibake sequences remain unchanged: eight in BF014RepositoryDatabaseAcceptanceTest.php and six in BF014SchemaAcceptanceTest.php. No invalid UTF-8 or replacement characters were found in the 44 implementation/handoff files or the updated canonical documentation.
+
+BF016.3 retains the implementation record. BF016.4 is formally accepted / READY. BF016.5 remains OPEN for the minimum one-primary-property-image foundation; the current generic UI placeholder is not a persisted image and does not meet that future requirement. BF016.6 remains OPEN for final BF016 closure. BF016 parent remains OPEN. Media persistence, galleries/video, Franchise logo, documents, Listing, Marketplace, Requests, Deals, Commissions, completeness and Listing Ready remain deferred. No next unit is selected and no official-branch merge is performed.
