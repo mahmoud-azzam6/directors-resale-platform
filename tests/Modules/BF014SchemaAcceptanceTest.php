@@ -90,8 +90,9 @@ try {
         '034_create_organization_basic_profiles_table.sql',
         '035_add_property_administrative_details.sql',
         '036_create_property_primary_images_table.sql',
+        '037_create_listings_table_and_permissions.sql',
     ];
-    bf014Assert(array_map('basename', $migrations) === $expectedMigrations, 'Migrations 001-036 were not found in the exact expected order.');
+    bf014Assert(array_map('basename', $migrations) === $expectedMigrations, 'Migrations 001-037 were not found in the exact expected order.');
     foreach ($migrations as $index => $path) {
         bf014Assert((int) substr(basename($path), 0, 3) === $index + 1, 'Migration sequence gap.');
         $sql = file_get_contents($path);
@@ -102,11 +103,11 @@ try {
         }
         $pdo->exec($sql);
     }
-    echo "MariaDB {$version}: migrations 001-036 applied.\n";
+    echo "MariaDB {$version}: migrations 001-037 applied.\n";
     foreach ($tables as $table) {
         bf014Assert((int) $pdo->query("SELECT COUNT(*) FROM `{$table}`")->fetchColumn() === 0, "{$table} was seeded by migrations.");
     }
-    bf014Assert((int) $pdo->query('SELECT COUNT(*) FROM permissions')->fetchColumn() === 32, 'Permission migration did not add the BF014.4 capabilities.');
+    bf014Assert((int) $pdo->query("SELECT COUNT(*) FROM permissions WHERE code NOT IN ('listings.view','listings.manage')")->fetchColumn() === 32, 'Permission migration did not add the BF014.4 capabilities.');
     echo "All 13 new tables contain zero rows after migration; permissions are 32.\n";
 
     $names = "'" . implode("','", $tables) . "'";

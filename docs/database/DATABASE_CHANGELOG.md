@@ -1,5 +1,11 @@
 # Database Changelog
 
+## BF017 — Listing MVP Foundation — migration 037 (repository only)
+
+`037_create_listings_table_and_permissions.sql` adds `listings` with ULID, composite Property/Organization reference, draft/published/archived lifecycle, optimistic revision, timestamps and actor references. A generated nullable active-Property unique guard prevents more than one draft/published Listing per Property. Foreign keys preserve owning Organization integrity through the existing composite Property key, with actor foreign keys and lifecycle/revision CHECKs. No Property/Profile/Ownership/image fields are duplicated or modified.
+
+Exactly `listings.view` and `listings.manage` are added to the existing canonical capability catalog. No Position grant, unrelated canonical seed, or business/test/demo record is included. The migration remains unapplied to directors_resale_platform; migrations 034–036 already exist there following the separately approved synchronization. Future application of 037 requires exact-target preflight, a verified backup, explicit owner approval and schema/catalog/application verification. Implementation and disposable acceptance do not authorize synchronization. [Bounded contract](../sprints/BF017-listing-mvp-foundation.md).
+
 ## BF014.1 - Database Schema + Integrity Constraints
 
 Status: IMPLEMENTED AND VERIFIED / CLOSED (verified 2026-09-13); BF014 remains IN PROGRESS, not complete

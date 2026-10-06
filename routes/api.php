@@ -110,6 +110,31 @@ return static function (Router $router, Container $container, array $config): vo
         return $target;
     };
     $listOrganizationTarget = static fn (Request $request): ?int => $requestedTarget($request, true);
+    $listingTarget = static function (Request $request, string $id) use ($container): ?int {
+        $listing = ctype_digit($id) ? $container->make(\App\Modules\Listing\Repositories\ListingRepository::class)->find((int) $id) : null;
+        if ($listing === null) { $request->setAttribute('auth.target.missing', true); return null; }
+        $organization = (int) $listing['organization_id'];
+        $request->setAttribute('auth.target.organization_candidate', $organization);
+        return $organization;
+    };
+    $listingPropertyTarget = static function (Request $request) use ($authorizationService): ?int {
+        $id = $request->input('organization_property_id');
+        if ((! is_int($id) && (! is_string($id) || ! ctype_digit($id))) || (int) $id <= 0) {
+            $request->setAttribute('auth.target.validation_error', ['organization_property_id' => 'A positive Property identifier is required.']);
+            return null;
+        }
+        $organization = $authorizationService->targetOrganization('organization_properties', (int) $id);
+        if ($organization === null) { $request->setAttribute('auth.target.missing', true); }
+        else { $request->setAttribute('auth.target.organization_candidate', $organization); }
+        return $organization;
+    };
+    $router->get('/listings', $authorize(fn (Request $request): Response => $container->make(\App\Modules\Listing\Controllers\ListingController::class)->index($request), 'listings.view', $listOrganizationTarget));
+    $router->post('/listings', $authorize(fn (Request $request): Response => $container->make(\App\Modules\Listing\Controllers\ListingController::class)->handle($request, null, 'create'), 'listings.manage', $listingPropertyTarget));
+    $router->get('/listings/{id}', $authorize(fn (Request $request, string $id): Response => $container->make(\App\Modules\Listing\Controllers\ListingController::class)->handle($request, $id), 'listings.view', $listingTarget));
+    $router->get('/listings/{id}/primary-image/content', $authorize(fn (Request $request, string $id): Response => $container->make(\App\Modules\Listing\Controllers\ListingController::class)->handle($request, $id, 'image'), 'listings.view', $listingTarget));
+    foreach (['publish', 'archive'] as $operation) {
+        $router->post('/listings/{id}/' . $operation, $authorize(fn (Request $request, string $id): Response => $container->make(\App\Modules\Listing\Controllers\ListingController::class)->handle($request, $id, $operation), 'listings.manage', $listingTarget));
+    }
     $createTarget = static fn (Request $request): ?int => is_numeric($request->input('organization_id'))
         ? (int) $request->input('organization_id') : null;
     $franchiseParentTarget = static fn (Request $request): ?int => is_numeric($request->input('parent_organization_id'))

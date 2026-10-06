@@ -163,7 +163,8 @@ try {
     bf016Assert($companyInvalid['status']===422 && $testPdo->query('SELECT name FROM organizations WHERE id=2')->fetchColumn()==='Company Display Name','Invalid company location changed its name.');
     foreach([12.5,'12.5',18,19]as$id)bf016Assert(bf016Request($router,'PUT','/organizations/2/basic-profile','franchise',['geographic_location_id'=>$id])['status']===422,'Company invalid geography accepted.');
     bf016Assert(bf016Request($router,'GET','/organizations/2/basic-profile','other')['status']===403,'Company unrelated scope bypassed.');
-    foreach(['listings','commission_transactions','media','private_documents']as$table){$statement=$testPdo->prepare('SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name=?');$statement->execute([$table]);bf016Assert((int)$statement->fetchColumn()===0,'Unexpected domain side-effect table.');}
+    bf016Assert((int)$testPdo->query('SELECT COUNT(*) FROM listings')->fetchColumn()===0,'Unexpected Listing record side effect.');
+    foreach(['commission_transactions','media','private_documents']as$table){$statement=$testPdo->prepare('SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name=?');$statement->execute([$table]);bf016Assert((int)$statement->fetchColumn()===0,'Unexpected domain side-effect table.');}
     bf016Assert((int)$testPdo->query('SELECT COUNT(*) FROM owners')->fetchColumn()===0 && (int)$testPdo->query('SELECT COUNT(*) FROM ownerships')->fetchColumn()===0,'Property details produced Ownership side effects.');
     echo "BF016.3 Property administrative details + company address MariaDB acceptance: PASS\n";
 } finally {

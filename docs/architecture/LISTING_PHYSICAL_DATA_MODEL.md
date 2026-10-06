@@ -10,6 +10,10 @@
 
 # 1. Purpose and Status
 
+## BF017 bounded physical contract — 2026-10-06
+
+The owner-approved [BF017 contract](../sprints/BF017-listing-mvp-foundation.md) specifies the small repository-only `listings` table and two canonical permissions in migration 037. Organization/Property identity, address, initial asking price/currency, primary image and Ownership remain live referenced sources; no material snapshot is implemented. One non-archived Listing per Organization Property is enforced, while archived identities remain retained. Direct publication and the three-state lifecycle are an explicit bounded exception; material versions, approvals, full history/assignment/provenance, media selection and the conceptual model below remain future work. Actual real database application is separately gated and not authorized by implementation acceptance.
+
 This document is the canonical source for the approved physical Listing data-model architecture. It refines the domain boundaries in `docs/architecture/LISTING_DOMAIN_ARCHITECTURE.md` without approving SQL tables, columns, indexes, constraints, migrations, APIs, or application behavior.
 
 Names in this document identify conceptual entities and relationships. They are not a committed physical table list. Logical constraints may later be enforced by database design, Service/business logic, or both.

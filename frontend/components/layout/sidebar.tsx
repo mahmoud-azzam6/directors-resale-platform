@@ -18,6 +18,7 @@ const navigation = [
   { label: 'Positions', href: '/admin/positions', permission: 'positions.view', icon: ShieldCheck },
   { label: 'Permissions', href: '/admin/permissions', permission: 'permissions.view', icon: LockKeyhole },
   { label: 'Properties', href: '/admin/properties', permission: 'properties.view', icon: Building2 },
+  { label: 'الإعلانات', href: '/admin/listings', permission: 'listings.view', icon: Files },
 ];
 
 export function Sidebar({ context, open, onClose }: { context: AuthContext; open: boolean; onClose: () => void }) {
