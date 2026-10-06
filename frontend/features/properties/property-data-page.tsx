@@ -1,4 +1,5 @@
 'use client';
+import { arabicError } from '@/lib/ui/arabic-errors';
 
 import Link from 'next/link';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -159,12 +160,12 @@ export function PropertyDataPage({ id }: { id: string }) {
   });
 
   if (core.isLoading || profile.isLoading) {
-    return <main className="page-shell"><p className="text-sm text-muted">Loading Property Data...</p></main>;
+    return <main className="page-shell" dir="rtl"><p className="text-sm text-muted">جارٍ تحميل بيانات الوحدة العقارية...</p></main>;
   }
 
   if ((core.error && !core.data) || (profile.error && !profile.data)) {
     const error = (core.error ?? profile.error) as ApiClientError;
-    return <main className="page-shell" dir="rtl"><Alert>{error?.status === 401 ? 'انتهت الجلسة. سجّل الدخول مجدداً.' : error?.status === 403 ? 'ليس لديك صلاحية عرض بيانات هذه الوحدة.' : error?.message ?? 'تعذر تحميل بيانات الوحدة.'}
+    return <main className="page-shell" dir="rtl"><Alert>{error?.status === 401 ? 'انتهت الجلسة. سجّل الدخول مجدداً.' : error?.status === 403 ? 'ليس لديك صلاحية عرض بيانات هذه الوحدة.' : arabicError(error, 'تعذر تحميل بيانات الوحدة.')}
       {![401, 403].includes(error?.status) && <Button onClick={() => { void core.refetch(); void profile.refetch(); }}>إعادة المحاولة</Button>}
     </Alert></main>;
   }
@@ -225,17 +226,17 @@ export function PropertyDataPage({ id }: { id: string }) {
   return (
     <main className="page-shell fade-up" dir="rtl" onChange={() => setDirty(true)}>
       <div>
-        <p className="eyebrow">Property setup · 1 of 3</p>
-        <h1 className="mt-2 text-3xl font-semibold text-ink">Property Data / بيانات الوحدة</h1>
-        <p className="mt-2 text-sm text-muted">Save progressively. Requiredness and Listing readiness are not calculated here.</p>
+        <p className="eyebrow">إعداد الوحدة العقارية · 1 من 3</p>
+        <h1 className="mt-2 text-3xl font-semibold text-ink">بيانات الوحدة العقارية</h1>
+        <p className="mt-2 text-sm text-muted">يمكن حفظ البيانات تدريجيًا. يتحقق النظام من متطلبات نشر الإعلان عند طلب النشر.</p>
       </div>
 
       {conflict && (
         <div className="mt-6">
           <Alert>
             <div>
-              <strong>This Profile changed elsewhere.</strong>
-              <p className="mt-1">Your input is still on this page. The latest server revision is {latestServerAggregate?.profile?.revision ?? 'available'}; review it, reconcile intentionally, then explicitly save again to retry.</p>
+              <strong>تغيرت بيانات الوحدة المحفوظة من جلسة أخرى.</strong>
+              <p className="mt-1">إدخالك محفوظ في هذه الصفحة. رقم المراجعة الحالية هو {latestServerAggregate?.profile?.revision ?? 'غير متاح حاليًا'}؛ راجع التغييرات ثم اضغط إعادة الحفظ للمحاولة مجددًا.</p>
               {conflictReadError && <Button onClick={async () => {
                 try { const latest = await queryClient.fetchQuery({ queryKey: ['property-profile', id], queryFn: () => propertyApi.profile(id) }); setLatestServerAggregate(latest); setConflictReadError(false); }
                 catch { setConflictReadError(true); }
@@ -245,8 +246,7 @@ export function PropertyDataPage({ id }: { id: string }) {
         </div>
       )}
 
-      {save.error && !conflict && <div className="mt-6"><Alert>{apiError?.message ?? 'Property Profile could not be saved.'}</Alert></div>}
-      {apiError?.fields && !conflict && <Alert><ul>{Object.entries(apiError.fields).map(([field, message]) => <li key={field}>{field}: {message}</li>)}</ul></Alert>}
+      {save.error && !conflict && <div className="mt-6"><Alert>{arabicError(apiError, 'تعذر حفظ بيانات الوحدة العقارية.')}</Alert></div>}
 
       <Card className="mt-8">
         <CardHeader><h2 className="font-semibold text-ink">البيانات الإدارية للوحدة</h2></CardHeader>
@@ -256,48 +256,48 @@ export function PropertyDataPage({ id }: { id: string }) {
           <Button variant="outline" onClick={() => { setGeography(null); setGeographyHydration(null); setSelectorVersion((version) => version + 1); setDirty(true); }}>مسح الموقع</Button>
           <div><Label htmlFor="property-address">الشارع والعنوان</Label><Input id="property-address" maxLength={1000} value={address} onChange={(event) => setAddress(event.target.value)} /></div>
           <div className="grid gap-5 md:grid-cols-2">
-            <div><Label htmlFor="initial-price">سعر الطلب الابتدائي (اختياري)</Label><Input id="initial-price" dir="ltr" inputMode="decimal" value={askingPrice} onChange={(event) => setAskingPrice(event.target.value)} /></div>
+            <div><Label htmlFor="initial-price">سعر الطلب الابتدائي (اختياري عند الحفظ)</Label><Input id="initial-price" dir="ltr" inputMode="decimal" value={askingPrice} onChange={(event) => setAskingPrice(event.target.value)} /></div>
             <div><Label htmlFor="price-currency">العملة</Label><select id="price-currency" className="h-12 w-full rounded-md border border-line bg-surface px-3" value={currency} onChange={(event) => setCurrency(event.target.value)}>{['EGP', 'USD', 'SAR', 'AED'].map((code) => <option key={code}>{code}</option>)}</select></div>
           </div>
-          <p className="text-xs text-muted">السعر بيانات إدارية فقط. حفظ إعداد الوحدة لا ينشئ إعلاناً أو عمولة ولا يحدد جاهزية النشر.</p>
+          <Alert tone="info">يمكن حفظ الوحدة دون عنوان أو سعر أو صورة. تُطلب هذه البيانات عند نشر الإعلان، ويتحقق النظام منها حينها. حفظ بيانات الوحدة لا ينشئ إعلانًا أو عمولة.</Alert>
         </CardContent>
       </Card>
 
       <Card className="mt-8">
-        <CardHeader><h2 className="font-semibold text-ink">Canonical selections</h2></CardHeader>
+        <CardHeader><h2 className="font-semibold text-ink">الاختيارات المعتمدة</h2></CardHeader>
         <CardContent>
           <div className="grid gap-5 md:grid-cols-2">
             <div>
-              <Label htmlFor="category">Property Category</Label>
+              <Label htmlFor="category">فئة الوحدة العقارية</Label>
               <select id="category" className="h-12 w-full rounded-md border border-line bg-surface px-3 text-sm" value={category ?? ''} onChange={(event) => { setCategory(value(event)); setUnitType(null); }}>
-                <option value="">Select category</option>
+                <option value="">اختر الفئة</option>
                 {core.data?.categories.map((item) => <option key={item.id} value={item.id}>{title(item)}</option>)}
               </select>
             </div>
             <div>
-              <Label htmlFor="unit">Unit Type</Label>
+              <Label htmlFor="unit">نوع الوحدة</Label>
               <select id="unit" disabled={!category} className="h-12 w-full rounded-md border border-line bg-surface px-3 text-sm disabled:opacity-60" value={unitType ?? ''} onChange={(event) => setUnitType(value(event))}>
-                <option value="">Select Unit Type</option>
+                <option value="">اختر نوع الوحدة</option>
                 {unitTypes.map((item) => <option key={item.id} value={item.id}>{title(item)}</option>)}
               </select>
             </div>
             <div>
-              <Label htmlFor="developer">Development hierarchy</Label>
+              <Label htmlFor="developer">المشروع أو المطور</Label>
               <select id="developer" className="h-12 w-full rounded-md border border-line bg-surface px-3 text-sm" value={developer ?? ''} onChange={(event) => setDeveloper(value(event))}>
-                <option value="">No Development selected</option>
+                <option value="">لم يتم اختيار مطور</option>
                 {core.data?.development.developers.map((item) => <option key={item.id} value={item.id}>{title(item)}</option>)}
               </select>
-              <p className="mt-1 text-xs text-muted">Developer selection uses the implemented BF015 reference contract.</p>
+              <p className="mt-1 text-xs text-muted">اختر المطور من قائمة المطورين المعتمدة.</p>
             </div>
           </div>
         </CardContent>
       </Card>
 
-      {unitType && projection.isLoading && <p className="mt-6 text-sm text-muted">Loading the Unit Type form...</p>}
-      {projection.error && <div className="mt-6"><Alert>{(projection.error as ApiClientError).message ?? 'Dynamic form could not be loaded.'}</Alert></div>}
+      {unitType && projection.isLoading && <p className="mt-6 text-sm text-muted">جارٍ تحميل حقول نوع الوحدة...</p>}
+      {projection.error && <div className="mt-6"><Alert>{arabicError(projection.error, 'تعذر تحميل حقول الوحدة.')}</Alert></div>}
       {projection.data && (
         <Card className="mt-6">
-          <CardHeader><h2 className="font-semibold text-ink">Unit Type fields</h2></CardHeader>
+          <CardHeader><h2 className="font-semibold text-ink">حقول نوع الوحدة</h2></CardHeader>
           <CardContent>
             <div className="grid gap-5 md:grid-cols-2">
               {projection.data.measurements.map((field) => (
@@ -311,14 +311,14 @@ export function PropertyDataPage({ id }: { id: string }) {
                   <Label htmlFor={`a-${field.definition_id}`}>{title(field)}</Label>
                   {field.data_type === 'ENUM' ? (
                     <select id={`a-${field.definition_id}`} className="h-12 w-full rounded-md border border-line bg-surface px-3 text-sm" value={attributeValues[field.definition_id] ?? ''} onChange={(event) => { setAttributesDirty(true); setAttributeValues({ ...attributeValues, [field.definition_id]: event.target.value }); }}>
-                      <option value="">Select option</option>
+                      <option value="">اختر الخيار</option>
                       {field.options.map((option) => <option key={option.id} value={option.id}>{title(option)}</option>)}
                     </select>
                   ) : field.data_type === 'BOOLEAN' ? (
                     <select id={`a-${field.definition_id}`} className="h-12 w-full rounded-md border border-line bg-surface px-3 text-sm" value={attributeValues[field.definition_id] ?? ''} onChange={(event) => { setAttributesDirty(true); setAttributeValues({ ...attributeValues, [field.definition_id]: event.target.value }); }}>
-                      <option value="">Select value</option>
-                      <option value="true">Yes</option>
-                      <option value="false">No</option>
+                      <option value="">اختر القيمة</option>
+                      <option value="true">نعم</option>
+                      <option value="false">لا</option>
                     </select>
                   ) : (
                     <Input id={`a-${field.definition_id}`} type={field.data_type === 'DATE' ? 'date' : field.data_type === 'INTEGER' || field.data_type === 'DECIMAL' ? 'number' : 'text'} value={attributeValues[field.definition_id] ?? ''} onChange={(event) => { setAttributesDirty(true); setAttributeValues({ ...attributeValues, [field.definition_id]: event.target.value }); }} />
@@ -331,10 +331,10 @@ export function PropertyDataPage({ id }: { id: string }) {
       )}
 
       <PropertyPrimaryImage id={id} />
-      <div className="mt-7 flex items-center gap-4">
+      <div className="mt-7 flex flex-wrap items-center gap-4">
         <Button onClick={submit} disabled={save.isPending || (conflict && !latestServerAggregate?.profile) || (apiError !== null && [401, 403].includes(apiError.status))}>{save.isPending ? 'جارٍ الحفظ...' : conflict ? 'إعادة الحفظ بالمراجعة الحالية' : 'حفظ بيانات الوحدة'}</Button>
-        <Button asChild variant="outline"><Link href={`/admin/properties/${id}/setup/ownership`}>Owner & Ownership</Link></Button>
-        {profile.data?.profile && <p className="text-xs text-muted">Profile revision {profile.data.profile.revision}</p>}
+        <Button asChild variant="outline"><Link href={`/admin/properties/${id}/setup/ownership`}>المالك والملكية</Link></Button>
+        {profile.data?.profile && <p className="text-xs text-muted">مراجعة بيانات الوحدة {profile.data.profile.revision}</p>}
       </div>
     </main>
   );

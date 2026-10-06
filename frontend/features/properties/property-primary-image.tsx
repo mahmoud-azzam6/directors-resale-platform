@@ -48,7 +48,7 @@ export function PropertyPrimaryImage({ id, readOnly = false }: { id: string; rea
       <img className="max-h-80 max-w-full rounded-md object-contain" alt={preview ? 'معاينة الصورة المختارة' : 'الصورة الأساسية المحفوظة'} src={preview ?? `${path}/content?v=${current?.reference}&retry=${previewVersion}`} onLoad={() => setLoadError(false)} onError={() => setLoadError(true)} />
       {loadError && <Alert>تعذر تحميل المعاينة. <Button onClick={() => { setLoadError(false); setPreviewVersion((v) => v + 1); }}>إعادة المحاولة</Button></Alert>}
     </>}
-    {!image.isPending && !image.error && !current && !preview && <p>لا توجد صورة أساسية محفوظة.</p>}
+    {!image.isPending && !image.error && !current && !preview && <Alert tone="info">لا توجد صورة أساسية محفوظة. يمكن حفظ بيانات الوحدة الآن وإضافة الصورة لاحقًا. الصورة الأساسية مطلوبة عند نشر الإعلان.</Alert>}
     {canManage && <fieldset disabled={mutation.isPending || forbidden} className="space-y-3">
       <p className="text-sm text-muted">JPEG أو PNG أو WebP ثابتة، حتى 10 ميجابايت؛ الأبعاد 600×600 على الأقل وحتى 4 ملايين بكسل.</p>
       <label className="block">اختيار صورة واحدة<input ref={input} aria-label="اختيار الصورة الأساسية" type="file" accept="image/jpeg,image/png,image/webp" onChange={(event) => {
@@ -59,6 +59,6 @@ export function PropertyPrimaryImage({ id, readOnly = false }: { id: string; rea
       <Button disabled={!selected} onClick={() => mutation.mutate(false)}>{mutation.isPending ? 'جارٍ الحفظ...' : current ? 'استبدال الصورة الأساسية' : 'حفظ الصورة الأساسية'}</Button>
       {current && <Button variant="outline" onClick={() => mutation.mutate(true)}>إزالة الصورة الأساسية</Button>}
     </fieldset>}
-    <p className="text-sm text-muted">صورة واحدة خاصة بالمؤسسة. وجود الصورة لا يعني اكتمال الوحدة أو جاهزية نشر إعلان.</p>
+    <Alert tone="info">صورة واحدة خاصة بالمؤسسة. وجود الصورة لا يعني اكتمال الوحدة أو جاهزية نشر الإعلان. معارض الصور والفيديو والمستندات الخاصة مؤجلة.</Alert>
   </CardContent></Card></section>;
 }

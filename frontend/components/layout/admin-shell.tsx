@@ -22,7 +22,7 @@ export function AdminShell({ initialContext, children }: { initialContext: AuthC
   }
 
   if (query.isLoading) return <div className="grid min-h-screen place-items-center p-8"><Skeleton className="h-20 w-80" /></div>;
-  if (query.error) return <div className="grid min-h-screen place-items-center p-8 text-center"><p className="text-sm text-muted">Your session has expired. <button className="font-semibold text-brand" onClick={() => router.replace('/login')}>Sign in again</button></p></div>;
+  if (query.error) return <div dir="rtl" lang="ar" className="grid min-h-screen place-items-center p-8 text-center"><p className="text-sm text-muted">انتهت الجلسة. <button className="font-semibold text-brand" onClick={() => router.replace('/login')}>تسجيل الدخول مجددًا</button></p></div>;
 
-  return <div className="flex min-h-screen bg-canvas"><Sidebar context={context} open={menuOpen} onClose={() => setMenuOpen(false)} /><div className="min-w-0 flex-1"><Header context={context} onMenu={() => setMenuOpen(true)} onLogout={logout} />{children}</div></div>;
+  return <div dir="rtl" lang="ar" className="flex min-h-screen bg-canvas"><Sidebar context={context} open={menuOpen} onClose={() => setMenuOpen(false)} /><div className="min-w-0 flex-1"><Header context={context} onMenu={() => setMenuOpen(true)} onLogout={logout} />{children}</div></div>;
 }
