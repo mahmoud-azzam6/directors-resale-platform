@@ -201,7 +201,8 @@ try {
     $httpBytes=curl_exec($curl); $type=curl_getinfo($curl,CURLINFO_CONTENT_TYPE); curl_close($curl);
     bf016Assert($type==='image/webp' && str_starts_with($httpBytes,'RIFF'),'Apache binary delivery failed.');
     bf016Assert(bf016Request($router,'DELETE',$uri,'partner')['status']===200,'Apache-uploaded image cleanup failed.');
-    foreach(['listings','requests','deals','marketplace','commission_transactions','private_documents']as$table){$s=$testPdo->prepare('SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name=?');$s->execute([$table]);bf016Assert((int)$s->fetchColumn()===0,'Unexpected domain side effect.');}
+    bf016Assert((int)$testPdo->query('SELECT COUNT(*) FROM listings')->fetchColumn()===0,'Unexpected Listing record side effect.');
+    foreach(['requests','deals','marketplace','commission_transactions','private_documents']as$table){$s=$testPdo->prepare('SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name=?');$s->execute([$table]);bf016Assert((int)$s->fetchColumn()===0,'Unexpected domain side effect.');}
     echo "BF016.5 primary image MariaDB acceptance: PASS\n";
 } finally {
     if ($created) {

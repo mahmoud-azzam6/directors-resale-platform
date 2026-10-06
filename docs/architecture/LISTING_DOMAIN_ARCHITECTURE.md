@@ -10,6 +10,10 @@
 
 # 1. Purpose
 
+## Owner-approved bounded BF017 exception — 2026-10-06
+
+[BF017 Listing MVP](../sprints/BF017-listing-mvp-foundation.md) records the current bounded implementation contract. The owner explicitly approves `listings.view` / `listings.manage`, direct `draft -> published -> archived`, Property-sourced initial price/currency and other presentation facts, and capability-authorized own/direct-child administrative Listing projection and management. Existing private Property/Profile/Owner/Ownership/image routes retain their scope rules; no Owner contacts are exposed. Internal and Owner approvals, moderation, material snapshots/versions and the broader lifecycle remain deferred. `published` here is an administrative MVP state and does not imply global Marketplace eligibility. The remaining architecture below is the future full domain, not a claim that BF017 implements it. BF016 remains CLOSED; Partner onboarding is deferred.
+
 This document is the canonical architecture source for the Listing domain. It defines approved domain boundaries, lifecycle, attribution, approval, privacy, marketplace, and future-integration rules without defining a physical database schema, API, frontend, or implementation sprint.
 
 The approved physical data-model architecture is defined separately in `docs/architecture/LISTING_PHYSICAL_DATA_MODEL.md`. That document is also **APPROVED / NOT IMPLEMENTED** and remains conceptual rather than a committed Listing schema. BF013 implemented and verified only the approved Property & Ownership backend foundation; it excludes Listing workflows, rich Property Profile behavior, and frontend Property workflows.

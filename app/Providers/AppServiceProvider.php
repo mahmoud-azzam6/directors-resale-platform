@@ -172,6 +172,9 @@ final class AppServiceProvider extends ServiceProvider
         $this->container->bind(FranchiseOnboardingController::class);
 
         $this->container->bind(OrganizationPropertyRepository::class);
+        $this->container->bind(\App\Modules\Listing\Repositories\ListingRepository::class);
+        $this->container->bind(\App\Modules\Listing\Services\ListingService::class);
+        $this->container->bind(\App\Modules\Listing\Controllers\ListingController::class);
         $this->container->bind(OrganizationPropertyProfileService::class);
         $this->container->bind(OrganizationPropertyProfileRepository::class);
         $this->container->bind(PropertyMeasurementRepository::class);

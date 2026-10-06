@@ -6,7 +6,7 @@ Version: 2.0
 
 Status: Active
 
-Last Updated: 2026-10-05
+Last Updated: 2026-10-06
 
 ---
 
@@ -19,10 +19,10 @@ Last Updated: 2026-10-05
 | Project Type | Enterprise SaaS Platform |
 | Industry | Real Estate Resale |
 | Architecture Style | Modular + Event Driven |
-| Current Phase | BF016 and BF016.2–BF016.6 IMPLEMENTED AND VERIFIED / CLOSED; BF013/BF014/BF015/AF001-AF004 remain CLOSED |
-| Current Sprint | BF016 — Organization and Property Setup Data Foundation — IMPLEMENTED AND VERIFIED / CLOSED |
-| Next Internal Unit | None selected |
-| Next Selected Sprint | No next sprint selected |
+| Current Phase | BF017 bounded Listing MVP CLOSED; BF016 and BF016.2–BF016.6 IMPLEMENTED AND VERIFIED / CLOSED; BF013/BF014/BF015/AF001-AF004 remain CLOSED |
+| Current Sprint | BF017 — Listing MVP Foundation — IMPLEMENTED AND VERIFIED / CLOSED |
+| Next Internal Unit | None selected; Partner onboarding deferred |
+| Next Selected Sprint | BF017 — Listing MVP Foundation |
 | Current Version | 0.1.0 |
 | Repository Status | Active |
 
@@ -176,16 +176,16 @@ Business rollout remains incremental.
 
 | Item | Value |
 |------|-------|
-| Current Phase | BF016 and BF016.2–BF016.6 IMPLEMENTED AND VERIFIED / CLOSED; BF013/BF014/BF015/AF001-AF004 remain CLOSED |
-| Current Sprint | BF016 — Organization and Property Setup Data Foundation — IMPLEMENTED AND VERIFIED / CLOSED |
+| Current Phase | BF017 bounded Listing MVP CLOSED; BF016 and BF016.2–BF016.6 IMPLEMENTED AND VERIFIED / CLOSED; BF013/BF014/BF015/AF001-AF004 remain CLOSED |
+| Current Sprint | BF017 — Listing MVP Foundation — IMPLEMENTED AND VERIFIED / CLOSED |
 | Current Module | M03 - Property Administration UI implemented through AF004; BF013/BF014/BF015 contracts composed |
 | Current Feature | BF016.5 Minimal Primary Property Image Foundation — IMPLEMENTED AND VERIFIED / READY |
-| Current Database Contract | Repository migrations 001–036 verified in disposable MariaDB; migrations 034, 035 and 036 remain unapplied to directors_resale_platform |
+| Current Database Contract | Repository migrations 001–037 verified in disposable MariaDB; real 034–036 already applied, 037 remains unapplied |
 | Current Database Module | Core plus BF013 Property/Owner/Ownership/Global Identity foundation |
 | Current Status | BF016.2–BF016.5 IMPLEMENTED AND VERIFIED; BF016 parent OPEN; next internal unit not selected |
 | Current Milestone | Milestone 2 - Core Business |
-| Next Internal Unit | None selected |
-| Next Selected Sprint | No next sprint selected |
+| Next Internal Unit | None selected; Partner onboarding deferred |
+| Next Selected Sprint | BF017 — Listing MVP Foundation |
 | Target Release | Not defined by the current canonical roadmap |
 
 ---
@@ -551,10 +551,10 @@ No Analytics or reporting implementation exists yet.
 
 | Item | Value |
 |------|-------|
-| Current Phase | BF016 and BF016.2–BF016.6 IMPLEMENTED AND VERIFIED / CLOSED; BF013/BF014/BF015/AF001-AF004 remain CLOSED |
+| Current Phase | BF017 bounded Listing MVP CLOSED; BF016 and BF016.2–BF016.6 IMPLEMENTED AND VERIFIED / CLOSED; BF013/BF014/BF015/AF001-AF004 remain CLOSED |
 | Current Module | M03 - Property Administration UI implemented through AF004; BF013/BF014/BF015 contracts composed |
 | Current Documents | [BF016 implementation record](sprints/BF016-organization-and-property-setup-data-foundation.md); PROPERTY_PROFILE_ARCHITECTURE.md; PROPERTY_CATALOG_ARCHITECTURE.md; SEED_DATA.md |
-| Current Database Contract | Repository migrations 001–036 verified in disposable MariaDB; migrations 034, 035 and 036 remain unapplied to directors_resale_platform |
+| Current Database Contract | Repository migrations 001–037 verified in disposable MariaDB; real 034–036 already applied, 037 remains unapplied |
 | Current ADR | ADR-002 Property / Ownership / Listing Separation |
 | Current Milestone | Milestone 2 - Core Business; BF013 closed |
 | Current Release Target | Not defined by the current canonical roadmap |
@@ -589,7 +589,7 @@ No Analytics or reporting implementation exists yet.
 | ADR Documents | 17 |
 | Documentation Files | 40+ |
 | Project Templates | 6 |
-| Current Sprint | BF016 — Organization and Property Setup Data Foundation — IMPLEMENTED AND VERIFIED / CLOSED |
+| Current Sprint | BF017 — Listing MVP Foundation — IMPLEMENTED AND VERIFIED / CLOSED |
 | Current Release | R0.1.0 |
 
 ---
@@ -864,3 +864,21 @@ MariaDB 10.4.32 was available at 127.0.0.1:3306 on DESKTOP-5EI3DP1; .env targets
 Deferred: full media system, galleries/multiple images, videos, Franchise logo/media, private documents/contracts, Listing, Marketplace, Requests, Deals, Commissions, completeness, Listing Ready and other future business workflows. Property setup is not Listing readiness.
 
 [Complete individual matrix and schema synchronization handoff](sprints/BF016-organization-and-property-setup-data-foundation.md#bf0166--final-acceptance-and-closure).
+
+## BF017 — Listing MVP Foundation — 2026-10-06
+
+**IMPLEMENTED AND VERIFIED / READY.** Owner-approved bounded sprint: [BF017 contract](sprints/BF017-listing-mvp-foundation.md). New canonical listings.view/listings.manage; direct draft -> published -> archived; Property remains the source of truth for identity, address, initial price/currency, primary image and current Ownership. Listing routes use authorized own/direct-child hierarchy and a limited presentation projection; existing PRIVATE_ORGANIZATION routes and Owner privacy remain unchanged. Partner Agency full/operational onboarding remains deferred because existing Organization context is sufficient. BF016 and BF016.2–BF016.6 stay CLOSED.
+
+Repository-only migration 037_create_listings_table_and_permissions.sql adds Listing lifecycle/revision storage, active-Property uniqueness, composite owning-Property foreign key, lifecycle/revision checks and exactly two canonical permissions. No Position assignments or business/demo data. No real database migration or seed is authorized. Internal/Owner approval, moderation, broad Listing Ready/completeness, Marketplace/search, Requests, Deals, Commissions, payments, notifications, galleries and other future workflows remain deferred. Actual environment synchronization requires separate preflight, verified backup and explicit approval.
+
+### BF017 final verification evidence
+
+All 55 unique PHP matrix entry points passed, including focused BF017, existing Franchise Admin hierarchy security, Operational Activation and the complete established BF013–BF016 entry/integrated/service/concurrency matrix. Latest BF017 acceptance passed 103 assertions plus guarded database/file cleanup checks. All 55 matrix entries passed post-process database inventory and temporary public HTTP-file cleanup; internal suites also execute their existing cleanup. The pre-existing e1_test_9740 database remained untouched. No new disposable database or uploaded file remained.
+
+PHP syntax: 199 files PASS. Frontend typecheck, lint, BF016 contract suite and new BF017 component hydration/capability/error/API suite PASS. Production build PASS through final trace collection and 35 static pages in an isolated copy matching all 134 frontend source hashes; the running development server was left intact. Strict UTF-8 passed for all 480 repository text files; all 38 changed-file mojibake/replacement and git diff checks PASS. Historical BF014 document retains HEAD blob 02f651068658df167ca9f62d2a55e8eeca7f98ed and its 4,852 known baseline matches; the two BF014 fixtures retain exactly eight plus six baseline sequences, with no new findings.
+
+MariaDB is available at 127.0.0.1:3306; .env resolves exactly directors_resale_platform via C:\xampp\php\php.exe and C:\xampp\php\php.ini. Before/after all 32 real table definitions, row counts and data fingerprints match. Aggregate schema SHA256: 8d19ef5feaed9c7205d404aeec18cde6cac8402e1eab84065cde2d60ad537b45. Aggregate data/row-count SHA256: 2f77070383a15a16719b4153779299e45ab15cc14eb5303fd6d71964a92f0311. No real login/token insertion, Position grant, seed, migration, business/demo/test data or image change occurred. Migration 037 remains unapplied, and neither new Listing capability is granted to real Positions by this task.
+
+Two proven stale regression expectations were reconciled: BF016 no-side-effect checks now require an empty Listing table while preserving deferred-domain table absence; BF014 excludes future domains but permits the six owner-approved Listing routes, whose exact registered surface is verified by BF017. Exact ordered migration manifests extend 001–036 to 001–037 without accepting arbitrary extras. Historical BF014 catalog count checks still require exactly 32 pre-Listing codes; focused BF017 requires exactly 34 total codes and the exact two active Listing capabilities. An initial new-test float/int strict comparison was corrected; latest acceptance and the complete final matrix pass. No security boundary was relaxed.
+
+READY means bounded implementation/verification ready for Architect review. Actual demo use against the real database requires separate explicit schema synchronization and grant approval, then eligible existing Property data. No next implementation unit is selected; Partner onboarding remains deferred. BF016 stays CLOSED.
