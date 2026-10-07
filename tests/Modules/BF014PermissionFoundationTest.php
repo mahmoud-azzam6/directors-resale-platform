@@ -48,7 +48,7 @@ try {
     sort($migrations, SORT_STRING);
     foreach ($migrations as $migration) { $pdo->exec((string) file_get_contents($migration)); }
 
-    $permissions = $pdo->query("SELECT code, status FROM permissions WHERE code NOT IN ('listings.view','listings.manage') ORDER BY code")->fetchAll(PDO::FETCH_ASSOC);
+    $permissions = $pdo->query("SELECT code, status FROM permissions WHERE code NOT IN ('listings.view','listings.manage','published_listings.view','requests.create','requests.view') ORDER BY code")->fetchAll(PDO::FETCH_ASSOC);
     bf014PermissionAssert(count($permissions) === 32, 'Migration 032 must increase the active Permission catalog from 30 to 32.');
     $catalogCodes = array_values(array_column(array_filter($permissions, static fn (array $row): bool => str_starts_with($row['code'], 'property_catalogs.')), 'code'));
     sort($catalogCodes, SORT_STRING);

@@ -19,6 +19,8 @@ const navigation = [
   { label: 'الصلاحيات', href: '/admin/permissions', permission: 'permissions.view', icon: LockKeyhole },
   { label: 'الوحدات العقارية', href: '/admin/properties', permission: 'properties.view', icon: Building2 },
   { label: 'الإعلانات', href: '/admin/listings', permission: 'listings.view', icon: Files },
+  { label: 'الإعلانات المتاحة', href: '/admin/available-listings', permission: 'published_listings.view', icon: Building2 },
+  { label: 'طلبات الاهتمام الخاصة بي', href: '/admin/my-requests', permission: 'requests.view', icon: Files },
 ];
 
 export function Sidebar({ context, open, onClose }: { context: AuthContext; open: boolean; onClose: () => void }) {
