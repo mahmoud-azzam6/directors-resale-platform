@@ -74,6 +74,17 @@ final class ListingService
         return $this->images->read((int) $listing['organization_property_id'], $organization);
     }
 
+    /** Read-only BF018 eligibility reuses the BF017 publication contract. */
+    public function currentlyAvailable(array $listing): bool
+    {
+        if ($listing['status'] !== 'published') { return false; }
+        $organization = (int) $listing['organization_id'];
+        $property = $this->properties->findInOrganization((int) $listing['organization_property_id'], $organization);
+        try { $this->activeProperty($property, $organization); }
+        catch (ValidationException) { return false; }
+        return $this->publicationErrors($property, $organization) === [];
+    }
+
     private function activeProperty(?array $property, int $organization): void
     {
         $owner = $this->organizations->find($organization);

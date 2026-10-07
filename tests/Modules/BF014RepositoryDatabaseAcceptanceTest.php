@@ -132,8 +132,9 @@ try {
         '035_add_property_administrative_details.sql',
         '036_create_property_primary_images_table.sql',
         '037_create_listings_table_and_permissions.sql',
+        '038_create_listing_interest_requests_and_permissions.sql',
     ];
-    bf014RepoEqual(array_map('basename', $migrations), $expectedMigrations, 'Migrations 001-037 in the exact expected order');
+    bf014RepoEqual(array_map('basename', $migrations), $expectedMigrations, 'Migrations 001-038 in the exact expected order');
     foreach ($migrations as $file) { $pdo->exec(file_get_contents($file)); }
     $tables = ['property_categories', 'unit_types', 'unit_type_configuration_versions', 'measurement_definitions',
         'unit_type_measurement_rules', 'attribute_definitions', 'attribute_options', 'unit_type_attribute_rules',
@@ -141,7 +142,7 @@ try {
     foreach ($tables as $table) {
         bf014RepoEqual((int) $pdo->query("SELECT COUNT(*) FROM `{$table}`")->fetchColumn(), 0, $table . ' exists without baseline rows');
     }
-    echo "Migrations 001-037 / 13 empty BF014 tables: PASS\n";
+    echo "Migrations 001-038 / 13 empty BF014 tables: PASS\n";
 
     $container = new Container();
     (new AppServiceProvider($container, []))->register();

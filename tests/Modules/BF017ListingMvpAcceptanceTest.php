@@ -67,7 +67,7 @@ try {
     listingAssert($pdo->query('SELECT DATABASE()')->fetchColumn() === $name, 'Real database setup prohibited.');
     $files = glob($root . '/database/migrations/*.sql'); sort($files, SORT_STRING);
     foreach ($files as $file) { $pdo->exec(file_get_contents($file)); }
-    listingAssert((int) $pdo->query('SELECT COUNT(*) FROM permissions')->fetchColumn() === 34, 'Exactly two Listing codes must be added.');
+    listingAssert((int) $pdo->query("SELECT COUNT(*) FROM permissions WHERE code NOT IN ('published_listings.view','requests.create','requests.view')")->fetchColumn() === 34, 'Exactly two BF017 Listing codes must be added before BF018 capabilities.');
     listingAssert($pdo->query("SELECT code FROM permissions WHERE code LIKE 'listings.%' ORDER BY code")->fetchAll(PDO::FETCH_COLUMN) === ['listings.manage', 'listings.view'], 'Exact Listing capabilities.');
     $ddl = $pdo->query('SHOW CREATE TABLE listings')->fetch(PDO::FETCH_NUM)[1];
     foreach (['uq_listings_active_property','fk_listing_property_organization','fk_listing_created_by','fk_listing_updated_by','chk_listing_revision','chk_listing_lifecycle'] as $constraint) { listingAssert(str_contains($ddl, $constraint), 'Missing constraint: ' . $constraint); }

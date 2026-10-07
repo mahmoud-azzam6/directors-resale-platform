@@ -129,6 +129,13 @@ return static function (Router $router, Container $container, array $config): vo
         return $organization;
     };
     $router->get('/listings', $authorize(fn (Request $request): Response => $container->make(\App\Modules\Listing\Controllers\ListingController::class)->index($request), 'listings.view', $listOrganizationTarget));
+    $publishedController = \App\Modules\Request\Controllers\PublishedListingController::class;
+    $router->get('/published-listings', $authorize(fn (Request $request): Response => $container->make($publishedController)->handle($request), 'published_listings.view', $listOrganizationTarget));
+    $router->get('/published-listings/{id}', $authorize(fn (Request $request, string $id): Response => $container->make($publishedController)->handle($request, $id, 'detail'), 'published_listings.view', $listingTarget));
+    $router->get('/published-listings/{id}/primary-image/content', $authorize(fn (Request $request, string $id): Response => $container->make($publishedController)->handle($request, $id, 'image'), 'published_listings.view', $listingTarget));
+    $router->post('/published-listings/{id}/requests', $authorize(fn (Request $request, string $id): Response => $container->make($publishedController)->handle($request, $id, 'submit'), 'requests.create', $listingTarget));
+    $router->get('/my-listing-requests', $authorize(fn (Request $request): Response => $container->make($publishedController)->handle($request, null, 'own'), 'requests.view'));
+    $router->get('/my-listing-requests/{id}', $authorize(fn (Request $request, string $id): Response => $container->make($publishedController)->handle($request, $id, 'receipt'), 'requests.view'));
     $router->post('/listings', $authorize(fn (Request $request): Response => $container->make(\App\Modules\Listing\Controllers\ListingController::class)->handle($request, null, 'create'), 'listings.manage', $listingPropertyTarget));
     $router->get('/listings/{id}', $authorize(fn (Request $request, string $id): Response => $container->make(\App\Modules\Listing\Controllers\ListingController::class)->handle($request, $id), 'listings.view', $listingTarget));
     $router->get('/listings/{id}/primary-image/content', $authorize(fn (Request $request, string $id): Response => $container->make(\App\Modules\Listing\Controllers\ListingController::class)->handle($request, $id, 'image'), 'listings.view', $listingTarget));

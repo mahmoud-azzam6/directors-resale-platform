@@ -2,20 +2,20 @@
 
 Status: Active
 
-Current Project Phase: BF017 bounded Listing MVP IMPLEMENTED AND VERIFIED / CLOSED; BF016 remains CLOSED
+Current Project Phase: BF018 IMPLEMENTED AND VERIFIED / READY FOR OWNER REVIEW; BF016 and BF017 remain CLOSED
 
 Current Milestone: Milestone 2 - Core Business
 
 Completed Sprints: BF001-BF017, AF001-AF004
 
-Current Sprint: BF017 — Listing MVP Foundation — IMPLEMENTED AND VERIFIED / CLOSED
+Current Sprint: BF018 - Published Listings Catalog & Request Flow - verified; commit/push approval pending
 
 
 Next Internal Unit: None selected; Partner onboarding remains deferred
 
 Handoff State: BF017 ready for review on codex-review; real Listing activation requires separately approved migration 037 and Position grants; official merge remains human-owner controlled
 
-Last Updated: 2026-10-06
+Last Updated: 2026-10-07
 
 ---
 
@@ -176,3 +176,17 @@ MariaDB is available at 127.0.0.1:3306; .env resolves exactly directors_resale_p
 Two proven stale regression expectations were reconciled: BF016 no-side-effect checks now require an empty Listing table while preserving deferred-domain table absence; BF014 excludes future domains but permits the six owner-approved Listing routes, whose exact registered surface is verified by BF017. Exact ordered migration manifests extend 001–036 to 001–037 without accepting arbitrary extras. Historical BF014 catalog count checks still require exactly 32 pre-Listing codes; focused BF017 requires exactly 34 total codes and the exact two active Listing capabilities. An initial new-test float/int strict comparison was corrected; latest acceptance and the complete final matrix pass. No security boundary was relaxed.
 
 READY means bounded implementation/verification ready for Architect review. Actual demo use against the real database requires separate explicit schema synchronization and grant approval, then eligible existing Property data. No next implementation unit is selected; Partner onboarding remains deferred. BF016 stays CLOSED.
+
+## BF018 - Published Listings Catalog & Request Flow - 2026-10-07
+
+**IMPLEMENTED AND VERIFIED / READY FOR OWNER REVIEW. Commit/push approval pending.** [Bounded BF018 contract and complete verification matrix](docs/sprints/BF018-published-listings-catalog-and-request-flow.md). This current entry supersedes earlier next-unit/deferred-Request statements only for the owner-approved expression-of-interest slice. BF016 and BF017 remain CLOSED; no next implementation unit is selected.
+
+Authenticated catalog/details/private image delivery show only currently eligible published Listings in the existing authorized Organization hierarchy. Existing Property remains the presentation source. Three explicitly approved canonical capabilities: `published_listings.view`, `requests.create`, `requests.view`. Submission requires catalog view plus create, derives identity/references server-side and permits one submitted Request per user/Listing, with concurrent duplicate protection. Receipts are requester-only, including for System actors, and remain readable after archival subject to current scope. No anonymous, peer-Franchise or unrelated-System access is added; existing private Property/Owner/Ownership boundaries and BF017 administration remain unchanged.
+
+Repository-only migration `038_create_listing_interest_requests_and_permissions.sql` adds `listing_interest_requests`, composite reference foreign keys, lookup/unique indexes, submitted-only check and the three canonical Permission rows. Additional unique reference indexes on existing `listings` and `users` support composite integrity. No Position assignments or business fixtures are included. Migration 038 remains UNAPPLIED to `127.0.0.1:3306/directors_resale_platform`; separate environment preflight, verified backup and explicit owner synchronization approval are required before actual use.
+
+Final gate: all 56 PHP matrix entries PASS, including BF018 (119 focused assertions), BF017, BF013-BF016, Franchise hierarchy security, Operational Activation and service/concurrency/integrated suites. Disposable database and public-file cleanup PASS after every entry. PHP syntax 203 files PASS; frontend typecheck, lint and BF016/BF017/BF018 contracts PASS. Production build PASS through final trace generation and 39 generated pages, from an isolated copy matching 148 frontend source hashes; copied build output and dependency junction cleaned. UTF-8 and changed-file mojibake/replacement scans PASS; no new findings. Historical BF014 document retains HEAD blob `02f651068658df167ca9f62d2a55e8eeca7f98ed` and 4,852 baseline matches; the two fixtures retain exactly 8 + 6 known sequences unchanged. Exact migration manifests now require ordered 001-038; historical catalog assertions exclude only explicitly approved later codes, retaining exact BF014/BF017 counts. One stale BF014 permission-count assertion was proven and corrected before the complete successful rerun.
+
+Real database remains unchanged across all 33 tables, schemas, row counts and data fingerprints. Schema SHA256: `e9d22d56629026c8074976d9ba7a36de00dac1aec1a15c8c9d76a8bdd9e6dfa9`. Data/row-count SHA256: `1d29c8505207501d51def46d901d76f0a18c3073f722d5f18d1f79b217174bf6`. No real login/token, Request, Listing, migration, seed, permission grant, business/demo change or test import occurred. The pre-existing `directors_resale_platform_e1_test_9740` database was excluded and untouched. All new acceptance fixtures were isolated and cleaned.
+
+Deferred: anonymous/global Marketplace/search, Request administration/cancellation/review, Holds, Deals, negotiation, viewing, Contracts, Sale Approval, Commissions, payments, transfers, notifications, full media/galleries/videos/Franchise logos/private documents, completeness/Listing Ready, approval/moderation workflows and full Partner onboarding. Requests never reserve or mutate Listing/Property/Ownership/image data or create downstream business records. Before Git operations, owner approval of the concrete verified handoff is still required by the BF018 request.
