@@ -20,6 +20,28 @@ const render = (component, client) => renderToStaticMarkup(React.createElement(Q
 const listing = { id: 7, organization_id: 2, organization_property_id: 8, status: 'published', revision: 2, organization: { id: 2, name: 'مؤسسة' }, property: { id: 8, property_code: 'PROP-FIXTURE', property_label: 'شقة النيل', address_text: 'شارع النيل', location: { name_ar: 'القاهرة' }, initial_asking_price: '250', currency_code: 'EGP', primary_image_url: '/listings/7/primary-image/content' } };
 const receipt = { id: 1, reference: 'REQUEST-REFERENCE', listing_id: 7, organization_property_id: 8, status: 'submitted', created_at: '2026-10-07', property: listing.property };
 async function main() {
+  let sidebarPath = '/admin/available-listings';
+  const load = Module._load;
+  Module._load = function (name, ...args) {
+    const result = load.call(this, name, ...args);
+    return name === 'next/navigation' ? { ...result, usePathname: () => sidebarPath } : result;
+  };
+  const { Sidebar } = require('../components/layout/sidebar.tsx');
+  const sidebar = (permissions) => renderToStaticMarkup(React.createElement(Sidebar, {
+    context: { permissions }, open: true, onClose: () => {},
+  }));
+  for (const current of ['/admin/available-listings', '/admin/available-listings/7']) {
+    sidebarPath = current;
+    const markup = sidebar(['published_listings.view']);
+    assert.equal((markup.match(/href="\/admin\/available-listings"/g) || []).length, 1);
+    assert.ok(markup.includes('الإعلانات المتاحة'));
+    assert.match(markup, /<a(?=[^>]*href="\/admin\/available-listings")(?=[^>]*aria-current="page")[^>]*>/);
+  }
+  assert.equal(sidebar([]).includes('/admin/available-listings'), false);
+  assert.equal(sidebar(['listings.view', 'properties.view']).includes('/admin/available-listings'), false);
+  sidebarPath = '/admin/available-listings-other';
+  assert.equal(sidebar(['published_listings.view']).includes('aria-current="page"'), false);
+  Module._load = load;
   const client = cache();
   client.setQueryData(['auth-context'], { permissions: ['published_listings.view','requests.create','requests.view'] });
   client.setQueryData(['published-listings'], [listing]);

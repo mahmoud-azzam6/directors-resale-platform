@@ -39,9 +39,9 @@ export function Sidebar({ context, open, onClose }: { context: AuthContext; open
       <nav className="mt-3 space-y-1" aria-label="القائمة الرئيسية">
         {navigation.filter((item) => (!item.permission || context.permissions.includes(item.permission))
           && (item.href !== '/admin/organization-profile' || ['franchise', 'system'].includes(context.organization?.organization_type ?? ''))).map((item) => {
-          const active = item.href === '/admin' ? pathname === item.href : pathname.startsWith(item.href);
+          const active = pathname === item.href || (item.href !== '/admin' && pathname.startsWith(`${item.href}/`));
           const Icon = item.icon;
-          return <Link key={item.href} href={item.href} onClick={onClose} className={cn('group flex items-center gap-3 rounded-md px-3 py-3 text-sm font-medium text-white/65 transition hover:bg-white/10 hover:text-white', active && 'bg-white/10 text-white')}>
+          return <Link key={item.href} href={item.href} onClick={onClose} aria-current={active ? 'page' : undefined} className={cn('group flex items-center gap-3 rounded-md px-3 py-3 text-sm font-medium text-white/65 transition hover:bg-white/10 hover:text-white', active && 'bg-white/10 text-white')}>
             <Icon size={18} className={cn('transition', active ? 'text-brand' : 'text-white/45 group-hover:text-brand')} /><span className="flex-1">{item.label}</span>{active && <ChevronLeft size={15} className="text-brand" />}
           </Link>;
         })}
